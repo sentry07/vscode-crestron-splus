@@ -1,0 +1,505 @@
+{
+    "Data_Event Codeblock":{
+        "prefix": "DATA_EVENT",
+        "body": [
+            "DATA_EVENT[${1:device}]",
+            "{",
+            "\tONLINE:",
+            "\t{",
+            "\t\t$0",
+            "\t}",
+            "\tOFFLINE: { }",
+            "\tCOMMAND: { }",
+            "\tSTRING:",
+            "\t{",
+            "\t\t",
+            "\t}",
+            "}"
+        ],
+        "description": "Basic DATA_EVENT block"
+    },
+    "Channel_Event Codeblock":{
+        "prefix": "channel_event",
+        "body": [
+            "CHANNEL_EVENT[${1:device},${2:channel}]",
+            "{",
+            "\tON:",
+            "\t{",
+            "\t\t$0",
+            "\t}",
+            "\tOFF:",
+            "\t{",
+            "\t\t",
+            "\t}",
+            "}"
+        ],
+        "description": "Basic CHANNEL_EVENT block"
+    },
+    "Level_Event Codeblock":{
+        "prefix": "level_event",
+        "body": [
+            "LEVEL_EVENT[${1:device},${2:level}]",
+            "{",
+            "\tSTACK_VAR INTEGER nLevel",
+            "\tnLevel = LEVEL.VALUE",
+            "\t",
+            "\t$0",
+            "}"
+        ],
+        "description": "Basic LEVEL_EVENT block"
+    },
+    "Timeline_Event Codeblock":{
+        "prefix": "timeline_event",
+        "body": [
+            "TIMELINE_EVENT[${1:timeline}]",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "Basic TIMELINE_EVENT block"
+    },
+    "Button Event Codeblock":{
+        "prefix": "button_event",
+        "body": [
+            "BUTTON_EVENT[${1:device},${2:channel}]",
+            "{",
+            "\tPUSH:",
+            "\t{",
+            "\t\t$0",
+            "\t}",
+            "}"
+        ],
+        "description": "Basic BUTTON_EVENT block with PUSH"
+    },
+    "Hold Event Codeblock":{
+        "prefix": "hold",
+        "body": [
+            "HOLD[${1:time}${2:,REPEAT}]:",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "Basic HOLD event block"
+    },
+    "Release Event Codeblock":{
+        "prefix": "release",
+        "body": [
+            "RELEASE:",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "Basic RELEASE event block"
+    },
+    "For Loop Codeblock":{
+        "prefix": "for",
+        "body": [
+            "FOR (${1:var} = ${2:start}; ${1:var} <= ${3:end}; ${1:var}++)",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "Basic FOR loop block"
+    },
+    "If Codeblock":{
+        "prefix": "if",
+        "body": [
+            "IF (${1:conditional})",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "IF conditional block"
+    },
+    "Else Codeblock":{
+        "prefix": "else",
+        "body": [
+            "ELSE",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "ELSE code block"
+    },
+    "Else If Codeblock":{
+        "prefix": "else if",
+        "body": [
+            "ELSE IF (${1:conditional})",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "ELSE IF conditional block"
+    },
+    "While Codeblock":{
+        "prefix": "while",
+        "body": [
+            "WHILE (${1:conditional})",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "WHILE conditional block"
+    },
+    "Switch Codeblock":{
+        "prefix": "switch",
+        "body": [
+            "SWITCH (${1:variable})",
+            "{",
+            "\tCASE ${2:value}:",
+            "\t{",
+            "\t\t$0",
+            "\t}",
+            "}"
+        ],
+        "description": "SWITCH conditional block"
+    },
+    "Case Codeblock":{
+        "prefix": "case",
+        "body": [
+            "CASE ${2:value}:",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "CASE conditional block"
+    },
+    "Select Codeblock":{
+        "prefix": "select",
+        "body": [
+            "SELECT",
+            "{",
+            "\tACTIVE (${1:conditional}):",
+            "\t{",
+            "\t\t$0",
+            "\t}",
+            "}"
+        ],
+        "description": "SELECT conditional block"
+    },
+    "Active Codeblock":{
+        "prefix": "active",
+        "body": [
+            "ACTIVE (${2:value}):",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "ACTIVE conditional block"
+    },
+    "Define_Function Codeblock":{
+        "prefix": "define_function",
+        "body": [
+            "DEFINE_FUNCTION ${1:return_type} ${2:function_name} (${3:parameters})",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "DEFINE_FUNCTION code block"
+    },
+    "Get_Last Function":{
+        "prefix": "get_last",
+        "body": "GET_LAST(${1:array})$0",
+        "description": "Get_Last() function call"
+    },
+    "Length_Array Function":{
+        "prefix": "length_array",
+        "body": "LENGTH_ARRAY(${1:var})$0",
+        "description": "Length_Array() function call"
+    },
+    "Max_Length_Array Function":{
+        "prefix": "max_length_array",
+        "body": "MAX_LENGTH_ARRAY(${1:var})$0",
+        "description": "Max_Length_Array() function call"
+    },
+    "Set_Length_Array Function":{
+        "prefix": "set_length_array",
+        "body": "SET_LENGTH_ARRAY(${1:var},${2:length})$0",
+        "description": "Set_Length_Array() function call"
+    },
+    "Length_String Function":{
+        "prefix": "length_string",
+        "body": "LENGTH_STRING(${1:var})$0",
+        "description": "Length_String() function call"
+    },
+    "Find_String Function":{
+        "prefix": "find_string",
+        "body": "FIND_STRING(${1:haystack},${2:needle},${3:startpos})$0",
+        "description": "Find_String() function call"
+    },
+    "Remove_String Function":{
+        "prefix": "remove_string",
+        "body": "REMOVE_STRING(${1:haystack},${2:needle},${3:startpos})$0",
+        "description": "Length_Array() function call"
+    },
+    "Left_String Function":{
+        "prefix": "left_string",
+        "body": "LEFT_STRING(${1:var},${2:length})$0",
+        "description": "Left_String() function call"
+    },
+    "Right_String Function":{
+        "prefix": "right_string",
+        "body": "RIGHT_STRING(${1:var},${2:length})$0",
+        "description": "Right_String() function call"
+    },
+    "Mid_String Function":{
+        "prefix": "mid_string",
+        "body": "MID_STRING(${1:var},${2:startpos},${3:endpos})$0",
+        "description": "Mid_String() function call"
+    },
+    "Integer Storage Type":{
+        "prefix": "integer",
+        "body": "INTEGER $0",
+        "description": "Integer variable type"
+    },
+    "SInteger Storage Type":{
+        "prefix": "sinteger",
+        "body": "SINTEGER $0",
+        "description": "Signed Integer variable type"
+    },
+    "Char Storage Type":{
+        "prefix": "char",
+        "body": "CHAR $0",
+        "description": "Char variable type"
+    },
+    "Long Storage Type":{
+        "prefix": "long",
+        "body": "LONG $0",
+        "description": "Long variable type"
+    },
+    "SLong Storage Type":{
+        "prefix": "slong",
+        "body": "SLONG $0",
+        "description": "SLong variable type"
+    },
+    "Float Storage Type":{
+        "prefix": "float",
+        "body": "FLOAT $0",
+        "description": "Float variable type"
+    },
+    "Double Storage Type":{
+        "prefix": "double",
+        "body": "DOUBLE $0",
+        "description": "Double variable type"
+    },
+    "Local_Var Declaration":{
+        "prefix": "local_var",
+        "body": "LOCAL_VAR $0",
+        "description": "Local_Var context declaration"
+    },
+    "Local_Var Integer Declaration":{
+        "prefix": "local_var integer",
+        "body": "LOCAL_VAR INTEGER $0",
+        "description": "Local_Var Integer variable declaration"
+    },
+    "Local_Var SInteger Declaration":{
+        "prefix": "local_var sinteger",
+        "body": "LOCAL_VAR SINTEGER $0",
+        "description": "Local_Var Signed Integer variable declaration"
+    },
+    "Local_Var Char Declaration":{
+        "prefix": "local_var char",
+        "body": "LOCAL_VAR CHAR $0",
+        "description": "Local_Var Char variable declaration"
+    },
+    "Local_Var Long Declaration":{
+        "prefix": "local_var long",
+        "body": "LOCAL_VAR LONG $0",
+        "description": "Local_Var Long variable declaration"
+    },
+    "Local_Var SLong Declaration":{
+        "prefix": "local_var slong",
+        "body": "LOCAL_VAR SLONG $0",
+        "description": "Local_Var SLong variable declaration"
+    },
+    "Local_Var Float Declaration":{
+        "prefix": "local_var float",
+        "body": "LOCAL_VAR FLOAT $0",
+        "description": "Local_Var Float variable declaration"
+    },
+    "Local_Var Double Declaration":{
+        "prefix": "local_var double",
+        "body": "LOCAL_VAR DOUBLE $0",
+        "description": "Local_Var Double variable declaration"
+    },
+    "Stack_Var Declaration":{
+        "prefix": "stack_var",
+        "body": "STACK_VAR $0",
+        "description": "Stack_Var context declaration"
+    },
+    "Stack_Var Char Declaration":{
+        "prefix": "stack_var char",
+        "body": "STACK_VAR CHAR $0",
+        "description": "Stack_Var Char context declaration"
+    },
+    "Stack_Var Integer Declaration":{
+        "prefix": "stack_var integer",
+        "body": "STACK_VAR INTEGER $0",
+        "description": "Stack_Var Integer context declaration"
+    },
+    "Stack_Var SInteger Declaration":{
+        "prefix": "stack_var sinteger",
+        "body": "STACK_VAR SINTEGER $0",
+        "description": "Stack_Var Signed Integer context declaration"
+    },
+    "Stack_Var Long Declaration":{
+        "prefix": "stack_var long",
+        "body": "STACK_VAR LONG $0",
+        "description": "Stack_Var Long context declaration"
+    },
+    "Stack_Var SLong Declaration":{
+        "prefix": "stack_var slong",
+        "body": "STACK_VAR SLONG $0",
+        "description": "Stack_Var SLong context declaration"
+    },
+    "Stack_Var Float Declaration":{
+        "prefix": "stack_var float",
+        "body": "STACK_VAR FLOAT $0",
+        "description": "Stack_Var Float context declaration"
+    },
+    "Stack_Var Double Declaration":{
+        "prefix": "stack_var double",
+        "body": "STACK_VAR DOUBLE $0",
+        "description": "Stack_Var Double context declaration"
+    },
+    "Send_Command Function":{
+        "prefix": "send_command",
+        "body": "SEND_COMMAND $0",
+        "description": "Send_Command function declaration"
+    },
+    "Send_String Function":{
+        "prefix": "send_string",
+        "body": "SEND_STRING $0",
+        "description": "Send_String function declaration"
+    },
+    "Comment header":{
+        "prefix": "__com",
+        "body": [
+            "// ---------------------------------------------------------------------------------------------------------------------",
+            "// ${1:Comment}",
+            "// ---------------------------------------------------------------------------------------------------------------------",
+            "$0"
+        ],
+        "description": "Comment header block"
+    },
+    "Upper_String Function":{
+        "prefix": "upper_string",
+        "body": "UPPER_STRING(${1:var})$0",
+        "description": "Upper_String() function call"
+    },
+    "Lower_String Function":{
+        "prefix": "lower_string",
+        "body": "LOWER_STRING(${1:var})$0",
+        "description": "Lower_String() function call"
+    },
+    "Do_Push Function":{
+        "prefix": "do_push",
+        "body": "DO_PUSH(${1:dev},${2:channel})\n$0",
+        "description": "Do_Push function declaration"
+    },
+    "Do_Push_Timed Function":{
+        "prefix": "do_push_timed",
+        "body": "DO_PUSH_TIMED(${1:dev},${2:channel})\n$0",
+        "description": "Do_Push_Timed function declaration"
+    },
+    "Do_Release Function":{
+        "prefix": "do_release",
+        "body": "DO_RELEASE(${1:dev},${2:channel})\n$0",
+        "description": "Do_Release function declaration"
+    },
+    "To Function":{
+        "prefix": "to",
+        "body": "TO[${1:dev},${2:channel}]\n$0",
+        "description": "To function declaration"
+    },
+    "Pulse Function":{
+        "prefix": "pulse",
+        "body": "PULSE[${1:dev},${2:channel}]\n$0",
+        "description": "Pulse function declaration"
+    },
+    "Set_Pulse_Time Function":{
+        "prefix": "set_pulse_time",
+        "body": "SET_PULSE_TIME(${1:time})\n$0",
+        "description": "Set_Pulse_Time function declaration"
+    },
+    "Add_Url_Entry Function":{
+        "prefix": "add_url_entry",
+        "body": "ADD_URL_ENTRY(${1:master_dev},${2:url_struct})\n$0",
+        "description": [
+            "Add_Url_Entry function declaration. Requires a D:P:S for the master_dev.\n",
+            "The URL_STRUCT is predefined as follows:",
+            "STRUCTURE URL_STRUCT",
+            "{",
+            "\tCHAR     Flags;           // Connection Type (normally 1)",
+            "\tINTEGER  Port;            // TCP port (normally 1319)",
+            "\tCHAR     URL[128];        // string: URL or IP address",
+            "\tCHAR     User[20];        // optional account info for ICSPS",
+            "\tCHAR     Password[20];    // optional account info for ICSPS",
+            "}"
+        ]
+    },
+    "Delete_Url_Entry Function":{
+        "prefix": "delete_url_entry",
+        "body": "DELETE_URL_ENTRY(${1:master_dev},${2:url_struct})\n$0",
+        "description": [
+            "Delete_Url_Entry function declaration. Requires a D:P:S for the master_dev.\n",
+            "The URL_STRUCT is predefined as follows:",
+            "STRUCTURE URL_STRUCT",
+            "{",
+            "\tCHAR     Flags;           // Connection Type (normally 1)",
+            "\tINTEGER  Port;            // TCP port (normally 1319)",
+            "\tCHAR     URL[128];        // string: URL or IP address",
+            "\tCHAR     User[20];        // optional account info for ICSPS",
+            "\tCHAR     Password[20];    // optional account info for ICSPS",
+            "}"
+        ]
+    },
+    "Get_Url_List Function":{
+        "prefix": "get_url_list",
+        "body": "GET_URL_LIST(${1:master_dev},${2:url_struct_array},${3|0,1,2|})\n$0",
+        "description": [
+            "Get_Url_List function declaration. Requires a D:P:S for the master_dev.\n",
+            "The URL_STRUCT is predefined as follows:",
+            "STRUCTURE URL_STRUCT",
+            "{",
+            "\tCHAR     Flags;           // Connection Type (normally 1)",
+            "\tINTEGER  Port;            // TCP port (normally 1319)",
+            "\tCHAR     URL[128];        // string: URL or IP address",
+            "\tCHAR     User[20];        // optional account info for ICSPS",
+            "\tCHAR     Password[20];    // optional account info for ICSPS",
+            "}",
+            "The third parameter is the type of URL: 0 = All, 1 = IDE Programmed, 2 = NetLinx Programmed"
+        ]
+    },
+    "Ip_Client_Open function": {
+        "prefix": "ip_client_open",
+        "body": "IP_CLIENT_OPEN(${1:localport},'${2:serveraddress}',${3:serverport},${4|IP_TCP,IP_UDP,IP_UDP_2WAY|})\n$0",
+        "description": "Ip_Client_Open function definition"
+    },
+    "Ip_Client_Close function": {
+        "prefix": "ip_client_close",
+        "body": "IP_CLIENT_CLOSE(${1:localport})\n$0",
+        "description": "Ip_Client_Close function definition"
+    },
+    "Ssh_Client_Open function": {
+        "prefix": "ssh_client_open",
+        "body": "SSH_CLIENT_OPEN(${1:localport},'${2:serveraddress}',${3:serverport},'${4:username}','${5:password}','/certs/id_rsa','${6:keypass}')\n$0",
+        "description": "Ssh_Client_Open function definition"
+    },
+    "Ssh_Client_Close function": {
+        "prefix": "ssh_client_close",
+        "body": "SSH_CLIENT_CLOSE(${1:localport})\n$0",
+        "description": "Ssh_Client_Close function definition"
+    },
+    "Tls_Client_Open function": {
+        "prefix": "tls_client_open",
+        "body": "TLS_CLIENT_OPEN(${1:localport},'${2:serveraddress}',${3:serverport},0)\n$0",
+        "description": "Tls_Client_Open function definition"
+    },
+    "Tls_Client_Close function": {
+        "prefix": "tls_client_close",
+        "body": "TLS_CLIENT_CLOSE(${1:localport})\n$0",
+        "description": "Tls_Client_Close function definition"
+    }
+
+}

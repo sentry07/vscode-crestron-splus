@@ -1,0 +1,168 @@
+{
+	"name": "crestron-splus",
+	"displayName": "Crestron S+",
+	"description": "Extension for Crestron S+. Includes syntax highlighting and compiling.",
+	"version": "0.0.1",
+	"publisher": "sentry07",
+	"icon": "crestron.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sentry07/vscode-amx-netlinx.git"
+	},
+	"license": "GPL-3.0",
+	"engines": {
+		"vscode": "^1.28.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Snippets"
+	],
+	"activationEvents": [
+		"onCommand:extension.splus_format",
+		"onCommand:extension.splus_help",
+		"onCommand:workbench.action.tasks.runTask"
+	],
+	"main": "./out/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.splus_format",
+				"title": "S+ Beautify Code"
+			},
+			{
+				"command": "extension.splus_help",
+				"title": "Open S+ Help Reference"
+			}
+		],
+		"configuration": [
+			{
+				"title": "Crestron S+",
+				"properties": {
+					"splus.compilerLocation": {
+						"type": "string",
+						"default": "C:\\Program Files (x86)\\Crestron\\SIMPL\\SPlusCC.exe",
+						"description": "Location of the S+ compiler. Please use double \\\\ for the path."
+					},
+					"splus.helpLocation": {
+						"type": "string",
+						"default": "C:\\Program Files (x86)\\Crestron\\Simpl\\Simpl+lr.chm",
+						"description": "Location of the S+ Help reference"
+					},
+					"splus.terminalLocation": {
+						"type": "string",
+						"default": "C:\\WINDOWS\\System32\\cmd.exe",
+						"description": "Location of the default windows cmd.exe"
+					}
+				}
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "extension.splus_help",
+					"group": "navigation@1",
+					"when": "resourceLangId == splus-source"
+				},
+				{
+					"command": "extension.splus_format",
+					"group": "1_modification@1",
+					"when": "resourceLangId == splus-source"
+				}
+			]
+		},
+		"keybindings": [
+			{
+				"command": "extension.splus_format",
+				"key": "ctrl+shift+f2",
+				"when": "resourceLangId == splus-source"
+			},
+			{
+				"command": "extension.netlinx_help",
+				"key": "ctrl+shift+f1",
+				"when": "resourceLangId == splus-source"
+			}
+		],
+		"languages": [
+			{
+				"id": "splus-source",
+				"aliases": [
+					"Crestron-S+",
+					"simpl_plus"
+				],
+				"extensions": [
+					".usp"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "splus-source",
+				"scopeName": "source.splus",
+				"path": "./syntaxes/crestron-splus.tmLanguage.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "splus-source",
+				"path": "./snippets/snippets.json"
+			}
+		],
+		"taskDefinitions": [
+			{
+				"type": "splus",
+				"properties": {
+					"buildPath": {
+						"type": "string"
+					}
+				}
+			}
+		],
+		"problemMatchers": [
+			{
+				"name": "splusCC",
+				"owner": "crestron-splus",
+				"fileLocation": [
+					"absolute"
+				],
+				"pattern": {
+					"regexp": "\\[([^\\]]*)\\]\\s*(?:Error)\\s*\\d*\\s*\\(Line (\\d*)\\)\\s*-\\s*(.*)$",
+					"file": 1,
+					"location": 2,
+					"message": 3
+				}
+			}
+		],
+		"configurationDefaults": {
+			"[splus-source]": {
+				"editor.wordBasedSuggestions": true,
+				"editor.suggest.snippetsPreventQuickSuggestions": false,
+				"editor.quickSuggestions": {
+					"other": true,
+					"comments": false,
+					"strings": false
+				},
+				"editor.snippetSuggestions": "top"
+			}
+		}
+	},
+	"scripts": {
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/mocha": "^5.2.6",
+		"@types/node": "^11.12.0",
+		"tslint": "^5.14.0",
+		"typescript": "^3.3.4000",
+		"vsce": "^1.59.0",
+		"vscode": "^1.1.30"
+	},
+	"__metadata": {
+		"id": "sentry07.crestron-splus",
+		"publisherId": "sentry07",
+		"publisherDisplayName": "Eric Walters"
+	}
+}
