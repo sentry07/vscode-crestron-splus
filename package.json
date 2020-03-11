@@ -2,12 +2,12 @@
 	"name": "crestron-splus",
 	"displayName": "Crestron S+",
 	"description": "Extension for Crestron S+. Includes syntax highlighting and compiling.",
-	"version": "0.0.1",
+	"version": "0.1.1",
 	"publisher": "sentry07",
 	"icon": "crestron.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/sentry07/vscode-amx-netlinx.git"
+		"url": "https://github.com/sentry07/vscode-crestron-splus.git"
 	},
 	"license": "GPL-3.0",
 	"engines": {
