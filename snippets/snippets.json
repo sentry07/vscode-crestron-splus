@@ -2,22 +2,22 @@
     "digital_input": 
     {
         "prefix": "digital_input",
-        "body": "digital_input ${1:Name};"
+        "body": "digital_input ${0:Name};"
     },
     "digital_output": 
     {
         "prefix": "digital_output",
-        "body": "digital_output ${1:Name};"
+        "body": "digital_output ${0:Name};"
     },
     "analog_input": 
     {
         "prefix": "analog_input",
-        "body": "analog_input ${1:Name};"
+        "body": "analog_input ${0:Name};"
     },
     "analog_output": 
     {
         "prefix": "analog_output",
-        "body": "analog_output ${1:Name};"
+        "body": "analog_output ${0:Name};"
     },
     "string_input": 
     {
@@ -27,7 +27,7 @@
     "string_output": 
     {
         "prefix": "string_output",
-        "body": "string_output ${1:Name};"
+        "body": "string_output ${0:Name};"
     },
     "push": 
     {
@@ -36,7 +36,7 @@
         [   
             "push ${1:DigitalInput}",
             "{",
-                "   ${2://code here}",
+                "\t${0://code here}",
             "}"
         ]
     },
@@ -47,7 +47,7 @@
         [ 
             "release ${1:DigitalInput}",
             "{",
-                "   ${2://code here}",
+                "\t${0://code here}",
             "}"
         ]
     },
@@ -58,39 +58,39 @@
         [ 
             "change ${1:StringOrAnalogInput}",
             "{",
-                "   ${2://code here}",
+                "\t${0://code here}",
             "}"
         ]
     },
     "integer_parameter": 
     {
         "prefix": "integer_parameter",
-        "body": "integer_parameter ${1:Name};"
+        "body": "integer_parameter ${0:Name};"
     },
     "string_parameter": 
     {
         "prefix": "string_parameter",
-        "body": "string_parameter ${1:Name};"
+        "body": "string_parameter ${0:Name};"
     },
     "trace": 
     {
         "prefix": "trace",
-        "body": "trace(\"${1:string}\",${2:args});"
+        "body": "trace(\"${1:string}\",${2:args});\r\n$0"
     },
     "makestring":
     {
         "prefix": "makestring",
-        "body": "makestring(${1:destinationVariable},\"${2:string}\",${3:args});"
+        "body": "makestring(${1:destinationVariable},\"${2:string}\",${3:args});\r\n$0"
     },
     "find":
     {
         "prefix": "find",
-        "body": "find(\"${1:match_string}\",${2:source_string});"
+        "body": "find(\"${1:match_string}\",${2:source_string})"
     },
     "mid":
     {
         "prefix": "mid",
-        "body": "mid(${1:source},${2:start},${3:number});"
+        "body": "mid(${1:source},${2:start},${3:number})"
     },
     "delay": 
     {
@@ -126,18 +126,16 @@
     "pulse": 
     {
         "prefix": "pulse",
-        "body": "pulse(${1:hundredthsOfaSecond}, ${2:digitalOutput});"
+        "body": "pulse(${1:hundredthsOfaSecond}, ${2:digitalOutput});\r\n$0"
     },
     "for":
     {
         "prefix": "for",
         "body": 
         [
-            "integer ${1:variableName};",
-            "",
             "for(${1:variableName} = ${2:value} to ${3:limit})",
             "{",
-            "   ${0://code here}",
+            "\t${0://code here}",
             "}"
         ]
     },
@@ -148,12 +146,25 @@
         [
             "switch(${1:expression})",
             "{",
-            "   case (${2:value}):",
-            "   {",
-            "       ${0://code here}",
-            "   }",
-            "   default:",
-            "       trace(\"default\")",
+            "\tcase (${2:value}):",
+            "\t{",
+            "\t\t${0://code here}",
+            "\t}",
+            "\tdefault:",
+            "\t{",
+            "\t\t",
+            "\t}",
+            "}"
+        ]
+    },
+    "case":
+    {
+        "prefix": "case",
+        "body":
+        [
+            "case (${1:value}):",
+            "{",
+            "\t${0://code here}",
             "}"
         ]
     },
@@ -164,7 +175,7 @@
         [
             "if(${1:expression})",
             "{",
-            "   ${0://code}",
+            "\t${0://code}",
             "}"
         ]
     },
@@ -175,7 +186,7 @@
         [
             "else",
             "{",
-            "   ${0://code}",
+            "\t${0://code}",
             "}"
         ]
     },
@@ -186,7 +197,7 @@
         [
             "while(${1:expression})",
             "{",
-            "   ${0://code}",
+            "\t${0://code}",
             "}"
         ]
     },
@@ -197,7 +208,7 @@
         [
             "do",
             "{",
-            "   ${0://code}",
+            "\t${0://code}",
             "}",
             "until(${1:expression});"
         ]
@@ -209,7 +220,7 @@
         [
             "function ${1:name}(${2:args})",
             "{",
-            "   ${0://code}",
+            "\t${0://code}",
             "}"
         ]
     },
@@ -220,10 +231,10 @@
         [
             "string_function ${1:name}(${2:args})",
             "{",
-            "   string ${3:returnValue}[255];",
-            "   ${0://code}",
-            "   ",
-            "   return ($3);",
+            "\tstring ${3:returnValue}[255];",
+            "\t${0://code}",
+            "\t",
+            "\treturn ($3);",
             "}"
         ]
     },
@@ -234,10 +245,10 @@
         [
             "integer_function ${1:name}(${2:args})",
             "{",
-            "   integer ${3:returnValue};",
-            "   ${0://code}",
-            "   ",
-            "   return ($3);",
+            "\tinteger ${3:returnValue};",
+            "\t${0://code}",
+            "\t",
+            "\treturn ($3);",
             "}"
         ]
     },
@@ -245,7 +256,8 @@
         "prefix":"getlast",
         "body":
         [
-            "GetLastModifiedArrayIndex()"
+            "GetLastModifiedArrayIndex();",
+            ""
         ],
         "description": "Returns last modified array index"
     },
@@ -257,7 +269,7 @@
             "",
             "callback function ${3:callbackName}(${4:argsType} args)",
             "{",
-            "   ${0://todo: code};",
+            "\t${0://todo: code};",
             "}"
         ],
         "description": "Register Delegates and generate callback function."
