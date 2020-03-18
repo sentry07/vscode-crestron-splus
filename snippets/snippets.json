@@ -254,12 +254,13 @@
     },
     "GetLastModifiedArrayIndex": {
         "prefix":"getlast",
-        "body":
-        [
-            "GetLastModifiedArrayIndex();",
-            ""
-        ],
+        "body":"GetLastModifiedArrayIndex();\r\n",
         "description": "Returns last modified array index"
+    },
+    "WaitForInitializationComplete": {
+        "prefix":"waitforinit",
+        "body":"WaitForInitializationComplete();\r\n",
+        "description": "Delays running code in Main() function until program is initialized"
     },
     "RegisterDelegate": {
         "prefix":"registerdelegate",
@@ -273,5 +274,31 @@
             "}"
         ],
         "description": "Register Delegates and generate callback function."
+    },
+    "Define_Constant": {
+        "prefix":"#define_constant",
+        "body": "#DEFINE_CONSTANT ${1:Name} ${2:Value}\r\n$0"
+    },
+    "IncludePath": {
+        "prefix":"#includepath",
+        "body": "#INCLUDEPATH \"${1:Name}\"\r\n$0"
+    },
+    "UserLibrary": {
+        "prefix":"#userlibrary",
+        "body": "#USERLIBRARY \"${1:Name}\"\r\n$0"
+    },
+    "UserSimplSharpLibrary": {
+        "prefix":"#user_simplsharp_library",
+        "body": "#USER_SIMPLSHARP_LIBRARY \"${1:Name}\"\r\n$0"
+    },
+    "Help Block": {
+        "prefix":"#help_begin",
+        "body":
+        [
+            "#HELP_BEGIN",
+            "",
+            "#HELP_END",
+            ""
+        ]
     }
 }
