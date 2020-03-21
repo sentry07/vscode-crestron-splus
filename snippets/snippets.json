@@ -285,7 +285,7 @@
     },
     "UserLibrary": {
         "prefix":"#userlibrary",
-        "body": "#USERLIBRARY \"${1:Name}\"\r\n$0"
+        "body": "#USER_LIBRARY \"${1:Name}\"\r\n$0"
     },
     "UserSimplSharpLibrary": {
         "prefix":"#user_simplsharp_library",
