@@ -1,389 +1,397 @@
 {
-  "scopeName": "source.splus",
-  "fileTypes": [
-      "usp"
-  ],
-  "name": "Crestron",
-  "patterns": [
-      {
-          "include": "#crestron_keywords"
-      },
-      {
-          "include": "#comments"
-      },
-      {
-          "include": "#numbers"
-      },
-      {
-          "begin": "\"",
-          "beginCaptures": [
-              {
-                  "name": "punctuation.definition.string.begin.usp"
-              }
-          ],
-          "comment": "double quoted strings",
-          "end": "\"",
-          "endCaptures": [
-              {
-                  "name": "punctuation.definition.string.end.usp"
-              }
-          ],
-          "name": "string.quoted.double.usp",
-          "patterns": [
-              {
-                  "include": "#string_escaped_char"
-              }
-          ]
-      },
-      {
-          "begin": "'",
-          "beginCaptures": [
-              {
-                  "name": "punctuation.definition.string.begin.usp"
-              }
-          ],
-          "comment": "single quoted strings",
-          "end": "'",
-          "endCaptures": [
-              {
-                  "name": "punctuation.definition.string.end.usp"
-              }
-          ],
-          "name": "string.quoted.single.usp",
-          "patterns": [
-              {
-                  "include": "#string_escaped_char"
-              }
-          ]
-      },
-      {
-          "comment": "help text highlighting",
-          "begin": "(?i)(#help_begin)",
-          "beginCaptures": {
-              "1": {
-                  "name": "keyword.other.preprocessor.usp"
-              }
-          },
-          "end": "(?i)(#help_end)",
-          "endCaptures": {
-              "1": {
-                  "name": "keyword.other.preprocessor.usp"
-              }
-          },
-          "name": "string.quoted.single.usp"
-
-      },
-      {
-          "begin": "(?i)\\s*(function|string_function|integer_function|push|change|release|event|eventhandler|callback function)\\s+(\\b[a-z0-9_]*\\b)",
-          "beginCaptures": {
-              "1": {
-                  "name": "keyword.other.function.usp"
-              },
-              "2": {
-                  "name": "entity.name.function.usp"
-              }
-          },
-          "comment": "function name highlighting",
-          "end": "(\\()|({)|(?<=\\})|(?=#)|(;)",
-          "name": "meta.function.usp",
-          "patterns": [
-              {
-                  "include": "#comments"
-              },
-              {
-                  "include": "#parens"
-              }
-          ]
-      },
-      {
-          "comment": "Function use highlighting",
-          "match": "([_$[:alpha:]][_$[:alnum:]]*)\\((.{0,})\\)",
-          "captures": {
-              "1":{ "name": "entity.name.function.usp"}
-          }
-      },
-      {
-          "comment": "Define Constants",
-          "match":"(?i)(#define_constant)(.+)\\s.+\\s",
-          "captures": {
-              "1": { "name": "keyword.other.preprocessor.usp"},
-              "2": { "name": "variable.other.usp"}
-          }
-      },
-      {
-          "begin": "(?i)\\b(digital_input|analog_input|analog_output|buffer_input|digital_output|string_input|string_output)\\b",
-          "beginCaptures": {
-             "1": {"name": "keyword.other.preprocessor.usp"}
-          },
-          "end": "(;)",
-          "endCaptures": {
-              "1": {"name": "punctuation.terminator.statement.usp"}
-          },
-          "name": "entity.name.function.usp",
-          "patterns": [
-              {
-                  "include": "#crestron_keywords"
-              },
-              {
-                  "include": "#comments"
-              },
-              {
-                  "match": ",",
-                  "name": "punctuation.separator.comma.usp"
-              }
-          ]
-      }
-
-  ],
-  "repository": {
-      "angle_brackets": {
-          "begin": "<",
-          "end": ">",
-          "name": "meta.angle-brackets.usp",
-          "patterns": [
-              {
-                  "include": "#angle_brackets"
-              },
-              {
-                  "include": "$base"
-              }
-          ]
-      },
-      "comments": {
-          "patterns": [
-              {
-                  "captures": {
-                      "1": {
-                          "name": "comment"
-                      }
-                  },
-                  "match": "^\/\\* =(\\s*.*?)\\s*= \\*\/$\\n?",
-                  "name": "comment.block.usp"
-              },
-              {
-                  "begin": "\/\\*",
-                  "captures": [
-                      {
-                          "name": "comment"
-                      }
-                  ],
-                  "end": "\\*\/",
-                  "name": "comment.block"
-              },
-              {
-                  "match": "\\*\/.*\\n",
-                  "name": "comment"
-              },
-              {
-                  "captures": {
-                      "1": {
-                          "name": "comment"
-                      }
-                  },
-                  "match": "^\/\/ =(\\s*.*?)\\s*=\\s*$\\n?",
-                  "name": "comment.line"
-              },
-              {
-                  "begin": "\/\/",
-                  "beginCaptures": [
-                      {
-                          "name": "comment"
-                      }
-                  ],
-                  "end": "$\\n?",
-                  "name": "comment.line.double-slash",
-                  "patterns": [
-                      {
-                          "match": "(?>\\\\\\s*\\n)",
-                          "name": "comment"
-                      }
-                  ]
-              }
-          ]
-      },
-      "crestron_keywords": {
-          "patterns": [
-              {
-                  "comment": "Crestron Compiler Directives",
-                  "match": "(?i)(#\\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library)\\b)",
-                  "name": "keyword.other.preprocessor.usp"
-              },
-              {
-                  "comment": "Crestron Parameter Properties",
-                  "match": "(?i)(#\\b(begin_parameter_properties|end_parameter_properties|begin_prop_full_description|end_prop_full_description|begin_prop_notes|end_prop_notes)\\b)",
-                  "name": "keyword.other.preprocessor.usp"
-              },
-              {
-                  "comment": "Crestron Joins",
-                  "match": "(?i)(#\\b(analog_input_join|analog_output_join|digital_input_join|digital_output_join|string_input_join|string_output_join)\\b)",
-                  "name": "keyword.other.preprocessor.usp"
-              },
-              {
-                  "comment": "Crestron I\/O Declarations",
-                  "match": "(?i)\\b(integer_parameter|long_integer_parameter|nonvolatile|signed_integer_parameter|signed_long_integer_parameter|string_parameter|structure|volatile)\\b",
-                  "name": "keyword.other.preprocessor.usp"
-              },
-              {
-                  "comment": "Crestron Socket Declarations",
-                  "match": "(?i)\\b(tcp_client|tcp_server|udp_socket)\\b",
-                  "name": "keyword.other.preprocessor.usp"
-              },
-              {
-                  "comment": "Crestron Variable Types",
-                  "match": "(?i)\\b(integer|long_integer|signed_integer|signed_long_integer|string|structure)\\b",
-                  "name": "storage.type.usp"
-              },
-              {
-                  "comment": "Crestron Threadsafe",
-                  "match": "(?i)\\b(threadsafe)\\b",
-                  "name": "storage.type.usp"
-              },
-              {
-                  "comment": "Crestron Skip Type",
-                  "match": "(?i)\\b(_skip_)\\b",
-                  "name": "storage.type.skip.usp"
-              },
-              {
-                  "comment": "Crestron Boolean Types",
-                  "match": "(?i)\\b(true|false)\\b",
-                  "name": "constant.language.boolean.usp"
-              },
-              {
-                  "comment": "Crestron Statements",
-                  "match": "(?i)\\b(return|case|default)\\b",
-                  "name": "keyword.control.usp"
-              },
-              {
-                  "comment": "Crestron Exceptions",
-                  "match": "(?i)\\b(try|catch)\\b",
-                  "name": "keyword.control.usp"
-              },
-              {
-                  "comment": "Crestron Exception Functions",
-                  "match": "(?i)\\b(GetExceptionCode|GetExceptionMessage)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron Conditionals",
-                  "match": "(?i)\\b(break|cswitch|if|else|switch|do|until|for|while|to)\\b",
-                  "name": "keyword.control.usp"
-              },
-              {
-                  "comment": "Crestron Array Functions",
-                  "match": "(?i)\\b(GetLastModifiedArrayIndex|GetNumArrayCols|GetNumArrayRows|GetNumStructureArrayCols|ResizeArray|ResizeStructureArray|SetArray)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron Bit\/Byte Functions",
-                  "match": "(?i)\\b(bit|byte|high|highWord|low|LowerChar|LowWord|RotateLeft|RotateLeftLong|RotateRight|RotateRightLong|SetByte|UpperChar)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron CEN-OEM Functions",
-                  "match": "(?i)\\b(_oem_break|_oem_cd|_oem_cts|_oem_dtr|_oem_long_break|_oem_max_string|_oem_pacing|_oem_rts|_oem_str_in|_oem_str_out)\\b",
-                  "name": "support.function.cen-oem.usp"
-              },
-              {
-                  "comment": "Crestron Data Conversion Functions",
-                  "match": "(?i)\\b(atoi|atol|chr|HexToI|HexToL|HexToSI|HexToSL|itoa|itohex|ltoa|ltohex)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron Socket Access Functions",
-                  "match": "(?i)\\b(SocketConnect|SocketConnectClient|SocketDisconnect|SocketDisconnectClient|SocketGetAddressAsRequested|SocketGetPortNumber|SocketGetRemoteIPAddress|SocketGetSenderIPAddress|SocketGetStatus|SocketIsBroadcast|SocketIsMulticast|SocketReceive|SocketSend|SocketServerStartListen|SocketServerStopListen|SocketStatus|SocketUDP_Disable|SocketUDP_Enable)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron Email Functions",
-                  "match": "(?i)\\b(SendMail|SendMailAdvance|SendMailWithAttachments)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron Encoding Functions",
-                  "match": "(?i)\\b(ascii|GetEncoding|SetEncoding|Inherit|ToASCII)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron File Functions",
-                  "match": "(?i)\\b(file_info|FileBOF|FileClose|FileDelete|FileDeleteShared|FileEOF|FileLength|FileOpen|FileOpenShared|FileRead|FileSeek|FileWrite|FindClose|FindFirst|FindFirstShared|FindNext|GetCurrentDirectory|IsDirectory|IsHidden|IsReadOnly|IsSystem|IsVolume|MakeDirectory|MakeDirectoryShared|ReadInteger|ReadIntegerArray|ReadLongInteger|ReadLongIntegerArray|ReadSignedInteger|ReadSignedIntegerArray|ReadSignedLongInteger|ReadSignedLongIntegerArray|ReadString|ReadStringArray|ReadStructure|RemoveDirectory|RemoveDirectoryShared|SetCurrentDirectory|StartFileOperations|WaitForNewDisk|WriteInteger|WriteIntegerArray|WriteLongInteger|WriteLongIntegerArray|WriteSignedInteger|WriteSignedIntegerArray|WriteSignedLongInteger|WriteSignedLongIntegerArray|WriteString|WriteStringArray|WriteStructure)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron Math Functions",
-                  "match": "(?i)\\b(abs|max|min|muldiv|smax|smin)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron Ramp Functions",
-                  "match": "(?i)\\b(CompareRampsByAttribute|CompareRampsByID|CreateRamp|GetRampInfo|InitializeRampInfo|InitializeRampInfoArray|IsRamping|ramp_info|StopRamp)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron Random Number Functions",
-                  "match": "(?i)\\b(random|rnd|seed)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron String Functions",
-                  "match": "(?i)\\b(makestring|print|trace|ClearBuffer|CompareStrings|CompareStringsNoCase|find|FindNoCase|gather|GatherByLength|GetC|left|len|lower|mid|remove|RemoveByLength|ResizeString|ReverseFind|ReverseFindNoCase|right|SetString|upper)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron System Control Functions",
-                  "match": "(?i)\\b(delay|ProcessLogic|pulse|TerminateEvent|WaitForInitializationComplete)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron System Initialization Functions",
-                  "match": "(?i)\\b(GenerateUserError|GenerateUserNotice|GenerateUserWarning|GetCIP|GetCrestnet|GetModelNumber|GetProgramNumber|GetSeries|GetSlot|GetSymbolInstanceName|GetSymbolReferenceName|IsSignalDefined|MakeProgramFilename|SendCresnetPacket|SendPacketToCPU|SetCIP|SetCresnet|SetSlot|RegisterDelegate|RegisterEvent)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron Time\/Date Functions",
-                  "match": "(?i)\\b(date|day|FileDate|FileDay|FileGetDateNum|FileGetDayOfWeekNum|FileGetHourNum|FileGetMinutesNum|FileGetMonthNum|FileGetSecondsNum|FileGetYearNum|FileMonth|FileTime|GetDateNum|GetDayOfWeekNum|GetDST|GetGMTOffset|GetHourNum|GetHSeconds|GetMinutesNum|GetMonthNum|GetSecondsNum|GetTicks|GetYearNum|month|SetClock|SetDate|SetGMTOffset|time)\\b",
-                  "name": "support.function.usp"
-              },
-              {
-                  "comment": "Crestron Wait Functions",
-                  "match": "(?i)\\b(CancelAllWait|CancelWait|PauseAllWait|PauseWait|ResumeAllWait|ResumeWait|RetimeWait|wait)\\b",
-                  "name": "support.function.wait.usp"
-              }
-          ]
-      },
-      "parens": {
-          "begin": "\\(",
-          "end": "\\)",
-          "name": "meta.parens.usp",
-          "patterns": [
-              {
-                  "include": "$base"
-              }
-          ]
-      },
-      "numbers": {
-          "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
-          "name": "constant.numeric.usp"
-      },
-      "punctuation-comma": {
-          "match": ",",
-          "name": "punctuation.separator.comma.usp"
-      },
-      "punctuation-semicolon": {
-          "match": ";",
-          "name": "punctuation.terminator.statement.usp"
-      },
-      "string_escaped_char": {
-          "patterns": [
-              {
-                  "match": "\\\\(\\\\|[abefnprtv'\"?]|[0-3]\\d{,2}|[4-7]\\d?|x[a-fA-F0-9]{,2}|u[a-fA-F0-9]{,4}|U[a-fA-F0-9]{,8})",
-                  "name": "constant.character.escape.usp"
-              },
-              {
-                  "match": "\\\\.",
-                  "name": "invalid.illegal.unknown-escape.usp"
-              }
-          ]
-      }
-  }
+    "scopeName": "source.splus",
+    "fileTypes": [
+        "usp",
+        "usl"
+    ],
+    "name": "Crestron",
+    "patterns": [
+        {
+            "include": "#crestron_keywords"
+        },
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#numbers"
+        },
+        {
+            "begin": "\"",
+            "beginCaptures": [
+                {
+                    "name": "punctuation.definition.string.begin.usp"
+                }
+            ],
+            "comment": "double quoted strings",
+            "end": "\"",
+            "endCaptures": [
+                {
+                    "name": "punctuation.definition.string.end.usp"
+                }
+            ],
+            "name": "string.quoted.double.usp",
+            "patterns": [
+                {
+                    "include": "#string_escaped_char"
+                }
+            ]
+        },
+        {
+            "begin": "'",
+            "beginCaptures": [
+                {
+                    "name": "punctuation.definition.string.begin.usp"
+                }
+            ],
+            "comment": "single quoted strings",
+            "end": "'",
+            "endCaptures": [
+                {
+                    "name": "punctuation.definition.string.end.usp"
+                }
+            ],
+            "name": "string.quoted.single.usp",
+            "patterns": [
+                {
+                    "include": "#string_escaped_char"
+                }
+            ]
+        },
+        {
+            "comment": "help text highlighting",
+            "begin": "(?i)(#help_begin)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.other.preprocessor.usp"
+                }
+            },
+            "end": "(?i)(#help_end)",
+            "endCaptures": {
+                "1": {
+                    "name": "keyword.other.preprocessor.usp"
+                }
+            },
+            "name": "comment.block.usp"
+        },
+        {
+            "begin": "(?i)\\s*(function|string_function|integer_function|push|change|release|event|eventhandler|callback function)\\s+(\\b[a-z0-9_]*\\b)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.usp"
+                },
+                "2": {
+                    "name": "entity.name.function.usp"
+                }
+            },
+            "comment": "function name highlighting",
+            "end": "(\\()|({)|(?<=\\})|(?=#)|(;)",
+            "name": "meta.function.usp",
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#parens"
+                }
+            ]
+        },
+        {
+            "comment": "Function use highlighting",
+            "match": "([_$[:alpha:]][_$[:alnum:]]*)\\((.{0,})\\)",
+            "captures": {
+                "1": {
+                    "name": "entity.name.function.usp"
+                }
+            }
+        },
+        {
+            "comment": "Define Constants",
+            "match": "(?i)(#define_constant)(.+)\\s.+\\s",
+            "captures": {
+                "1": {
+                    "name": "keyword.other.preprocessor.usp"
+                },
+                "2": {
+                    "name": "variable.other.usp"
+                }
+            }
+        },
+        {
+            "begin": "(?i)\\b(digital_input|analog_input|analog_output|buffer_input|digital_output|string_input|string_output)\\b",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.other.preprocessor.usp"
+                }
+            },
+            "end": "(;)",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.terminator.statement.usp"
+                }
+            },
+            "name": "entity.name.function.usp",
+            "patterns": [
+                {
+                    "include": "#crestron_keywords"
+                },
+                {
+                    "include": "#comments"
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.comma.usp"
+                }
+            ]
+        }
+    ],
+    "repository": {
+        "angle_brackets": {
+            "begin": "<",
+            "end": ">",
+            "name": "meta.angle-brackets.usp",
+            "patterns": [
+                {
+                    "include": "#angle_brackets"
+                },
+                {
+                    "include": "$base"
+                }
+            ]
+        },
+        "comments": {
+            "patterns": [
+                {
+                    "captures": {
+                        "1": {
+                            "name": "comment"
+                        }
+                    },
+                    "match": "^\/\\* =(\\s*.*?)\\s*= \\*\/$\\n?",
+                    "name": "comment.block.usp"
+                },
+                {
+                    "begin": "\/\\*",
+                    "captures": [
+                        {
+                            "name": "comment"
+                        }
+                    ],
+                    "end": "\\*\/",
+                    "name": "comment.block"
+                },
+                {
+                    "match": "\\*\/.*\\n",
+                    "name": "comment"
+                },
+                {
+                    "captures": {
+                        "1": {
+                            "name": "comment"
+                        }
+                    },
+                    "match": "^\/\/ =(\\s*.*?)\\s*=\\s*$\\n?",
+                    "name": "comment.line"
+                },
+                {
+                    "begin": "\/\/",
+                    "beginCaptures": [
+                        {
+                            "name": "comment"
+                        }
+                    ],
+                    "end": "$\\n?",
+                    "name": "comment.line.double-slash",
+                    "patterns": [
+                        {
+                            "match": "(?>\\\\\\s*\\n)",
+                            "name": "comment"
+                        }
+                    ]
+                }
+            ]
+        },
+        "crestron_keywords": {
+            "patterns": [
+                {
+                    "comment": "Crestron Compiler Directives",
+                    "match": "(?i)(#\\b(analog_serial_expand|category|crestron_library|user_simplsharp_library|includepath|default_nonvolatile|default_volatile|digital_expand|enable_dynamic|enable_stack_checking|enable_trace|encoding_ascii|encoding_utf16|encoding_inherit_from_parent|encoding_inherit_from_program|help|help_pdf_file|hint|if_defined|if_not_defined|endif|if_series2|if_series3|large_stack|max_internal_buffer_size|output_shift|print_to_trace|symbol_name|user_library)\\b)",
+                    "name": "keyword.other.preprocessor.usp"
+                },
+                {
+                    "comment": "Crestron Parameter Properties",
+                    "match": "(?i)(#\\b(begin_parameter_properties|end_parameter_properties|begin_prop_full_description|end_prop_full_description|begin_prop_notes|end_prop_notes)\\b)",
+                    "name": "keyword.other.preprocessor.usp"
+                },
+                {
+                    "comment": "Crestron Joins",
+                    "match": "(?i)(#\\b(analog_input_join|analog_output_join|digital_input_join|digital_output_join|string_input_join|string_output_join)\\b)",
+                    "name": "keyword.other.preprocessor.usp"
+                },
+                {
+                    "comment": "Crestron I\/O Declarations",
+                    "match": "(?i)\\b(integer_parameter|long_integer_parameter|nonvolatile|signed_integer_parameter|signed_long_integer_parameter|string_parameter|structure|volatile)\\b",
+                    "name": "keyword.other.preprocessor.usp"
+                },
+                {
+                    "comment": "Crestron Socket Declarations",
+                    "match": "(?i)\\b(tcp_client|tcp_server|udp_socket)\\b",
+                    "name": "keyword.other.preprocessor.usp"
+                },
+                {
+                    "comment": "Crestron Variable Types",
+                    "match": "(?i)\\b(integer|long_integer|signed_integer|signed_long_integer|string|structure)\\b",
+                    "name": "storage.type.usp"
+                },
+                {
+                    "comment": "Crestron Threadsafe",
+                    "match": "(?i)\\b(threadsafe)\\b",
+                    "name": "storage.type.usp"
+                },
+                {
+                    "comment": "Crestron Skip Type",
+                    "match": "(?i)\\b(_skip_)\\b",
+                    "name": "storage.type.skip.usp"
+                },
+                {
+                    "comment": "Crestron Boolean Types",
+                    "match": "(?i)\\b(true|false)\\b",
+                    "name": "constant.language.boolean.usp"
+                },
+                {
+                    "comment": "Crestron Statements",
+                    "match": "(?i)\\b(return|case|default)\\b",
+                    "name": "keyword.control.usp"
+                },
+                {
+                    "comment": "Crestron Exceptions",
+                    "match": "(?i)\\b(try|catch)\\b",
+                    "name": "keyword.control.usp"
+                },
+                {
+                    "comment": "Crestron Exception Functions",
+                    "match": "(?i)\\b(GetExceptionCode|GetExceptionMessage)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Conditionals",
+                    "match": "(?i)\\b(break|cswitch|if|else|switch|do|until|for|while|to)\\b",
+                    "name": "keyword.control.usp"
+                },
+                {
+                    "comment": "Crestron Array Functions",
+                    "match": "(?i)\\b(GetLastModifiedArrayIndex|GetNumArrayCols|GetNumArrayRows|GetNumStructureArrayCols|ResizeArray|ResizeStructureArray|SetArray)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Bit\/Byte Functions",
+                    "match": "(?i)\\b(bit|byte|high|highWord|low|LowerChar|LowWord|RotateLeft|RotateLeftLong|RotateRight|RotateRightLong|SetByte|UpperChar)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron CEN-OEM Functions",
+                    "match": "(?i)\\b(_oem_break|_oem_cd|_oem_cts|_oem_dtr|_oem_long_break|_oem_max_string|_oem_pacing|_oem_rts|_oem_str_in|_oem_str_out)\\b",
+                    "name": "support.function.cen-oem.usp"
+                },
+                {
+                    "comment": "Crestron Data Conversion Functions",
+                    "match": "(?i)\\b(atoi|atol|chr|HexToI|HexToL|HexToSI|HexToSL|itoa|itohex|ltoa|ltohex)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Socket Access Functions",
+                    "match": "(?i)\\b(SocketConnect|SocketConnectClient|SocketDisconnect|SocketDisconnectClient|SocketGetAddressAsRequested|SocketGetPortNumber|SocketGetRemoteIPAddress|SocketGetSenderIPAddress|SocketGetStatus|SocketIsBroadcast|SocketIsMulticast|SocketReceive|SocketSend|SocketServerStartListen|SocketServerStopListen|SocketStatus|SocketUDP_Disable|SocketUDP_Enable)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Email Functions",
+                    "match": "(?i)\\b(SendMail|SendMailAdvance|SendMailWithAttachments)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Encoding Functions",
+                    "match": "(?i)\\b(ascii|GetEncoding|SetEncoding|Inherit|ToASCII)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron File Functions",
+                    "match": "(?i)\\b(file_info|FileBOF|FileClose|FileDelete|FileDeleteShared|FileEOF|FileLength|FileOpen|FileOpenShared|FileRead|FileSeek|FileWrite|FindClose|FindFirst|FindFirstShared|FindNext|GetCurrentDirectory|IsDirectory|IsHidden|IsReadOnly|IsSystem|IsVolume|MakeDirectory|MakeDirectoryShared|ReadInteger|ReadIntegerArray|ReadLongInteger|ReadLongIntegerArray|ReadSignedInteger|ReadSignedIntegerArray|ReadSignedLongInteger|ReadSignedLongIntegerArray|ReadString|ReadStringArray|ReadStructure|RemoveDirectory|RemoveDirectoryShared|SetCurrentDirectory|StartFileOperations|WaitForNewDisk|WriteInteger|WriteIntegerArray|WriteLongInteger|WriteLongIntegerArray|WriteSignedInteger|WriteSignedIntegerArray|WriteSignedLongInteger|WriteSignedLongIntegerArray|WriteString|WriteStringArray|WriteStructure)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Math Functions",
+                    "match": "(?i)\\b(abs|max|min|muldiv|smax|smin)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Ramp Functions",
+                    "match": "(?i)\\b(CompareRampsByAttribute|CompareRampsByID|CreateRamp|GetRampInfo|InitializeRampInfo|InitializeRampInfoArray|IsRamping|ramp_info|StopRamp)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Random Number Functions",
+                    "match": "(?i)\\b(random|rnd|seed)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron String Functions",
+                    "match": "(?i)\\b(makestring|print|trace|ClearBuffer|CompareStrings|CompareStringsNoCase|find|FindNoCase|gather|GatherByLength|GetC|left|len|lower|mid|remove|RemoveByLength|ResizeString|ReverseFind|ReverseFindNoCase|right|SetString|upper)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron System Control Functions",
+                    "match": "(?i)\\b(delay|ProcessLogic|pulse|TerminateEvent|WaitForInitializationComplete)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron System Initialization Functions",
+                    "match": "(?i)\\b(GenerateUserError|GenerateUserNotice|GenerateUserWarning|GetCIP|GetCrestnet|GetModelNumber|GetProgramNumber|GetSeries|GetSlot|GetSymbolInstanceName|GetSymbolReferenceName|IsSignalDefined|MakeProgramFilename|SendCresnetPacket|SendPacketToCPU|SetCIP|SetCresnet|SetSlot|RegisterDelegate|RegisterEvent)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Time\/Date Functions",
+                    "match": "(?i)\\b(date|day|FileDate|FileDay|FileGetDateNum|FileGetDayOfWeekNum|FileGetHourNum|FileGetMinutesNum|FileGetMonthNum|FileGetSecondsNum|FileGetYearNum|FileMonth|FileTime|GetDateNum|GetDayOfWeekNum|GetDST|GetGMTOffset|GetHourNum|GetHSeconds|GetMinutesNum|GetMonthNum|GetSecondsNum|GetTicks|GetYearNum|month|SetClock|SetDate|SetGMTOffset|time)\\b",
+                    "name": "support.function.usp"
+                },
+                {
+                    "comment": "Crestron Wait Functions",
+                    "match": "(?i)\\b(CancelAllWait|CancelWait|PauseAllWait|PauseWait|ResumeAllWait|ResumeWait|RetimeWait|wait)\\b",
+                    "name": "support.function.wait.usp"
+                }
+            ]
+        },
+        "parens": {
+            "begin": "\\(",
+            "end": "\\)",
+            "name": "meta.parens.usp",
+            "patterns": [
+                {
+                    "include": "$base"
+                }
+            ]
+        },
+        "numbers": {
+            "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
+            "name": "constant.numeric.usp"
+        },
+        "punctuation-comma": {
+            "match": ",",
+            "name": "punctuation.separator.comma.usp"
+        },
+        "punctuation-semicolon": {
+            "match": ";",
+            "name": "punctuation.terminator.statement.usp"
+        },
+        "string_escaped_char": {
+            "patterns": [
+                {
+                    "match": "\\\\(\\\\|[abefnprtv'\"?]|[0-3]\\d{,2}|[4-7]\\d?|x[a-fA-F0-9]{,2}|u[a-fA-F0-9]{,4}|U[a-fA-F0-9]{,8})",
+                    "name": "constant.character.escape.usp"
+                },
+                {
+                    "match": "\\\\.",
+                    "name": "invalid.illegal.unknown-escape.usp"
+                }
+            ]
+        }
+    }
 }
- 
