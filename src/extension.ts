@@ -175,6 +175,15 @@ function getCompileCommand(fileName: string, buildType: number): string {
   else if (buildType === 3) {
       compiler.filepaths.push("\\target series2");
   }
+  else if (buildType === 4) {
+      compiler.filepaths.push("\\target series4");
+  }
+  else if (buildType === 5) {
+      compiler.filepaths.push("\\target series3 series4");
+  }
+  else if (buildType === 6) {
+      compiler.filepaths.push("\\target series2 series3 series4");
+  }
 
   return compiler.buildCommand();
 }
@@ -193,53 +202,120 @@ async function getCompileTasks(): Promise<vscode.Task[]> {
     let doc = editor.document;
     let executable = 'c:\\windows\\system32\\cmd.exe';
 
-    // Create 3 series compile build task
-    let buildCommand = getCompileCommand(doc.fileName, 1);
-
-    let taskDef: SplusTaskDefinition = {
-      type: 'shell',
-      label: 'S+ Compile 3 Series',
-      buildPath: buildCommand
+    if (vscode.workspace.getConfiguration("splus").enable3series == true) {
+      // Create 3 series compile build task
+      let buildCommand = getCompileCommand(doc.fileName, 1);
+  
+      let taskDef: SplusTaskDefinition = {
+        type: 'shell',
+        label: 'S+ Compile 3 Series',
+        buildPath: buildCommand
+      }
+  
+      let command: vscode.ShellExecution = new vscode.ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
+      let task = new vscode.Task(taskDef, 'S+ Compile 3 Series', 'crestron-splus', command, `$splusCC`);
+      task.definition = taskDef;
+      task.group = vscode.TaskGroup.Build;
+  
+      result.push(task);
     }
 
-    let command: vscode.ShellExecution = new vscode.ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-    let task = new vscode.Task(taskDef, 'S+ Compile 3 Series', 'crestron-splus', command, `$splusCC`);
-    task.definition = taskDef;
-    task.group = vscode.TaskGroup.Build;
-
-    result.push(task);
-
+    if (vscode.workspace.getConfiguration("splus").enable2series == true && vscode.workspace.getConfiguration("splus").enable3series == true)
+    {
     // Create 2 and 3 series build task
-    buildCommand = getCompileCommand(doc.fileName, 2);
+      let buildCommand = getCompileCommand(doc.fileName, 2);
+  
+      let taskDef: SplusTaskDefinition = {
+        type: 'shell',
+        label: 'S+ Compile 2 and 3 Series',
+        buildPath: buildCommand
+      }
+  
+      let command = new vscode.ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
+      let task = new vscode.Task(taskDef, 'S+ Compile 2 and 3 Series', 'crestron-splus', command, `$splusCC`);
+      task.definition = taskDef;
+      task.group = vscode.TaskGroup.Build;
+  
+      result.push(task);
+    }  
 
-    taskDef = {
-      type: 'shell',
-      label: 'S+ Compile 2 and 3 Series',
-      buildPath: buildCommand
+    if (vscode.workspace.getConfiguration("splus").enable2series == true)
+    {
+      // Create 2 series build task
+      let buildCommand = getCompileCommand(doc.fileName, 3);
+  
+      let taskDef: SplusTaskDefinition = {
+        type: 'shell',
+        label: 'S+ Compile 2 Series',
+        buildPath: buildCommand
+      }
+  
+      let command = new vscode.ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
+      let task = new vscode.Task(taskDef, 'S+ Compile 2 Series', 'crestron-splus', command, `$splusCC`);
+      task.definition = taskDef;
+      task.group = vscode.TaskGroup.Build;
+  
+      result.push(task);
     }
 
-    command = new vscode.ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-    task = new vscode.Task(taskDef, 'S+ Compile 2 and 3 Series', 'crestron-splus', command, `$splusCC`);
-    task.definition = taskDef;
-    task.group = vscode.TaskGroup.Build;
-
-    result.push(task);
-
-    // Create 2 series build task
-    buildCommand = getCompileCommand(doc.fileName, 3);
-
-    taskDef = {
-      type: 'shell',
-      label: 'S+ Compile 2 Series',
-      buildPath: buildCommand
+    if (vscode.workspace.getConfiguration("splus").enable4series == true)
+    {
+      // Create 2 series build task
+      let buildCommand = getCompileCommand(doc.fileName, 4);
+  
+      let taskDef: SplusTaskDefinition = {
+        type: 'shell',
+        label: 'S+ Compile 4 Series',
+        buildPath: buildCommand
+      }
+  
+      let command = new vscode.ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
+      let task = new vscode.Task(taskDef, 'S+ Compile 4 Series', 'crestron-splus', command, `$splusCC`);
+      task.definition = taskDef;
+      task.group = vscode.TaskGroup.Build;
+  
+      result.push(task);
     }
 
-    command = new vscode.ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-    task = new vscode.Task(taskDef, 'S+ Compile 2 Series', 'crestron-splus', command, `$splusCC`);
-    task.definition = taskDef;
-    task.group = vscode.TaskGroup.Build;
+    if (vscode.workspace.getConfiguration("splus").enable4series == true && vscode.workspace.getConfiguration("splus").enable3series == true)
+    {
+      // Create 2 series build task
+      let buildCommand = getCompileCommand(doc.fileName, 5);
+  
+      let taskDef: SplusTaskDefinition = {
+        type: 'shell',
+        label: 'S+ Compile 3 and 4 Series',
+        buildPath: buildCommand
+      }
+  
+      let command = new vscode.ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
+      let task = new vscode.Task(taskDef, 'S+ Compile 3 and 4 Series', 'crestron-splus', command, `$splusCC`);
+      task.definition = taskDef;
+      task.group = vscode.TaskGroup.Build;
+  
+      result.push(task);
+    }
 
-    result.push(task);
+    if (vscode.workspace.getConfiguration("splus").enable4series == true && vscode.workspace.getConfiguration("splus").enable3series == true && vscode.workspace.getConfiguration("splus").enable2series == true)
+    {
+      // Create 2 series build task
+      let buildCommand = getCompileCommand(doc.fileName, 6);
+  
+      let taskDef: SplusTaskDefinition = {
+        type: 'shell',
+        label: 'S+ Compile 2, 3 and 4 Series',
+        buildPath: buildCommand
+      }
+  
+      let command = new vscode.ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
+      let task = new vscode.Task(taskDef, 'S+ Compile 2, 3 and 4 Series', 'crestron-splus', command, `$splusCC`);
+      task.definition = taskDef;
+      task.group = vscode.TaskGroup.Build;
+  
+      result.push(task);
+    }
+
+    
     return result;
   }
   catch (err) {

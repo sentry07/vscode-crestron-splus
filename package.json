@@ -2,7 +2,7 @@
 	"name": "crestron-splus",
 	"displayName": "Crestron S+",
 	"description": "Extension for Crestron S+. Includes syntax highlighting and compiling.",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"publisher": "sentry07",
 	"icon": "crestron.png",
 	"repository": {
@@ -48,10 +48,20 @@
 						"default": "C:\\Program Files (x86)\\Crestron\\Simpl\\Simpl+lr.chm",
 						"description": "Location of the S+ Help reference"
 					},
-					"splus.terminalLocation": {
-						"type": "string",
-						"default": "C:\\WINDOWS\\System32\\cmd.exe",
-						"description": "Location of the default windows cmd.exe"
+					"splus.enable2series": {
+						"type": "boolean",
+						"default": false,
+						"description": "Enable 2-Series target for build tasks"
+					},
+					"splus.enable3series": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable 3-Series target for build tasks"
+					},
+					"splus.enable4series": {
+						"type": "boolean",
+						"default": false,
+						"description": "Enable 4-Series target for build tasks"
 					}
 				}
 			}
