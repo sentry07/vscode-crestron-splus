@@ -74,7 +74,46 @@
             "name": "comment.block.usp"
         },
         {
-            "begin": "(?i)\\s*(function|string_function|integer_function|push|change|release|event|eventhandler|callback function)\\s+(\\b[a-z0-9_]*\\b)",
+            "match": "(?im)\\s*(push|change|release)\\s*([\\w_]*)\\s*",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.usp"
+                },
+                "2": {
+                    "name": "entity.name.function.usp"
+                }
+            },
+            "comment": "named event name highlighting",
+            "name": "meta.function.usp",
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#parens"
+                }
+            ]
+        },
+        {
+            "match": "(?im)\\s*(event)\\s*",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.usp"
+                }
+            },
+            "comment": "generic event name highlighting",
+            "name": "meta.function.usp",
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#parens"
+                }
+            ]
+        },
+        {
+            "begin": "(?i)(function|string_function|integer_function|callback function)\\s*([\\w_]*)",
             "beginCaptures": {
                 "1": {
                     "name": "keyword.control.usp"
