@@ -1,8 +1,8 @@
 {
 	"name": "crestron-splus",
 	"displayName": "Crestron S+",
-	"description": "Extension for Crestron S+. Includes syntax highlighting and compiling.",
-	"version": "0.1.5",
+	"description": "Extension for Crestron S+. Includes syntax highlighting, compiling and formatting.",
+	"version": "0.1.6",
 	"publisher": "sentry07",
 	"icon": "crestron.png",
 	"repository": {
@@ -15,22 +15,19 @@
 	},
 	"categories": [
 		"Programming Languages",
-		"Snippets"
+		"Snippets",
+		"Formatters"
 	],
 	"activationEvents": [
-		"onCommand:extension.splus_format",
 		"onCommand:extension.splus_help",
-		"onCommand:workbench.action.tasks.runTask"
+		"onCommand:workbench.action.tasks.runTask",
+		"onLanguage:splus-source"
 	],
 	"main": "./out/extension",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.splus_format",
-				"title": "S+ Beautify Code"
-			},
-			{
-				"command": "extension.splus_help",
+				"command": "splus.help",
 				"title": "Open S+ Help Reference"
 			}
 		],
@@ -69,25 +66,15 @@
 		"menus": {
 			"editor/context": [
 				{
-					"command": "extension.splus_help",
+					"command": "splus.help",
 					"group": "navigation@1",
-					"when": "resourceLangId == splus-source"
-				},
-				{
-					"command": "extension.splus_format",
-					"group": "1_modification@1",
 					"when": "resourceLangId == splus-source"
 				}
 			]
 		},
 		"keybindings": [
 			{
-				"command": "extension.splus_format",
-				"key": "ctrl+shift+f2",
-				"when": "resourceLangId == splus-source"
-			},
-			{
-				"command": "extension.splus_help",
+				"command": "splus.help",
 				"key": "ctrl+shift+f1",
 				"when": "resourceLangId == splus-source"
 			}
@@ -95,10 +82,6 @@
 		"languages": [
 			{
 				"id": "splus-source",
-				"aliases": [
-					"Crestron-S+",
-					"simpl_plus"
-				],
 				"extensions": [
 					".usp",
 					".usl"
@@ -121,7 +104,7 @@
 		],
 		"taskDefinitions": [
 			{
-				"type": "splus",
+				"type": "splus-source",
 				"properties": {
 					"buildPath": {
 						"type": "string"
