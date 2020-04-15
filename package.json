@@ -1,8 +1,8 @@
 {
 	"name": "crestron-splus",
 	"displayName": "Crestron S+",
-	"description": "Extension for Crestron S+. Includes syntax highlighting, compiling and formatting.",
-	"version": "0.1.6",
+	"description": "Syntax highlighting, formatting, build tasks.",
+	"version": "0.2.0",
 	"publisher": "sentry07",
 	"icon": "crestron.png",
 	"repository": {
