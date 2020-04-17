@@ -270,14 +270,8 @@
                             "name": "comment"
                         }
                     ],
-                    "end": "$\\n?",
-                    "name": "comment.line.double-slash",
-                    "patterns": [
-                        {
-                            "match": "(?>\\\\\\s*\\n)",
-                            "name": "comment"
-                        }
-                    ]
+                    "end": "(?=$)",
+                    "name": "comment.line.double-slash"
                 }
             ]
         },
