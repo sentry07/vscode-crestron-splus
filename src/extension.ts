@@ -18,7 +18,7 @@ import {
 	FormattingOptions,
 	CancellationToken,
 	DocumentRangeFormattingEditProvider,
-	DocumentFormattingEditProvider,
+	DocumentFormattingEditProvider
 } from "vscode";
 
 
@@ -26,9 +26,11 @@ let taskProvider: Disposable | undefined;
 
 export function activate(context: ExtensionContext) {
 
-	let help_command = commands.registerCommand("extension.splus_help", () => {
+	let localhelp_command = commands.registerCommand("splus.localHelp", () => {
 		callShellCommand(workspace.getConfiguration("splus").helpLocation);
 	});
+
+	let webhelp_command = commands.registerCommand("splus.webHelp", openWebHelp);
 
 	function rebuildTaskList(): void {
 		if (taskProvider) {
@@ -55,13 +57,18 @@ export function activate(context: ExtensionContext) {
 	let thisFormatProvider = new formattingProvider(formatProvider);
 	languages.registerDocumentFormattingEditProvider({ scheme: 'file', language: 'splus-source' }, thisFormatProvider);
 
-	context.subscriptions.push(help_command);
+	context.subscriptions.push(localhelp_command);
+	context.subscriptions.push(webhelp_command);
 
 	workspace.onDidChangeConfiguration(rebuildTaskList);
 	workspace.onDidOpenTextDocument(rebuildTaskList);
 	window.onDidChangeActiveTextEditor(rebuildTaskList);
 
 	rebuildTaskList();
+}
+
+function openWebHelp() : void {
+	commands.executeCommand('browser-preview.openPreview','http://help.crestron.com/simpl_plus');
 }
 
 export interface RangeFormattingOptions {
@@ -211,7 +218,7 @@ function formatText(docText: string): string {
 
 // Creates a terminal, calls the command, then closes the terminal
 function callShellCommand(shellCommand: string): void {
-	let term = window.createTerminal('splus', workspace.getConfiguration("splus").terminalLocation);
+	let term = window.createTerminal('splus', 'c:\\windows\\system32\\cmd.exe');
 	term.sendText("\"" + shellCommand + "\"", true);
 	term.sendText("exit", true);
 }

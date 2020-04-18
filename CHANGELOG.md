@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.3.0
+* Fixed local helpfile command
++ Added online helpfile shortcut
+
+## 0.2.1
+- Lots of syntax updates
+
 ## 0.2.0
 - First published version
 - Added a document formatter provider. Use the context menu to select Format Document. You can also enable "Format on Save" in VSCode settings.

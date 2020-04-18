@@ -7,10 +7,9 @@ file locations in there.
 # You must enable or disable the platforms you wish to compile for in the settings.
 # By default only 3 series is enabled.
 
-## New in this release (0.2.0):
-* Added a document formatter provider. Use the context menu to select Format Document. You can also enable "Format on Save" in VSCode settings.
-* Build targets in the settings (2, 3 and 4 series). 3 series is the default when installing.
-* Updated snippets and language definitions
+## New in this release (0.3.0):
+* Fixed helpfile shortcut
+* Added online help shortcut
 
 ## Quality of life recommendations:
 * Install "Open In Application" extension by Fabio Spampinato: https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-open-in-application
@@ -21,7 +20,8 @@ file locations in there.
 
 This extension contributes the following commands:
 
-* `splus.help`: Opens the SIMPL+ help reference file
+* `splus.localHelp`: Opens the local SIMPL+ help reference file
+* `splus.webHelp`: Opens the online SIMPL+ help reference page
 
 ## Extension Settings
 
@@ -37,4 +37,5 @@ This extension contributes the following settings:
 
 All commands are added to the right click context menu of the editor tab, and the following keybindings have been added.
 
-* `ctrl+shift+F1`: Opens SIMPL+ Help
+* `ctrl+shift+F1`: Opens the local SIMPL+ help reference file
+* `ctrl+shift+F2`: Opens the online SIMPL+ help reference page

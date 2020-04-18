@@ -2,7 +2,7 @@
 	"name": "crestron-splus",
 	"displayName": "Crestron S+",
 	"description": "Syntax highlighting, formatting, build tasks.",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"publisher": "sentry07",
 	"icon": "crestron.png",
 	"repository": {
@@ -19,7 +19,8 @@
 		"Formatters"
 	],
 	"activationEvents": [
-		"onCommand:extension.splus_help",
+		"onCommand:splus.localHelp",
+		"onCommand:splus.webHelp",
 		"onCommand:workbench.action.tasks.runTask",
 		"onLanguage:splus-source"
 	],
@@ -27,8 +28,12 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "splus.help",
+				"command": "splus.localHelp",
 				"title": "Open S+ Help Reference"
+			},
+			{
+				"command": "splus.webHelp",
+				"title": "Open S+ Online Reference"
 			}
 		],
 		"configuration": [
@@ -66,16 +71,26 @@
 		"menus": {
 			"editor/context": [
 				{
-					"command": "splus.help",
+					"command": "splus.localHelp",
 					"group": "navigation@1",
+					"when": "resourceLangId == splus-source"
+				},
+				{
+					"command": "splus.webHelp",
+					"group": "navigation@2",
 					"when": "resourceLangId == splus-source"
 				}
 			]
 		},
 		"keybindings": [
 			{
-				"command": "splus.help",
+				"command": "splus.localHelp",
 				"key": "ctrl+shift+f1",
+				"when": "resourceLangId == splus-source"
+			},
+			{
+				"command": "splus.webHelp",
+				"key": "ctrl+shift+f2",
 				"when": "resourceLangId == splus-source"
 			}
 		],
@@ -154,6 +169,9 @@
 		"vsce": "^1.59.0",
 		"vscode": "^1.1.30"
 	},
+	"extensionDependencies":[
+		"auchenberg.vscode-browser-preview"
+	],
 	"__metadata": {
 		"id": "sentry07.crestron-splus",
 		"publisherId": "sentry07",
