@@ -21,6 +21,8 @@ import {
 	DocumentFormattingEditProvider
 } from "vscode";
 
+import * as fs from 'fs';
+import { fileURLToPath } from "url";
 
 let taskProvider: Disposable | undefined;
 
@@ -67,8 +69,8 @@ export function activate(context: ExtensionContext) {
 	rebuildTaskList();
 }
 
-function openWebHelp() : void {
-	commands.executeCommand('browser-preview.openPreview','http://help.crestron.com/simpl_plus');
+function openWebHelp(): void {
+	commands.executeCommand('browser-preview.openPreview', 'http://help.crestron.com/simpl_plus');
 }
 
 export interface RangeFormattingOptions {
@@ -234,7 +236,27 @@ function countChars(haystack: string, needle: string): number {
 }
 
 interface SplusTaskDefinition extends TaskDefinition {
+	label: string;
 	buildPath: string;
+}
+
+class SplusCompiler {
+	constructor() {
+		this.filepaths = [];
+		this.compilerPath = "\"" + workspace.getConfiguration("splus").compilerLocation + "\"";
+	}
+	buildCommand() {
+		let filepathConcat = "";
+		this.filepaths.forEach(element => {
+			filepathConcat += element + " ";
+		});
+		return this.compilerPath +
+			" " +
+			filepathConcat;
+	}
+
+	filepaths: string[];
+	compilerPath: string;
 }
 
 function getCompileCommand(fileName: string, buildType: number): string {
@@ -262,6 +284,33 @@ function getCompileCommand(fileName: string, buildType: number): string {
 	return compiler.buildCommand();
 }
 
+function getApiCommand(apiFileName: string, thisFileDir: string): string {
+	let workDir = thisFileDir + "SPlsWork\\";
+	return "\"" + workDir + "splusheader.exe\" \"" + workDir + apiFileName + ".dll\" \"" + thisFileDir + apiFileName + ".api\"";
+}
+
+function getApiInIncludeCommand(apiFileName: string, thisFileDir: string, includePaths: string[]): string {
+	includePaths.forEach((path: string) => {
+		let thisPath = path.slice(14,-1);
+		let workDir = thisFileDir;
+		if (workDir.endsWith("\\")) {
+			workDir = workDir.slice(0, -1);
+		}
+		while (thisPath.startsWith("..\\\\")) {
+			thisPath = thisPath.slice(3);
+			workDir = workDir.slice(0, workDir.lastIndexOf("\\"));
+		}
+		if (!thisPath.endsWith("\\")) {
+			thisPath = thisPath + "\\";
+		}
+		if (fs.existsSync(workDir + "\\" + thisPath + apiFileName + ".dll")) {
+			return "\"" + workDir + "splusheader.exe\" \"" + workDir + apiFileName + ".dll\" \"" + thisFileDir + apiFileName + ".api\"";
+		}
+	})
+
+	return "";
+}
+
 async function getCompileTasks(): Promise<Task[]> {
 	let workspaceRoot = workspace.rootPath;
 	let emptyTasks: Task[] = [];
@@ -276,6 +325,36 @@ async function getCompileTasks(): Promise<Task[]> {
 		let doc = editor.document;
 		let executable = 'c:\\windows\\system32\\cmd.exe';
 
+		let sSharpLibRegEx = /#USER_SIMPLSHARP_LIBRARY\s*\"([\w\.\-]*)\"/gmi;
+		let sSharpIncludeRegEx = /#INCLUDEPATH\s*\"([\w\.\-]*)\"/gmi;
+
+		let sSharpLibs = doc.getText().match(sSharpLibRegEx);
+		let sSharIncludes = doc.getText().match(sSharpIncludeRegEx);
+
+		if (sSharpLibs.length > 0) {
+			sSharpLibs.forEach((regexMatch: string) => {
+				let fileName = regexMatch.slice(26, -1);
+				let thisFileDir = doc.fileName.slice(0, doc.fileName.lastIndexOf("\\") + 1);
+
+				if (fs.existsSync(thisFileDir + "SPlsWork\\" + fileName + ".dll")) {
+					let buildCommand = getApiCommand(fileName, thisFileDir);
+
+					let taskDef: SplusTaskDefinition = {
+						type: 'shell',
+						label: 'Build API for ' + fileName,
+						buildPath: buildCommand
+					}
+
+					let command: ShellExecution = new ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
+					let task = new Task(taskDef, taskDef.label, 'crestron-splus', command, '');
+					task.definition = taskDef;
+					task.group = TaskGroup.Build;
+
+					result.push(task);
+				}
+			})
+		}
+
 		if (workspace.getConfiguration("splus").enable3series == true) {
 			// Create 3 series compile build task
 			let buildCommand = getCompileCommand(doc.fileName, 1);
@@ -287,7 +366,7 @@ async function getCompileTasks(): Promise<Task[]> {
 			}
 
 			let command: ShellExecution = new ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-			let task = new Task(taskDef, 'S+ Compile 3 Series', 'crestron-splus', command, `$splusCC`);
+			let task = new Task(taskDef, taskDef.label, 'crestron-splus', command, `$splusCC`);
 			task.definition = taskDef;
 			task.group = TaskGroup.Build;
 
@@ -305,7 +384,7 @@ async function getCompileTasks(): Promise<Task[]> {
 			}
 
 			let command = new ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-			let task = new Task(taskDef, 'S+ Compile 2 and 3 Series', 'crestron-splus', command, `$splusCC`);
+			let task = new Task(taskDef, taskDef.label, 'crestron-splus', command, `$splusCC`);
 			task.definition = taskDef;
 			task.group = TaskGroup.Build;
 
@@ -323,7 +402,7 @@ async function getCompileTasks(): Promise<Task[]> {
 			}
 
 			let command = new ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-			let task = new Task(taskDef, 'S+ Compile 2 Series', 'crestron-splus', command, `$splusCC`);
+			let task = new Task(taskDef, taskDef.label, 'crestron-splus', command, `$splusCC`);
 			task.definition = taskDef;
 			task.group = TaskGroup.Build;
 
@@ -341,7 +420,7 @@ async function getCompileTasks(): Promise<Task[]> {
 			}
 
 			let command = new ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-			let task = new Task(taskDef, 'S+ Compile 4 Series', 'crestron-splus', command, `$splusCC`);
+			let task = new Task(taskDef, taskDef.label, 'crestron-splus', command, `$splusCC`);
 			task.definition = taskDef;
 			task.group = TaskGroup.Build;
 
@@ -359,7 +438,7 @@ async function getCompileTasks(): Promise<Task[]> {
 			}
 
 			let command = new ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-			let task = new Task(taskDef, 'S+ Compile 3 and 4 Series', 'crestron-splus', command, `$splusCC`);
+			let task = new Task(taskDef, taskDef.label, 'crestron-splus', command, `$splusCC`);
 			task.definition = taskDef;
 			task.group = TaskGroup.Build;
 
@@ -377,7 +456,7 @@ async function getCompileTasks(): Promise<Task[]> {
 			}
 
 			let command = new ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-			let task = new Task(taskDef, 'S+ Compile 2, 3 and 4 Series', 'crestron-splus', command, `$splusCC`);
+			let task = new Task(taskDef, taskDef.label, 'crestron-splus', command, `$splusCC`);
 			task.definition = taskDef;
 			task.group = TaskGroup.Build;
 
@@ -411,29 +490,9 @@ function getOutputChannel(): OutputChannel {
 	return _channel;
 }
 
-class SplusCompiler {
-	constructor() {
-		this.filepaths = [];
-		this.compilerPath = "\"" + workspace.getConfiguration("splus").compilerLocation + "\"";
-	}
-	buildCommand() {
-		let filepathConcat = "";
-		this.filepaths.forEach(element => {
-			filepathConcat += element + " ";
-		});
-		return this.compilerPath +
-			" " +
-			filepathConcat;
-	}
-
-	filepaths: string[];
-	compilerPath: string;
-}
 // this method is called when your extension is deactivated
-function deactivate(): void {
+export function deactivate(): void {
 	if (taskProvider) {
 		taskProvider.dispose();
 	}
 }
-exports.deactivate = deactivate;
-//# sourceMappingURL=extension.js.map

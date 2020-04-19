@@ -99,7 +99,16 @@
 				"id": "splus-source",
 				"extensions": [
 					".usp",
-					".usl"
+					".usl",
+					".csp",
+					".csl"
+				],
+				"configuration": "./language-configuration.json"
+			},
+			{
+				"id": "splus-sharp_api",
+				"extensions": [
+					".api"
 				],
 				"configuration": "./language-configuration.json"
 			}
@@ -109,6 +118,11 @@
 				"language": "splus-source",
 				"scopeName": "source.splus",
 				"path": "./syntaxes/crestron-splus.tmLanguage.json"
+			},
+			{
+				"language": "splus-sharp_api",
+				"scopeName": "source.sharp_api",
+				"path": "./syntaxes/crestron-sharp_api.json"
 			}
 		],
 		"snippets": [

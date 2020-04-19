@@ -2,7 +2,9 @@
     "scopeName": "source.splus",
     "fileTypes": [
         "usp",
-        "usl"
+        "usl",
+        "csp",
+        "csl"
     ],
     "name": "Crestron",
     "patterns": [
@@ -35,7 +37,7 @@
             "name": "comment.block.usp"
         },
         {
-            "match": "(?i)\\s*(push|change|release)\\s+([\\w_]*)\\s*",
+            "match": "(?i)\\s*(push|change|release)\\s+(([\\w_]+\\s*,?\\s*)+)",
             "captures": {
                 "1": {
                     "name": "keyword.control.usp"
@@ -74,12 +76,15 @@
             ]
         },
         {
-            "begin": "(?i)(function|string_function|integer_function|callback function)\\s+([\\w_]*)",
+            "begin": "(?i)(callback)?\\s*(function|string_function|integer_function|gathereventhandler)\\s+([\\w_]*)",
             "beginCaptures": {
                 "1": {
-                    "name": "keyword.control.usp"
+                    "name": "support.class.usp"
                 },
                 "2": {
+                    "name": "keyword.control.usp"
+                },
+                "3": {
                     "name": "entity.name.function.usp"
                 }
             },
