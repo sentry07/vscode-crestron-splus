@@ -345,7 +345,7 @@ async function getCompileTasks(): Promise<Task[]> {
         let sSharpIncludeRegEx = /#INCLUDEPATH\s*\"([\w\.\-]*)\"/gmi;
 
         let sSharpLibs = doc.getText().match(sSharpLibRegEx);
-        let sSharIncludes = doc.getText().match(sSharpIncludeRegEx);
+        let sSharpIncludes = doc.getText().match(sSharpIncludeRegEx);
 
         let enable2SeriesCompile = workspace.getConfiguration("splus").enable2series === true;
         let enable3SeriesCompile = workspace.getConfiguration("splus").enable3series === true;
