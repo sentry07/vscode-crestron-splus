@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.0
+* Lots of updates to syntaxes
++ API file generation for SIMPL# libraries added to build tasks (CTRL+SHIFT+B)
+
 ## 0.3.0
 * Fixed local helpfile command
 + Added online helpfile shortcut

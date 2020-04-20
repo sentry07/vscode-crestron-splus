@@ -4,12 +4,18 @@ After installing the extension, please open your VSCode Settings (CTRL-Comma) an
 file locations in there.
 
 ## Use CTRL+SHIFT+B to compile your S+ code
-# You must enable or disable the platforms you wish to compile for in the settings.
-# By default only 3 series is enabled.
+# You must enable or disable the platforms you wish to compile for in the settings. By default only 3 series is enabled.
 
-## New in this release (0.3.0):
+## New in 0.4.0
+* Lots of updates to syntaxes
++ API file generation for SIMPL# libraries added to build tasks (CTRL+SHIFT+B)
+
+## New in 0.3.0:
 * Fixed helpfile shortcut
-* Added online help shortcut
+* Added online help shortcut to context menu (or CTRL+SHIFT+F2)
+
+## Required Extensions (installed automatically)
++ Browser Preview (auchenberg.vscode-browser-preview)
 
 ## Quality of life recommendations:
 * Install "Open In Application" extension by Fabio Spampinato: https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-open-in-application
