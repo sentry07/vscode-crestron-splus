@@ -37,7 +37,7 @@
             "name": "comment.block.usp"
         },
         {
-            "match": "(?i)\\s*(push|change|release)\\s+(([\\w_]+\\s*,?\\s*)+)",
+            "match": "(?i)\\s*(push|change|release)\\s+(([\\w_$]+\\s*,?\\s*)+)",
             "captures": {
                 "1": {
                     "name": "keyword.control.usp"
@@ -154,26 +154,12 @@
                     "include": "#comments"
                 },
                 {
-                    "match": ",",
-                    "name": "punctuation.separator.comma.usp"
+                    "include": "#punctuation-comma"
                 }
             ]
         }
     ],
     "repository": {
-        "angle_brackets": {
-            "begin": "<",
-            "end": ">",
-            "name": "meta.angle-brackets.usp",
-            "patterns": [
-                {
-                    "include": "#angle_brackets"
-                },
-                {
-                    "include": "$base"
-                }
-            ]
-        },
         "string": {
             "patterns": [
                 {
