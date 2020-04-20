@@ -64,6 +64,7 @@ export function activate(context: ExtensionContext) {
 
 	workspace.onDidChangeConfiguration(rebuildTaskList);
 	workspace.onDidOpenTextDocument(rebuildTaskList);
+	workspace.onDidSaveTextDocument(rebuildTaskList);
 	window.onDidChangeActiveTextEditor(rebuildTaskList);
 
 	rebuildTaskList();
@@ -325,7 +326,7 @@ async function getCompileTasks(): Promise<Task[]> {
 		let doc = editor.document;
 		let executable = 'c:\\windows\\system32\\cmd.exe';
 
-		let sSharpLibRegEx = /#USER_SIMPLSHARP_LIBRARY\s*\"([\w\.\-]*)\"/gmi;
+		let sSharpLibRegEx = /(#USER_SIMPLSHARP_LIBRARY|#CRESTRON_SIMPLSHARP_LIBRARY)\s*\"([\w\.\-]*)\"/gmi;
 		let sSharpIncludeRegEx = /#INCLUDEPATH\s*\"([\w\.\-]*)\"/gmi;
 
 		let sSharpLibs = doc.getText().match(sSharpLibRegEx);
@@ -333,7 +334,13 @@ async function getCompileTasks(): Promise<Task[]> {
 
 		if (sSharpLibs != null && sSharpLibs.length > 0) {
 			sSharpLibs.forEach((regexMatch: string) => {
-				let fileName = regexMatch.slice(26, -1);
+				let fileName = "";
+				if(regexMatch.toLowerCase().startsWith("#user_simplsharp_library")) {
+					fileName = regexMatch.slice(26, -1);
+				}
+				else if (regexMatch.toLowerCase().startsWith("#crestron_simplsharp_library")) {
+					fileName = regexMatch.slice(30, -1);
+				}
 				let thisFileDir = doc.fileName.slice(0, doc.fileName.lastIndexOf("\\") + 1);
 
 				if (fs.existsSync(thisFileDir + "SPlsWork\\" + fileName + ".dll")) {

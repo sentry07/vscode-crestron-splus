@@ -96,6 +96,9 @@
 		],
 		"languages": [
 			{
+				"aliases": [
+					"Crestron S+"
+				],
 				"id": "splus-source",
 				"extensions": [
 					".usp",
@@ -106,6 +109,9 @@
 				"configuration": "./language-configuration.json"
 			},
 			{
+				"aliases": [
+					"Crestron C# API"
+				],
 				"id": "splus-sharp_api",
 				"extensions": [
 					".api"
@@ -121,8 +127,8 @@
 			},
 			{
 				"language": "splus-sharp_api",
-				"scopeName": "source.sharp_api",
-				"path": "./syntaxes/crestron-sharp_api.json"
+				"scopeName": "source.cs",
+				"path": "./syntaxes/csharp.tmLanguage.json"
 			}
 		],
 		"snippets": [
