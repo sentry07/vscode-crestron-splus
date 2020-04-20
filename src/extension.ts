@@ -331,7 +331,7 @@ async function getCompileTasks(): Promise<Task[]> {
 		let sSharpLibs = doc.getText().match(sSharpLibRegEx);
 		let sSharIncludes = doc.getText().match(sSharpIncludeRegEx);
 
-		if (sSharpLibs.length > 0) {
+		if (sSharpLibs != null && sSharpLibs.length > 0) {
 			sSharpLibs.forEach((regexMatch: string) => {
 				let fileName = regexMatch.slice(26, -1);
 				let thisFileDir = doc.fileName.slice(0, doc.fileName.lastIndexOf("\\") + 1);
