@@ -266,21 +266,23 @@ function getBuildParameters(fileName: string, buildType: BuildType): [string, st
     let compiler = new SplusCompiler();
     compiler.arguments.push("\\rebuild \"" + fileName + "\" \\target");
 
-    let series = "";
+    let seriesTargets = [];
     if ((buildType & BuildType.Series2) === BuildType.Series2) {
-        series += "& 2 ";
+        seriesTargets.push(2);
         compiler.arguments.push("series2");
     }
     if ((buildType & BuildType.Series3) === BuildType.Series3) {
-        series += "& 3 ";
+        seriesTargets.push(3);
         compiler.arguments.push("series3");
     }
     if ((buildType & BuildType.Series4) === BuildType.Series4) {
-        series += "& 4 ";
+        seriesTargets.push(4);
         compiler.arguments.push("series4");
     }
 
-    return ["SIMPL+ Compile" + series.substr(1) + "Series", compiler.buildCommand()];
+    let label = "SIMPL+ Compile" + seriesTargets.join(" & ") + "Series";
+    let command = compiler.buildCommand();
+    return [label, command];
 }
 
 function getApiCommand(apiFileName: string, thisFileDir: string): string {
