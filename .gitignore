@@ -1,3 +1,4 @@
-package-lock.json
+.vscode-test
 out/
 node_modules/
+# package-lock.json
