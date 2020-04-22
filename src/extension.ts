@@ -27,11 +27,11 @@ import { fileURLToPath } from "url";
 let taskProvider: Disposable | undefined;
 
 enum BuildType {
-    None    = 0,
+    None = 0,
     Series2 = 1,
     Series3 = 2,
     Series4 = 4,
-    All     = 7
+    All = 7
 }
 
 export function activate(context: ExtensionContext) {
@@ -244,11 +244,6 @@ function countChars(haystack: string, needle: string): number {
     return count;
 }
 
-interface SplusTaskDefinition extends TaskDefinition {
-    label: string;
-    buildPath: string;
-}
-
 class SplusCompiler {
     constructor() {
         this.arguments = [];
@@ -280,7 +275,7 @@ function getBuildParameters(fileName: string, buildType: BuildType): [string, st
         compiler.arguments.push("series4");
     }
 
-    let label = "SIMPL+ Compile" + seriesTargets.join(" & ") + "Series";
+    let label = "Compile " + seriesTargets.join(" & ") + " Series";
     let command = compiler.buildCommand();
     return [label, command];
 }
@@ -292,7 +287,7 @@ function getApiCommand(apiFileName: string, thisFileDir: string): string {
 
 function getApiInIncludeCommand(apiFileName: string, thisFileDir: string, includePaths: string[]): string {
     includePaths.forEach((path: string) => {
-        let thisPath = path.slice(14,-1);
+        let thisPath = path.slice(14, -1);
         let workDir = thisFileDir;
         if (workDir.endsWith("\\")) {
             workDir = workDir.slice(0, -1);
@@ -315,16 +310,24 @@ function getApiInIncludeCommand(apiFileName: string, thisFileDir: string, includ
 function getBuildTask(doc: TextDocument, buildType: BuildType): Task {
     let [label, buildCommand] = getBuildParameters(doc.fileName, buildType);
 
-    let taskDef: SplusTaskDefinition = {
-        type: 'shell',
+    let taskDef: TaskDefinition = {
+        type: "shell",
         label: label,
-        buildPath: buildCommand
+        command: buildCommand,
+        problemMatcher: ["$splusCC"],
+        presentation: {
+            panel: "shared",
+            focus: true,
+            clear: true
+        }
     }
 
-    let executable = 'C:\\Windows\\System32\\cmd.exe';
-    let command = new ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-    let task = new Task(taskDef, taskDef.label, 'crestron-splus', command, `$splusCC`);
+    let command = new ShellExecution("\"" + taskDef.command + "\"");
+    let task = new Task(taskDef, taskDef.label, "Crestron S+", command, taskDef.problemMatcher);
     task.group = TaskGroup.Build;
+    task.definition = taskDef;
+    task.presentationOptions = taskDef.presentation;
+
     return task;
 }
 
@@ -340,7 +343,7 @@ async function getCompileTasks(): Promise<Task[]> {
         let result: Task[] = [];
         let editor = window.activeTextEditor;
         let doc = editor.document;
-        
+
         let executable = 'C:\\Windows\\System32\\cmd.exe';
 
         let sSharpLibRegEx = /(#(?:USER|CRESTRON)_SIMPLSHARP_LIBRARY)\s*\"([\w\.\-]*)\"/gmi;
@@ -356,7 +359,7 @@ async function getCompileTasks(): Promise<Task[]> {
         if (sSharpLibs && sSharpLibs.length > 0) {
             sSharpLibs.forEach((regexMatch: string) => {
                 let fileName = "";
-                if(regexMatch.toLowerCase().startsWith("#user_simplsharp_library")) {
+                if (regexMatch.toLowerCase().startsWith("#user_simplsharp_library")) {
                     fileName = regexMatch.slice(26, -1);
                 }
                 else if (regexMatch.toLowerCase().startsWith("#crestron_simplsharp_library")) {
@@ -368,16 +371,23 @@ async function getCompileTasks(): Promise<Task[]> {
                 if (fs.existsSync(thisFileDir + "SPlsWork\\" + fileName + ".dll")) {
                     let buildCommand = getApiCommand(fileName, thisFileDir);
 
-                    let taskDef: SplusTaskDefinition = {
-                        type: 'shell',
-                        label: 'Generate API for ' + fileName,
-                        buildPath: buildCommand
+                    let taskDef: TaskDefinition = {
+                        type: "shell",
+                        label: "Generate API file for " + fileName,
+                        command: buildCommand,
+                        problemMatcher: [],
+                        presentation: {
+                            panel: "shared",
+                            focus: true,
+                            clear: true
+                        }
                     }
 
-                    let command: ShellExecution = new ShellExecution(`"${buildCommand}"`, { executable: executable, shellArgs: ['/c'] });
-                    let task = new Task(taskDef, taskDef.label, 'crestron-splus', command, '');
-                    task.definition = taskDef;
+                    let command: ShellExecution = new ShellExecution("\"" + taskDef.command + "\"");
+                    let task = new Task(taskDef, taskDef.label, 'Crestron S+', command, taskDef.problemMatcher);
                     task.group = TaskGroup.Build;
+                    task.definition = taskDef;
+                    task.presentationOptions = taskDef.presentation;
 
                     result.push(task);
                 }
@@ -412,7 +422,7 @@ async function getCompileTasks(): Promise<Task[]> {
     catch (err) {
         let channel = getOutputChannel();
         console.log(err);
-        
+
         if (err.stderr) {
             channel.appendLine(err.stderr);
         }

@@ -141,9 +141,9 @@
 			{
 				"type": "splus-source",
 				"properties": {
-					"buildPath": {
-						"type": "string"
-					}
+                    "label": {
+                        "type": "string"
+                    }
 				}
 			}
 		],
