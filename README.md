@@ -6,6 +6,10 @@ file locations in there.
 ## Use CTRL+SHIFT+B to compile your S+ code
 # You must enable or disable the platforms you wish to compile for in the settings. By default only 3 series is enabled.
 
+## 0.4.1
+* Continued syntax refinement (by bitm0de)
+* Code cleanup and rework
+
 ## New in 0.4.0
 * Lots of updates to syntaxes
 + API file generation for SIMPL# libraries added to build tasks (CTRL+SHIFT+B)

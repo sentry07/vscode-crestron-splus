@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.1
+* Continued syntax refinement (by bitm0de)
+* Code cleanup and rework
+
 ## 0.4.0
 * Lots of updates to syntaxes
 + API file generation for SIMPL# libraries added to build tasks (CTRL+SHIFT+B)
