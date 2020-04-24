@@ -18,7 +18,8 @@ import {
     FormattingOptions,
     CancellationToken,
     DocumentRangeFormattingEditProvider,
-    DocumentFormattingEditProvider
+    DocumentFormattingEditProvider,
+    env
 } from "vscode";
 
 import * as fs from 'fs';
@@ -35,6 +36,12 @@ enum BuildType {
 }
 
 export function activate(context: ExtensionContext) {
+
+    if (workspace.workspaceFolders === undefined) {
+        let fileName = window.activeTextEditor.document.uri.path;
+        let fileFolder = fileName.slice(0,fileName.lastIndexOf("/") + 1);
+        commands.executeCommand("vscode.openFolder",Uri.parse(fileFolder));
+    }
 
     let localhelp_command = commands.registerCommand("splus.localHelp", () => {
         callShellCommand(workspace.getConfiguration("splus").helpLocation);
