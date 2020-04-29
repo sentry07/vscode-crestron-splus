@@ -23,7 +23,6 @@ import {
 } from "vscode";
 
 import * as fs from 'fs';
-import { fileURLToPath } from "url";
 
 let taskProvider: Disposable | undefined;
 
@@ -39,8 +38,8 @@ export function activate(context: ExtensionContext) {
 
     if (workspace.workspaceFolders === undefined) {
         let fileName = window.activeTextEditor.document.uri.path;
-        let fileFolder = fileName.slice(0,fileName.lastIndexOf("/") + 1);
-        commands.executeCommand("vscode.openFolder",Uri.parse(fileFolder));
+        let fileFolder = fileName.slice(0, fileName.lastIndexOf("/") + 1);
+        commands.executeCommand("vscode.openFolder", Uri.parse(fileFolder));
     }
 
     let localhelp_command = commands.registerCommand("splus.localHelp", () => {
@@ -150,6 +149,8 @@ function formatText(docText: string): string {
     let startingSignalList = 0;
     let docLines = docText.split(/\r?\n/);                      // Split into lines
 
+    let lineSuffix = '\r';                                      // whether to add the suffix or not
+
     // Comment weeders
     let reDeCom1 = /(\/\/.*)/gm;                                // Single line comment
     let reDeCom2 = /((?:\(\*|\/\*).*(?:\*\)|\*\/))/gm;          // Fully enclosed multiline comment
@@ -197,37 +198,47 @@ function formatText(docText: string): string {
             startingSignalList = 1;
         }
 
+        
+        if (line == docLines.length - 1)
+        {
+            lineSuffix = '';
+        }
+
         // Indent Increase Rules
         if (inSignalList == 1) {
             if (startingSignalList == 1) {
-                outputText = outputText + thisLineTrimmed + "\r";
+                outputText = outputText + thisLineTrimmed + lineSuffix;
                 startingSignalList = 0;
             }
             else {
-                outputText = outputText + ('\t'.repeat(4)) + thisLineTrimmed + "\r";
+                outputText = outputText + ('\t'.repeat(4)) + thisLineTrimmed + lineSuffix;
                 if (thisLineTrimmed.includes(";")) {
                     inSignalList = 0;
                 }
             }
         }
-        else if ((inComment > 0 && !startingComment) || (!inComment && endingComment)) {           // If we're in a multiline comment, just leave the line alone unless it's the start of a ML comment
-            outputText = outputText + thisLine + "\r";
+        // If we're in a multiline comment, just leave the line alone unless it's the start of a ML comment
+        else if ((inComment > 0 && !startingComment) || (!inComment && endingComment)) {
+            outputText = outputText + thisLine + lineSuffix;
         }
-        else if (indentDelta > 0) {                                                         // If we're increasing indent delta because of this line, the add it, then increase indent
-            outputText = outputText + ('\t'.repeat(indentLevel)) + thisLineTrimmed + "\r";
+        // If we're increasing indent delta because of this line, the add it, then increase indent
+        else if (indentDelta > 0) {
+            outputText = outputText + ('\t'.repeat(indentLevel)) + thisLineTrimmed + lineSuffix;
             indentLevel = (indentLevel + indentDelta >= 0) ? (indentLevel + indentDelta) : 0;
         }
         // If we're decreasing delta, and the line starts with the character that is decreasing it, then decrease first, and then add this line
         else if (indentDelta < 0 && (thisLineClean[0] === '}' || thisLineClean[0] === ']' || thisLineClean[0] === ')')) {
             indentLevel = (indentLevel + indentDelta >= 0) ? (indentLevel + indentDelta) : 0;
-            outputText = outputText + ('\t'.repeat(indentLevel)) + thisLineTrimmed + "\r";
+            outputText = outputText + ('\t'.repeat(indentLevel)) + thisLineTrimmed + lineSuffix;
         }
-        else if (indentDelta < 0) {                                                         // If we're decreasing delta but the first character isn't the cause, then we're still inside the block
-            outputText = outputText + ('\t'.repeat(indentLevel)) + thisLineTrimmed + "\r";
+        // If we're decreasing delta but the first character isn't the cause, then we're still inside the block
+        else if (indentDelta < 0) {
+            outputText = outputText + ('\t'.repeat(indentLevel)) + thisLineTrimmed + lineSuffix;
             indentLevel = (indentLevel + indentDelta >= 0) ? (indentLevel + indentDelta) : 0;
         }
-        else {                                                                              // indentDelta === 0; do nothing except add the line with the indent
-            outputText = outputText + ('\t'.repeat(indentLevel)) + thisLineTrimmed + "\r";
+        // indentDelta === 0; do nothing except add the line with the indent
+        else {
+            outputText = outputText + ('\t'.repeat(indentLevel)) + thisLineTrimmed + lineSuffix;
         }
     };
 
@@ -329,7 +340,8 @@ function getBuildTask(doc: TextDocument, buildType: BuildType): Task {
         }
     }
 
-    let command = new ShellExecution("\"" + taskDef.command + "\"");
+    let executable = 'C:\\Windows\\System32\\cmd.exe';
+    let command = new ShellExecution("\"" + taskDef.command + "\"", { executable: executable, shellArgs: ['/c'] });
     let task = new Task(taskDef, taskDef.label, "Crestron S+", command, taskDef.problemMatcher);
     task.group = TaskGroup.Build;
     task.definition = taskDef;
@@ -390,7 +402,8 @@ async function getCompileTasks(): Promise<Task[]> {
                         }
                     }
 
-                    let command: ShellExecution = new ShellExecution("\"" + taskDef.command + "\"");
+                    let executable = 'C:\\Windows\\System32\\cmd.exe';
+                    let command = new ShellExecution("\"" + taskDef.command + "\"", { executable: executable, shellArgs: ['/c'] });
                     let task = new Task(taskDef, taskDef.label, 'Crestron S+', command, taskDef.problemMatcher);
                     task.group = TaskGroup.Build;
                     task.definition = taskDef;

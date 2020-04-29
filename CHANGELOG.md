@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.4.2
++ When opening a single file, VSCode will now open the containing folder to enable build tasks
+* Fixed build bug when PowerShell is the default shell
+* Fixed document formatter adding a blank line to the ends of files
+
 ## 0.4.1
 * Continued syntax refinement (by bitm0de)
 * Code cleanup and rework
