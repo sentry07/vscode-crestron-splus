@@ -19,10 +19,14 @@ import {
     CancellationToken,
     DocumentRangeFormattingEditProvider,
     DocumentFormattingEditProvider,
-    env
+    ViewColumn,
 } from "vscode";
 
 import * as fs from 'fs';
+
+import {
+    join
+} from 'path';
 
 let taskProvider: Disposable | undefined;
 
@@ -80,7 +84,15 @@ export function activate(context: ExtensionContext) {
     workspace.onDidOpenTextDocument(rebuildTaskList);
     workspace.onDidSaveTextDocument(rebuildTaskList);
     window.onDidChangeActiveTextEditor(rebuildTaskList);
-
+    tasks.onDidEndTask(event => {
+        const { source, name, scope } = event.execution.task;
+        if (source == "Crestron S+" && name.startsWith("Generate API file for ")) {
+            let fileName = name.slice(name.lastIndexOf(" ") + 1);
+            workspace.openTextDocument(join(workspace.rootPath, fileName + ".api")).then(doc => {
+                window.showTextDocument(doc,ViewColumn.Beside);
+            });
+        }
+    });
     rebuildTaskList();
 }
 
@@ -198,9 +210,7 @@ function formatText(docText: string): string {
             startingSignalList = 1;
         }
 
-        
-        if (line == docLines.length - 1)
-        {
+        if (line == docLines.length - 1) {
             lineSuffix = '';
         }
 
@@ -362,8 +372,6 @@ async function getCompileTasks(): Promise<Task[]> {
         let result: Task[] = [];
         let editor = window.activeTextEditor;
         let doc = editor.document;
-
-        let executable = 'C:\\Windows\\System32\\cmd.exe';
 
         let sSharpLibRegEx = /(#(?:USER|CRESTRON)_SIMPLSHARP_LIBRARY)\s*\"([\w\.\-]*)\"/gmi;
         let sSharpIncludeRegEx = /#INCLUDEPATH\s*\"([\w\.\-]*)\"/gmi;
