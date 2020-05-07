@@ -108,8 +108,8 @@ export class formattingProvider
     public async provideDocumentRangeFormattingEdits(
         document: TextDocument,
         range: Range,
-        options: FormattingOptions,
-        token: CancellationToken
+        _options: FormattingOptions,
+        _token: CancellationToken
     ): Promise<TextEdit[]> {
         return this.provideEdits(document, {
             rangeEnd: document.offsetAt(range.end),
@@ -119,8 +119,8 @@ export class formattingProvider
 
     public async provideDocumentFormattingEdits(
         document: TextDocument,
-        options: FormattingOptions,
-        token: CancellationToken
+        _options: FormattingOptions,
+        _token: CancellationToken
     ): Promise<TextEdit[]> {
         return this.provideEdits(document);
     }
@@ -131,7 +131,7 @@ function fullDocumentRange(document: TextDocument): Range {
     return new Range(0, 0, lastLineId, document.lineAt(lastLineId).text.length);
 }
 
-async function formatProvider(document: TextDocument, options?: RangeFormattingOptions): Promise<TextEdit[]> {
+async function formatProvider(document: TextDocument, _options?: RangeFormattingOptions): Promise<TextEdit[]> {
     let outputText = formatText(document.getText());
     return [new TextEdit(
         fullDocumentRange(document),
@@ -351,7 +351,7 @@ function getBuildTask(doc: TextDocument, buildType: BuildType): Task {
 }
 
 async function getCompileTasks(): Promise<Task[]> {
-    let workspaceRoot = workspace.rootPath;
+    let workspaceRoot = workspace.workspaceFolders[0].uri.fsPath;
     let emptyTasks: Task[] = [];
 
     if (!workspaceRoot) {
@@ -362,8 +362,6 @@ async function getCompileTasks(): Promise<Task[]> {
         let result: Task[] = [];
         let editor = window.activeTextEditor;
         let doc = editor.document;
-
-        let executable = 'C:\\Windows\\System32\\cmd.exe';
 
         let sSharpLibRegEx = /(#(?:USER|CRESTRON)_SIMPLSHARP_LIBRARY)\s*\"([\w\.\-]*)\"/gmi;
         let sSharpIncludeRegEx = /#INCLUDEPATH\s*\"([\w\.\-]*)\"/gmi;
@@ -378,12 +376,9 @@ async function getCompileTasks(): Promise<Task[]> {
         if (sSharpLibs && sSharpLibs.length > 0) {
             sSharpLibs.forEach((regexMatch: string) => {
                 let fileName = "";
-                if (regexMatch.toLowerCase().startsWith("#user_simplsharp_library")) {
-                    fileName = regexMatch.slice(26, -1);
-                }
-                else if (regexMatch.toLowerCase().startsWith("#crestron_simplsharp_library")) {
-                    fileName = regexMatch.slice(30, -1);
-                }
+                let tokens = regexMatch.match(/\S+/g)
+                if (tokens.length > 1)
+                    fileName = tokens[1].slice(1, -1);
 
                 let thisFileDir = doc.fileName.slice(0, doc.fileName.lastIndexOf("\\") + 1);
 
