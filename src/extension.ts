@@ -19,7 +19,8 @@ import {
     CancellationToken,
     DocumentRangeFormattingEditProvider,
     DocumentFormattingEditProvider,
-    env
+    env,
+    TaskScope
 } from "vscode";
 
 import * as fs from 'fs';
@@ -342,7 +343,7 @@ function getBuildTask(doc: TextDocument, buildType: BuildType): Task {
 
     let executable = 'C:\\Windows\\System32\\cmd.exe';
     let command = new ShellExecution("\"" + taskDef.command + "\"", { executable: executable, shellArgs: ['/c'] });
-    let task = new Task(taskDef, taskDef.label, "Crestron S+", command, taskDef.problemMatcher);
+    let task = new Task(taskDef, TaskScope.Workspace, taskDef.label, "Crestron S+", command, taskDef.problemMatcher);
     task.group = TaskGroup.Build;
     task.definition = taskDef;
     task.presentationOptions = taskDef.presentation;
@@ -399,7 +400,7 @@ async function getCompileTasks(): Promise<Task[]> {
 
                     let executable = 'C:\\Windows\\System32\\cmd.exe';
                     let command = new ShellExecution("\"" + taskDef.command + "\"", { executable: executable, shellArgs: ['/c'] });
-                    let task = new Task(taskDef, taskDef.label, 'Crestron S+', command, taskDef.problemMatcher);
+                    let task = new Task(taskDef, TaskScope.Workspace, taskDef.label, 'Crestron S+', command, taskDef.problemMatcher);
                     task.group = TaskGroup.Build;
                     task.definition = taskDef;
                     task.presentationOptions = taskDef.presentation;
