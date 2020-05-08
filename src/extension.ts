@@ -20,7 +20,9 @@ import {
     DocumentRangeFormattingEditProvider,
     DocumentFormattingEditProvider,
     env,
-    TaskScope
+    TaskScope,
+    CustomExecution,
+    TextDocumentSaveReason
 } from "vscode";
 
 import * as fs from 'fs';
@@ -144,7 +146,7 @@ function formatText(docText: string): string {
     let outputText = "";
     let indentLevel = 0;                                        // Current line indent level (number of tabs)
     let inComment = 0;                                          // If we're in a comment and what level
-    let inSignalList = 0;										// If we're in a list of signals
+    let inSignalList = 0;                                       // If we're in a list of signals
     let startingComment = 0;                                    // Check if this line starts a comment
     let endingComment = 0;                                      // Check if this line ends a comment
     let startingSignalList = 0;
@@ -352,18 +354,22 @@ function getBuildTask(doc: TextDocument, buildType: BuildType): Task {
 }
 
 async function getCompileTasks(): Promise<Task[]> {
-    let workspaceRoot = workspace.workspaceFolders[0].uri.fsPath;
+    let result: Task[] = [];
+    let editor = window.activeTextEditor;
+    let doc = editor.document;
     let emptyTasks: Task[] = [];
 
+    let workspaceFolder = workspace.getWorkspaceFolder(doc.uri)
+    if (!workspaceFolder) {
+        return emptyTasks;
+    }
+
+    let workspaceRoot = workspaceFolder.uri.fsPath;
     if (!workspaceRoot) {
         return emptyTasks;
     }
 
     try {
-        let result: Task[] = [];
-        let editor = window.activeTextEditor;
-        let doc = editor.document;
-
         let sSharpLibRegEx = /(#(?:USER|CRESTRON)_SIMPLSHARP_LIBRARY)\s*\"([\w\.\-]*)\"/gmi;
         let sSharpIncludeRegEx = /#INCLUDEPATH\s*\"([\w\.\-]*)\"/gmi;
 
