@@ -6,6 +6,8 @@ file locations in there.
 ## Use CTRL+SHIFT+B to compile your S+ code
 # You must enable or disable the platforms you wish to compile for in the settings. By default only 3 series is enabled.
 
+This extension currently requires that VSCode has opened the containing folder the S+ file(s) are in. As of 0.4.2, the extension will open the folder for you when open a single file, but only if VSCode doesn't have another folder open. If you are getting `No build errors found` messages when building S+ files, make sure you have the opened the containing folder.
+
 ## 0.4.2
 + When opening a single file, VSCode will now open the containing folder to enable build tasks
 * Fixed build bug when PowerShell is the default shell
