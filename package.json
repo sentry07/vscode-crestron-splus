@@ -188,9 +188,6 @@
 		"typescript": "^3.9.9",
 		"vsce": "^1.88.0"
 	},
-	"extensionDependencies": [
-		"auchenberg.vscode-browser-preview"
-	],
 	"__metadata": {
 		"id": "sentry07.crestron-splus",
 		"publisherId": "sentry07",
