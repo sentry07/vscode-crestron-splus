@@ -2,7 +2,7 @@
 	"name": "crestron-splus",
 	"displayName": "Crestron S+",
 	"description": "Syntax highlighting, formatting, build tasks.",
-	"version": "0.4.3",
+	"version": "0.5.0",
 	"publisher": "sentry07",
 	"icon": "crestron.png",
 	"repository": {
