@@ -24,7 +24,7 @@
 		"onCommand:workbench.action.tasks.runTask",
 		"onLanguage:splus-source"
 	],
-	"main": "./out/extension",
+	"main": "out/extension.js",
 	"contributes": {
 		"commands": [
 			{
