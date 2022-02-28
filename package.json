@@ -4,7 +4,7 @@
 	"description": "Syntax highlighting, formatting, build tasks.",
 	"version": "0.5.0",
 	"publisher": "sentry07",
-	"icon": "crestron.png",
+	"icon": "./icons/crestron.png",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/sentry07/vscode-crestron-splus.git"
@@ -106,6 +106,10 @@
 					".csp",
 					".csl"
 				],
+				"icon": {
+					"dark": "./icons/splusIcon.png",
+					"light": "./icons/splusIcon.png"
+				},
 				"configuration": "./language-configuration.json"
 			},
 			{
@@ -116,6 +120,10 @@
 				"extensions": [
 					".api"
 				],
+				"icon": {
+					"dark": "./icons/splusIcon.png",
+					"light": "./icons/splusIcon.png"
+				},
 				"configuration": "./language-configuration.json"
 			}
 		],
@@ -186,7 +194,7 @@
 		"@types/node": "^11.15.53",
 		"tslint": "^5.14.0",
 		"typescript": "^3.9.9",
-		"vsce": "^1.88.0"
+		"vsce": "^2.6.7"
 	},
 	"__metadata": {
 		"id": "sentry07.crestron-splus",
@@ -194,7 +202,7 @@
 		"publisherDisplayName": "Eric Walters"
 	},
 	"dependencies": {
-		"@types/vscode": "^1.56.0",
-		"vscode-test": "^1.5.2"
+		"@types/vscode": "^1.64.0",
+		"@vscode/test-electron": "^1.5.2"
 	}
 }
