@@ -319,12 +319,22 @@
         [
             "RegisterEvent(${1:objectInstName}, ${2:eventName}, ${3:callbackFuncName});",
             "",
-            "eventhandler ${3:callbackFuncName}(${4:objectTypeName} sender,${5:argsType} args)",
+            "eventhandler ${3:callbackFuncName}(${4:senderClassType} sender,${5:argsType} args)",
             "{",
             "\t${0://code here};",
             "}"
         ],
         "description":"Register Events and generate eventHandler function."
+    },
+    "EventHandler": {
+        "prefix": "eventhandler",
+        "body":
+        [
+            "eventhandler ${1:callbackFuncName}(${2:senderClassType} sender,${3:argsType} args)",
+            "{",
+            "\t${0://code here};",
+            "}"
+        ]
     },
     "Define_Constant": {
         "prefix":"#define_constant",

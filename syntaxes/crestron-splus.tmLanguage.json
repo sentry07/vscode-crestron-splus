@@ -76,7 +76,7 @@
             ]
         },
         {
-            "begin": "(?i)(function|integer_function|signed_integer_function|long_integer_function|signed_long_integer_function|string_function|callback function|callback integer_function|callback signed_integer_function|callback long_integer_function|callback signed_long_integer_function|callback gathereventhandler)\\s+([\\w_]*)",
+            "begin": "(?i)(function|integer_function|signed_integer_function|long_integer_function|signed_long_integer_function|string_function|callback function|callback integer_function|callback signed_integer_function|callback long_integer_function|callback signed_long_integer_function|callback gathereventhandler|eventhandler)\\s+([\\w_]*)",
             "beginCaptures": {
                 "1": {
                     "name": "support.class.usp"
