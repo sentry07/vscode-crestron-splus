@@ -8,8 +8,12 @@ file locations in there.
 
 This extension currently requires that VSCode has opened the containing folder the S+ file(s) are in. As of 0.4.2, the extension will open the folder for you when open a single file, but only if VSCode doesn't have another folder open. If you are getting `No build errors found` messages when building S+ files, make sure you have the opened the containing folder.
 
+## 0.5.2
++ Updated Snippets (eventhandler)
+* Fixed extension entrypoint
+
 ## 0.5.1
-+ Updated Snippets
++ Updated Snippets (event callback)
 + Added language icon
 
 ## 0.5.0
