@@ -88,7 +88,7 @@ export function activate(context: ExtensionContext) {
 }
 
 function openWebHelp(): void {
-    commands.executeCommand('browser-preview.openPreview', 'http://help.crestron.com/simpl_plus');
+    commands.executeCommand('simpleBrowser.show', 'http://help.crestron.com/simpl_plus');
 }
 
 export interface RangeFormattingOptions {

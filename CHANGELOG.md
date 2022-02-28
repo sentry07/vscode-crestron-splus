@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.5.0
++ Replaced dependency for BrowserPreview extension with internal browser
+* Updated dependencies
+
 ## 0.4.2
 + When opening a single file, VSCode will now open the containing folder to enable build tasks
 * Fixed build bug when PowerShell is the default shell
