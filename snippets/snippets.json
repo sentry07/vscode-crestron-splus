@@ -224,6 +224,16 @@
             "}"
         ]
     },
+    "callback_function":{
+        "prefix": "callback_function",
+        "body": 
+        [
+            "callback function ${1:name}(${2:args})",
+            "{",
+            "\t${0://code}",
+            "}"
+        ]
+    },
     "string_function":
     {
         "prefix": "string_function",
@@ -238,12 +248,40 @@
             "}"
         ]
     },
+    "callback_string_function":
+    {
+        "prefix": "callback_string_function",
+        "body": 
+        [
+            "callback string_function ${1:name}(${2:args})",
+            "{",
+            "\tstring ${3:returnValue}[255];",
+            "\t${0://code}",
+            "\t",
+            "\treturn ($3);",
+            "}"
+        ]
+    },
     "integer_function":
     {
         "prefix": "integer_function",
         "body": 
         [
             "integer_function ${1:name}(${2:args})",
+            "{",
+            "\tinteger ${3:returnValue};",
+            "\t${0://code}",
+            "\t",
+            "\treturn ($3);",
+            "}"
+        ]
+    },
+    "callback_integer_function":
+    {
+        "prefix": "callback_integer_function",
+        "body": 
+        [
+            "callback integer_function ${1:name}(${2:args})",
             "{",
             "\tinteger ${3:returnValue};",
             "\t${0://code}",
@@ -274,6 +312,19 @@
             "}"
         ],
         "description": "Register Delegates and generate callback function."
+    },
+    "RegisterEvent":{
+        "prefix":"registerevent",
+        "body":
+        [
+            "RegisterEvent(${1:objectInstName}, ${2:eventName}, ${3:callbackFuncName});",
+            "",
+            "eventhandler ${3:callbackFuncName}(${4:objectTypeName} sender,${5:argsType} args)",
+            "{",
+            "\t${0://code here};",
+            "}"
+        ],
+        "description":"Register Events and generate eventHandler function."
     },
     "Define_Constant": {
         "prefix":"#define_constant",
