@@ -361,5 +361,56 @@
             "// ---------------------------------------------------------------------------------------------------------------------",
             "$0"
         ]
+    },
+    "Parameter Properties": {
+        "prefix": "#begin_parameter_properties",
+        "body":
+        [
+            "#BEGIN_PARAMETER_PROPERTIES ${1:Parameter}",
+            "   $0",
+            "#END_PARAMETER_PROPERTIES"
+        ]
+    },
+    "Parameter Property: Valid Units": {
+        "prefix": "propValidUnits",
+        "body": "propValidUnits = ${0};\t\t// unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks"
+    },
+    "Parameter Property: Default Unit": {
+        "prefix": "propDefaultUnit",
+        "body": "propDefaultUnit = ${0};\t\t// unitString, unitDecimal, unitHex, unitPercent, unitCharacter, unitTime, unitTicks"
+    },
+    "Parameter Property: Bounds": {
+        "prefix": "propBounds",
+        "body": "propBounds = ${1:Lower_Bound},${2:Upper_Bound};"
+    },
+    "Parameter Property: Default Value": {
+        "prefix": "propDefaultValue",
+        "body": "propDefaultValue = ${1:value};"
+    },
+    "Parameter Property: List": {
+        "prefix": "propList",
+        "body": "propList = $0;\t\t// {\"value\", \"label\"}, {\"value\", \"label\"};"
+    },
+    "Parameter Property: Short Description": {
+        "prefix": "propShortDescription",
+        "body": "propShortDescription = $0;"
+    },
+    "Parameter Property: Full Description": {
+        "prefix": "#BEGIN_PROP_FULL_DESCRIPTION",
+        "body":
+        [
+            "#BEGIN_PROP_FULL_DESCRIPTION",
+            "\t$0",
+            "#END_PROP_FULL_DESCRIPTION"
+        ]
+    },
+    "Parameter Property: Notes": {
+        "prefix": "#BEGIN_PROP_NOTES",
+        "body":
+        [
+            "#BEGIN_PROP_NOTES",
+            "\t$0",
+            "#END_PROP_NOTES"
+        ]
     }
 }
