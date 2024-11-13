@@ -375,7 +375,7 @@
                 },
                 {
                     "comment": "Crestron Math Functions",
-                    "match": "(?i)\\b(abs|max|min|muldiv|smax|smin)\\b",
+                    "match": "(?i)\\b(abs|max|min|muldiv|smax|smin|mod|umod)\\b",
                     "name": "support.function.usp"
                 },
                 {
