@@ -62,7 +62,7 @@
 					},
 					"splus.enable4series": {
 						"type": "boolean",
-						"default": false,
+						"default": true,
 						"description": "Enable 4-Series target for build tasks"
 					}
 				}
