@@ -1,208 +1,331 @@
 {
-	"name": "crestron-splus",
-	"displayName": "Crestron S+",
-	"description": "Syntax highlighting, formatting, build tasks.",
-	"version": "0.5.2",
-	"publisher": "sentry07",
-	"icon": "icons/crestron.png",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/sentry07/vscode-crestron-splus.git"
-	},
-	"license": "GPL-3.0",
-	"engines": {
-		"vscode": "^1.28.0"
-	},
-	"categories": [
-		"Programming Languages",
-		"Snippets",
-		"Formatters"
-	],
-	"activationEvents": [
-		"onCommand:splus.localHelp",
-		"onCommand:splus.webHelp",
-		"onCommand:workbench.action.tasks.runTask",
-		"onLanguage:splus-source"
-	],
-	"main": "out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "splus.localHelp",
-				"title": "Open S+ Help Reference"
-			},
-			{
-				"command": "splus.webHelp",
-				"title": "Open S+ Online Reference"
-			}
-		],
-		"configuration": [
-			{
-				"title": "Crestron S+",
-				"properties": {
-					"splus.compilerLocation": {
-						"type": "string",
-						"default": "C:\\Program Files (x86)\\Crestron\\SIMPL\\SPlusCC.exe",
-						"description": "Location of the S+ compiler. Please use double \\\\ for the path."
-					},
-					"splus.helpLocation": {
-						"type": "string",
-						"default": "C:\\Program Files (x86)\\Crestron\\Simpl\\Simpl+lr.chm",
-						"description": "Location of the S+ Help reference"
-					},
-					"splus.enable2series": {
-						"type": "boolean",
-						"default": false,
-						"description": "Enable 2-Series target for build tasks"
-					},
-					"splus.enable3series": {
-						"type": "boolean",
-						"default": true,
-						"description": "Enable 3-Series target for build tasks"
-					},
-					"splus.enable4series": {
-						"type": "boolean",
-						"default": false,
-						"description": "Enable 4-Series target for build tasks"
-					}
-				}
-			}
-		],
-		"menus": {
-			"editor/context": [
-				{
-					"command": "splus.localHelp",
-					"group": "navigation@1",
-					"when": "resourceLangId == splus-source"
-				},
-				{
-					"command": "splus.webHelp",
-					"group": "navigation@2",
-					"when": "resourceLangId == splus-source"
-				}
-			]
-		},
-		"keybindings": [
-			{
-				"command": "splus.localHelp",
-				"key": "ctrl+shift+f1",
-				"when": "resourceLangId == splus-source"
-			},
-			{
-				"command": "splus.webHelp",
-				"key": "ctrl+shift+f2",
-				"when": "resourceLangId == splus-source"
-			}
-		],
-		"languages": [
-			{
-				"aliases": [
-					"Crestron S+"
-				],
-				"id": "splus-source",
-				"extensions": [
-					".usp",
-					".usl",
-					".csp",
-					".csl"
-				],
-				"icon": {
-					"dark": "./icons/splusIcon.png",
-					"light": "./icons/splusIcon.png"
-				},
-				"configuration": "./language-configuration.json"
-			},
-			{
-				"aliases": [
-					"Crestron C# API"
-				],
-				"id": "splus-sharp_api",
-				"extensions": [
-					".api"
-				],
-				"icon": {
-					"dark": "./icons/splusIcon.png",
-					"light": "./icons/splusIcon.png"
-				},
-				"configuration": "./language-configuration.json"
-			}
-		],
-		"grammars": [
-			{
-				"language": "splus-source",
-				"scopeName": "source.splus",
-				"path": "./syntaxes/crestron-splus.tmLanguage.json"
-			},
-			{
-				"language": "splus-sharp_api",
-				"scopeName": "source.cs",
-				"path": "./syntaxes/csharp.tmLanguage.json"
-			}
-		],
-		"snippets": [
-			{
-				"language": "splus-source",
-				"path": "./snippets/snippets.json"
-			}
-		],
-		"taskDefinitions": [
-			{
-				"type": "splus-source",
-				"properties": {
-					"label": {
-						"type": "string"
-					}
-				}
-			}
-		],
-		"problemMatchers": [
-			{
-				"name": "splusCC",
-				"owner": "crestron-splus",
-				"fileLocation": [
-					"absolute"
-				],
-				"pattern": {
-					"regexp": "\\[([^\\]]*)\\]\\s*(?:Error)\\s*\\d*\\s*\\(Line (\\d*)\\)\\s*-\\s*(.*)$",
-					"file": 1,
-					"location": 2,
-					"message": 3
-				}
-			}
-		],
-		"configurationDefaults": {
-			"[splus-source]": {
-				"editor.wordBasedSuggestions": true,
-				"editor.suggest.snippetsPreventQuickSuggestions": false,
-				"editor.quickSuggestions": {
-					"other": true,
-					"comments": false,
-					"strings": false
-				},
-				"editor.snippetSuggestions": "top"
-			}
-		}
-	},
-	"scripts": {
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test"
-	},
-	"devDependencies": {
-		"@types/mocha": "^5.2.6",
-		"@types/node": "^11.15.53",
-		"tslint": "^5.14.0",
-		"typescript": "^3.9.9",
-		"vsce": "^2.6.7"
-	},
-	"__metadata": {
-		"id": "sentry07.crestron-splus",
-		"publisherId": "sentry07",
-		"publisherDisplayName": "Eric Walters"
-	},
-	"dependencies": {
-		"@types/vscode": "^1.64.0",
-		"@vscode/test-electron": "^1.5.2"
-	}
+  "name": "simpl-plus",
+  "displayName": "SIMPL+",
+  "description": "Syntax highlighting, formatting, build tasks.",
+  "version": "1.0.0-alpha8",
+  "publisher": "sentry07",
+  "icon": "icons/crestron.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sentry07/vscode-crestron-splus.git"
+  },
+  "license": "GPL-3.0",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Formatters"
+  ],
+  "main": "./dist/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "simpl-plus.localHelp",
+        "title": "SIMPL+: Open S+ Help Reference"
+      },
+      {
+        "command": "simpl-plus.webHelp",
+        "title": "SIMPL+: Open S+ Online Reference"
+      },
+      {
+        "command": "simpl-plus.build",
+        "title": "SIMPL+: Build SIMPL+ Project"
+      },
+      {
+        "command": "simpl-plus.insertCategory",
+        "title": "SIMPL+: Insert #Category..."
+      },
+      {
+        "command": "simpl-plus.openApis",
+        "title": "SIMPL+: Open all project related API files"
+      },
+      {
+        "command": "simpl-plus.openLibraries",
+        "title": "SIMPL+: Open all project related library files"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "SIMPL+",
+        "properties": {
+          "simpl-plus.simplDirectory": {
+            "type": "string",
+            "default": "C:\\Program Files (x86)\\Crestron\\Simpl",
+            "description": "Location of the Crestron SIMPL Directory."
+          }
+        }
+      },
+      {
+        "title": "Compilation",
+        "properties": {
+          "simpl-plus.enable2series": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enables Series 2 build target for new or unknown SIMPL+ files"
+          },
+          "simpl-plus.enable3series": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enables Series 3 build target for new or unknown SIMPL+ files"
+          },
+          "simpl-plus.enable4series": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enables Series 4 build target for new or unknown SIMPL+ files"
+          }
+        }
+      },
+      {
+        "title": "Formatting",
+        "properties": {
+          "simpl-plus.keywordCase": {
+            "type": "string",
+            "enum": [
+              "lowercase",
+              "UPPERCASE",
+              "PascalCase",
+              "Unchanged"
+            ],
+            "markdownEnumDescriptions": [
+              "Format Keywords to all lowercase/lower_case",
+              "Format Keywords to all UPPERCASE/UPPER_CASE",
+              "Format Keywords to all PascalCase/Pascal_Case",
+              "Leave Keywords unchanged"
+            ],
+            "default": "Unchanged",
+            "description": "Case used when performing autoformat of built-in keywords, statements, etc "
+          },
+          "simpl-plus.braceLine": {
+            "type": "boolean",
+            "default": false,
+            "description": "If enable it will add a new line before every opening curly bracket.  If not, it will move it to the end of the previous line"
+          }
+        }
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "simpl-plus.build",
+          "group": "navigation@1",
+          "when": "resourceLangId == simpl-plus"
+        },
+        {
+          "command": "simpl-plus.localHelp",
+          "group": "navigation@2",
+          "when": "resourceLangId == simpl-plus"
+        },
+        {
+          "command": "simpl-plus.webHelp",
+          "group": "navigation@3",
+          "when": "resourceLangId == simpl-plus"
+        },
+        {
+          "command": "simpl-plus.insertCategory",
+          "group": "navigation@4",
+          "when": "resourceLangId == simpl-plus"
+        },
+        {
+          "command": "simpl-plus.openApis",
+          "group": "navigation@5",
+          "when": "resourceLangId == simpl-plus && simpl-plus:hasApis"
+        },
+        {
+          "command": "simpl-plus.openLibraries",
+          "group": "navigation@6",
+          "when": "resourceLangId == simpl-plus && simpl-plus:hasLibraries"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "simpl-plus.localHelp",
+        "key": "ctrl+shift+f1",
+        "when": "resourceLangId == simpl-plus"
+      },
+      {
+        "command": "simpl-plus.webHelp",
+        "key": "ctrl+shift+f2",
+        "when": "resourceLangId == simpl-plus"
+      },
+      {
+        "command": "simpl-plus.build",
+        "key": "F12",
+        "when": "resourceLangId == simpl-plus"
+      },
+      {
+        "command": "simpl-plus.rebuild",
+        "key": "shift+F12",
+        "when": "resourceLangId == simpl-plus"
+      }
+    ],
+    "languages": [
+      {
+        "aliases": [
+          "SIMPL+"
+        ],
+        "id": "simpl-plus",
+        "extensions": [
+          ".usp",
+          ".usl",
+          ".csp",
+          ".csl"
+        ],
+        "icon": {
+          "dark": "./icons/simpl+Icon.png",
+          "light": "./icons/simpl+Icon.png"
+        },
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "aliases": [
+          "SIMPL# API"
+        ],
+        "id": "simpl-sharp-api",
+        "extensions": [
+          ".api"
+        ],
+        "icon": {
+          "dark": "./icons/simplSharpIcon.png",
+          "light": "./icons/simplSharpIcon.png"
+        },
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "icons": {
+      "target-two": {
+        "description": "Simpl Plus Target Series 2",
+        "default": {
+          "fontPath": "./icons/simpl-plus-targets.woff",
+          "fontCharacter": "\\20"
+        }
+      },
+      "target-three": {
+        "description": "Simpl Plus Target Series 3",
+        "default": {
+          "fontPath": "./icons/simpl-plus-targets.woff",
+          "fontCharacter": "\\21"
+        }
+      },
+      "target-four": {
+        "description": "Simpl Plus Target Series 4",
+        "default": {
+          "fontPath": "./icons/simpl-plus-targets.woff",
+          "fontCharacter": "\\22"
+        }
+      }
+    },
+    "grammars": [
+      {
+        "language": "simpl-plus",
+        "scopeName": "source.simpl-plus",
+        "path": "./syntaxes/simpl-plus.tmLanguage.json"
+      },
+      {
+        "language": "simpl-sharp-api",
+        "scopeName": "source.simpl-sharp-api",
+        "path": "./syntaxes/simpl-sharp-api.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "simpl-plus",
+        "path": "./snippets/snippets.json"
+      }
+    ],
+    "taskDefinitions": [
+      {
+        "type": "simpl-plus",
+        "properties": {
+          "buildTypes": {
+            "type": "array",
+            "description": "Target Build Type"
+          },
+          "files": {
+            "type": "array",
+            "description": "Files to build"
+          },
+          "directory": {
+            "type": "string",
+            "description": "Directory where the files to build are located"
+          },
+          "rebuild": {
+            "type": "boolean",
+            "description": "Rebuild the files even if no change have been made to the usp"
+          }
+        }
+      }
+    ],
+    "problemMatchers": [
+      {
+        "name": "SIMPL+",
+        "owner": "simpl-plus",
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}"
+        ],
+        "pattern": {
+          "regexp": "\\[([^\\]]*)\\]\\s*(?:Error)\\s*\\d*\\s*\\(Line (\\d*)\\)\\s*-\\s*(.*)$",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        }
+      }
+    ],
+    "configurationDefaults": {
+      "[simpl-plus]": {
+        "editor.wordBasedSuggestions": "currentDocument",
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.quickSuggestions": {
+          "other": true,
+          "comments": false,
+          "strings": false
+        },
+        "editor.snippetSuggestions": "inline"
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile && npm run bundle",
+    "compile": "tsc -p ./",
+    "compileWatch": "tsc -p . -w --outDir out",
+    "bundle": "webpack --mode production",
+    "bundleWatch": "webpack --watch",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "package": "vsce package",
+    "test": "vscode-test",
+    "test-with-coverage": "vscode-test --coverage",
+    "yaml2json-watch": "yaml2json syntaxes --save --pretty --recursive --watch",
+    "puml-to-svg": "java -jar \"C:\\ProgramData\\chocolatey\\lib\\plantuml\\tools\\plantuml.jar\"  \".\\UML\\csharp-syntax-mindmap\\*.puml\" \".\\UML\\simpl-plus-syntax-mindmap\\*.puml\" -svg"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.x",
+    "@types/sinon": "^17.0.3",
+    "@types/vscode": "^1.93.0",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "@vscode/vsce": "^3.1.0",
+    "eslint": "^9.9.1",
+    "sinon": "^19.0.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.5.4",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4",
+    "yamljs": "^0.3.0"
+  },
+  "__metadata": {
+    "id": "sentry07.simpl-plus",
+    "publisherId": "sentry07",
+    "publisherDisplayName": "Eric Walters"
+  },
+  "dependencies": {
+    "html-to-text": "^9.0.5",
+    "vscode-textmate-languageservice": "^4.0.0"
+  }
 }

@@ -1,426 +1,1043 @@
 {
-    "digital_input": 
-    {
-        "prefix": "digital_input",
-        "body": "digital_input ${0:Name};"
+    "Digital_Input":{
+        "prefix":
+        [
+            "Digital_Input","digitalinput","din"
+        ],
+        "body": 
+        [
+            "Digital_Input\t${1:Variable}${2:[${3:Array Size}${4:, ${5:Minimum Show}}]};$0"
+        ],
+        "description": "Routes digital inputs from the outside SIMPL program into a SIMPL+ program under the specified variable names. DIGITAL_INPUT values are either 0 (digital low) or 1 (digital high)."
     },
-    "digital_output": 
-    {
-        "prefix": "digital_output",
-        "body": "digital_output ${0:Name};"
+    "Digital_Output":{
+        "prefix":
+        [
+            "Digital_Output","digitaloutput","dout"
+        ],
+        "body": 
+        [
+            "Digital_Output\t${1:Variable}${2:[${3:Array Size}]};$0"
+        ],
+        "description": "Routes a value from the SIMPL+ program to a SIMPL program. If a value different from 0 is placed on a DIGITAL_OUTPUT, the digital signal in the SIMPL program is set high when the control system processes the logic."
     },
-    "analog_input": 
-    {
-        "prefix": "analog_input",
-        "body": "analog_input ${0:Name};"
+    "Analog_Input":{
+        "prefix":
+        [
+            "Analog_Input","analoginput","ain"
+        ],
+        "body": 
+        [
+            "Analog_Input\t${1:Variable}${2:[${3:Array Size}${4:, ${5:Minimum Show}}]};$0"
+        ],
+        "description": "Routes analog inputs from the outside SIMPL program into a SIMPL+ program under with the specified variable names. ANALOG_INPUT values are 16-bit numbers. They are treated as signed or unsigned values inside of a SIMPL+ program depending on the operators or functions being used."
     },
-    "analog_output": 
-    {
-        "prefix": "analog_output",
-        "body": "analog_output ${0:Name};"
+    "Analog_Output":{
+        "prefix":
+        [
+            "Analog_Output","analogoutput","aout"
+        ],
+        "body": 
+        [
+            "Analog_Output\t${1:Variable}${2:[${3:Array Size}]};$0"
+        ],
+        "description": "Routes a value from the SIMPL+ program to the SIMPL program as an analog value. ANALOG_OUTPUT values are 16-bit numbers. They are treated as signed or unsigned values inside of a SIMPL+ program depending on the operators or functions being used."
     },
-    "string_input": 
-    {
-        "prefix": "string_input",
-        "body": "string_input ${1:Name}[${2:stringSize}];"
+    "String_Input":{
+        "prefix":
+        [
+            "String_Input","stringinput","sin"
+        ],
+        "body": 
+        [
+            "String_Input\t${1:Variable}${2:[${3:Array Size}]}[${4:Characters}];$0"
+        ],
+        "description": "Routes serial inputs from the outside SIMPL program into a SIMPL+ program under the specified variable names. Strings are of arbitrary length, so a maximum size must be specified. Upon receiving new data, the value is cleared and the new string is put in. Strings received greater than the specified size are truncated to the size in the declaration. String inputs may be written to, so their data space may be used as a storage spot for doing something such as parsing through a string without declaring temporary storage."
     },
-    "string_output": 
-    {
-        "prefix": "string_output",
-        "body": "string_output ${0:Name};"
+    "String_Output":{
+        "prefix":
+        [
+            "String_Output","stringoutput","sout"
+        ],
+        "body": 
+        [
+            "String_Output\t${1:Variable}${2:[${3:Array Size}]};$0"
+        ],
+        "description": "Routes serial strings from the SIMPL+ program to the SIMPL program. A string length is not required as the output string buffer management is performed by the operating system."
     },
-    "push": 
-    {
-        "prefix": "push",
+    "Push":{
+        "prefix":
+        [
+            "Push"
+        ],
         "body":
         [   
-            "push ${1:DigitalInput}",
-            "{",
+            "Push ${1:digital_input}{",
                 "\t${0://code here}",
             "}"
-        ]
+        ],
+        "description": "PUSH is executed when a DIGITAL_INPUT transitions from low to high."
     },
-    "release": 
-    {
-        "prefix": "release",
+    "Release":{
+        "prefix":
+        [
+            "Release"
+        ],
         "body":
         [ 
-            "release ${1:DigitalInput}",
-            "{",
+            "Release ${1:digital_input}{",
                 "\t${0://code here}",
             "}"
-        ]
+        ],
+        "description": "RELEASE is executed when a DIGITAL_INPUT transitions from high to low."
     },
-    "change": 
-    {
-        "prefix": "change",
+    "Change":{
+        "prefix":
+        [
+            "Change"
+        ],
         "body":
         [ 
-            "change ${1:StringOrAnalogInput}",
-            "{",
+            "Change ${1:string_input or analog_input}{",
                 "\t${0://code here}",
             "}"
-        ]
+        ],
+        "description": "The CHANGE event is called when a DIGITAL_INPUT transitions from low to high or high to low, or when an ANALOG_INPUT or STRING_INPUT changes."
     },
-    "integer_parameter": 
-    {
-        "prefix": "integer_parameter",
-        "body": "integer_parameter ${0:Name};"
-    },
-    "string_parameter": 
-    {
-        "prefix": "string_parameter",
-        "body": "string_parameter ${0:Name};"
-    },
-    "trace": 
-    {
-        "prefix": "trace",
-        "body": "trace(\"${1:string}\",${2:args});\r\n$0"
-    },
-    "makestring":
-    {
-        "prefix": "makestring",
-        "body": "makestring(${1:destinationVariable},\"${2:string}\",${3:args});\r\n$0"
-    },
-    "find":
-    {
-        "prefix": "find",
-        "body": "find(\"${1:match_string}\",${2:source_string})"
-    },
-    "mid":
-    {
-        "prefix": "mid",
-        "body": "mid(${1:source},${2:start},${3:number})"
-    },
-    "delay": 
-    {
-        "prefix": "delay",
-        "body": "delay(${1:hundredthsOfaSecond});"
-    },
-    "lower": 
-    {
-        "prefix": "lower",
-        "body": "lower(${1:stringVariable})"
-    },
-    "upper": 
-    {
-        "prefix": "upper",
-        "body": "upper(${1:stringVariable})"
-    },
-    "itoa": 
-    {
-        "prefix": "itoa",
-        "body": "itoa(${1:integerVariable})"
-    },
-    "atoi": 
-    {
-        "prefix": "atoi",
-        "body": "atoi(${1:stringVariable})"
-    },
-    "chr": 
-    {
-        "prefix": "chr",
-        "body": "chr(${1:integerCode})",
-        "description": "Takes the integer value specified and returns the corresponding ASCII character as a one-byte string."
-    },
-    "pulse": 
-    {
-        "prefix": "pulse",
-        "body": "pulse(${1:hundredthsOfaSecond}, ${2:digitalOutput});\r\n$0"
-    },
-    "for":
-    {
-        "prefix": "for",
+    "Integer_Parameter":{
+        "prefix":
+        [
+            "Integer_Parameter","integerparameter","iparam"
+        ],
         "body": 
         [
-            "for(${1:variableName} = ${2:value} to ${3:limit})",
-            "{",
+            "Integer_Parameter\t${1:Variable}${2:[${3:ARRAY}]};$0"
+        ],
+        "description": "An INTEGER_PARAMETER array element may be used anywhere an INTEGER is legal, with the caveat that it may not be written to.  Array elements are referenced by using the name followed by [element]. The element number may range from 1 to the element size. For example, if an array is declared as NUM[2], then legal elements are NUM[1], and NUM[2]. The bracket notation is often called an array subscript."
+    },
+    "String_Parameter":{
+        "prefix":
+        [
+            "String_Parameter","stringparameter","sparam"
+        ],
+        "body": 
+        [
+            "String_Parameter\t${1:Variable}${2:[${3:Array Size}]}[${4:Characters}];$0"
+        ],
+        "description": "A STRING_PARAMETER array element may be used anywhere a STRING is legal, with the caveat that it may not be written to.  Array elements are referenced by using the name followed by [element]. The element number may range from 1 to the element size. For example, if an array is declared as NUM[2], then legal elements are NUM[1], and NUM[2]. The bracket notation is often called an array subscript."
+    },
+    "%s":{
+        "prefix":
+        [
+            "%s"
+        ],
+        "body": 
+        [
+            "%s $0"
+        ],
+        "description": "s: Specifies a BUFFER_INPUT, STRING, or STRING_INPUT variable."
+    },
+    "%d":{
+        "prefix":
+        [
+            "%d"
+        ],
+        "body": 
+        [
+            "%d $0"
+        ],
+        "description": "d: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as a signed decimal value."
+    },
+    "%u":{
+        "prefix":
+        [
+            "%u"
+        ],
+        "body": 
+        [
+            "%u $0"
+        ],
+        "description": "u: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as an unsigned decimal value."
+    },
+    "%x":{
+        "prefix":
+        [
+            "%x"
+        ],
+        "body": 
+        [
+            "%x $0"
+        ],
+        "description": "x: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as a lowercase hexadecimal number."
+    },
+    "%X":{
+        "prefix":
+        [
+            "%X"
+        ],
+        "body": 
+        [
+            "%X $0"
+        ],
+        "description": "X: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as an uppercase hexadecimal number."
+    },
+    "%l":{
+        "prefix":
+        [
+            "%l"
+        ],
+        "body": 
+        [
+            "%l $0"
+        ],
+        "description": "l: Specifies a LONG_INTEGER or UNSIGNED_LONG_INTEGER will follow, and is followed by d, u, x, or X."
+    },
+    "%":{
+        "prefix":
+        [
+            "%"
+        ],
+        "body": 
+        [
+            "% $0"
+        ],
+        "description": "%: Prints a % sign (i.e. use %% to print a % sign)."
+    },
+    "%ld":{
+        "prefix":
+        [
+            "%ld"
+        ],
+        "body": 
+        [
+            "%ld $0"
+        ],
+        "description": "%ld: Specifies a LONG_INTEGER to be printed as a signed decimal value."
+    },
+    "%c":{
+        "prefix":
+        [
+            "%c"
+        ],
+        "body": 
+        [
+            "%c $0"
+        ],
+        "description": "%c: Specifies a printable ASCII character to be printed."
+    },
+    "Trace":{
+        "prefix":
+        [
+            "Trace"
+        ],
+        "body": 
+        [
+            "Trace(\"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
+        ],
+        "description": "The output of TRACE goes to the CONSOLE of the control system and can be monitored in the Trace window in the Crestron Toolbox SIMPL Debugger and in Crestron Viewport. It can display simple text strings or complex formatted strings."
+    },
+    "MakeString destination":{
+        "prefix":
+        [
+            "MakeString destination"
+        ],
+        "body": 
+        [
+            "MakeString(${1:BUILDING STRING VAR}, \"${2:your statement here}\\n\"${3:, ${4:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
+        ],
+        "description": "MAKESTRING is a variant of PRINT. The output of MAKESTRING goes to the DESTINATION string. It can print simple text strings or complex formatted strings."
+    },
+    "MakeString console(0)":{
+        "prefix":
+        [
+            "MakeString console"
+        ],
+        "body": 
+        [
+            "MakeString(0, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
+        ],
+        "description": "0:  Console Port, same as PRINT."
+    },
+    "MakeString cpu(1)":{
+        "prefix":
+        [
+            "MakeString cpu"
+        ],
+        "body": 
+        [
+            "MakeString(1, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
+        ],
+        "description": "1:  CPU (same functionality as SendPacketToCPU function)"
+    },
+    "MakeString cresnet network(2)":{
+        "prefix":
+        [
+            "MakeString cresnet network"
+        ],
+        "body": 
+        [
+            "MakeString(2, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
+        ],
+        "description": "2:  Cresnet Network (same functionality as SendCresnetPacket function)."
+    },
+    "Find":{
+        "prefix":
+        [
+            "Find"
+        ],
+        "body": 
+        [
+            "${1:INTEGER RETURN_VALUE} = Find(\"${2:STRING MATCH_STRING}\", ${3:STRING SOURCE_STRING}${4:, [${5:INTEGER START_POSITION}]});\n$0"
+        ],
+        "description": "MATCH_STRING is a STRING containing the string to be matched. SOURCE_STRING is a STRING containing the string to be searched. START_POSITION is an INTEGER which tells FIND at what character in the string to start the search, and is 1 based. If it is not specified, it defaults to 1. RETURN_VALUE is the index of where MATCH_STRING first occurs (going left to right) in SOURCE_STRING. If a match can not be found, or POSITION exceeds the length of the SOURCE_STRING then 0 is returned. The index is 1 based."
+    },
+    "Mid":{
+        "prefix":
+        [
+            "Mid"
+        ],
+        "body": 
+        [
+            "${1:STRING RETURN_VALUE} = Mid(${2:SOURCE_STRING}, ${3:INTEGER START_POSITION}, ${4:INTEGER GATHER_LENGTH})\n$0"
+        ],
+        "description": "Returns a string GATHER_LENGTH characters long from SOURCE_STRING, starting at START_POSITION. SOURCE_STRING is a STRING containing the input string. START_POSITION is an INTEGER telling MID at which character position in SOURCE_STRING to start. The first character of SOURCE_STRING is considered 1. GATHER_LENGTH is an INTEGER telling MID how many characters to use from SOURCE_STRING. RETURN_VALUE: A STRING GATHER_LENGTH characters long starting st START_POSITION. If START_POSITION is greater than the length of SOURCE_STRING, an empty STRING is returned. If GATHER_LENGTH is greater than the total number of characters that can be retrieved starting from START_POSITION, only the remaining characters in SOURCE_STRING will be pulled. For Example, MID(\"ABCD\", 2, 10) would return a STRING containing BCD."
+    },
+    "Delay":{
+        "prefix":
+        [
+            "Delay"
+        ],
+        "body": 
+        [ 
+            "Delay(${1:TIME in Hundredths of a second});",
+            "\t//EX. 500 = 5 SECONDS, 1000 = 10 SECONDS",
+            "\t//DELAY PAUSES IN THIS PLACE OF CODE AND CONTINUES WITH THE STATEMENTS AFTER THE DELAY TIME EXPIRES\n$0"
+        ],
+        "description": "Forces a task switch and starts a timer for the hundredths of a second specified by TIME. The system continues with the statements after a delay when the delay time has expired."
+    },
+    "Lower":{
+        "prefix":
+        [
+            "Lower"
+        ],
+        "body": 
+        [
+            "${1:${2:STRING RETURN_VALUE} = }Lower(${3:SOURCE_STRING})\n$0"
+        ],
+        "description": "Takes a source string and converts characters with the values A-Z (uppercase) to a-z (lowercase)."
+    },
+    "Upper":{
+        "prefix":
+        [
+            "Upper"
+        ],
+        "body": 
+        [
+            "${1:${2:STRING RETURN_VALUE} = }Upper(${3:SOURCE_STRING})\n$0"
+        ],
+        "description": "Takes a source string and converts characters with the values a-z (lowercase) to A-Z (uppercase)."
+    },
+    "ITtoA":{
+        "prefix":
+        [
+            "ITtoA", "integertoascii", "integertostring"
+        ],
+        "body": 
+        [
+            "${1:${2:STRING RETURN_VALUE} = }ITtoA(${3:INTEGER_VARIABLE}) //INTEGER_VARIABLE MUST CONTAIN A NUMBER FROM 0 TO 65535\n$0"
+        ],
+        "description": "Takes the value in INTEGER_VARIABLE and creates a string containing the string equivalent of that integer. The output string does not contain leading zeros."
+    },
+    "AToI":{
+        "prefix":
+        [
+            "AToI", "asciitointeger", "stringtointeger"
+        ],
+        "body": 
+        [
+            "${1:${2:INTEGER RETURN_VALUE} = }AToI(${3:STRING_VARIABLE})\n$0"
+        ],
+        "description": "Converts a STRING to an INTEGER value. The conversion looks for the first valid character (0-9), and then reads until it finds the first invalid character. The resulting string of valid characters is then converted. The \"-\" is ignored, hence the output is an unsigned number [i.e., ATOI(\"-1\") would yield 1 as the output]. If the value exceeds 65535, the value is undefined. If no valid value to convert is found, 0 is returned."
+    },
+    "Chr":{
+        "prefix":
+        [
+            "Chr"
+        ],
+        "body": 
+        [
+            "${1:${2:STRING RETURN_VALUE} = }Chr(${3:INTEGER_VARIABLE}) //INTEGER_VARIABLE MUST CONTAIN A NUMBER FROM 0 TO 255\n$0"
+        ],
+        "description": "Takes the INTEGER_VARIABLE specified and returns the corresponding ASCII character as a one-byte string."
+    },
+    "Pulse":{
+        "prefix":
+        [
+            "Pulse"
+        ],
+        "body": 
+        [
+            "Pulse(${1:TIME in Hundredths Of a Second}, ${2:DIGITAL_OUTPUT});\n$0"
+        ],
+        "description": "Pulses the output high then low for the specified length of time (in hundredths of a second). When the pulse starts, a task switch is performed so other logic can be processed. Pulse is always high, then low. If the output is already high, the high is ignored, but the low will be sent at the appropriate time."
+    },
+    "For":{
+        "prefix":
+        [
+            "For"
+        ],
+        "body": 
+        [
+            "For (${1:INTEGER_VARIABLE} = ${2:VALUE_A} To ${3:VALUE_B}){",
             "\t${0://code here}",
             "}"
-        ]
+        ],
+        "description": "This loop executes the <statements> while <variable> iterates from the value of <start_expression> to the value of <end_expression>. The variable is incremented by <step_expression> at the end of the loop, if STEP is specified, else it is incremented by 1. The <step_expression> can be negative which will result in the loop counting down. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that <start_expression> and <end_expression> are evaluated once before the loop starts and are not re-evaluated during the execution of the loop. If it is defined, <step_expression> is evaluated each pass through the loop, so <step_expression> may be modified during execution of the loop."
     },
-    "switch":
-    {
-        "prefix": "switch",
+    "Switch":{
+        "prefix":
+        [
+            "Switch"
+        ],
         "body": 
         [
-            "switch(${1:expression})",
-            "{",
-            "\tcase (${2:value}):",
-            "\t{",
-            "\t\t${0://code here}",
+            "Switch (${1:EXPRESSION}){",
+            "\tCase (${2:VALUE}):{",
+            "\t\t${3://code here}",
             "\t}",
-            "\tdefault:",
-            "\t{",
+            "\t${0://type CASE to add a new case statement}",
+            "\tDefault:{",
             "\t\t",
             "\t}",
             "}"
-        ]
+        ],
+        "description": "SWITCH is a more direct method of writing a complex IF-ELSE-IF statement. In the SWITCH, if <expression> is equal to <expression1>, <statements1> is executed. If <expression> is equal to <expression2>, <statements2> is executed. This same method would apply to as many CASE statements as are listed in the body of the SWITCH. Note that if any of the <statements> blocks are only a single statement, the { and } characters on the CASE may be omitted."
     },
-    "case":
-    {
-        "prefix": "case",
+    "Case":{
+        "prefix":
+        [
+            "Case"
+        ],
         "body":
         [
-            "case (${1:value}):",
-            "{",
+            "Case (${1:VALUE}):{",
             "\t${0://code here}",
             "}"
         ]
     },
-    "if":
-    {
-        "prefix": "if",
+    "If":{
+        "prefix":
+        [
+            "If"
+        ],
         "body": 
         [
-            "if(${1:expression})",
-            "{",
+            "If (${1:EXPRESSION}){",
             "\t${0://code}",
             "}"
-        ]
+        ],
+        "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
     },
-    "else":
-    {
-        "prefix": "else",
+    "Else":{
+        "prefix":
+        [
+            "Else"
+        ],
         "body": 
         [
-            "else",
-            "{",
+            "Else {",
             "\t${0://code}",
             "}"
-        ]
+        ],
+        "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
     },
-    "while":
-    {
-        "prefix": "while",
+    "Else If":{
+        "prefix":
+        [
+            "Else If"
+        ],
         "body": 
         [
-            "while(${1:expression})",
-            "{",
+            "Else If (${1:EXPRESSION}){",
             "\t${0://code}",
             "}"
-        ]
+        ],
+        "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
     },
-    "dountil":
-    {
-        "prefix": "dountil",
+    "While":{
+        "prefix":
+        [
+            "While"
+        ],
         "body": 
         [
-            "do",
-            "{",
+            "While (${1:EXPRESSION}){",
+            "\t${0://code}",
+            "}"
+        ],
+        "description": "This loop performs a set of <statements> as long as <expression> does not evaluate to zero. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that depending on <expression>, the body of the loop may never be executed. Note that <expression> is evaluated at the beginning of the loop."
+    },
+    "Do - Until":{
+        "prefix":
+        [
+            "Do", "Until", "DoUntil"
+        ],
+        "body": 
+        [
+            "Do {",
             "\t${0://code}",
             "}",
-            "until(${1:expression});"
-        ]
+            "Until (${1:EXPRESSION});"
+        ],
+        "description": "This loop performs a set of <statements> at least one time and will terminate when <expression> evaluates to true. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that <expression> is evaluated each time through the loop."
     },
-    "function":
-    {
-        "prefix": "function",
+    "Function":{
+        "prefix":
+        [
+            "Function"
+        ],
         "body": 
         [
-            "function ${1:name}(${2:args})",
-            "{",
+            "Function ${1:FUNCTION}(${2:[INTEGER, STRING]}){",
             "\t${0://code}",
-            "}"
-        ]
-    },
-    "callback_function":{
-        "prefix": "callback_function",
-        "body": 
-        [
-            "callback function ${1:name}(${2:args})",
-            "{",
-            "\t${0://code}",
-            "}"
-        ]
-    },
-    "string_function":
-    {
-        "prefix": "string_function",
-        "body": 
-        [
-            "string_function ${1:name}(${2:args})",
-            "{",
-            "\tstring ${3:returnValue}[255];",
-            "\t${0://code}",
-            "\t",
-            "\treturn ($3);",
-            "}"
-        ]
-    },
-    "callback_string_function":
-    {
-        "prefix": "callback_string_function",
-        "body": 
-        [
-            "callback string_function ${1:name}(${2:args})",
-            "{",
-            "\tstring ${3:returnValue}[255];",
-            "\t${0://code}",
-            "\t",
-            "\treturn ($3);",
-            "}"
-        ]
-    },
-    "integer_function":
-    {
-        "prefix": "integer_function",
-        "body": 
-        [
-            "integer_function ${1:name}(${2:args})",
-            "{",
-            "\tinteger ${3:returnValue};",
-            "\t${0://code}",
-            "\t",
-            "\treturn ($3);",
-            "}"
-        ]
-    },
-    "callback_integer_function":
-    {
-        "prefix": "callback_integer_function",
-        "body": 
-        [
-            "callback integer_function ${1:name}(${2:args})",
-            "{",
-            "\tinteger ${3:returnValue};",
-            "\t${0://code}",
-            "\t",
-            "\treturn ($3);",
-            "}"
-        ]
-    },
-    "GetLastModifiedArrayIndex": {
-        "prefix":"getlast",
-        "body":"GetLastModifiedArrayIndex();\r\n",
-        "description": "Returns last modified array index"
-    },
-    "WaitForInitializationComplete": {
-        "prefix":"waitforinit",
-        "body":"WaitForInitializationComplete();\r\n",
-        "description": "Delays running code in Main() function until program is initialized"
-    },
-    "RegisterDelegate": {
-        "prefix":"registerdelegate",
-        "body":
-        [
-            "RegisterDelegate(${1:objectName}, ${2:delegateName}, ${3:callbackName});",
-            "",
-            "callback function ${3:callbackName}(${4:argsType} args)",
-            "{",
-            "\t${0://todo: code};",
             "}"
         ],
-        "description": "Register Delegates and generate callback function."
+        "description": "Returns no data to the caller"
     },
-    "RegisterEvent":{
-        "prefix":"registerevent",
-        "body":
+    "Integer_Function":{
+        "prefix":
         [
-            "RegisterEvent(${1:objectInstName}, ${2:eventName}, ${3:callbackFuncName});",
-            "",
-            "eventhandler ${3:callbackFuncName}(${4:senderClassType} sender,${5:argsType} args)",
-            "{",
-            "\t${0://code here};",
+            "Integer_Function"
+        ],
+        "body": 
+        [
+            "Integer_Function ${1:FUNCTION_NAME}(${2:[PARAMETERS]}){",
+            "\tInteger ${3:RETURN_VALUE}; //THIS IS RETURN VALUE FOR THIS FUNCTION",
+            "\t",
+            "\tReturn ($3);",
             "}"
         ],
-        "description":"Register Events and generate eventHandler function."
+        "description": "Returns an integer value to the caller"
     },
-    "EventHandler": {
-        "prefix": "eventhandler",
-        "body":
+    "String_Function":{
+        "prefix":
         [
-            "eventhandler ${1:callbackFuncName}(${2:senderClassType} sender,${3:argsType} args)",
-            "{",
-            "\t${0://code here};",
+            "String_Function"
+        ],
+        "body": 
+        [
+            "String_Function ${1:FUNCTION_NAME}(${2:[PARAMETERS]}){",
+            "\tString ${3:RETURN_VALUE}[255]; //THIS IS RETURN VALUE FOR THIS FUNCTION",
+            "\t",
+            "\tReturn ($3);",
             "}"
-        ]
+        ],
+        "description": "Returns a string value to the caller"
     },
-    "Define_Constant": {
-        "prefix":"#define_constant",
-        "body": "#DEFINE_CONSTANT ${1:Name} ${2:Value}\r\n$0"
-    },
-    "IncludePath": {
-        "prefix":"#includepath",
-        "body": "#INCLUDEPATH \"${1:Name}\"\r\n$0"
-    },
-    "UserLibrary": {
-        "prefix":"#userlibrary",
-        "body": "#USER_LIBRARY \"${1:Name}\"\r\n$0"
-    },
-    "UserSimplSharpLibrary": {
-        "prefix":"#user_simplsharp_library",
-        "body": "#USER_SIMPLSHARP_LIBRARY \"${1:Name}\"\r\n$0"
-    },
-    "Help Block": {
-        "prefix":"#help_begin",
+    "GetLastModifiedArrayIndex":{
+        "prefix":
+        [
+            "getlastmodifiedarrayindex","GetLastModifiedArrayIndex","glmai"
+        ],
         "body":
         [
-            "#HELP_BEGIN",
-            "",
-            "#HELP_END",
-            ""
-        ]
+            "GetLastModifiedArrayIndex();\n$0"
+        ],
+        "description": "Determines the specific index number of an input list array that has changed. ANALOG_INPUT, BUFFER_INPUT, DIGITAL_INPUT, and STRING_INPUT arrays are subject to be used in CHANGE, PUSH, and RELEASE statements, but only the overall array can be specified in the statement, not an individual element. In order to find out what element has been modified (and hence caused the activation of the CHANGE, PUSH, or RELEASE), GETLASTMODIFIEDARRAYINDEX is used."
     },
-    "Comment Block": {
-        "prefix": "__comment",
+    "WaitForInitializationComplete":{
+        "prefix":
+        [
+            "waitforinitializationcomplete","WaitForInitializationComplete","wfic"
+        ],
+        "body":
+        [
+            "WaitForInitializationComplete();\n"
+        ],
+        "description": "Waits for the logic processor to perform its first logic solution before returning control back to the calling task.  This makes it possible to access inputs and outputs in function main() that are modified during the initial logic solution (propagating signals with logic \"1\" attached).  The function Main() starts to run at when the Simpl+ module is initialized."
+    },
+    "Parameter Property: Valid Units":{
+        "prefix":
+        [
+            "PropValidUnits"
+        ],
+        "body": 
+        [
+            "PropValidUnits = ${0};\t\t// unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks"
+        ],
+        "description": ""
+    },
+    "Parameter Property: Default Unit":{
+        "prefix":
+        [
+            "PropDefaultUnit"
+        ],
+        "body": 
+        [
+            "PropDefaultUnit = ${0};\t\t// unitString, unitDecimal, unitHex, unitPercent, unitCharacter, unitTime, unitTicks"
+        ],
+        "description": ""
+    },
+    "Parameter Property: Default Value":{
+        "prefix":
+        [
+            "PropDefaultValue"
+        ],
+        "body": 
+        [
+            "PropDefaultValue = ${1:value};"
+        ],
+        "description": ""
+    },
+    "Parameter Property: List":{
+        "prefix":
+        [
+            "PropList"
+        ],
+        "body": 
+        [
+            "PropList = $0;\t\t// {\"value\", \"label\"}, {\"value\", \"label\"};"
+        ],
+        "description": ""
+    },
+    "Parameter Property: Bounds":{
+        "prefix":
+        [
+            "PropBounds"
+        ],
+        "body": 
+        [
+            "PropBounds = ${1:Lower_Bound},${2:Upper_Bound};"
+        ],
+        "description": ""
+    },
+    "Parameter Property: Short Description":{
+        "prefix":
+        [
+            "PropShortDescription"
+        ],
+        "body": 
+        [
+            "PropShortDescription = $0;"
+        ],
+        "description": ""
+    },
+    "Parameter Property: Full Description":{
+        "prefix":
+        [
+            "#Begin_Prop_Full_Description"
+        ],
+        "body":
+        [
+            "#Begin_Prop_Full_Description",
+            "\t$0",
+            "#End_Prop_Full_Description"
+        ],
+        "description": ""
+    },
+    "Parameter Property: Notes":{
+        "prefix":
+        [
+            "#Begin_Prop_Notes"
+        ],
+        "body":
+        [
+            "#Begin_Prop_Notes",
+            "\t$0",
+            "#End_Prop_Notes"
+        ],
+        "description": ""
+    },
+    "#Analog_Serial_Expand":{
+        "prefix":
+        [
+            "@CD","#Analog_Serial_Expand"
+        ],
+        "body": 
+        [
+            "#Analog_Serial_Expand ${1|SEPARATELY //This is the default value and allows for expansion of both inputs and outputs in no particular order on a given symbol,OUTPUTSWITHPARAMS //This allows a single input to be expanded into a number of outputs,INPUTSWITHOUTPUTS //This allows the combined expansion of inputs and outputs If you add an input an output is also automatically added,INPUTSWITHPARAMS //This allows the expansion of the number of inputs for a single output,ALLWITHANY //This allows for the expansion of both inputs and outputs but unlike InputWithOutputs the relationship between inputs and outputs doesn't have to be one to one,PWITHIXORO //This allows for the expansion of either inputs or outputs|}\n$0"
+        ],
+        "description": "Define a CONSTANT_VALUE that will be substituted anywhere in the current source file where CONSTANT_NAME is used."
+    },
+    "#Begin_Parameter_Properties":{
+        "prefix":
+        [
+            "@A","#Begin_Parameter_Properties","PARAMETER_PROPERTIES"
+        ],
+        "body":
+        [
+            "#Begin_Parameter_Properties ${1:PARAM_VARIABLE} ${2:[PARAM_VARIABLE]}",
+            "\t$0",
+            "#End_Parameter_Properties"
+        ],
+        "description": ""
+    },
+    "#Crestron_Library":{
+        "prefix":
+        [
+            "@LIB","#Crestron_Library"
+        ],
+        "body": 
+        [
+            "#Crestron_Library \"${1:CRESTRON LIBRARY NAME}\"\n$0"
+        ],
+        "description": "Directs the compiler to include code from a Crestron provided library. The module name specified is the Crestron Library Filename without the CSL extension."
+    },
+    "#Crestron_Simplsharp_Library":{
+        "prefix":
+        [
+            "@LIB","#Crestron_Simplsharp_Library"
+        ],
+        "body": 
+        [
+            "#Crestron_Simplsharp_Library \"${1:SIMPL# LIBRARY NAME}\"\n$0"
+        ],
+        "description": "Directs the compiler to include code from a Crestron SIMPL# library. The module name specified is the library filename without the CLZ extension."
+    },
+    "#Default_NonVolatile":{
+        "prefix":
+        [
+            "@CD","#Default_NonVolatile"
+        ],
+        "body": 
+        [
+            "#Default_NonVolatile\n$0"
+        ],
+        "description": "Program variables retain their value if hardware power is lost."
+    },
+    "#Default_Volatile":{
+        "prefix":
+        [
+            "@CD","#Default_Volatile"
+        ],
+        "body": 
+        [
+            "#Default_Volatile\n$0"
+        ],
+        "description": "Program variables will not retain their value if hardware power is lost."
+    },
+    "#Define_Constant":{
+        "prefix":
+        [
+            "@CD","#Define_Constant"
+        ],
+        "body": 
+        [
+            "#Define_Constant\t${1:CONSTANT_NAME} ${2:CONSTANT_VALUE}\n$0"
+        ],
+        "description": "Define a CONSTANT_VALUE that will be substituted anywhere in the current source file where CONSTANT_NAME is used."
+    },
+    "#Digital_Expand":{
+        "prefix":
+        [
+            "@CD","#Digital_Expand"
+        ],
+        "body": 
+        [
+            "#Analog_Serial_Expand ${1|SEPARATELY //This is the default value and allows for expansion of both inputs and outputs in no particular order on a given symbol,OUTPUTSWITHPARAMS //This allows a single input to be expanded into a number of outputs,INPUTSWITHOUTPUTS //This allows the combined expansion of inputs and outputs If you add an input an output is also automatically added,INPUTSWITHPARAMS //This allows the expansion of the number of inputs for a single output,ALLWITHANY //This allows for the expansion of both inputs and outputs but unlike InputWithOutputs the relationship between inputs and outputs doesn't have to be one to one,PWITHIXORO //This allows for the expansion of either inputs or outputs|}\n$0"
+        ],
+        "description": "This provides a way to expand, or add, inputs and/or outputs for a specified symbol."
+    },
+    "#Encoding_Ascii":{
+        "prefix":
+        [
+            "@CD","#Encoding_Ascii"
+        ],
+        "body": 
+        [
+            "#Encoding_Ascii\n$0"
+        ],
+        "description": "This directive ensures that any strings in the SIMPL+ module without explicit encoding keywords are marked with ASCII encoding."
+    },
+    "#Encoding_Utf16":{
+        "prefix":
+        [
+            "@CD","#Encoding_Utf16"
+        ],
+        "body": 
+        [
+            "#Encoding_Utf16\n$0"
+        ],
+        "description": "This directive will ensure that any strings in the SIMPL+ module without explicit encoding keywords are marked with UTF16 encoding."
+    },
+    "#Encoding_Inherit_From_Parent":{
+        "prefix":
+        [
+            "@CD","#Encoding_Inherit_From_Parent"
+        ],
+        "body": 
+        [
+            "#Encoding_Inherit_From_Parent\n$0"
+        ],
+        "description": "This directive will ensure that any strings in the SIMPL+ module without explicit encoding keywords are marked with default encoding of the parent of this module."
+    },
+    "#Encoding_Inherit_From_Program":{
+        "prefix":
+        [
+            "@CD","#Encoding_Inherit_From_Program"
+        ],
+        "body": 
+        [
+            "#Encoding_Inherit_From_Program\n$0"
+        ],
+        "description": "This directive will ensure that any strings in the SIMPL+ module without explicit encoding keywords are marked with default encoding of the SIMPL program."
+    },
+    "#Help":{
+        "prefix":
+        [
+            "@FILL","#Help"
+        ],
+        "body": 
+        [
+            "#Help \"$[1:ENTER HELP TEXT}\"\n$0"
+        ],
+        "description": "Several #Help lines can be specified."
+    },
+    "#Help_Begin ... #Help_End":{
+        "prefix":
+        [
+            "@FILL","#Help_Begin", "#Help_End"
+        ],
+        "body": 
+        [
+            "#Help_Begin",
+            "\t$0",
+            "#Help_End"
+        ],
+        "description": "The #Help_Begin, #Help_End pair makes it easier to create help since each line does not need a separate #Help directive."
+    },
+    "#Hint":{
+        "prefix":
+        [
+            "@CD","#Hint"
+        ],
+        "body": 
+        [
+            "#Hint \"$[1:ENTER HINT TEXT}\"\n$0"
+        ],
+        "description": "The #Hint shows up in the status bar and provides a short tactical clue as to the function of the symbol in the same way that Crestron-defined built-in symbols do. If the hint is specified, it will be visible when the symbol is highlighted in the User Modules section of the Symbol Library."
+    },
+    "#If_Defined ... #endif":{
+        "prefix":
+        [
+            "@FILL","#If_Defined", "#endif"
+        ],
+        "body": 
+        [
+            "#If_Defined ${1:CONSTANT_VARIABLE}",
+            "\t$0",
+            "#endif"
+        ],
+        "description": "Results in compilation of the <code> only if <constant_name> has previously been defined. This construct is generally useful for putting in code for debugging purposes, giving the ability to easily turn the debugging on and off during compilation."
+    },
+    "#If_Not_Defined ... #endif":{
+        "prefix":
+        [
+            "@FILL","#If_Not_Defined", "#endif"
+        ],
+        "body": 
+        [
+            "#If_Not_Defined ${1:CONSTANT_VARIABLE}",
+            "\t$0",
+            "#endif"
+        ],
+        "description": "Results in compilation of the <code> only if <constant_name> has not been  previously defined."
+    },
+    "#If_Series2":{
+        "prefix":
+        [
+            "@CD","#If_Series2"
+        ],
+        "body": 
+        [
+            "#If_Series2",
+            "\tFUNCTION ${1:myFunc()}{",
+            "\t\t//CODE",
+            "\t}",
+            "#endif"
+        ],
+        "description": "Using this compiler directive will cause the compiler to only include the statements for the 2-series control system."
+    },
+    "#If_Series3":{
+        "prefix":
+        [
+            "@CD","#If_Series3"
+        ],
+        "body": 
+        [
+            "#If_Series3",
+            "\tFUNCTION ${1:myFunc()}{",
+            "\t\t//CODE",
+            "\t}",
+            "#endif"
+        ],
+        "description": "Using this compiler directive will cause the compiler to only include the statements for the 3-series control system."
+    },
+    "#If_Series4":{
+        "prefix":
+        [
+            "@CD","#If_Series4"
+        ],
+        "body": 
+        [
+            "#If_Series4",
+            "\tFUNCTION ${1:myFunc()}{",
+            "\t\t//CODE",
+            "\t}",
+            "#endif"
+        ],
+        "description": "Using this compiler directive will cause the compiler to only include the statements for the 4-series control system."
+    },
+    "#Includepath":{
+        "prefix":
+        [
+            "@CD","#Includepath"
+        ],
+        "body": 
+        [
+            "#Includepath \"${1:FILE PATH - ABSOLUTE OR RELATIVE - SEE HELP FILE}\"\n$0"
+        ],
+        "description": "Directs the compiler to search for User SIMPL+ and SIMPL# Libraries in the specified paths."
+    },
+    "#Large_Stack":{
+        "prefix":
+        [
+            "@CD","#Large_Stack"
+        ],
+        "body": 
+        [
+            "#Large_Stack\n$0"
+        ],
+        "description": "This is used to increase the stack size when necessary."
+    },
+    "#Max_Internal_Buffer_Size":{
+        "prefix":
+        [
+            "@CD","#Max_Internal_Buffer_Size"
+        ],
+        "body": 
+        [
+            "#Max_Internal_Buffer_Size $[1:INTEGER 0-65535}\n$0"
+        ],
+        "description": "Sets the maximum size for the compiler’s internal string allocations."
+    },
+    "#Output_Shift":{
+        "prefix":
+        [
+            "@CD","#Output_Shift"
+        ],
+        "body": 
+        [
+            "#Output_Shift $[1:INTEGER}\n$0"
+        ],
+        "description": "This provides a way to arrange the inputs and outputs on the symbol graphic so that they line up and are easy to read."
+    },
+    "#Print_To_Trace":{
+        "prefix":
+        [
+            "@CD","#Print_To_Trace"
+        ],
+        "body": 
+        [
+            "#Print_To_Trace\n$0"
+        ],
+        "description": "When invoked, this enables converts all print statements to trace statements."
+    },
+    "#Symbol_Name":{
+        "prefix":
+        [
+            "@CD","#Symbol_Name"
+        ],
+        "body": 
+        [
+            "#Symbol_Name \"$[1:NAME OF SYMBOL}\"\n$0"
+        ],
+        "description": "By specifying <name of symbol>, this name will show up on the header of the symbol in the detail view as well as in the USER SIMPL+ section of the Symbol Library."
+    },
+    "#User_Library":{
+        "prefix":
+        [
+            "@LIB","#User_Library"
+        ],
+        "body": 
+        [
+            "#User_Library \"${1:USER LIBRARY NAME}\"\n$0"
+        ],
+        "description": "Directs the compiler to include code from a User written library. The module name specified is the User Library Filename without the USL extension that is used by User Libraries. Relative or absolute path are not allowed within this directive (see #Includepath)."
+    },
+    "#User_SimplSharp_Library":{
+        "prefix":
+        [
+            "@LIB","#User_SimplSharp_Library"
+        ],
+        "body": 
+        [
+            "#User_SimplSharp_Library \"${1:SIMPL# LIBRARY NAME}\"\n$0"
+        ],
+        "description": "Directs the compiler to include code from a User SIMPL# library. The module name specified is the library filename without the CLZ extension. Relative or absolute path are not allowed within this directive (see #Includepath)."
+    },
+    "Comment Block":{
+        "prefix":
+        [
+            "@FILL","COMMENT"
+        ],
         "body":
         [
             "// ---------------------------------------------------------------------------------------------------------------------",
             "// $1",
+            "// $2",
+            "// $3",
+            "// $4",
+            "// $5",
             "// ---------------------------------------------------------------------------------------------------------------------",
             "$0"
         ]
     },
-    "Parameter Properties": {
-        "prefix": "#begin_parameter_properties",
+    "Parameter Property: Template":{
+        "prefix":
+        [
+            "@TEMP","TEMPLATE_PARAMETER_PROPERTIES"
+        ],
         "body":
         [
-            "#BEGIN_PARAMETER_PROPERTIES ${1:Parameter}",
-            "   $0",
-            "#END_PARAMETER_PROPERTIES"
-        ]
+            "#Begin_Parameter_Properties parameter_variable[, parameter_variable ...] ",
+            "\tPropValidUnits =\t\tunitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks;",
+            "\tPropDefaultUnit =\t\tunitString or unitDecimal or unitHex or unitPercent or unitCharacter or unitTime or unitTicks;",
+            "\tPropDefaultValue =\t\tdefault_value or \"default_value\";",
+            "\tPropList = \t\t\t\t{ \"value\",\"label\" },{ \"value\",\"label\" };",
+            "\tPropBounds = \t\t\tlower_bound , upper_bound;",
+            "\tPropShortDescription =\t\"status_bar_hint_text\";",
+            "",
+            "#Begin_Prop_Full_Description",
+            "line_1",
+            "...",
+            "line_n",
+            "#End_Prop_Full_Description",
+            "",
+            "#Begin_Prop_Notes",
+            "line_1",
+            "...",
+            "line_n",
+            "#End_Prop_Notes",
+            "",
+            "#End_Parameter_Properties"
+        ],
+        "description": ""
     },
-    "Parameter Property: Valid Units": {
-        "prefix": "propValidUnits",
-        "body": "propValidUnits = ${0};\t\t// unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks"
-    },
-    "Parameter Property: Default Unit": {
-        "prefix": "propDefaultUnit",
-        "body": "propDefaultUnit = ${0};\t\t// unitString, unitDecimal, unitHex, unitPercent, unitCharacter, unitTime, unitTicks"
-    },
-    "Parameter Property: Bounds": {
-        "prefix": "propBounds",
-        "body": "propBounds = ${1:Lower_Bound},${2:Upper_Bound};"
-    },
-    "Parameter Property: Default Value": {
-        "prefix": "propDefaultValue",
-        "body": "propDefaultValue = ${1:value};"
-    },
-    "Parameter Property: List": {
-        "prefix": "propList",
-        "body": "propList = $0;\t\t// {\"value\", \"label\"}, {\"value\", \"label\"};"
-    },
-    "Parameter Property: Short Description": {
-        "prefix": "propShortDescription",
-        "body": "propShortDescription = $0;"
-    },
-    "Parameter Property: Full Description": {
-        "prefix": "#BEGIN_PROP_FULL_DESCRIPTION",
-        "body":
+    "Help":{
+        "prefix":
         [
-            "#BEGIN_PROP_FULL_DESCRIPTION",
-            "\t$0",
-            "#END_PROP_FULL_DESCRIPTION"
-        ]
-    },
-    "Parameter Property: Notes": {
-        "prefix": "#BEGIN_PROP_NOTES",
-        "body":
+            "help","HELP","SIMPLHELP"
+        ],
+        "body": 
         [
-            "#BEGIN_PROP_NOTES",
-            "\t$0",
-            "#END_PROP_NOTES"
-        ]
+            "//\tSIMPL+ Snippet Help Topics ------------------------------------------------------------------ ",
+            "//\t\t @TEMP, TEMPLATE_PARAMETER_PROPERTIES - Load a Parameter Property Template",
+            "//\t\t @CD - List Compiler Directive statements",
+            "//\t\t @LIB - List Include Library statements",
+            "//\t\t @FILL - List statements that include bulk data",
+            "//\t\t #Analog_Serial_Expand and #Digital_Expand - When using snippets, you will be prompted to select from a list of options"
+        ],
+        "description": "Crestron SIMPL+ Snippets Help"
     }
 }

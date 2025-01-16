@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "simpl-plus",
+			"buildTypes": [
+				"Series3",
+				"Series4"
+			],
+			"files": [
+				"placeholder.usp",
+				"place holder.usp"
+			],
+			"directory": "c:\\ExtensionDevelopment\\SimplPlusExtension\\vscode-crestron-splus\\testworkspace",
+			"rebuild": false,
+			"problemMatcher": [
+				"$SIMPL+"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"label": "simpl-plus: Compile 3 & 4 Series"
+		}
+	]
+}
