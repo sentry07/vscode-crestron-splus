@@ -168,14 +168,15 @@ export class SimplPlusTasks implements TaskProvider {
         [name: string, definition: SimplPlusTaskDefinition, execution: ShellExecution] {
 
         let commandArguments: ShellQuotedString[] = [];
-        let seriesTargets: string[] = [];
+        let seriesTargets = buildType.map(type => type.replace("Series", ""));
         const dosExecutable = "C:\\Windows\\System32\\cmd.exe";
         const compilerPath = `${workspace.getConfiguration("simpl-plus").simplDirectory}\\SPlusCC.exe`;
 
         const compileCommand = rebuild ? "\\rebuild" : "\\build";
         commandArguments.push(this.getShellQuote(compileCommand));
         fileNames.forEach(fileName => {
-            commandArguments.push(this.getShellQuote(`${fileName}`));
+            const fullPath = path.join(directory, fileName);
+            commandArguments.push(this.getShellQuote(`${fullPath}`));
         });
         commandArguments.push(this.getShellQuote("\\target"));
         buildType.forEach(type => {

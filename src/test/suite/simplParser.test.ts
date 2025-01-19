@@ -232,7 +232,15 @@ suite("testing document tokenization", function () {
         assert.strictEqual(documentMembers[0].blockRange.start.character, 0);
         assert.strictEqual(documentMembers[0].blockRange.end.line, 2);
         assert.strictEqual(documentMembers[0].blockRange.end.character, 1);
-        assert.strictEqual(documentMembers[0].children.length, 0);
+        assert.strictEqual(documentMembers[0].children.length, 1);
+        assert.strictEqual(documentMembers[0].children[0].name, "");
+        assert.strictEqual(documentMembers[0].children[0].blockRange.start.line, 0);
+        assert.strictEqual(documentMembers[0].children[0].blockRange.start.character, 38);
+        assert.strictEqual(documentMembers[0].children[0].blockRange.end.line, 0);
+        assert.strictEqual(documentMembers[0].children[0].blockRange.end.character, 40);
+        assert.strictEqual(documentMembers[0].children[0].kind, vscode.CompletionItemKind.TypeParameter);
+        assert.strictEqual(documentMembers[0].children[0].dataType, "");
+        assert.strictEqual(documentMembers[0].children[0].dataTypeModifier, "");
     });
 
     test("It should have a function with a void data type", async () => {
@@ -254,7 +262,15 @@ suite("testing document tokenization", function () {
         assert.strictEqual(documentMembers[0].blockRange.start.character, 0);
         assert.strictEqual(documentMembers[0].blockRange.end.line, 2);
         assert.strictEqual(documentMembers[0].blockRange.end.character, 1);
-        assert.strictEqual(documentMembers[0].children.length, 0);
+        assert.strictEqual(documentMembers[0].children.length, 1);
+        assert.strictEqual(documentMembers[0].children[0].name, "");
+        assert.strictEqual(documentMembers[0].children[0].blockRange.start.line, 0);
+        assert.strictEqual(documentMembers[0].children[0].blockRange.start.character, 21);
+        assert.strictEqual(documentMembers[0].children[0].blockRange.end.line, 0);
+        assert.strictEqual(documentMembers[0].children[0].blockRange.end.character, 23);
+        assert.strictEqual(documentMembers[0].children[0].kind, vscode.CompletionItemKind.TypeParameter);
+        assert.strictEqual(documentMembers[0].children[0].dataType, "");
+        assert.strictEqual(documentMembers[0].children[0].dataTypeModifier, "");
     });
 
     test("It should have a function with an eventHandler modifier and no parameters or elements", async () => {
@@ -276,7 +292,15 @@ suite("testing document tokenization", function () {
         assert.strictEqual(documentMembers[0].blockRange.start.character, 0);
         assert.strictEqual(documentMembers[0].blockRange.end.line, 2);
         assert.strictEqual(documentMembers[0].blockRange.end.character, 1);
-        assert.strictEqual(documentMembers[0].children.length, 0);
+        assert.strictEqual(documentMembers[0].children.length, 1);
+        assert.strictEqual(documentMembers[0].children[0].name, "");
+        assert.strictEqual(documentMembers[0].children[0].blockRange.start.line, 0);
+        assert.strictEqual(documentMembers[0].children[0].blockRange.start.character, 25);
+        assert.strictEqual(documentMembers[0].children[0].blockRange.end.line, 0);
+        assert.strictEqual(documentMembers[0].children[0].blockRange.end.character, 27);
+        assert.strictEqual(documentMembers[0].children[0].kind, vscode.CompletionItemKind.TypeParameter);
+        assert.strictEqual(documentMembers[0].children[0].dataType, "");
+        assert.strictEqual(documentMembers[0].children[0].dataTypeModifier, "");
     });
 
     // test("test that position is inside parameters", async () => {

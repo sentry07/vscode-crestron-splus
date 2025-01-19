@@ -28,7 +28,7 @@ suite('Insert Category Command Test Suite', () => {
         await delay(200);
         const text = vscode.window.activeTextEditor?.document.getText();
         if (text === undefined) { assert.fail; }
-        assert.match(text!, /#CATEGORY "6"/);
+        assert.match(text!, /#Category "6" \/\/Lighting\r\n\/\/Nothing To See/);
     });
 
     test('should insert custom category when input is provided', async () => {
@@ -45,7 +45,7 @@ suite('Insert Category Command Test Suite', () => {
         await delay(200);
         const text = vscode.window.activeTextEditor?.document.getText();
         if (text === undefined) { assert.fail; }
-        assert.match(text!, /#CATEGORY "46" "My Test Category"/);
+        assert.match(text!, /#Category "46" "My Test Category" \/\/Custom\r\n\/\/Nothing To See/);
     });
 
     test('should not insert category when input is cancelled', async () => {
@@ -56,6 +56,6 @@ suite('Insert Category Command Test Suite', () => {
 
         const text = vscode.window.activeTextEditor?.document.getText();
         if (text === undefined) { assert.fail; }
-        assert.doesNotMatch(text!, /#CATEGORY "6"/);
+        assert.doesNotMatch(text!, /#Category "6"/);
     });
 });
