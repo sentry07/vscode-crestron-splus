@@ -3,3 +3,10 @@ node_modules
 src/
 tsconfig.json
 webpack.config.js
+**/*.js.map
+testWorkspace/
+UML/
+TODO
+out/test/
+Language-Syntax.md
+coverage/

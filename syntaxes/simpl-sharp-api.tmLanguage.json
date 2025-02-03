@@ -1,0 +1,606 @@
+{
+  "scopeName": "source.simpl-sharp-api",
+  "fileTypes": [
+    "api"
+  ],
+  "name": "CrestronApi",
+  "patterns": [
+    {
+      "include": "#directives"
+    },
+    {
+      "include": "#declaration"
+    }
+  ],
+  "repository": {
+    "directives": {
+      "patterns": [
+        {
+          "include": "#punctuation-semicolon"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "declaration": {
+      "patterns": [
+        {
+          "include": "#namespace-declaration"
+        },
+        {
+          "include": "#class-declaration"
+        },
+        {
+          "include": "#enum-declaration"
+        }
+      ]
+    },
+    "namespace-declaration": {
+      "begin": "\\b(namespace)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.namespace.api"
+        }
+      },
+      "end": "(?<=\\})|(?=;)",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "name": "entity.name.type.namespace.api",
+          "match": "(?x)\n  [_[:alpha:]][_[:alnum:]]*"
+        },
+        {
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.open.api"
+            }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.close.api"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#declarations"
+            }
+          ]
+        }
+      ]
+    },
+    "class-declaration": {
+      "begin": "(?x)\n  (?=\n    (?:\\b(static)\\b\\s+)?\n    \\b(class)\\b\\s+\n  )",
+      "end": "(?<=\\})|(?=;)",
+      "patterns": [
+        {
+          "begin": "(?x)\n  (?:\\b(static)\\b\\s+)?\n  \\b(class)\\b\\s+\n  ([_[:alpha:]][_[:alnum:]]*)\\s*",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.modifier.static.api"
+            },
+            "2": {
+              "name": "storage.type.class.api"
+            },
+            "3": {
+              "name": "entity.name.type.class.api"
+            }
+          },
+          "end": "(?=\\{)|(?=;)",
+          "patterns": [
+            {
+              "include": "#comment"
+            }
+          ]
+        },
+        {
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.open.api"
+            }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.close.api"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#class-members"
+            }
+          ]
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "enum-declaration": {
+      "begin": "(?x)\n  (?=\n    \\b(enum)\\b\\s+\n  )",
+      "end": "(?<=\\})|(?=;)",
+      "patterns": [
+        {
+          "begin": "(?x)\n  \\b(enum)\\b\\s+\n  ([_[:alpha:]][_[:alnum:]]*)\\s*",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.enum.api"
+            },
+            "2": {
+              "name": "entity.name.type.enum.api"
+            }
+          },
+          "end": "(?=\\{)|(?=;)",
+          "patterns": [
+            {
+              "include": "#comment"
+            }
+          ]
+        },
+        {
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.open.api"
+            }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.close.api"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#enum-members"
+            }
+          ]
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "enum-members": {
+      "patterns": [
+        {
+          "include": "#punctuation-comma"
+        },
+        {
+          "match": "@?[_[:alpha:]][_[:alnum:]]*",
+          "name": "entity.name.variable.enum-member.api"
+        }
+      ]
+    },
+    "class-members": {
+      "patterns": [
+        {
+          "include": "#delegate-declaration"
+        },
+        {
+          "include": "#event-handler-declaration"
+        },
+        {
+          "include": "#function-declaration"
+        },
+        {
+          "include": "#variable-declaration"
+        },
+        {
+          "include": "#punctuation-semicolon"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "delegate-declaration": {
+      "begin": "(?x)\n  (?:\n    (\\bdelegate\\b)\\s+               #grab delegate\n    ([_[:alpha:]][_[:alnum:]]*)\\s+  #grab delegate return type\n    ([_[:alpha:]][_[:alnum:]]*)\\s*  #grab delegate name\n  )\n  (?=\\()  #stop pattern before the opening parenthesis without grabbing any characters",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.delegate.api"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#type"
+            }
+          ]
+        },
+        "3": {
+          "patterns": [
+            {
+              "match": "([_[:alpha:]][_[:alnum:]]*)",
+              "name": "entity.name.type.delegate.api"
+            }
+          ]
+        }
+      },
+      "end": "(?ix)\n  (?<=;)   #stop pattern after the semicolon",
+      "patterns": [
+        {
+          "include": "#parenthesized-parameter-list"
+        }
+      ]
+    },
+    "function-declaration": {
+      "begin": "(?x)\n  (?:\n    (?:(\\bstatic\\b)\\s+)?            #possibly grab static\n    ([_[:alpha:]][_[:alnum:]]*)\\s+  #grab function type\n    ([_[:alpha:]][_[:alnum:]]*)\\s*  #grab function name\n  )\n  (?=\\()  #stop pattern before the opening parenthesis without grabbing any characters",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.static.api"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#type"
+            }
+          ]
+        },
+        "3": {
+          "patterns": [
+            {
+              "match": "([_[:alpha:]][_[:alnum:]]*)",
+              "name": "entity.name.function.api"
+            }
+          ]
+        }
+      },
+      "end": "(?ix)\n  (?<=;)   #stop pattern after the semicolon",
+      "patterns": [
+        {
+          "include": "#parenthesized-parameter-list"
+        },
+        {
+          "include": "#punctuation-semicolon"
+        }
+      ]
+    },
+    "event-handler-declaration": {
+      "begin": "(?x)\n  (?:\n    (\\bstatic\\b\\s+)?             #possibly grab static\n    \\b(EventHandler)\\b\\s+        #grab function type\n    ([_[:alpha:]][_[:alnum:]]*)\\s*\n  )\n  (?=\\()  #stop pattern before the opening parenthesis without grabbing any characters",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.modifier.static.api"
+        },
+        "2": {
+          "name": "keyword.type.eventhandler.api"
+        },
+        "3": {
+          "name": "entity.name.variable.eventhandler.api"
+        }
+      },
+      "end": "(?ix)\n  (?<=;)   #stop pattern after the semicolon",
+      "patterns": [
+        {
+          "include": "#parenthesized-parameter-list"
+        },
+        {
+          "include": "#punctuation-semicolon"
+        }
+      ]
+    },
+    "variable-declaration": {
+      "begin": "(?x)\n  (?:\n    (?:\\b(static|DelegateProperty)\\b\\s+)? #possibly grab static property\n    ([_[:alpha:]][_[:alnum:]]*)\\s   #grab variable type\n    (?:([_[:alpha:]][_[:alnum:]]*)\\s*  #grab variable name\n      (# array suffix?\n        \\[\n          (?:\\s*,\\s*)* # commata for multi-dimensional arrays\n        \\]\\s*\n      )*\n    )\n  )\n  (?=;)",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.$1.api"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#type"
+            }
+          ]
+        },
+        "3": {
+          "name": "entity.name.variable.api"
+        },
+        "4": {
+          "patterns": [
+            {
+              "include": "#type-array-suffix"
+            }
+          ]
+        }
+      },
+      "end": "(?ix)\n  (?<=;)   #stop pattern after the semicolon",
+      "patterns": [
+        {
+          "include": "#punctuation-semicolon"
+        }
+      ]
+    },
+    "parenthesized-parameter-list": {
+      "begin": "(\\()",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.parenthesis.open.api"
+        }
+      },
+      "end": "(\\))",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.parenthesis.close.api"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#parameter"
+        },
+        {
+          "include": "#punctuation-comma"
+        }
+      ]
+    },
+    "parameter": {
+      "begin": "(?x)\n    \\s*(BYREF)?\\s*  #Possibly grab modifier\n    (?:\n      ([_[:alpha:]][_[:alnum:]]*)\\s+ #grab the parameter type or\n      ([_[:alpha:]][_[:alnum:]]*)    #grab the type\n    )",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.$1.api"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#type"
+            }
+          ]
+        },
+        "3": {
+          "name": "entity.name.variable.parameter.api"
+        }
+      },
+      "end": "(?ix)\n  (?=[\\,\\)])  #stop pattern before theres a comma or closing parenthesis without grabbing any characters",
+      "patterns": [
+        {
+          "match": "([\\_[:alpha:]][_[:alnum:]]*)",
+          "name": "entity.name.variable.parameter.api"
+        },
+        {
+          "include": "#type-array-suffix"
+        }
+      ]
+    },
+    "type-array-suffix": {
+      "begin": "\\[",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.squarebracket.open.api"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.squarebracket.close.api"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#numeric-literal"
+        },
+        {
+          "include": "#punctuation-comma"
+        }
+      ]
+    },
+    "type": {
+      "patterns": [
+        {
+          "include": "#type-builtin"
+        },
+        {
+          "include": "#type-builtin-function-return"
+        },
+        {
+          "include": "#type-name"
+        }
+      ]
+    },
+    "type-builtin": {
+      "match": "\\b(INTEGER|STRING|LONG_INTEGER|SIGNED_INTEGER|SIGNED_LONG_INTEGER|SIMPLSHARPSTRING|EventArgs)\\b",
+      "name": "keyword.type.$1.api"
+    },
+    "type-builtin-function-return": {
+      "match": "\\b(FUNCTION|INTEGER_FUNCTION|STRING_FUNCTION|LONG_INTEGER_FUNCTION|SIGNED_INTEGER_FUNCTION|SIGNED_LONG_INTEGER_FUNCTION|SIMPLSHARPSTRING_FUNCTION)\\b",
+      "name": "keyword.type.$1.api"
+    },
+    "type-name": {
+      "match": "[_[:alpha:]][_[:alnum:]]*",
+      "name": "entity.name.type.api"
+    },
+    "literals": {
+      "patterns": [
+        {
+          "include": "#numeric-literal"
+        },
+        {
+          "include": "#char-literal"
+        },
+        {
+          "include": "#string-literal"
+        },
+        {
+          "include": "#reserved-words"
+        }
+      ]
+    },
+    "numeric-literal": {
+      "match": "(?x)\n  (?<!\\w)\\.?\\d #ensure it starts with a digit or period and not a word character\n  (?:\n    (?:[0-9a-zA-Z_%]|_)| #capture any digit or letter or underscore (anything that resembles a number)\n    (?<=[eE])[+-]| # even if it looks scientific\n    \\.\\d #or floating point\n  )*",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "begin": "(?=.)",
+              "end": "$",
+              "patterns": [
+                {
+                  "match": "(?x)\n  (0[xX]) #ensure it starts with a 0x or 0X\n  ([0-9a-fA-F](?:[0-9a-fA-F])*)$ #capture rest of hex digits",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.other.prefix.hex.api"
+                    },
+                    "2": {
+                      "name": "constant.numeric.hex.api"
+                    }
+                  }
+                },
+                {
+                  "match": "(?x)\n  (?=[0-9])(?!0[xX]) #ensure it starts with a digit, but not wit a 0x or 0X\n  ([0-9d](?:[0-9d])*)$ #capture rest of decimal digits and d (for parameter properties decimal value)",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.decimal.api"
+                    }
+                  }
+                },
+                {
+                  "match": "(?ix)\n  (?=[0-9a-f])(?!0[xX]) #ensure it starts with a hex digit, but not wit a 0x or 0X\n  ([0-9a-fh](?:[0-9a-fh])*)$ #capture rest of hex digits and h (for parameter properties decimal value)hex value)",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.hex.api"
+                    }
+                  }
+                },
+                {
+                  "match": "(?x)\n  (?=[0-9])(?!0[xX]) #ensure it starts with a digit, but not wit a 0x or 0X\n  ([0-9%](?:[0-9%])*)$ #capture rest of decimal digits and % (for parameter properties percentage value)",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.percentage.api"
+                    }
+                  }
+                },
+                {
+                  "match": "(?x)\n  (?=[0-9])(?!0[xX]) #ensure it starts with a digit, but not wit a 0x or 0X\n  ([0-9s](?:[0-9s])*)$ #capture rest of decimal digits and s (for parameter properties seconds value)",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.seconds.api"
+                    }
+                  }
+                },
+                {
+                  "match": "(?x)\n  (?=[0-9])(?!0[xX]) #ensure it starts with a digit, but not wit a 0x or 0X\n  ([0-9t](?:[0-9t])*)$ #capture rest of decimal digits and t (for parameter properties ticks value)",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.ticks.api"
+                    }
+                  }
+                },
+                {
+                  "match": "(?:(?:[0-9a-zA-Z_]|_)|(?<=[eE])[+-]|\\.\\d)+",
+                  "name": "invalid.illegal.constant.numeric.api"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "char-literal": {
+      "name": "string.quoted.single.api",
+      "begin": "\\'",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.char.begin.api"
+        }
+      },
+      "end": "(\\')|((?:[^\\n])$)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.char.end.api"
+        },
+        "2": {
+          "name": "invalid.illegal.newline.api"
+        }
+      },
+      "patterns": [
+        {
+          "match": "([0-9a-zA-Z]{2,})",
+          "name": "invalid.illegal.char.api"
+        }
+      ]
+    },
+    "string-literal": {
+      "name": "string.quoted.double.api",
+      "begin": "\\\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.api"
+        }
+      },
+      "end": "(\")|((?:[^\\n])$)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.end.api"
+        },
+        "2": {
+          "name": "invalid.illegal.newline.api"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#string-character-escape"
+        }
+      ]
+    },
+    "string-character-escape": {
+      "match": "(?x)\n  (\\%   #escape initializer character either % or \\\n    (?:\n      (?:[0-9a-zA-Z]|\\%)? #grab any digit or letter or % character for next character zero or 1 times\n      (?:[0-9a-zA-Z])*    #grab the rest of the digits or letters\n    )\n  ) |  #or\n  (?:\\\\(?:[a-zA-Z])(?:(?:[0-9a-fA-F]){2})?)|(?:\\\\\\\\) #grab any one letter or dual hex number after a backslash or double backslash",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "begin": "(?=.)",
+              "end": "$",
+              "patterns": [
+                {
+                  "match": "(?x)\n  (%%) |  # Prints % or\n  (%\n    (?:\n      (?:[0-9]?[0-9])? #[[pad]width]\n      (?:\n        d|  #Signed Analog_Input, Analog_Output or Integer as decimal\n        s|  #Buffer_Input, String_Input or String\n        u|  #Unsigned Analog_Input, Analog_Output or integer\n        ld| #Long_Integer as decimal\n        lu| #Long_Unsigned_Integer as decimal\n        x|  #Analog_Input, Analog_Output or Integer as lowercase hexadecimal\n        X|  #Analog_Input, Analog_Output or Integer as uppercase hexadecimal\n        lx| #long Integer as lowercase hexadecimal\n        lX| #long Integer as uppercase hexadecimal\n        c|  #Printable ASCII character\n      ){1}\n    ) #Print Formatters %[[pad]width]specifier\n  )",
+                  "name": "constant.character.escape.api"
+                },
+                {
+                  "match": "(?x)\n   (\\\\\n     [\n       a  #Alert (Beep)\n       b  #Backspace\n       f  #Form Feed\n       n  #Newline\n       r  #Carriage Return\n       t  #Horizontal Tab\n       v\n     ] #Vertical Tab\n   ) |\n   (\\\\\n     (?:\n       [xX](?:[0-9a-fA-F]){2}  #Hexadecimal character code\n     )\n   ) |\n   (\\\\\\\\) #double backslash",
+                  "name": "constant.character.escape.api"
+                },
+                {
+                  "match": ".*",
+                  "name": "invalid.illegal.character.escape.api"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "punctuation-comma": {
+      "match": "\\,",
+      "name": "punctuation.comma.api"
+    },
+    "punctuation-semicolon": {
+      "match": "\\;",
+      "name": "punctuation.terminator.api"
+    },
+    "comment": {
+      "patterns": [
+        {
+          "include": "#comment-single-line"
+        }
+      ]
+    },
+    "comment-single-line": {
+      "name": "comment.line.double-slash.api",
+      "begin": "(^\\s+)?(\\/\\/).*$",
+      "while": "^(\\s*)(\\/\\/).*$",
+      "captures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.leading.api"
+        },
+        "2": {
+          "name": "punctuation.definition.comment.api"
+        }
+      }
+    }
+  }
+}

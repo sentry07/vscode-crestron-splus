@@ -1,5 +1,29 @@
 # Change Log
 
+## 1.0.0
+*  Complete language syntax highlighting for SIMPL+ files and API files
+*  Document formatting with
+    *   Indentation
+    *   Capitalization for keywords with options for
+        *   lowercase
+        *   UPPERCASE
+        *   PascalCase
+        *   Leave Untouched
+    *   Brace Line ( {} ) formatting
+        *   Same Line as block name
+        *   New line under block name
+*  Full support of VS Code Build Task: 
+    *   Autodetects workspaces with USP and [suggest relevant SIMPL+ Build Task](https://code.visualstudio.com/docs/editor/tasks#_task-autodetection) 
+    *   Create your own [Custom Build task](https://code.visualstudio.com/docs/editor/tasks#_custom-tasks) for one or many SIMPL+ files through VS Code tasks.json
+*  Support for building current file using F12, or force build using Shift+F12.
+*  Remembers build targets from previously build SIMPL+ files the same way Crestron's SIMPL+ IDE does.
+*  Hover over help for SIMPL+ functions, leveraging the SIMPL+ online help file.
+*  Automatic API file generation for SIMPL# libraries
+*  Autocomplete support for local variables, functions, SIMPL# classes and enums, SIMPL+ library functions, keywords, and built-in functions.
+*  Function Signature Helper
+*  Snippets for common SIMPL+ functions
+*  SIMPL+ category insertion through right click context menu
+
 ## 0.5.0
 + Replaced dependency for BrowserPreview extension with internal browser
 * Updated dependencies
