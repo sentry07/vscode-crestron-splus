@@ -2,7 +2,7 @@
   "name": "simpl-plus",
   "displayName": "SIMPL+",
   "description": "Syntax highlighting, formatting, build tasks.",
-  "version": "1.0.0-alpha9",
+  "version": "1.0.0-beta1",
   "publisher": "sentry07",
   "icon": "icons/crestron.png",
   "repository": {

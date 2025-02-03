@@ -198,7 +198,3 @@ internalVariables: enumMembers
         * Then after pressing dot, provide Non Void Functions and Variables and recurse down the class for each dot
     * Custom Structure Names
         * Then after pressing dot, provide structure members and recurse down the structure for each dot
-
-```csharp
-private class()
-```

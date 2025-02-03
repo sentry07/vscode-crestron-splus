@@ -59,6 +59,12 @@ export class SimplPlusCompletionProvider implements CompletionItemProvider {
                 let functionObjects = this.getProjectFunctionObjects(uri);
                 const functionVariables = this.getFunctionVariables(currentBlock);
                 const lineUntilPosition = document.lineAt(position.line).text.slice(0, position.character);
+                const quotes = lineUntilPosition.match(/"/g);
+                //return nothing if inside a string
+                if (quotes !== null && quotes.length % 2 === 1) {
+                    return [];
+                }
+                //return only non void functions if in the right side of an equal sign, or inside a parenthesis or bracket
                 if (lineUntilPosition.match(/[\=\(\[]/)) {
                     functionKeywords = this.getExpressionKeywords();
                     functionObjects = this.getProjectExpressionObjects(uri);
@@ -170,6 +176,7 @@ export class SimplPlusCompletionProvider implements CompletionItemProvider {
             "Variable Declaration",
             "Global Declaration",
             "Statement",
+            "Void"
         ];
         const keywordDefinitions = this._keywordService.getKeywordsByType(functionKeywords);
         const functionKinds: CompletionItemKind[] = [

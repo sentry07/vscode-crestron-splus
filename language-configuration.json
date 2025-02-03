@@ -38,8 +38,8 @@
   //adds region folding support for the language
   "folding": {
     "markers": {
-      "start": "^\\s*//\\s*#?region\\b",
-      "end": "^\\s*//\\s*#?endregion\\b"
+      "start": "^\\s*//\\s*#?Region\\b",
+      "end": "^\\s*//\\s*#?EndRegion\\b"
     }
   },
   //First and second matching group will match handlebars {{ or }}.
