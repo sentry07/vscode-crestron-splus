@@ -1,0 +1,258 @@
+import * as assert from 'assert';
+import * as sinon from "sinon";
+import * as fsWrapper from '../../helpers/fsExistsSyncWrapper';
+import { removeWorkspaceCustomSettings, OpenAndShowSPlusDocument, delay } from '../testFunctions';
+import * as vscode from 'vscode';
+import { TokenService } from '../../services/tokenService.temp';
+import { DocumentTokenService } from '../../services/documentTokenService.temp';
+import { ApiTokenService } from '../../services/apiTokenService.temp';
+import { SimplObject } from '../../base/simplObject';
+import { isUndefined } from 'util';
+
+
+let mockExtensionContext = {
+    subscriptions: [],
+    workspaceState: {} as vscode.Memento,
+    extensionPath: '',
+    asAbsolutePath: (relativePath: string) => '',
+    storagePath: '',
+    globalStoragePath: '',
+    logPath: '',
+    extensionUri: vscode.Uri.parse(''),
+    extensionMode: vscode.ExtensionMode.Test,
+    secrets: {} as vscode.SecretStorage,
+    globalState: undefined,
+    environmentVariableCollection: undefined,
+    storageUri: vscode.Uri.parse(''),
+    globalStorageUri: vscode.Uri.parse(''),
+    logUri: vscode.Uri.parse(''),
+    extension: undefined,
+    languageModelAccessInformation: undefined
+};
+let _documentTokenServiceStub: sinon.SinonStubbedInstance<DocumentTokenService>;
+let _apiTokenServiceStub: sinon.SinonStubbedInstance<ApiTokenService>;
+
+suite("testing getting DocumentMembers", function () {
+
+    setup(async function () {
+        await removeWorkspaceCustomSettings();
+        _documentTokenServiceStub = sinon.stub(DocumentTokenService.getInstance(mockExtensionContext));
+        _apiTokenServiceStub = sinon.stub(ApiTokenService.getInstance(mockExtensionContext));
+    });
+
+    teardown(async function () {
+        await removeWorkspaceCustomSettings();
+        sinon.restore();
+    });
+    test("Return Document Token", function () {
+        const documentToken: SimplObject = {
+            name: "MyDocument",
+            dataType: "MyDataType",
+            kind: vscode.CompletionItemKind.Class,
+            nameRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 0)),
+            uri: "MyTestDocument"
+        }
+        const tokenService = TokenService.getInstance(mockExtensionContext);
+        const uri = vscode.Uri.parse("MyTestDocument");
+        _documentTokenServiceStub.getTokens.withArgs(uri).returns(documentToken);
+
+        const result = tokenService.getDocumentMembers(uri);
+        assert.strictEqual(result.length, 1);
+        assert.strictEqual(result[0].name, "MyDocument");
+    });
+    test("Return API Document Token", function () {
+        const documentToken: SimplObject = {
+            name: "MyDocument",
+            dataType: "MyDataType",
+            kind: vscode.CompletionItemKind.Class,
+            nameRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 0)),
+            uri: "MyTestDocument"
+        }
+        const tokenService = TokenService.getInstance(mockExtensionContext);
+        const uri = vscode.Uri.parse("MyTestDocument");
+        _apiTokenServiceStub.getTokens.withArgs(uri).returns([documentToken]);
+
+        const result = tokenService.getDocumentMembers(uri);
+        assert.strictEqual(result.length, 1);
+        assert.strictEqual(result[0].name, "MyDocument");
+    });
+    test("Return nothing with wrong URI", function () {
+        const documentToken: SimplObject = {
+            name: "MyDocument",
+            dataType: "MyDataType",
+            kind: vscode.CompletionItemKind.Class,
+            nameRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 0)),
+            uri: "MyTestDocument"
+        }
+        const tokenService = TokenService.getInstance(mockExtensionContext);
+        const uri = vscode.Uri.parse("MyTestDocument");
+        const uri2 = vscode.Uri.parse("MyTestDocument2");
+        _documentTokenServiceStub.getTokens.withArgs(uri2).returns(documentToken);
+        _apiTokenServiceStub.getTokens.withArgs(uri2).returns([documentToken]);
+
+        const result = tokenService.getDocumentMembers(uri);
+        assert.strictEqual(result.length, 0);
+    });
+});
+
+suite("testing getting object at position", function () {
+    setup(async function () {
+        await removeWorkspaceCustomSettings();
+        _documentTokenServiceStub = sinon.stub(DocumentTokenService.getInstance(mockExtensionContext));
+        _apiTokenServiceStub = sinon.stub(ApiTokenService.getInstance(mockExtensionContext));
+    });
+
+    teardown(async function () {
+        await removeWorkspaceCustomSettings();
+        sinon.restore();
+    });
+    test("Return undefined with position not inside any function, event or structure", function () {
+        const uri = vscode.Uri.parse("MyTestDocument");
+        const documentToken: SimplObject = {
+            name: "MyDocument",
+            dataType: "MyDataType",
+            kind: vscode.CompletionItemKind.Class,
+            nameRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(5, 0)),
+            uri: uri.toString()
+        }
+        const tokenService = TokenService.getInstance(mockExtensionContext);
+        _documentTokenServiceStub.getTokens.withArgs(uri).returns(documentToken);
+
+        const result = tokenService.getObjectAtPosition(uri, new vscode.Position(3, 0));
+        assert.strictEqual(result, undefined);
+    });
+    test("Return structure object with position inside", function () {
+        const uri = vscode.Uri.parse("MyTestDocument");
+        const struct: SimplObject = {
+            name: "structure1",
+            dataType: "structure",
+            kind: vscode.CompletionItemKind.Struct,
+            nameRange: new vscode.Range(new vscode.Position(2, 0), new vscode.Position(2, 5)),
+            blockRange: new vscode.Range(new vscode.Position(2, 0), new vscode.Position(5, 4)),
+        }
+        const documentToken: SimplObject = {
+            name: "MyDocument",
+            dataType: "MyDataType",
+            kind: vscode.CompletionItemKind.Class,
+            nameRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 5)),
+            blockRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(5, 0)),
+            uri: uri.toString(),
+            internalStructures: [
+                struct
+            ]
+        };
+        const tokenService = TokenService.getInstance(mockExtensionContext);
+        _documentTokenServiceStub.getTokens.withArgs(uri).returns(documentToken);
+
+        const result = tokenService.getObjectAtPosition(uri, new vscode.Position(3, 0));
+        assert.strictEqual(result, struct);
+    });
+
+    test("Return event object with position inside", function () {
+        const uri = vscode.Uri.parse("MyTestDocument");
+        const event: SimplObject = {
+            name: "event1",
+            dataType: "event",
+            kind: vscode.CompletionItemKind.Event,
+            nameRange: new vscode.Range(new vscode.Position(2, 0), new vscode.Position(2, 5)),
+            blockRange: new vscode.Range(new vscode.Position(2, 0), new vscode.Position(5, 4)),
+        }
+        const documentToken: SimplObject = {
+            name: "MyDocument",
+            dataType: "MyDataType",
+            kind: vscode.CompletionItemKind.Class,
+            nameRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 5)),
+            blockRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(5, 0)),
+            uri: uri.toString(),
+            internalEvents: [
+                event
+            ]
+        };
+
+        const tokenService = TokenService.getInstance(mockExtensionContext);
+        _documentTokenServiceStub.getTokens.withArgs(uri).returns(documentToken);
+
+        const result = tokenService.getObjectAtPosition(uri, new vscode.Position(3, 0));
+        assert.strictEqual(result, event);
+    });
+    test("Return function object with position inside parameters, and confirms it is inside it", function () {
+        const uri = vscode.Uri.parse("MyTestDocument");
+        const func: SimplObject = {
+            name: "func1",
+            dataType: "function",
+            kind: vscode.CompletionItemKind.Function,
+            nameRange: new vscode.Range(new vscode.Position(2, 0), new vscode.Position(2, 5)),
+            blockRange: new vscode.Range(new vscode.Position(2, 0), new vscode.Position(5, 4)),
+            parameterRange: new vscode.Range(new vscode.Position(2, 10), new vscode.Position(2, 20)),
+        }
+        const documentToken: SimplObject = {
+            name: "MyDocument",
+            dataType: "MyDataType",
+            kind: vscode.CompletionItemKind.Class,
+            nameRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 5)),
+            blockRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(5, 0)),
+            uri: uri.toString(),
+            internalFunctions: [
+                func
+            ]
+        };
+
+        const tokenService = TokenService.getInstance(mockExtensionContext);
+        _documentTokenServiceStub.getTokens.withArgs(uri).returns(documentToken);
+
+        const pos = new vscode.Position(2, 15);
+        const result = tokenService.getObjectAtPosition(uri, pos);
+        const isAtParameterRange = tokenService.isAtParameterRange(uri, pos);
+        assert.strictEqual(result, func);
+        assert.strictEqual(isAtParameterRange,true);
+    });
+    test("Return function object with position inside, and confirms it is outside parameters", function () {
+        const uri = vscode.Uri.parse("MyTestDocument");
+        const func: SimplObject = {
+            name: "function1",
+            dataType: "function",
+            kind: vscode.CompletionItemKind.Function,
+            nameRange: new vscode.Range(new vscode.Position(2, 0), new vscode.Position(2, 5)),
+            blockRange: new vscode.Range(new vscode.Position(2, 0), new vscode.Position(5, 4)),
+        }
+        const documentToken: SimplObject = {
+            name: "MyDocument",
+            dataType: "MyDataType",
+            kind: vscode.CompletionItemKind.Class,
+            nameRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 5)),
+            blockRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(5, 0)),
+            uri: uri.toString(),
+            internalFunctions: [
+                func
+            ]
+        };
+
+        const tokenService = TokenService.getInstance(mockExtensionContext);
+        _documentTokenServiceStub.getTokens.withArgs(uri).returns(documentToken);
+
+        const pos = new vscode.Position(2, 15);
+        const result = tokenService.getObjectAtPosition(uri, pos);
+        const isAtParameterRange = tokenService.isAtParameterRange(uri, pos);
+        assert.strictEqual(result, func);
+        assert.strictEqual(isAtParameterRange,false);
+    });
+    test("Return false for an object without formulas", function () {
+        const uri = vscode.Uri.parse("MyTestDocument");
+        const documentToken: SimplObject = {
+            name: "MyDocument",
+            dataType: "MyDataType",
+            kind: vscode.CompletionItemKind.Class,
+            nameRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(0, 5)),
+            blockRange: new vscode.Range(new vscode.Position(0, 0), new vscode.Position(5, 0)),
+            uri: uri.toString(),
+
+        };
+
+        const tokenService = TokenService.getInstance(mockExtensionContext);
+        _documentTokenServiceStub.getTokens.withArgs(uri).returns(documentToken);
+
+        const pos = new vscode.Position(2, 15);
+        const isAtParameterRange = tokenService.isAtParameterRange(uri, pos);
+        assert.strictEqual(isAtParameterRange,false);
+    });
+});

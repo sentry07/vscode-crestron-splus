@@ -1,0 +1,28 @@
+
+namespace SampleSimplSharpLibrary;
+{
+     class SampleClass 
+    {
+        // class delegates
+        delegate SIGNED_LONG_INTEGER_FUNCTION IntSampleDelegate ( SIGNED_LONG_INTEGER intParameter, INTEGER uShortIntegerParameter );
+
+        // class events
+        EventHandler SampleComplexEvent ( SampleClass sender, MyEventArgs e );
+
+        // class functions
+        INTEGER_FUNCTION SampleUshortMethod ( INTEGER ushortParameter , SampleStructure clientStructureParam , SampleSubClass clientClassParam );
+
+        // class variables
+        STRING stringSampleField[];
+
+        // class properties
+        DelegateProperty SampleDelegate SampleDelegateProperty;
+        SampleSubClass SampleSampleSubClass;
+    };
+    enum SampleEnum
+    {
+        SampleEnumValue1,
+        SampleEnumValue2,
+        SampleEnumValue3,
+    };
+}
