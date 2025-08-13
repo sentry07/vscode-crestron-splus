@@ -13,7 +13,7 @@ class SimplPlusDocumentBuildTargets {
 
     public constructor(document: TextDocument | undefined) {
         if (document === undefined) { return; }
-        if (document.languageId !== "simpl-plus") { return; }
+        if (document.languageId !== "crestron-splus") { return; }
         this._document = document;
         this.UpdatedBuildTargets(document);
     }
@@ -62,10 +62,10 @@ class SimplPlusDocumentBuildTargets {
 
     private getBuildTargetsFromPreferences(): BuildType[] {
         let fileBuildTypes: BuildType[] = [];
-        const simplConfig = workspace.getConfiguration("simpl-plus");
-        workspace.getConfiguration("simpl-plus").enable2series === true ? fileBuildTypes.push("Series2") : null;
-        workspace.getConfiguration("simpl-plus").enable3series === true ? fileBuildTypes.push("Series3") : null;
-        workspace.getConfiguration("simpl-plus").enable4series === true ? fileBuildTypes.push("Series4") : null;
+        const simplConfig = workspace.getConfiguration("crestron-splus");
+        workspace.getConfiguration("crestron-splus").enable2series === true ? fileBuildTypes.push("Series2") : null;
+        workspace.getConfiguration("crestron-splus").enable3series === true ? fileBuildTypes.push("Series3") : null;
+        workspace.getConfiguration("crestron-splus").enable4series === true ? fileBuildTypes.push("Series4") : null;
         return fileBuildTypes;
     }
 }

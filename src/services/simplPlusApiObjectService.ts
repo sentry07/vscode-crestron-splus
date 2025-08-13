@@ -34,7 +34,7 @@ export class simplPlusApiObjectService implements Disposable {
     //stores the api paths that need tokens on a specific program.
     private _programs = new Map<string, string[]>();
     private static _instance: simplPlusApiObjectService;
-    private selector: DocumentSelector = 'simpl-plus';
+    private selector: DocumentSelector = 'crestron-splus';
     public static getInstance(ctx: ExtensionContext): simplPlusApiObjectService {
         if (!simplPlusApiObjectService._instance) {
             simplPlusApiObjectService._instance = new simplPlusApiObjectService(ctx);
@@ -200,9 +200,9 @@ export class simplPlusApiObjectService implements Disposable {
 
     private async runApiGenerator(CLZLibraryPath: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            const simplDirectory = workspace.getConfiguration("simpl-plus").simplDirectory;
+            const simplDirectory = workspace.getConfiguration("crestron-splus").simplDirectory;
             if (!fs.existsSync(simplDirectory)) { reject("SIMPL+ Extension Directory not found. Check configuration"); return; }
-            const extensionPath = extensions.getExtension("sentry07.simpl-plus")?.extensionPath;
+            const extensionPath = extensions.getExtension("sentry07.crestron-splus")?.extensionPath;
             if (extensionPath === undefined) { resolve(); }
             const simpPlusApiGeneratorPath = join(extensionPath, "support", "SimplPlusApiGenerator.exe");
             if (!fs.existsSync(simpPlusApiGeneratorPath)) { reject("SIMPL+ API Generator not found. Reinstall Extension"); return; }

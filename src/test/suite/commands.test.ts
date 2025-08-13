@@ -13,15 +13,15 @@ suiteTeardown(async function () {
 });
 suite('Registration', function () {
     const commandsToTest = [{
-        command: 'simpl-plus.localHelp',
+        command: 'crestron-splus.localHelp',
         title: 'Local Help'
     },
     {
-        command: 'simpl-plus.webHelp',
+        command: 'crestron-splus.webHelp',
         title: 'Web Help'
     },
     {
-        command: 'simpl-plus.build',
+        command: 'crestron-splus.build',
         title: 'SIMPL+: Build SIMPL+ Project'
     }
     ];
@@ -38,9 +38,9 @@ suite('Execution', function () {
         const fakeTerminalCreator = sinon.stub(vscode.window, 'createTerminal').callsFake(() => {
             return fakeTerminal;
         });
-        await vscode.commands.executeCommand('simpl-plus.localHelp');
+        await vscode.commands.executeCommand('crestron-splus.localHelp');
         await delay(500);
-        assert.ok(fakeTerminalCreator.args[0][0].toString().includes("simpl-plus"));
+        assert.ok(fakeTerminalCreator.args[0][0].toString().includes("crestron-splus"));
         assert.ok(typeof fakeTerminalCreator.args !== undefined &&
             fakeTerminalCreator.args[0] !== undefined &&
             fakeTerminalCreator.args[0].length > 1 &&
@@ -55,7 +55,7 @@ suite('Execution', function () {
     test('Web Help should open open a browser link', async function () {
         const fakeShowBrowserCommand = sinon.stub(vscode.env, 'openExternal')
             .returns(Promise.resolve(true));
-        await vscode.commands.executeCommand('simpl-plus.webHelp');
+        await vscode.commands.executeCommand('crestron-splus.webHelp');
         await delay(500);
         assert.ok(fakeShowBrowserCommand.calledOnce);
         assert.ok(fakeShowBrowserCommand.args[0][0].toString() === 'https://help.crestron.com/simpl_plus');
@@ -64,7 +64,7 @@ suite('Execution', function () {
     {
         const fakeTaskCreator = sinon.stub(vscode.tasks, 'executeTask').resolves();
         await OpenAndShowSPlusDocument("Nothing To See");
-        await vscode.commands.executeCommand('simpl-plus.build');
+        await vscode.commands.executeCommand('crestron-splus.build');
         await delay(500);
         assert.ok(fakeTaskCreator.calledOnce);
         assert.strictEqual(fakeTaskCreator.args[0][0].name, 'Compile 3 & 4 Series');
@@ -80,7 +80,7 @@ suite('Execution', function () {
         //@ts-ignore
         const fakeQuickPic = sinon.stub(vscode.window, 'showQuickPick').resolves(quickPickItems);
         await OpenAndShowSPlusDocument("\\\\Nothing To See");
-        await vscode.commands.executeCommand('simpl-plus.showQuickPick');
+        await vscode.commands.executeCommand('crestron-splus.showQuickPick');
         await delay(500);
         assert.ok(fakeQuickPic.calledOnce);
         //@ts-ignore

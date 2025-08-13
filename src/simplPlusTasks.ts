@@ -29,7 +29,7 @@ import * as fs from 'fs';
 
 
 export class SimplPlusTasks implements TaskProvider {
-    static SimplPlusType: string = "simpl-plus";
+    static SimplPlusType: string = "crestron-splus";
     private simpPlusTasks: Task[] | undefined = undefined;
     // private simplPlusPromise: Thenable<Task[]> | undefined = undefined;
     private static _instance: SimplPlusTasks;
@@ -170,7 +170,7 @@ export class SimplPlusTasks implements TaskProvider {
         let commandArguments: ShellQuotedString[] = [];
         let seriesTargets = buildType.map(type => type.replace("Series", ""));
         const dosExecutable = "C:\\Windows\\System32\\cmd.exe";
-        const compilerPath = `${workspace.getConfiguration("simpl-plus").simplDirectory}\\SPlusCC.exe`;
+        const compilerPath = `${workspace.getConfiguration("crestron-splus").simplDirectory}\\SPlusCC.exe`;
 
         const compileCommand = rebuild ? "\\rebuild" : "\\build";
         commandArguments.push(this.getShellQuote(compileCommand));

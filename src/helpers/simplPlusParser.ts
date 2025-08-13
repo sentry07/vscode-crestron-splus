@@ -2,7 +2,7 @@ import { CompletionItemKind, Position, Range, TextDocument } from "vscode";
 import { SimplPlusObject } from "../base/simplPlusObject";
 import TextmateLanguageService, { TextmateToken } from "vscode-textmate-languageservice";
 
-const selector: string = 'simpl-plus';
+const selector: string = 'crestron-splus';
 let programName: string = "";
 let programUri: string = "";
 

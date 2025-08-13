@@ -2,7 +2,7 @@
 start
 partition "startup"{
     :document opens;
-    if (active document is simpl-plus) then (yes)
+    if (active document is crestron-splus) then (yes)
         if (has ush) then (yes)
             :get targets from ush;
             :targets stored in extension

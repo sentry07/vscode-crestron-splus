@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { extensions, Position, QuickPickItem, QuickPickOptions, window } from 'vscode';
 export async function insertCategory() {
-    const extensionPath = extensions.getExtension("sentry07.simpl-plus")?.extensionPath;
+    const extensionPath = extensions.getExtension("sentry07.crestron-splus")?.extensionPath;
     if (extensionPath === undefined) { return; }
     const categoriesPath = path.join(extensionPath, "support", "categories.json");
     if (!fs.existsSync(categoriesPath)) {

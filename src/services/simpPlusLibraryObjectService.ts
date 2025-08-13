@@ -26,7 +26,7 @@ export class simpPlusLibraryObjectService implements Disposable {
     //stores the library paths that need tokens on a specific program.
     private _programs = new Map<string, string[]>();
     private static _instance: simpPlusLibraryObjectService;
-    private selector: DocumentSelector = 'simpl-plus';
+    private selector: DocumentSelector = 'crestron-splus';
     public static getInstance(ctx: ExtensionContext): simpPlusLibraryObjectService {
         if (!simpPlusLibraryObjectService._instance) {
             simpPlusLibraryObjectService._instance = new simpPlusLibraryObjectService(ctx);

@@ -65,7 +65,7 @@ export class SimplPlusFormattingProvider
     private formatNewLines(docText: string): string {
         let endOfLineCharacter = os.EOL;                                     // whether to add the suffix or not
 
-        const addLine: boolean = workspace.getConfiguration("simpl-plus").braceLine;
+        const addLine: boolean = workspace.getConfiguration("crestron-splus").braceLine;
         let docLines = docText.split(/\r?\n/);                      // Split into lines
         let openBracketDoc: string[] = [];
         let closeBracketDoc: string[] = [];
@@ -273,7 +273,7 @@ export class SimplPlusFormattingProvider
     }
 
     private changeCase(document: string): string {
-        const formatSetting = workspace.getConfiguration("simpl-plus").keywordCase;
+        const formatSetting = workspace.getConfiguration("crestron-splus").keywordCase;
         if (formatSetting === "Unchanged") { return document; }
         const keywordService = KeywordService.getInstance();
         const keywords = keywordService.getAllKeywords();

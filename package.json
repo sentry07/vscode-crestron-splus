@@ -1,8 +1,8 @@
 {
-  "name": "simpl-plus",
-  "displayName": "SIMPL+",
+  "name": "crestron-splus",
+  "displayName": "Crestron SIMPL+",
   "description": "Syntax highlighting, formatting, build tasks.",
-  "version": "1.0.0-beta1",
+  "version": "1.0.0",
   "publisher": "sentry07",
   "icon": "icons/crestron.png",
   "repository": {
@@ -22,27 +22,27 @@
   "contributes": {
     "commands": [
       {
-        "command": "simpl-plus.localHelp",
+        "command": "crestron-splus.localHelp",
         "title": "SIMPL+: Open S+ Help Reference"
       },
       {
-        "command": "simpl-plus.webHelp",
+        "command": "crestron-splus.webHelp",
         "title": "SIMPL+: Open S+ Online Reference"
       },
       {
-        "command": "simpl-plus.build",
+        "command": "crestron-splus.build",
         "title": "SIMPL+: Build SIMPL+ Project"
       },
       {
-        "command": "simpl-plus.insertCategory",
+        "command": "crestron-splus.insertCategory",
         "title": "SIMPL+: Insert #Category..."
       },
       {
-        "command": "simpl-plus.openApis",
+        "command": "crestron-splus.openApis",
         "title": "SIMPL+: Open all project related API files"
       },
       {
-        "command": "simpl-plus.openLibraries",
+        "command": "crestron-splus.openLibraries",
         "title": "SIMPL+: Open all project related library files"
       }
     ],
@@ -50,7 +50,7 @@
       {
         "title": "SIMPL+",
         "properties": {
-          "simpl-plus.simplDirectory": {
+          "crestron-splus.simplDirectory": {
             "type": "string",
             "default": "C:\\Program Files (x86)\\Crestron\\Simpl",
             "description": "Location of the Crestron SIMPL Directory."
@@ -60,17 +60,17 @@
       {
         "title": "Compilation",
         "properties": {
-          "simpl-plus.enable2series": {
+          "crestron-splus.enable2series": {
             "type": "boolean",
             "default": false,
             "description": "Enables Series 2 build target for new or unknown SIMPL+ files"
           },
-          "simpl-plus.enable3series": {
+          "crestron-splus.enable3series": {
             "type": "boolean",
             "default": true,
             "description": "Enables Series 3 build target for new or unknown SIMPL+ files"
           },
-          "simpl-plus.enable4series": {
+          "crestron-splus.enable4series": {
             "type": "boolean",
             "default": true,
             "description": "Enables Series 4 build target for new or unknown SIMPL+ files"
@@ -80,7 +80,7 @@
       {
         "title": "Formatting",
         "properties": {
-          "simpl-plus.keywordCase": {
+          "crestron-splus.keywordCase": {
             "type": "string",
             "enum": [
               "lowercase",
@@ -97,7 +97,7 @@
             "default": "Unchanged",
             "description": "Case used when performing autoformat of built-in keywords, statements, etc "
           },
-          "simpl-plus.braceLine": {
+          "crestron-splus.braceLine": {
             "type": "boolean",
             "default": false,
             "description": "If enable it will add a new line before every opening curly bracket.  If not, it will move it to the end of the previous line"
@@ -108,57 +108,57 @@
     "menus": {
       "editor/context": [
         {
-          "command": "simpl-plus.build",
+          "command": "crestron-splus.build",
           "group": "navigation@1",
-          "when": "resourceLangId == simpl-plus"
+          "when": "resourceLangId == crestron-splus"
         },
         {
-          "command": "simpl-plus.localHelp",
+          "command": "crestron-splus.localHelp",
           "group": "navigation@2",
-          "when": "resourceLangId == simpl-plus"
+          "when": "resourceLangId == crestron-splus"
         },
         {
-          "command": "simpl-plus.webHelp",
+          "command": "crestron-splus.webHelp",
           "group": "navigation@3",
-          "when": "resourceLangId == simpl-plus"
+          "when": "resourceLangId == crestron-splus"
         },
         {
-          "command": "simpl-plus.insertCategory",
+          "command": "crestron-splus.insertCategory",
           "group": "navigation@4",
-          "when": "resourceLangId == simpl-plus"
+          "when": "resourceLangId == crestron-splus"
         },
         {
-          "command": "simpl-plus.openApis",
+          "command": "crestron-splus.openApis",
           "group": "navigation@5",
-          "when": "resourceLangId == simpl-plus && simpl-plus:hasApis"
+          "when": "resourceLangId == crestron-splus && crestron-splus:hasApis"
         },
         {
-          "command": "simpl-plus.openLibraries",
+          "command": "crestron-splus.openLibraries",
           "group": "navigation@6",
-          "when": "resourceLangId == simpl-plus && simpl-plus:hasLibraries"
+          "when": "resourceLangId == crestron-splus && crestron-splus:hasLibraries"
         }
       ]
     },
     "keybindings": [
       {
-        "command": "simpl-plus.localHelp",
+        "command": "crestron-splus.localHelp",
         "key": "ctrl+shift+f1",
-        "when": "resourceLangId == simpl-plus"
+        "when": "resourceLangId == crestron-splus"
       },
       {
-        "command": "simpl-plus.webHelp",
+        "command": "crestron-splus.webHelp",
         "key": "ctrl+shift+f2",
-        "when": "resourceLangId == simpl-plus"
+        "when": "resourceLangId == crestron-splus"
       },
       {
-        "command": "simpl-plus.build",
+        "command": "crestron-splus.build",
         "key": "F12",
-        "when": "resourceLangId == simpl-plus"
+        "when": "resourceLangId == crestron-splus"
       },
       {
-        "command": "simpl-plus.rebuild",
+        "command": "crestron-splus.rebuild",
         "key": "shift+F12",
-        "when": "resourceLangId == simpl-plus"
+        "when": "resourceLangId == crestron-splus"
       }
     ],
     "languages": [
@@ -166,7 +166,7 @@
         "aliases": [
           "SIMPL+"
         ],
-        "id": "simpl-plus",
+        "id": "crestron-splus",
         "extensions": [
           ".usp",
           ".usl",
@@ -219,9 +219,9 @@
     },
     "grammars": [
       {
-        "language": "simpl-plus",
-        "scopeName": "source.simpl-plus",
-        "path": "./syntaxes/simpl-plus.tmLanguage.json"
+        "language": "crestron-splus",
+        "scopeName": "source.crestron-splus",
+        "path": "./syntaxes/crestron-splus.tmLanguage.json"
       },
       {
         "language": "simpl-sharp-api",
@@ -231,13 +231,13 @@
     ],
     "snippets": [
       {
-        "language": "simpl-plus",
+        "language": "crestron-splus",
         "path": "./snippets/snippets.json"
       }
     ],
     "taskDefinitions": [
       {
-        "type": "simpl-plus",
+        "type": "crestron-splus",
         "properties": {
           "buildTypes": {
             "type": "array",
@@ -261,7 +261,7 @@
     "problemMatchers": [
       {
         "name": "SIMPL+",
-        "owner": "simpl-plus",
+        "owner": "crestron-splus",
         "fileLocation": [
           "relative",
           "${workspaceFolder}"
@@ -275,7 +275,7 @@
       }
     ],
     "configurationDefaults": {
-      "[simpl-plus]": {
+      "[crestron-splus]": {
         "editor.wordBasedSuggestions": "currentDocument",
         "editor.suggest.snippetsPreventQuickSuggestions": false,
         "editor.quickSuggestions": {
@@ -299,7 +299,7 @@
     "test": "vscode-test",
     "test-with-coverage": "vscode-test --coverage",
     "yaml2json-watch": "yaml2json syntaxes --save --pretty --recursive --watch",
-    "puml-to-svg": "java -jar \"C:\\ProgramData\\chocolatey\\lib\\plantuml\\tools\\plantuml.jar\"  \".\\UML\\csharp-syntax-mindmap\\*.puml\" \".\\UML\\simpl-plus-syntax-mindmap\\*.puml\" -svg"
+    "puml-to-svg": "java -jar \"C:\\ProgramData\\chocolatey\\lib\\plantuml\\tools\\plantuml.jar\"  \".\\UML\\csharp-syntax-mindmap\\*.puml\" \".\\UML\\crestron-splus-syntax-mindmap\\*.puml\" -svg"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.7",
@@ -320,7 +320,7 @@
     "yamljs": "^0.3.0"
   },
   "__metadata": {
-    "id": "sentry07.simpl-plus",
+    "id": "sentry07.crestron-splus",
     "publisherId": "sentry07",
     "publisherDisplayName": "Eric Walters"
   },

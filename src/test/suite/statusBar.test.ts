@@ -17,6 +17,6 @@ suite("Status Bar ", () => {
         var statusBarItem = statusBarSpy.returnValues[0];
         assert.strictEqual(statusBarItem.text, "Targets: $(target-three)$(target-four)");
         assert.strictEqual(statusBarItem.tooltip, "Click to select SIMPL+ compilation targets");
-        assert.strictEqual(statusBarItem.command, "simpl-plus.showQuickPick");
+        assert.strictEqual(statusBarItem.command, "crestron-splus.showQuickPick");
     });
 });
