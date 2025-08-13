@@ -1,0 +1,59 @@
+      digital_input digitalInput1;
+  digital_input digitalInput2,
+        digitalInput3,
+    digitalInput4;
+
+    analog_input analogInput1;
+ analog_input analogInput2,
+           analogInput3,
+       analogInput4;
+
+    string_input stringInput1;
+  string_input stringInput2,
+                stringInput3,
+            stringInput4;
+
+    buffer_input bufferInput1;
+ buffer_input bufferInput2,
+                bufferInput3,
+            bufferInput4;
+
+    digital_output digitaloutput1;
+ digital_output digitaloutput2,
+            digitaloutput3,
+        digitaloutput4;
+
+        analog_output analogoutput1;
+ analog_output analogoutput2,
+                analogoutput3,
+            analogoutput4;
+
+        string_output stringoutput1;
+ string_output stringoutput2,
+                    stringoutput3,
+                stringoutput4;
+
+
+
+  /* test test test
+test test test
+   */
+
+
+     change Name2
+ {
+        if(Name3=2)
+    {
+        switch(Name3)
+        {
+                case (3):
+                {
+                //code here
+            }
+            default:
+            {
+
+                }
+        }
+    }
+ }

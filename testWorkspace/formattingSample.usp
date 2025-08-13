@@ -1,0 +1,893 @@
+
+//region Comment
+/*******************************************************************************************
+  MultiLine Comment
+*******************************************************************************************/
+// Single Line Comment
+// endregion
+
+//region Preprocessor
+
+//keyword.preprocessor.{name below}
+#PRINT_TO_TRACE  //test
+#ENABLE_DYNAMIC //test
+#ENABLE_STACK_CHECKING  //test
+#LARGE_STACK  //test
+#ENABLE_TRACE  //test
+#ENCODING_ASCII  //test
+#ENCODING_INHERIT_FROM_PARENT  //test
+#ENCODING_INHERIT_FROM_PROGRAM  //test
+#ENCODING_UTF16  //test
+#DEFAULT_NONVOLATILE  //test
+#DEFAULT_VOLATILE  //test
+#IF_SERIES2 
+#IF_SERIES3
+#IF_SERIES4 
+#ENDIF
+
+//keyword.preprocessordefineconstant  entity.name constant
+#DEFINE_CONSTANT HELLO                 534343 //test
+#DEFINE_CONSTANT HELLO2                "Something"
+#DEFINE_CONSTANT HELLO3                0x03
+#DEFINE_CONSTANT HELLO4                'A'
+
+//keyword.preprocessor.category  		constant
+#CATEGORY 						 		"6" //test
+#CRESTRON_LIBRARY						"KnobAnalogHandler" 		//test
+#USER_LIBRARY 							"SampleLibrary"  			//test 
+#CRESTRON_SIMPLSHARP_LIBRARY 			"ZunExternal"
+#USER_SIMPLSHARP_LIBRARY 				"SampleSimplSharpLibrary"
+#INCLUDEPATH 							".//somewhere" 				//test
+#SYMBOL_NAME 							"My Name" //test
+#HINT 									"The Hint" //test
+#HELP 									"The Help" //test
+#OUTPUT_SHIFT 							5 //test
+#MAX_INTERNAL_BUFFER_SIZE 				1000 //test
+
+//keyword.preprocessor.{nambe below}	//keyword.control.option.{name below}
+#ANALOG_SERIAL_EXPAND 					Separately //test
+#DIGITAL_EXPAND 						PWithIxorO //test
+
+//keyword.preprocessor.if-ifnot-defined	//entity.name.variable.preprocessor.symbol
+#IF_DEFINED 							dfdfdf //test
+#IF_NOT_DEFINED 						dfdfdf //test
+
+
+//keyword.preprocessor.helpbegin
+#HELP_BEGIN
+//comment.block.documentation
+line_1...  
+line_2...  
+line_n  
+//keyword.preprocessor.helpend
+#HELP_END
+
+//keyword.preprocessor.begin-parameter-properties	entinty.name.type
+#BEGIN_PARAMETER_PROPERTIES 					 	StringParameter1, StringParameter2 //test
+//keyword.preprocessor-arameter-validunits	keyword.preprocessor.{word below}
+#propValidUnits =  							unitString  //test
+#propValidUnits =  							unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks  //test
+//keyword.preprocessor.defaultunits		keyword.preprocessor.{word below}
+#propDefaultUnits =  					unitString //test
+#propDefaultUnits =  					unitHex //test
+#propDefaultUnits =  					unitPercent //test
+#propDefaultUnits = 					unitCharacter //test
+#propDefaultUnits =  					unitTime //test
+#propDefaultUnits =  					unitTicks //test
+//keyword.preprocessor.defaultvalue		string.quoted.double
+#propDefaultValue =  					"string"
+//keyword.preprocessor.defaultvalue		constant.numberic.decimal
+#propDefaultValue =  					25d //test
+//keyword.preprocessor.defaultvalue		constant.numberic.hex
+#propDefaultValue =  					25h
+//keyword.preprocessor.defaultvalue		constant.numberic.precentage
+#propDefaultValue =  					25%
+//keyword.preprocessor.defaultvalue		string.quoted.single
+#propDefaultValue =  					'a'
+//keyword.preprocessor.defaultvalue		constant.numberic.seconds
+#propDefaultValue =  					25s
+//keyword.preprocessor.defaultvalue		constant.numberic.ticks
+#propDefaultValue =  					25t
+//keyword.preprocessor.proplist		literals, string.quoted.double
+#propList = { 25d , "label" } , { 25h, "label" } , { 25%, "label" } , { 'a' , "label" } , { 25s, "label" } , { 25t , "label" } , { "helloLabel", "label" } //test
+//keyword.preprocessor.propupperbound	constant.numberic.ticks
+#propUpperBound =  						25t   //test
+//keyword.preprocessor.proplowerbound	constant.numberic.ticks
+#propLowerBound =  						5t   //test
+//keyword.preprocessor.propshortdescription	string.quoted.double
+#propShortDescription = 					"status_bar_hint_text for StringParameter1" //test
+//keyword.preprocessor.beginpropfulldescription
+#BEGIN_PROP_FULL_DESCRIPTION  
+//comment.block.documentation
+line_1...  
+line_2...  
+line_n  
+//keyword.preprocessor.endpropfulldescription
+#END_PROP_FULL_DESCRIPTION
+//keyword.preprocessor.begingpropfnotes
+#BEGIN_PROP_NOTES 
+//comment.block.documentation
+line_1...  
+line_2...  
+line_n  
+//keyword.preprocessor.endpropnotes
+#END_PROP_NOTES
+//keyword.preprocessor.endparameterproperties
+#END_PARAMETER_PROPERTIES
+
+//endregion
+
+//region Declarations
+//Input Declarations
+//keyword.type.{name below}		entity.name.variable
+STRING_INPUT 					entityNameVariable, StringInput1[20];//, StringInput2[4][20], _SKIP_, StringInput3[4,2][20];
+BUFFER_INPUT 					BufferInput1[20]; //keywordTypeBuffer_Input entityNameVariable
+DIGITAL_INPUT 					DigitalInput1, DigitalInput2[4], _SKIP_, DigitalInput3[4,2];
+ANALOG_INPUT 					AnalogInput1, AnalogInput2[4], _SKIP_, AnalogInput3[4,2];
+STRING_INPUT 					StringInput2[4][20], _SKIP_, StringInput3[4,2][20];
+BUFFER_INPUT 					BufferInput2[4][20], _SKIP_, BufferInput3[4,2][20];
+
+//Output 
+//keyword.type.{name below}		entity.name.variable
+STRING_OUTPUT 					entityNameVariable, StringOutput1;
+DIGITAL_OUTPUT					DigitalOutput1, DigitalOutput2[4], _SKIP_, DigitalOutput3[4,2];
+ANALOG_OUTPUT 					AnalogOutput1, AnalogOutput2[4], _SKIP_, AnalogOutput3[4,2];
+STRING_OUTPUT 					StringOutput2[4], _SKIP_, StringOutput3[4,2];
+
+// Parameter Declaration
+//keyword.type.{name below}		entity.name.variable
+INTEGER_PARAMETER 				entityNameVariable, IntegerParameter1, IntegerParameter2[4];
+SIGNED_INTEGER_PARAMETER 		SignedIntegerParameter1, SignedIntegerParameter2[4];
+LONG_INTEGER_PARAMETER 			LongIntgerParameter1, LongIntgerParameter2[4];
+SIGNED_LONG_INTEGER_PARAMETER 	SignedLongIntegerParameter1, SignedLongIntegerParameter2[4];
+STRING_PARAMETER 				StringParameter1[50], StringParameter2[4][50];
+
+//Global Variable Declaration
+//storage.modifier.{name below}	keyword.type.{name below}		entity.name.variable
+								INTEGER 						Variable#1, _Variable2 [4] , __Variable3 [4] [2] ;
+								LONG_INTEGER 					Variable4, Variable5[4], Variable6[4][2];
+								SIGNED_INTEGER 					Variable7, Variable8[4], Variable9[4][2];
+								SIGNED_LONG_INTEGER 			Variable10[4][2];
+								STRING 							Variable11$[6], Variable11[4][6]; //keywordTypeString entityNameVariable
+DYNAMIC 						STRING 							DynamicString[10]; //storageModifierDynamic keywordTypeString entityNameVariable
+VOLATILE 						STRING 							Volati$_#leString[10];
+NONVOLATILE 					STRING 							NonVolatileString [10];
+ASCII 							STRING 							AsiiString[10];
+UTF16 							string 							Utf16String[10];
+INHERIT 						STRING 							InheritString[10];
+//storage.modifier.{name below}	//entity.name.type				entity.name.variable
+INHERIT							entityNameType  				entityNameVariable, internalStuct[10];; //user local declaration
+
+// Internal Class Definitions
+// SampleClass CustomClass;
+//keyword.type.{name below}		entity.name.variable
+CEvent 							cEven$_#tClass;  //keywordTypeCEvent entityNameVariable
+CMutex 							entityNameVariable, cMutexClass;
+
+// Internal Socket definition
+//keyword.type.{name below}		entity.name.variable
+TCP_CLIENT 						entityNameVariable, TcpClient[100]; //keywordTypeTCP_CLIENT entityNameVariable
+TCP_SERVER 						TcpServer[100];
+UDP_SOCKET 						UdpSocket[100];
+
+
+
+//structure definition
+//storage.type.structure		entity.name.type.structure
+STRUCTURE 						mySruct //storageTypeStructure entintyNameTypeStructure
+{
+	//storage.modifier.{name below}	//keyword.type.{name below}		entity.name.variable
+									INTEGER 						Variable#1, _Variable2[4], __Variable3[4][2]; //test
+									INTEGER 						Variable#1, _Variable2[4], __Variable3[4][2];
+									LONG_INTEGER 					Variable4, Variable5[4], Variable6[4][2];
+									SIGNED_INTEGER 					Variable7, V$_#ariable8[4], Variable9[4][2];
+									SIGNED_LONG_INTEGER 			Variable10[4][2];
+	INHERIT 						STRING 							Variable11$[6], Variable11[4][6];
+									mystruct						struct;
+}; //test 
+
+//														 parenthsized-parameter-list
+//storage.modifier.callback			//keyword.type.{name below}		entity.name.function	 keyword.modifier.{name below}	keyword.type.{name below}	entity.name.variable.parameter
+callback							FUNCTION 						MyFunction				(ByRef 							INTEGER 					myvar1	){}
+									INTEGER_FUNCTION				MyFunction				(){}
+									LONG_INTEGER_FUNCTION			MyFunction				(){}
+									SIGNED_INTEGER_FUNCTION			MyFunction				(){}
+									SIGNED_LONG_INTEGER_FUNCTION	MyFunction				(){}		
+									STRING_FUNCTION					MyFunction				(){
+
+	//storage.modifier.{name below}	keyword.type.{name below}		entity.name.variable.local
+									INTEGER 						Variable#1, _Variable2[4], __Variable3[4][2]; //test
+									INTEGER 						Variable#1, _Variable2[4], __Variable3[4][2];
+									LONG_INTEGER 					Variable4, Variable5[4], Variable6[4][2];
+									SIGNED_INTEGER 					Variable7, V$_#ariable8[4], Variable9[4][2];
+									SIGNED_LONG_INTEGER 			Variable10[4][2];
+									STRING 							Variable11$[6], Variable11[4][6];
+	DYNAMIC 						INTEGER 						Variable#1, _Variable2[4], __Variable3[4][2];
+	ASCII 							LONG_INTEGER 					Variable4, Variable5[4], Variable6[4][2];
+	UTF16 							SIGNED_INTEGER 					Variable7, Variable8[4], Variable9[4][2];
+	INHERIT 						SIGNED_LONG_INTEGER 			Variable10, Variable11[4], Variable12[4][2];
+	//storage.modifier.{name below}	entity.name.type				entity.name.variable.local
+									mySruct 						internalStruct1, internalStuct2[10];
+}
+
+//Event Handlers
+//storage.modifier.threadsafe		keyword.type.{name below}		entity.name.variable.event
+THREADSAFE 							CHANGE 							DigitalInput1, DigitalInpu2 {}
+									EVENT 							IN1 {}
+									PUSH 							IN2 {}
+									RELEASE 						IN3, LEVEL, A$, PRESETS {}
+									SOCKETCONNECT 					IN3, IN4 {}
+									SOCKETDISCONNECT 				Digi$_#talInput1 {}
+									SOCKETRECEIVE 					Digi$_#talInput1 {}
+									SOCKETSTATUS 					Digi$_#talInput1 {}
+
+//stacked events
+PUSH DigitalInput1, DigitalInpu2 
+CHANGE DigitalInput1, DigitalInpu2 
+RELEASE IN3, LEVEL, A$, PRESETS 
+{
+	// meta.block
+								//storage.modifier.{name below}	keyword.type.{name below}		entity.name.variable.local
+								INTEGER 						Variable#1, _Variable2[4], __Variable3[4][2]; //test
+								INTEGER 						Variable#1, _Variable2[4], __Variable3[4][2];
+								LONG_INTEGER 					Variable4, Variable5[4], Variable6[4][2];
+								SIGNED_INTEGER 					Variable7, V$_#ariable8[4], Variable9[4][2];
+								SIGNED_LONG_INTEGER 			Variable10[4][2];
+								STRING 							Variable11$[6], Variable11[4][6];
+DYNAMIC 						INTEGER 						Variable#1, _Variable2[4], __Variable3[4][2];
+ASCII 							LONG_INTEGER 					Variable4, Variable5[4], Variable6[4][2];
+UTF16 							SIGNED_INTEGER 					Variable7, Variable8[4], Variable9[4][2];
+INHERIT 						SIGNED_LONG_INTEGER 			Variable10, Variable11[4], Variable12[4][2];
+//storage.modifier.{name below}	entity.name.type				entity.name.variable.local
+								mySruct 						internalStruct1, internalStuct2[10];
+
+						D
+}
+
+//endregion
+
+
+//statements
+FUNCTION simple_expressions(ByRef INTEGER my$_#var1,  LONG_INTEGER myvar2, SIGNED_INTEGER myVar3, SIGNED_LONG_INTEGER myvar4, ByVal mySruct myvar5)
+{
+	// meta.block
+
+	//expression Arithmetic
+	//variable.other.readwrite	keyword.operator.assignment variable.other.readwrite 	keyword.operator.arythmetic		variable.other.readwrite
+	a 							= 							b 								- 							c;
+	a = b * c;
+	a = b / c;
+	a = b S/ c;
+	a = b MOD c;
+	a = b UMOD c;
+	a = b % c;
+	a = b + c;
+	a = b - c;
+	//variable.other.readwrite	keyword.operator.assignment constant.numeric.decimal 	keyword.operator.arythmetic		keyword.support.function.invoaction
+	a 							= 							5 								- 							Len(t);
+	//variable.other.readwrite	keyword.operator.assignment constant.numeric.decimal 	keyword.operator.arythmetic		entity.name.function.invoaction
+	a 							= 							5 								- 							MyFunction(t);
+
+	//variable.other.readwrite	keyword.operator.assignment variable.other.readwrite 	keyword.operator.bitwise		variable.other.readwrite
+	a 							= 							b 							<<	 							c;
+	a = b >> c;
+	a = b {{ c;
+	a = b }} c;
+	a = b NOT(c);
+	a = b & c;
+	a = b | c;
+	a = b ^ c;
+	a = b !c;
+	a = b && c;
+	a = b || c;
+
+	//variable.other.readwrite	keyword.operator.assignment variable.other.readwrite 	keyword.operator.conparison		variable.other.readwrite
+	a 							= 							b 							=	 							c;
+	a = b = c;
+	a = b <> c;
+
+	//variable.other.readwrite	keyword.operator.assignment variable.other.readwrite 	keyword.operator.relational		variable.other.readwrite
+	a 							= 							b 							< 							c;
+	a = b < c;
+	a = b > c;
+	a = b <= c;
+	a = b >= c;
+	a = b S< c;
+	a = b S> c;
+	a = b S<= c;
+	a = b S>= c;
+
+	//Numeric literals
+	0x12AC
+	0X123
+	0x123
+	1234
+	-2
+	jkjk 123 jkjk
+	jkj 0xabc fjkj
+
+	//Illegal Numeric literals
+	1234f  //c# floating point cast
+	123.459  //floating point
+	jkjk 123jkj  //malformed
+	jkj 0xABCcfjkj //malformed
+	1234e-4 //exponential
+	1234E5 //exponential
+
+	//Character Literal
+	'd'
+
+	//Illegal Charcter Literal
+	'dd'
+	'd
+	'x034df3'
+
+	//string Literal
+	print("hello world");
+	print("\a \b \f \n \r \t \x34 ");
+	print("\a");
+	print("\b");
+	print("\f");
+	print("\n");
+	print("\r");
+	print("\t");
+	print("\v");
+	print("\xFA91");
+	print("\xFA9");
+	print("\xFA");
+
+
+	print("string: %s %4s %04s \n", s, s, s);
+	print("signed decimal %d %4d %04d \n", si, si, si);
+	print("unsigned %u %4u %04u \n", i, i, i);
+	print("hex %x %2x %02x \n", i, i, i);
+	print("HEX %X %2X %02X \n", i, i, i);
+	print("lis decimal %ld %9ld %09ld \n", sli, sli, sli);
+	print("liu decimal %lu %9lu %09lu \n", li, li, li);
+	print("%% \n");
+	print("%c %2c %02c \n", i, i, i);
+	print("\c");
+	print("\d");
+	print("\e");
+	print("\g");
+	print("\i");
+	print("\k");
+	print("\l");
+	print("\m");
+	print("\o");
+	print("\p");
+	print("\s");
+	print("\u");
+	print("\w");
+	print("\z");
+	print("%12lx", li);
+	print("%12lx", li);
+	print("%12lX", li);
+
+	//Illegal string literals
+	print("\xF");
+	print("\h");
+	print("\j");
+	print("\q");
+	print("\y");
+	print("%12m", li);
+	print("%m", li);
+
+}
+
+FUNCTION LoopingConstructs()
+{
+	
+	//keyowrd.control.loop.for               keyword.control.loop.to	keyword.control.loop.step.
+	FOR 						( a = Len(t) TO Len(t) 					STEP Len(5) ){
+		//keyowrd.control.loop.continue             
+		CONTINUE;
+	}
+	
+	do
+	{
+		a=a+1;
+	}
+	until(a=5);
+	
+	WHILE( a < 5 )
+	{
+		d = ReverseFind(a,"d",0);
+		d = ReverseFindNoCase(a,"d",0); 		
+	}
+
+}
+
+FUNCTION EncodingFunctions()
+{
+	// encoding functions
+	//variable.other.readwrite 	keyword.operator.assignment	keywrod.support.funciton.invocation
+	d 							= 							GetEncoding(a);
+	SetEncoding(a,ENCODING_ASCII);
+	b = ToASCII(a);
+	b = ToUTF16(a);
+	
+	//string parsing functions
+	ClearBuffer(BufferInput1);
+	c =CompareStrings(a,b);
+	c = CompareStringsNoCase(a,b);
+	d = Find("a",a,1);
+	d = FindNoCase("a",a,1);
+	a = Gather("a",BufferInput1,10);
+	c = GatherAsync("a",BufferInput1,MyGatherCallback,10);
+	c = GatherAsyncByLength(5,BufferInput1,MyGatherCallback,10);
+	b = GatherByLength(5,BufferInput1,10);
+	b = Right(a,5);
+	b = Upper(a);	c = GatherByLengthWithDest(5,BufferInput1,b,10);
+	a = Left(a,3);
+	d = Len(a);
+	b = Lower(a);
+	a = Mid(a,1,2);
+	c = RearmGatherAsync(BufferInput1);
+	b = Remove("a",a,1);
+	b = RemoveByLength(3,a);
+	c = RemoveGatherAsync(BufferInput1);
+	c = ResizeString(a,20);
+	d = ReverseFind(a,"d",0);
+	d = ReverseFindNoCase(a,"d",0); 
+	a = _oem_break|_oem_cd|_oem_cts|_oem_dtr|_oem_long_break|_oem_max_string|_oem_pacing|	_oem_rts|_oem_str_in|_oem_str_out;
+	b = on;
+	c  = off;
+}
+
+FUNCTION ArrayOperators()
+{
+	SetArray(g,3);
+	c = GetNumArrayCols(b);
+	c = GetNumArrayRows(b);
+	c = GetNumStructureArrayCols(testStruct);
+	e = ResizeArray(g,20);
+	e = ResizeStructureArray(testStruct,20);
+}
+
+FUNCTION CrestronClases()
+{
+	//variable.object.other	punctuation.accessor	entity.name.function.invocation
+	cEventClass				.						Close();
+	h = cEventClass.Reset();
+	h = cEventClass.Set();
+	h = cEventClass.Wait(10);
+	
+	cMutexClass.Close();
+	cMutexClass.ReleaseMutex();
+	h = cMutexClass.WaitForMutex();
+}
+
+FUNCTION DataConversionFunctions(){
+	a = ATOI("Hello");
+	c = ATOL("Hello");
+	b = Chr(10);
+	a = HexToI("ABCD");
+	c = HexToL("ABCDabcd");
+	d = HexToSI ("ABCD");
+	e = HexToSL ("ABCDabcd");
+	b = ITOA(25);
+	b = ITOHex(14);
+	b = LtoA(10000000);
+	b = LtoHex(10000000); 
+}
+
+Function RandomFunctions()
+{
+	INTEGER a;
+	SEED(10);
+	a = RND();
+	a = RANDOM(5,10);
+}
+
+
+EVENT TcpClient
+{
+	SIGNED_INTEGER status;
+	SIGNED_LONG_INTEGER a;
+	STRING soUDP_Rx[10];
+	STRING siUDP_Tx[10];
+	STRING S[300];
+	status = SocketConnectClient (TcpClient, "1.1.1.1", 20, 1);
+	status = SocketDisconnectClient (TcpClient);
+	status = SocketServerStartListen(TcpServer, S, 20);
+	status = SocketServerStopListen(TcpServer);
+	status = SocketUDP_Enable(UdpSocket, "1.1.1.1", 20);
+	status = SocketUDP_Disable (UdpSocket);
+	status = SocketSend(TcpClient, siUDP_Tx );
+	a = SocketGetPortNumber(TcpClient);
+	status = SocketGetRemoteIPAddress(TcpClient, S);
+	status = SocketGetAddressAsRequested(TcpClient, S);
+	status = SocketIsBroadcast(UdpSocket);
+	status = SocketIsMulticast(UdpSocket);
+	if (Len(UdpSocket.SocketRxBuf) < 256)
+	Print("Rx: %s", UdpSocket.SocketRxBuf);
+	soUDP_Rx = UdpSocket.SocketRxBuf;
+	ClearBuffer(UdpSocket.SocketRxBuf);
+	status = SocketSend(UdpSocket, siUDP_Tx );
+}
+
+
+
+SOCKETCONNECT TcpClient
+{
+}
+
+
+
+SOCKETDISCONNECT TcpClient
+{
+	// TODO:  Add code here
+}
+
+
+
+SOCKETRECEIVE TcpClient
+{
+	signed_integer iStatus;
+	STRING siClientTx[10];
+	STRING soClientRx[10];
+	STRING S[300];
+	iStatus = SocketGetSenderIPAddress(UdpSocket, S);
+	iStatus = TcpClient.SocketStatus;
+	soClientRx = TcpClient.SocketRxBuf;
+}
+
+
+
+SOCKETSTATUS TcpClient
+{
+	signed_integer iStatus;
+	iStatus = SocketGetStatus();
+}
+
+
+
+Function Main()
+{
+	RegisterDelegate(objectName, delegateName, callbackName);
+	RegisterEvent(objectInstName, eventName, callbackFuncName);
+	
+	eventhandler callbackFuncName(senderClassType sender,argsType args)
+	{
+		//code here;
+	}
+	
+	callback function callbackName(argsType args)
+	{
+		//todo: code;
+	}
+	WaitForInitializationComplete();
+}
+
+Func
+
+Function Test1(byRef integer Param1, byval integer Param2, ReadOnlyByRef integer Param3)
+{}
+
+eventhandler test (class myclass, EventArgs myargs){
+	test
+}
+
+eventhandler test (class myclass, myargs myargs){
+	test
+}
+
+callback SIGNED_INTEGER_FUNCTION MyGatherCallback(GatherEventArgs Args)
+{
+	STRING a[20];
+	SIGNED_INTEGER c;
+	
+	a=Args.RxString;
+	c = Args.Results;
+	RearmGatherAsync(Args.Input);
+	Test2.Test1(one, "2", three[1])
+	Test("test %d %s %u %s %x %X %ld %lu %% %adf");
+	Test("test %1d %12s %3u %32s %x %X %2ld %1lu %%");
+	Test("test %133d %1233s %3333u %32333s %33x %33X %2333ld %3331lu %%");
+	// Test("\n \t \b \r \f\ \a \\ \' \" \x23 ");
+}
+
+
+
+Function StringParsingAndManipulations()
+{
+	STRING a[10],b[10];
+	INTEGER d;
+	SIGNED_INTEGER c;
+	
+	return (a+5);
+	return a*5;
+}
+
+FUNCTION SystemControl()
+{
+	Pulse(5,DigitalOutput1);
+	PROCESSLOGIC();
+	DELAY(6);
+	WaitForInitializationComplete();
+}
+
+FUNCTION SystemInterfaceing()
+{
+	INTEGER a;
+	STRING b[10];
+	
+	b=GetModelNumber();
+	a=GetSeries();
+	b=GetSymbolInstanceName();
+	b=GetSymbolReferenceName();
+	a=IsSignalDefined(DigitalInput2[2]);
+	b=MakeProgramFilename("\\a");
+	SendCresnetPacket("\xFF");
+	SendPacketToCPU("\xFF");
+}
+
+FUNCTION WaitEvents()
+{
+	
+	CANCELWAIT(MyWait);
+	CANCELALLWAIT();
+	PAUSEWAIT(MyWait);
+	RESUMEALLWAIT();
+	PAUSEALLWAIT();
+	RETIMEWAIT(5,MyWait);
+	RESUMEWAIT(MyWait);
+	WAIT(10,MyWait)
+	{
+		PRINT("");
+	}
+}
+
+FUNCTION MathematicalFunctions()
+{
+	INTEGER a,b,c;
+	
+	a = SMIN(a,b);
+	a = SMAX(a,b);
+	a = MULDIV(a,b,c);
+	a = MIN(a,b);
+	a = MAX(a,b);
+	a = ABS(a);
+}
+
+FUNCTION StringFormatting()
+{
+	STRING a[10],b[10];
+	INTEGER c;
+	
+	MakeString(a,"Hello World %s",a);
+	Print("Hello World %s",a);
+	a = "Hello"+"Worlds";
+	If(a=b){Print("");};
+	If(a<>b){Print("");};
+	If(a<b){Print("");};
+	If(a>b){Print("");};
+	Trace("Hello World %s",a); 
+	BranchingFunctions(test,test);
+}
+
+Function BranchingFunctions()
+{
+	INTEGER a;
+	STRING b[10];
+	
+	CSWITCH (a)
+	{
+		CASE (1):
+		{
+			Print("");
+			break;
+		}
+		CASE (2):
+		{
+			Print("");
+			break;
+		}
+		DEFAULT:
+		{
+			Print("");
+			break;
+		}
+	}
+	
+	SWITCH (a)
+	{
+		CASE (1):
+		{
+			Print("");
+		}
+		CASE (2):
+		{
+			Print("");
+		}
+		DEFAULT:
+		{
+			Print("");
+		}
+	}
+}
+
+FUNCTION BitAndByteFunctions()
+{
+	INTEGER a,b;
+	STRING c[10];
+	LONG_INTEGER d;
+	
+	a= Bit("abc",1,2);
+	a= Byte("abc",1);
+	a= High(a);
+	a= HighWord(d);
+	a= Low(a);
+	a= LowWord(d);
+	a= LowerChar(12);
+	a= UpperChar(12);
+	a= SetByte(c,1,2);
+}
+
+Function FileFunctions()
+{
+	a = IsNull(cMutexClass);
+	
+	a=StartFileOperations();
+	nFileHandle = FileOpen ( "\\CF0\\MyFile", _O_WRONLY | _O_TEXT );
+	nNumWritten=FileWrite( nFileHandle, sBuf, 500 );
+	a = FileClose( nFileHandle );
+	a = EndFileOperations();
+	a = FileEOF ( nFileHandle ) ;
+	a = SEEK_SET | SEEK_CUR | SEEK_END;
+	a = FileSeek( nFileHandle, 0, SEEK_SET) 
+	a = FileClose ( nFileHandle ) ;
+	a = FileDelete ( "\\CF0\\MyFile" ) 
+	nFileHandle = FileOpen ( "\\CF0\\MyFile", _O_RDONLY | _O_TEXT);
+	a = FileBOF ( nFileHandle ) 
+	a = FileRead(nFileHandle, sBuf, 4096)
+	iErrorCode = ReadString( nFileHandle, s2);
+	iErrorCode = WriteStringArray( nFileHandle, s);
+	iErrorCode = ReadStringArray( nFileHandle, s);
+	iErrorCode = WriteSignedLongInteger(nFileHandle, sli);
+	iErrorCode = WriteLongInteger(nFileHandle, li);
+	iErrorCode = WriteInteger(nFileHandle, i);
+	iErrorCode = WriteString( nFileHandle, s2);
+	iErrorCode = ReadSignedLongIntegerArray(nFileHandle, sliArray);
+	iErrorCode = ReadIntegerArray(nFileHandle, iArray);
+	iErrorCode = ReadSignedIntegerArray(nFileHandle, isArray);
+	iErrorCode = ReadLongIntegerArray(nFileHandle, ilArray);
+	iErrorCode = ReadIntegerArray(nFileHandle, iArray);
+	iErrorCode = ReadSignedLongInteger(nFileHandle, sli);
+	iErrorCode = ReadSignedInteger(nFileHandle, si);
+	iErrorCode = ReadLongInteger(nFileHandle, li);
+	iErrorCode = ReadInteger(nFileHandle, i);
+	ReadStructure( nFileHandle, struct, nTotalBytesRead );
+	
+	a = WaitForNewDisk() 
+	a = FileDeleteShared ( "\\CF0\\MyFile" )
+	a = ARDONLY | AHIDDEN | ASYSTEM | AVOLUME | ADIRENT | ARCHIVE  ;      
+	a = CheckForNVRAMDisk() 
+	a = MakeDirectoryShared("NewDirect") 
+	a = RemoveDirectoryShared("\\CF0\\NewDirect") 
+	a = CheckForDisk () 
+	a = GetCurrentDirectory()
+	a = SetCurrentDirectory("\\CF0\\NewDirect")
+	a = RemoveDirectory("\\CF0\\NewDirect") 
+	a = MakeDirectory("NewDirect") 
+	a = FindFirst("*.dat", FileInfo );
+	a = IsVolume(FileInfo)
+	a = IsSystem(FileInfo)
+	a = IsReadOnly(FileInfo)
+
+	Found = FindNext(FileInfo);
+	a = IsDirectory(FileInfo)
+	a = IsHidden(FileInfo)
+	iErrorCode = WriteSignedIntegerArray(nFileHandle, isArray);
+	if (FindClose() < 0) 
+	a = _O_APPEND | _O_CREAT | _O_EXCL | _O_TRUNC | _O_TEXT | _O_BINARY | _O_RDONLY | _O_RDWR | _O_WRONLY;
+	s2 = FileInfo.Name;
+	a = FileInfo.iAttributes;
+	a = FileInfo.iTime;
+	a = FileInfo.iDate;
+	li = FileInfo.lSize;
+}
+
+FUNCTION TimeAndDateFunctions()
+{
+	a = Date(1);
+	a = Day();
+	a = FileDate(FileInfo, 1);
+	a = FileDay(FileInfo);
+	b = FileGetDateNum(FileInfo);
+	b = FileGetDayOfWeekNum(FileInfo);
+	b = FileGetHourNum(FileInfo);
+	b = FileGetMinutesNum(FileInfo);
+	b = FileGetMonthNum(FileInfo);
+	b = FileGetSecondsNum(FileInfo);
+	b = FileGetYearNum(FileInfo);
+	a = FileMonth(FileInfo);
+	a = FileTime(FileInfo);
+	c = GetDateNum();
+	c = GetDayOfWeekNum();
+	c = GetDst();
+	b = GetGmtOffset();
+	c = GetHourNum();
+	c = GetHSeconds();
+	c = GetMinutesNum();
+	c = GetMonthNum();
+	c = GetSecondsNum();
+	c = GetTicks();
+	c = GetYearNum();
+	a = Month();
+	SetClock(1,1,1);  //No Help?
+	SetDate(1,1,1);
+	b = SetGmtOffset(1);
+	a = Time();
+}
+
+FUNCTION SendMailFunctions()
+{
+	nErr = SendMail( "192.168.16.3",
+		"UserLogonName",
+		"UserLogonPassword",                   
+		"SenderEmailAddress@crestron.com",
+		"RecipientEmailAddress@crestron.com",
+		"ccEmailAddress@crestron.com",
+		"This is the subject",
+		"This is the message" );
+	nErr = SendMailWithAttachments( "192.168.16.3",
+		"UserLogonName",
+		"UserLogonPassword",                   
+		"SenderEmailAddress@crestron.com",
+		"RecipientEmailAddress@crestron.com",
+		"ccEmailAddress@crestron.com",
+		"This is the subject",
+		"This is the message",
+		2,
+		"\\CF0\\test.pdf;\\CF0\\test.img" );
+	nErr = SendMailAdvance( "192.168.16.3",
+		80,
+		"UserLogonName",
+		"UserLogonPassword",                   
+		"SenderEmailAddress@crestron.com",
+		"RecipientEmailAddress@crestron.com",
+		"ccEmailAddress@crestron.com",
+		"This is the subject",
+		"This is the message",
+		2,
+		"\\CF0\\test.pdf;\\CF0\\test.img" );
+}
+
+FUNCTION RampingFunctions()
+{
+	RAMP_INFO InputRampInfo, InputRampInfo2[3];
+	SIGNED_INTEGER status;
+	
+	InputRampInfo.rampLowerBound=0;
+	InputRampInfo.rampUpperBound=65535;
+	InputRampInfo.rampBaseValue=100000;
+	InputRampInfo.rampTargetValue=65535;
+	InputRampInfo.rampTransitionTime=500;
+	InputRampInfo.rampIsAbsolute=0;
+	InputRampInfo.rampIsRunnable=1;
+	
+	status = CreateRamp(AnalogOutput1,InputRampInfo);
+	status = StopRamp(AnalogOutput1);
+	status = IsRamping(AnalogOutput1) ;
+	status = GetRampInfo(AnalogOutput1,InputRampInfo) ;
+	status = CompareRampsByAttribute(AnalogOutput1,InputRampInfo);
+	status = CompareRampsByID (AnalogOutput1,4) ;
+	InitializeRampInfo(InputRampInfo);
+	InitializeRampInfoArray(InputRampInfo2) ;
+
+}
+
+FUNCTION TryAndCatchHandling()
+{
+	TRY
+	{
+		intArr[1] = 1;
+		Print( "array index set" );
+	}
+	CATCH
+	{
+		Print( "Exception thrown: %s", GetExceptionMessage() );
+	}
+}

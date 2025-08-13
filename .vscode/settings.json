@@ -1,0 +1,6 @@
+{
+    "plantuml.diagramsRoot": "csharp syntax  mindmap",
+    "plantuml.exportFormat": "svg",
+    "plantuml.exportOutDir": "csharp syntax  mindmap",
+    "plantuml.exportMapFile": true
+}

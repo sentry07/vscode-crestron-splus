@@ -1,0 +1,65 @@
+@startuml ObjectTraversal
+
+start
+note left
+    # Object Traversal
+
+    Return Object Type of last object in a chained syntax for autocomplete or syntax helper to consume
+
+    Given
+    * Object1.
+    * Object1.Field1.
+    * Object1.Field1.Field2.
+
+    Where object 1 could be a class, structure, enum or any other object or instance of an object that produces a child,
+    and Field 1 is any other object or instance of an object that also produces a child. after (. or closing parenthesis ) propose members of last field data type.
+
+    * struct1.
+    ** struct1Inst -> struct1Type
+    * struct1.struct2.
+    ** struct1Instance -> struct1Type.struct2Instance -> struct2Type
+    * class1.class2.property.
+    *** class1Instance -> class1Type.class2Instance -> class2Type.property -> nothing
+    * enum.
+    ** enumType:EnumMembers (notice there is no autocomplete of a enumInstance)
+    * class1.struct1.struct2.
+    ** class1Instance -> class1Type.struct1Instance -> struct1Instance -> struct1Type.struct2Instance -> struct2Type
+    * class1.function().class.
+    ** struct1Instance -> classInstance.function -> functionReturnType.classInstance -> classType
+    * class1.function().
+    ** struct1Instance -> classInstance.function -> functionReturnType
+
+    pseudoCode:
+
+    extract keywords (disregard parenthesis or square brackets) connected by dots.
+
+    Make instances to find a list of all Objects within scope
+        In Global scope, that would be nothing (this is where instances are declared)
+        Inside function and event that would be:
+            * global variables,
+            * local variables
+    
+    From first word find instance in Instances
+    Find object based on instance.dataType out of projects in scope
+
+    If no more words, return object
+
+    Select next word, and make new instances to find the children of the found object
+
+    Repeat until no more words
+
+
+end note
+:Tokens[] = ;
+:scopeObjects = getObjectAtPosition(position);
+:instances = scopeObjects;
+repeat
+    :instance = instances.find(ch=>ch.name===currentToken);
+    :currentObject = scopeObjects.find(so => so.name == instance.name);
+    :instances = currentObject.children;
+    :currentToken = Tokens.Shift();
+repeat while (currentToken) is (!undefined)
+:return currentObject;
+
+
+@enduml

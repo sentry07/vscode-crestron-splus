@@ -1,5 +1,9 @@
 .vscode-test
 out/
 node_modules/
-# package-lock.json
+dist/
+coverage/
+package-lock.json
 *.vsix
+SPlsWork/
+*.ush

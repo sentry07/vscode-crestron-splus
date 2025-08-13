@@ -1,0 +1,66 @@
+@startuml
+start
+partition "startup"{
+    :document opens;
+    if (active document is simpl-plus) then (yes)
+        if (has ush) then (yes)
+            :get targets from ush;
+            :targets stored in extension
+            targets dictionary;
+        else (no)
+            :get targets from global/workspace
+            settings (can only be changed through
+            vs code settings);
+            :targets stored in extension
+            targets dictionary;
+        endif
+        :show targets in status bar;
+    else (no)
+        :clear targets status bar;
+        stop
+    endif
+}
+split
+partition "user changes targets"{
+    :user right clicks on status targets;
+    :shows quick picks;
+    :user changes targets;
+    :targets stored in extension
+    targets dictionary;
+    :show targets in status bar;
+}
+split again
+partition "user changes to another document"{
+    if (document is usp) then (yes)
+        :load targets from dictionary;
+        :show targets in status bar;
+    else (no)
+        :clear targets status bar;
+        stop
+    endif
+}
+split again
+
+partition "user changes targets through VS Code settings"{
+    :user changes targets through
+    settings;
+    :targets stored in workspace or global
+    as per users choice through VS;
+    :No changes to active documents;
+}
+end split
+partition "compiling"{
+    if (compile) then (through F12)
+        :create built task from dictionary;
+        :run task;
+    else (through ctrl-shift-b)
+        :create built task from selection;
+        :run task;
+    endif
+}
+partition "document closes"{
+    :user closes document;
+    :updates status bar based on new active document;
+    :clears dictionary for that document;
+}
+@enduml
