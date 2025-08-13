@@ -1,34 +1,58 @@
 {
-    "comments": {
-        // symbol used for single line comment. Remove this entry if your language does not support line comments
-        "lineComment": "//",
-        // symbols used for start and end a block comment. Remove this entry if your language does not support block comments
-        "blockComment": [ "/*", "*/" ]
-    },
-    // symbols used as brackets
-    "brackets": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"]
-    ],
-    // symbols that are auto closed when typing
-    "autoClosingPairs": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"],
-        ["\"", "\""],
-        ["'", "'"]
-    ],
-    // symbols that that can be used to surround a selection
-    "surroundingPairs": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"],
-        ["\"", "\""],
-        ["'", "'"]
-    ],
-    "indentationRules": {
-		"increaseIndentPattern": "^((?!\\/\\/|['\\\"]).)*(\\{[^{}\\v]*|\\([^()\\*\\v]*|\\[[^\\[\\]\\v]*)$",
-		"decreaseIndentPattern": "^((?!.*?\\/\\*).*\\*\\/)?\\s*[\\}\\]\\)].*$"
-	}
+  //https://code.visualstudio.com/api/language-extensions/language-configuration-guide
+  "comments": {
+    // symbol used for single line comment. Remove this entry if your language does not support line comments
+    "lineComment": "//",
+    // symbols used for start and end a block comment. Remove this entry if your language does not support block comments
+    "blockComment": ["/*", "*/"]
+  },
+  // symbols to be highlighted with its matching pair, when selected
+  //https://code.visualstudio.com/api/language-extensions/language-configuration-guide#brackets-definition
+  "brackets": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"]
+  ],
+  // symbols that are auto closed when typing the first one
+  //https://code.visualstudio.com/api/language-extensions/language-configuration-guide#autoclosing
+  "autoClosingPairs": [
+    { "open": "{", "close": "}", "notIn": ["comment"] },
+    { "open": "[", "close": "]", "notIn": ["comment"] },
+    { "open": "(", "close": ")", "notIn": ["comment"] },
+    { "open": "\"", "close": "\"", "notIn": ["string"] },
+    { "open": "/*", "close": "*/", "notIn": ["string"] },
+    { "open": "'", "close": "'", "notIn": ["string", "comment"] }
+  ],
+  // allows auto closing pairs before symbols below
+  //https://code.visualstudio.com/api/language-extensions/language-configuration-guide#autoclosing-before
+  "autoCloseBefore": ";:.,=}])>` \n\t",
+  // symbols that that can be used to auto surround a selection
+  //https://code.visualstudio.com/api/language-extensions/language-configuration-guide#autosurrounding
+  "surroundingPairs": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    ["\"", "\""],
+    ["'", "'"]
+  ],
+  //adds region folding support for the language
+  "folding": {
+    "markers": {
+      "start": "^\\s*//\\s*#?Region\\b",
+      "end": "^\\s*//\\s*#?EndRegion\\b"
+    }
+  },
+  //First and second matching group will match handlebars {{ or }}.
+  //Third matching group will match positive or negative numbers with optional word character following the decimal digits (-123.45abc)/
+  //Fourth matching group will match any non-whitespace character except these symbols: ^`~!@#%^&*()-=+[{]}\|;:'",.<>/?']
+  //https://code.visualstudio.com/api/language-extensions/language-configuration-guide#word-pattern
+  "wordPattern": "(\\{\\{)|(\\}\\})|(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+  //match beginning of a block as defined by these symbols: {([ and match end of a block as defined by these symbols: })] 
+  // as long as they are not inside a comment ( // or /*) or string ( " or ' or \) or handlebars {{ or }}.
+  //when matched, vscode will increase the indentation of the next line
+  //https://code.visualstudio.com/api/language-extensions/language-configuration-guide#indentation-rules
+  "indentationRules": {
+    "increaseIndentPattern": "^((?!\\/\\/|['\\\"]|\\\\\\*|\\{\\{).)*(\\{[^{}\\v]*|\\([^()\\*\\v]*|\\[[^\\[\\]\\v]*)$",
+    "decreaseIndentPattern": "^((?!.*?\\/\\*|\\}\\}).*\\*\\/)?\\s*[\\}\\]\\)].*$"
+  }
 }

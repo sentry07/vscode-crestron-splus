@@ -1,426 +1,588 @@
 {
-    "digital_input": 
-    {
-        "prefix": "digital_input",
-        "body": "digital_input ${0:Name};"
-    },
-    "digital_output": 
-    {
-        "prefix": "digital_output",
-        "body": "digital_output ${0:Name};"
-    },
-    "analog_input": 
-    {
-        "prefix": "analog_input",
-        "body": "analog_input ${0:Name};"
-    },
-    "analog_output": 
-    {
-        "prefix": "analog_output",
-        "body": "analog_output ${0:Name};"
-    },
-    "string_input": 
-    {
-        "prefix": "string_input",
-        "body": "string_input ${1:Name}[${2:stringSize}];"
-    },
-    "string_output": 
-    {
-        "prefix": "string_output",
-        "body": "string_output ${0:Name};"
-    },
-    "push": 
-    {
-        "prefix": "push",
-        "body":
-        [   
-            "push ${1:DigitalInput}",
-            "{",
-                "\t${0://code here}",
-            "}"
-        ]
-    },
-    "release": 
-    {
-        "prefix": "release",
-        "body":
-        [ 
-            "release ${1:DigitalInput}",
-            "{",
-                "\t${0://code here}",
-            "}"
-        ]
-    },
-    "change": 
-    {
-        "prefix": "change",
-        "body":
-        [ 
-            "change ${1:StringOrAnalogInput}",
-            "{",
-                "\t${0://code here}",
-            "}"
-        ]
-    },
-    "integer_parameter": 
-    {
-        "prefix": "integer_parameter",
-        "body": "integer_parameter ${0:Name};"
-    },
-    "string_parameter": 
-    {
-        "prefix": "string_parameter",
-        "body": "string_parameter ${0:Name};"
-    },
-    "trace": 
-    {
-        "prefix": "trace",
-        "body": "trace(\"${1:string}\",${2:args});\r\n$0"
-    },
-    "makestring":
-    {
-        "prefix": "makestring",
-        "body": "makestring(${1:destinationVariable},\"${2:string}\",${3:args});\r\n$0"
-    },
-    "find":
-    {
-        "prefix": "find",
-        "body": "find(\"${1:match_string}\",${2:source_string})"
-    },
-    "mid":
-    {
-        "prefix": "mid",
-        "body": "mid(${1:source},${2:start},${3:number})"
-    },
-    "delay": 
-    {
-        "prefix": "delay",
-        "body": "delay(${1:hundredthsOfaSecond});"
-    },
-    "lower": 
-    {
-        "prefix": "lower",
-        "body": "lower(${1:stringVariable})"
-    },
-    "upper": 
-    {
-        "prefix": "upper",
-        "body": "upper(${1:stringVariable})"
-    },
-    "itoa": 
-    {
-        "prefix": "itoa",
-        "body": "itoa(${1:integerVariable})"
-    },
-    "atoi": 
-    {
-        "prefix": "atoi",
-        "body": "atoi(${1:stringVariable})"
-    },
-    "chr": 
-    {
-        "prefix": "chr",
-        "body": "chr(${1:integerCode})",
-        "description": "Takes the integer value specified and returns the corresponding ASCII character as a one-byte string."
-    },
-    "pulse": 
-    {
-        "prefix": "pulse",
-        "body": "pulse(${1:hundredthsOfaSecond}, ${2:digitalOutput});\r\n$0"
-    },
-    "for":
-    {
-        "prefix": "for",
-        "body": 
-        [
-            "for(${1:variableName} = ${2:value} to ${3:limit})",
-            "{",
-            "\t${0://code here}",
-            "}"
-        ]
-    },
-    "switch":
-    {
-        "prefix": "switch",
-        "body": 
-        [
-            "switch(${1:expression})",
-            "{",
-            "\tcase (${2:value}):",
-            "\t{",
-            "\t\t${0://code here}",
-            "\t}",
-            "\tdefault:",
-            "\t{",
-            "\t\t",
-            "\t}",
-            "}"
-        ]
-    },
-    "case":
-    {
-        "prefix": "case",
-        "body":
-        [
-            "case (${1:value}):",
-            "{",
-            "\t${0://code here}",
-            "}"
-        ]
-    },
-    "if":
-    {
-        "prefix": "if",
-        "body": 
-        [
-            "if(${1:expression})",
-            "{",
-            "\t${0://code}",
-            "}"
-        ]
-    },
-    "else":
-    {
-        "prefix": "else",
-        "body": 
-        [
-            "else",
-            "{",
-            "\t${0://code}",
-            "}"
-        ]
-    },
-    "while":
-    {
-        "prefix": "while",
-        "body": 
-        [
-            "while(${1:expression})",
-            "{",
-            "\t${0://code}",
-            "}"
-        ]
-    },
-    "dountil":
-    {
-        "prefix": "dountil",
-        "body": 
-        [
-            "do",
-            "{",
-            "\t${0://code}",
-            "}",
-            "until(${1:expression});"
-        ]
-    },
-    "function":
-    {
-        "prefix": "function",
-        "body": 
-        [
-            "function ${1:name}(${2:args})",
-            "{",
-            "\t${0://code}",
-            "}"
-        ]
-    },
-    "callback_function":{
-        "prefix": "callback_function",
-        "body": 
-        [
-            "callback function ${1:name}(${2:args})",
-            "{",
-            "\t${0://code}",
-            "}"
-        ]
-    },
-    "string_function":
-    {
-        "prefix": "string_function",
-        "body": 
-        [
-            "string_function ${1:name}(${2:args})",
-            "{",
-            "\tstring ${3:returnValue}[255];",
-            "\t${0://code}",
-            "\t",
-            "\treturn ($3);",
-            "}"
-        ]
-    },
-    "callback_string_function":
-    {
-        "prefix": "callback_string_function",
-        "body": 
-        [
-            "callback string_function ${1:name}(${2:args})",
-            "{",
-            "\tstring ${3:returnValue}[255];",
-            "\t${0://code}",
-            "\t",
-            "\treturn ($3);",
-            "}"
-        ]
-    },
-    "integer_function":
-    {
-        "prefix": "integer_function",
-        "body": 
-        [
-            "integer_function ${1:name}(${2:args})",
-            "{",
-            "\tinteger ${3:returnValue};",
-            "\t${0://code}",
-            "\t",
-            "\treturn ($3);",
-            "}"
-        ]
-    },
-    "callback_integer_function":
-    {
-        "prefix": "callback_integer_function",
-        "body": 
-        [
-            "callback integer_function ${1:name}(${2:args})",
-            "{",
-            "\tinteger ${3:returnValue};",
-            "\t${0://code}",
-            "\t",
-            "\treturn ($3);",
-            "}"
-        ]
-    },
-    "GetLastModifiedArrayIndex": {
-        "prefix":"getlast",
-        "body":"GetLastModifiedArrayIndex();\r\n",
-        "description": "Returns last modified array index"
-    },
-    "WaitForInitializationComplete": {
-        "prefix":"waitforinit",
-        "body":"WaitForInitializationComplete();\r\n",
-        "description": "Delays running code in Main() function until program is initialized"
-    },
-    "RegisterDelegate": {
-        "prefix":"registerdelegate",
-        "body":
-        [
-            "RegisterDelegate(${1:objectName}, ${2:delegateName}, ${3:callbackName});",
-            "",
-            "callback function ${3:callbackName}(${4:argsType} args)",
-            "{",
-            "\t${0://todo: code};",
-            "}"
-        ],
-        "description": "Register Delegates and generate callback function."
-    },
-    "RegisterEvent":{
-        "prefix":"registerevent",
-        "body":
-        [
-            "RegisterEvent(${1:objectInstName}, ${2:eventName}, ${3:callbackFuncName});",
-            "",
-            "eventhandler ${3:callbackFuncName}(${4:senderClassType} sender,${5:argsType} args)",
-            "{",
-            "\t${0://code here};",
-            "}"
-        ],
-        "description":"Register Events and generate eventHandler function."
-    },
-    "EventHandler": {
-        "prefix": "eventhandler",
-        "body":
-        [
-            "eventhandler ${1:callbackFuncName}(${2:senderClassType} sender,${3:argsType} args)",
-            "{",
-            "\t${0://code here};",
-            "}"
-        ]
-    },
-    "Define_Constant": {
-        "prefix":"#define_constant",
-        "body": "#DEFINE_CONSTANT ${1:Name} ${2:Value}\r\n$0"
-    },
-    "IncludePath": {
-        "prefix":"#includepath",
-        "body": "#INCLUDEPATH \"${1:Name}\"\r\n$0"
-    },
-    "UserLibrary": {
-        "prefix":"#userlibrary",
-        "body": "#USER_LIBRARY \"${1:Name}\"\r\n$0"
-    },
-    "UserSimplSharpLibrary": {
-        "prefix":"#user_simplsharp_library",
-        "body": "#USER_SIMPLSHARP_LIBRARY \"${1:Name}\"\r\n$0"
-    },
-    "Help Block": {
-        "prefix":"#help_begin",
-        "body":
-        [
-            "#HELP_BEGIN",
-            "",
-            "#HELP_END",
-            ""
-        ]
-    },
-    "Comment Block": {
-        "prefix": "__comment",
-        "body":
-        [
-            "// ---------------------------------------------------------------------------------------------------------------------",
-            "// $1",
-            "// ---------------------------------------------------------------------------------------------------------------------",
-            "$0"
-        ]
-    },
-    "Parameter Properties": {
-        "prefix": "#begin_parameter_properties",
-        "body":
-        [
-            "#BEGIN_PARAMETER_PROPERTIES ${1:Parameter}",
-            "   $0",
-            "#END_PARAMETER_PROPERTIES"
-        ]
-    },
-    "Parameter Property: Valid Units": {
-        "prefix": "propValidUnits",
-        "body": "propValidUnits = ${0};\t\t// unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks"
-    },
-    "Parameter Property: Default Unit": {
-        "prefix": "propDefaultUnit",
-        "body": "propDefaultUnit = ${0};\t\t// unitString, unitDecimal, unitHex, unitPercent, unitCharacter, unitTime, unitTicks"
-    },
-    "Parameter Property: Bounds": {
-        "prefix": "propBounds",
-        "body": "propBounds = ${1:Lower_Bound},${2:Upper_Bound};"
-    },
-    "Parameter Property: Default Value": {
-        "prefix": "propDefaultValue",
-        "body": "propDefaultValue = ${1:value};"
-    },
-    "Parameter Property: List": {
-        "prefix": "propList",
-        "body": "propList = $0;\t\t// {\"value\", \"label\"}, {\"value\", \"label\"};"
-    },
-    "Parameter Property: Short Description": {
-        "prefix": "propShortDescription",
-        "body": "propShortDescription = $0;"
-    },
-    "Parameter Property: Full Description": {
-        "prefix": "#BEGIN_PROP_FULL_DESCRIPTION",
-        "body":
-        [
-            "#BEGIN_PROP_FULL_DESCRIPTION",
-            "\t$0",
-            "#END_PROP_FULL_DESCRIPTION"
-        ]
-    },
-    "Parameter Property: Notes": {
-        "prefix": "#BEGIN_PROP_NOTES",
-        "body":
-        [
-            "#BEGIN_PROP_NOTES",
-            "\t$0",
-            "#END_PROP_NOTES"
-        ]
-    }
+  "#Region": {
+    "prefix": ["//#Region"],
+    "body": ["//#Region ${1:Region_Name}", "\t$0", "//#EndRegion"],
+    "description": "The #Region directive allows you to specify a block of code that you can expand or collapse when using the outlining feature of the code editor."
+  },
+  "For": {
+    "prefix": ["For"],
+    "body": ["For (${1:INTEGER} = ${2:0} To ${3:10}) {", "\t${0://code here}", "}"],
+    "description": "The FOR loop is used to execute a block of code a specified number of times."
+  },
+  "Push": {
+    "prefix": ["Push"],
+    "body": ["Push ${1:digital_input}{", "\t${0://code here}", "}"],
+    "description": "PUSH is executed when a DIGITAL_INPUT transitions from low to high."
+  },
+  "Release": {
+    "prefix": ["Release"],
+    "body": ["Release ${1:digital_input}{", "\t${0://code here}", "}"],
+    "description": "RELEASE is executed when a DIGITAL_INPUT transitions from high to low."
+  },
+  "Change": {
+    "prefix": ["Change"],
+    "body": [
+      "Change ${1:string_input or analog_input}{",
+      "\t${0://code here}",
+      "}"
+    ],
+    "description": "The CHANGE event is called when a DIGITAL_INPUT transitions from low to high or high to low, or when an ANALOG_INPUT or STRING_INPUT changes."
+  },
+  "%s": {
+    "prefix": ["%s"],
+    "body": ["%s $0"],
+    "description": "s: Specifies a BUFFER_INPUT, STRING, or STRING_INPUT variable."
+  },
+  "%d": {
+    "prefix": ["%d"],
+    "body": ["%d $0"],
+    "description": "d: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as a signed decimal value."
+  },
+  "%u": {
+    "prefix": ["%u"],
+    "body": ["%u $0"],
+    "description": "u: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as an unsigned decimal value."
+  },
+  "%x": {
+    "prefix": ["%x"],
+    "body": ["%x $0"],
+    "description": "x: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as a lowercase hexadecimal number."
+  },
+  "%X": {
+    "prefix": ["%X"],
+    "body": ["%X $0"],
+    "description": "X: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as an uppercase hexadecimal number."
+  },
+  "%l": {
+    "prefix": ["%l"],
+    "body": ["%l $0"],
+    "description": "l: Specifies a LONG_INTEGER or UNSIGNED_LONG_INTEGER will follow, and is followed by d, u, x, or X."
+  },
+  "%": {
+    "prefix": ["%"],
+    "body": ["% $0"],
+    "description": "%: Prints a % sign (i.e. use %% to print a % sign)."
+  },
+  "%ld": {
+    "prefix": ["%ld"],
+    "body": ["%ld $0"],
+    "description": "%ld: Specifies a LONG_INTEGER to be printed as a signed decimal value."
+  },
+  "%c": {
+    "prefix": ["%c"],
+    "body": ["%c $0"],
+    "description": "%c: Specifies a printable ASCII character to be printed."
+  },
+  "Switch": {
+    "prefix": ["Switch"],
+    "body": [
+      "Switch (${1:EXPRESSION}){",
+      "\tCase (${2:VALUE}):{",
+      "\t\t${3://code here}",
+      "\t}",
+      "\t${0://type CASE to add a new case statement}",
+      "\tDefault:{",
+      "\t\t",
+      "\t}",
+      "}"
+    ],
+    "description": "SWITCH is a more direct method of writing a complex IF-ELSE-IF statement. In the SWITCH, if <expression> is equal to <expression1>, <statements1> is executed. If <expression> is equal to <expression2>, <statements2> is executed. This same method would apply to as many CASE statements as are listed in the body of the SWITCH. Note that if any of the <statements> blocks are only a single statement, the { and } characters on the CASE may be omitted."
+  },
+  "Case": {
+    "prefix": ["Case"],
+    "body": ["Case (${1:VALUE}):{", "\t${0://code here}", "}"]
+  },
+  "If": {
+    "prefix": ["If"],
+    "body": ["If (${1:EXPRESSION}){", "\t${0://code}", "}"],
+    "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
+  },
+  "Else": {
+    "prefix": ["Else"],
+    "body": ["Else {", "\t${0://code}", "}"],
+    "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
+  },
+  "Else If": {
+    "prefix": ["Else If"],
+    "body": ["Else If (${1:EXPRESSION}){", "\t${0://code}", "}"],
+    "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
+  },
+  "While": {
+    "prefix": ["While"],
+    "body": ["While (${1:EXPRESSION}){", "\t${0://code}", "}"],
+    "description": "This loop performs a set of <statements> as long as <expression> does not evaluate to zero. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that depending on <expression>, the body of the loop may never be executed. Note that <expression> is evaluated at the beginning of the loop."
+  },
+  "Do - Until": {
+    "prefix": ["Do", "Until", "DoUntil"],
+    "body": ["Do {", "\t${0://code}", "}", "Until (${1:EXPRESSION});"],
+    "description": "This loop performs a set of <statements> at least one time and will terminate when <expression> evaluates to true. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that <expression> is evaluated each time through the loop."
+  },
+  "Parameter Property: Valid Units": {
+    "prefix": ["PropValidUnits"],
+    "body": [
+      "PropValidUnits = ${0};\t\t// unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks"
+    ],
+    "description": ""
+  },
+  "Parameter Property: Default Unit": {
+    "prefix": ["PropDefaultUnit"],
+    "body": [
+      "PropDefaultUnit = ${0};\t\t// unitString, unitDecimal, unitHex, unitPercent, unitCharacter, unitTime, unitTicks"
+    ],
+    "description": ""
+  },
+  "Parameter Property: Default Value": {
+    "prefix": ["PropDefaultValue"],
+    "body": ["PropDefaultValue = ${1:value};"],
+    "description": ""
+  },
+  "Parameter Property: List": {
+    "prefix": ["PropList"],
+    "body": [
+      "PropList = $0;\t\t// {\"value\", \"label\"}, {\"value\", \"label\"};"
+    ],
+    "description": ""
+  },
+  "Parameter Property: Bounds": {
+    "prefix": ["PropBounds"],
+    "body": ["PropBounds = ${1:Lower_Bound},${2:Upper_Bound};"],
+    "description": ""
+  },
+  "Parameter Property: Short Description": {
+    "prefix": ["PropShortDescription"],
+    "body": ["PropShortDescription = $0;"],
+    "description": ""
+  },
+  "Parameter Property: Full Description": {
+    "prefix": ["#Begin_Prop_Full_Description"],
+    "body": [
+      "#Begin_Prop_Full_Description",
+      "\t$0",
+      "#End_Prop_Full_Description"
+    ],
+    "description": ""
+  },
+  "Parameter Property: Notes": {
+    "prefix": ["#Begin_Prop_Notes"],
+    "body": ["#Begin_Prop_Notes", "\t$0", "#End_Prop_Notes"],
+    "description": ""
+  },
+  "#Analog_Serial_Expand": {
+    "prefix": ["@CD", "#Analog_Serial_Expand"],
+    "body": [
+      "#Analog_Serial_Expand ${1|SEPARATELY //This is the default value and allows for expansion of both inputs and outputs in no particular order on a given symbol,OUTPUTSWITHPARAMS //This allows a single input to be expanded into a number of outputs,INPUTSWITHOUTPUTS //This allows the combined expansion of inputs and outputs If you add an input an output is also automatically added,INPUTSWITHPARAMS //This allows the expansion of the number of inputs for a single output,ALLWITHANY //This allows for the expansion of both inputs and outputs but unlike InputWithOutputs the relationship between inputs and outputs doesn't have to be one to one,PWITHIXORO //This allows for the expansion of either inputs or outputs|}\n$0"
+    ],
+    "description": "Define a CONSTANT_VALUE that will be substituted anywhere in the current source file where CONSTANT_NAME is used."
+  },
+  "#Begin_Parameter_Properties": {
+    "prefix": ["@A", "#Begin_Parameter_Properties", "PARAMETER_PROPERTIES"],
+    "body": [
+      "#Begin_Parameter_Properties ${1:PARAM_VARIABLE} ${2:[PARAM_VARIABLE]}",
+      "\t$0",
+      "#End_Parameter_Properties"
+    ],
+    "description": ""
+  },
+  "#Help_Begin ... #Help_End": {
+    "prefix": ["@FILL", "#Help_Begin", "#Help_End"],
+    "body": ["#Help_Begin", "\t$0", "#Help_End"],
+    "description": "The #Help_Begin, #Help_End pair makes it easier to create help since each line does not need a separate #Help directive."
+  },
+  "#If_Defined ... #endif": {
+    "prefix": ["@FILL", "#If_Defined", "#endif"],
+    "body": ["#If_Defined ${1:CONSTANT_VARIABLE}", "\t$0", "#endif"],
+    "description": "Results in compilation of the <code> only if <constant_name> has previously been defined. This construct is generally useful for putting in code for debugging purposes, giving the ability to easily turn the debugging on and off during compilation."
+  },
+  "#If_Not_Defined ... #endif": {
+    "prefix": ["@FILL", "#If_Not_Defined", "#endif"],
+    "body": ["#If_Not_Defined ${1:CONSTANT_VARIABLE}", "\t$0", "#endif"],
+    "description": "Results in compilation of the <code> only if <constant_name> has not been  previously defined."
+  },
+  "#If_Series2": {
+    "prefix": ["@CD", "#If_Series2"],
+    "body": [
+      "#If_Series2",
+      "\tFUNCTION ${1:myFunc()}{",
+      "\t\t//CODE",
+      "\t}",
+      "#endif"
+    ],
+    "description": "Using this compiler directive will cause the compiler to only include the statements for the 2-series control system."
+  },
+  "#If_Series3": {
+    "prefix": ["@CD", "#If_Series3"],
+    "body": [
+      "#If_Series3",
+      "\tFUNCTION ${1:myFunc()}{",
+      "\t\t//CODE",
+      "\t}",
+      "#endif"
+    ],
+    "description": "Using this compiler directive will cause the compiler to only include the statements for the 3-series control system."
+  },
+  "#If_Series4": {
+    "prefix": ["@CD", "#If_Series4"],
+    "body": [
+      "#If_Series4",
+      "\tFUNCTION ${1:myFunc()}{",
+      "\t\t//CODE",
+      "\t}",
+      "#endif"
+    ],
+    "description": "Using this compiler directive will cause the compiler to only include the statements for the 4-series control system."
+  },
+  "Comment Block": {
+    "prefix": ["@FILL", "COMMENT"],
+    "body": [
+      "// ---------------------------------------------------------------------------------------------------------------------",
+      "// $1",
+      "// $2",
+      "// $3",
+      "// $4",
+      "// $5",
+      "// ---------------------------------------------------------------------------------------------------------------------",
+      "$0"
+    ]
+  },
+  "Parameter Property: Template": {
+    "prefix": ["@TEMP", "TEMPLATE_PARAMETER_PROPERTIES"],
+    "body": [
+      "#Begin_Parameter_Properties parameter_variable[, parameter_variable ...] ",
+      "\tPropValidUnits =\t\tunitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks;",
+      "\tPropDefaultUnit =\t\tunitString or unitDecimal or unitHex or unitPercent or unitCharacter or unitTime or unitTicks;",
+      "\tPropDefaultValue =\t\tdefault_value or \"default_value\";",
+      "\tPropList = \t\t\t\t{ \"value\",\"label\" },{ \"value\",\"label\" };",
+      "\tPropBounds = \t\t\tlower_bound , upper_bound;",
+      "\tPropShortDescription =\t\"status_bar_hint_text\";",
+      "",
+      "#Begin_Prop_Full_Description",
+      "line_1",
+      "...",
+      "line_n",
+      "#End_Prop_Full_Description",
+      "",
+      "#Begin_Prop_Notes",
+      "line_1",
+      "...",
+      "line_n",
+      "#End_Prop_Notes",
+      "",
+      "#End_Parameter_Properties"
+    ],
+    "description": ""
+  },
+  "Document Template: Full Template:": {
+    "prefix": ["@TEMP", "TEMPLATE_DOCUMENT_FULL"],
+    "body": [
+      "/*******************************************************************************************",
+      "  SIMPL+ Module Information",
+      "  (Fill in comments below)",
+      "*******************************************************************************************/",
+      "/*",
+      "Dealer Name:",
+      "System Name:",
+      "System Number:",
+      "Programmer:",
+      "Comments:",
+      "*/",
+      "",
+      "/*******************************************************************************************",
+      "  Compiler Directives",
+      "  (Uncomment and declare compiler directives as needed)",
+      "*******************************************************************************************/",
+      "// #ENABLE_DYNAMIC",
+      "// #SYMBOL_NAME \"\"",
+      "// #HINT \"\"",
+      "// #DEFINE_CONSTANT",
+      "// #CATEGORY \"\" ",
+      "// #PRINT_TO_TRACE",
+      "// #DIGITAL_EXPAND ",
+      "// #ANALOG_SERIAL_EXPAND ",
+      "// #OUTPUT_SHIFT ",
+      "// #HELP_PDF_FILE \"\"",
+      "#DEFAULT_VOLATILE",
+      "#ENABLE_STACK_CHECKING",
+      "#ENABLE_TRACE",
+      "// #ENCODING_ASCII",
+      "// #ENCODING_UTF16",
+      "// #ENCODING_INHERIT_FROM_PARENT",
+      "// #ENCODING_INHERIT_FROM_PROGRAM",
+      "/*",
+      "#HELP_BEGIN",
+      "   (add additional lines of help lines)",
+      "#HELP_END",
+      "*/",
+      "",
+      "/*******************************************************************************************",
+      "  Include Libraries",
+      "  (Uncomment and include additional libraries as needed)",
+      "*******************************************************************************************/",
+      "// #CRESTRON_LIBRARY \"\"",
+      "// #USER_LIBRARY \"\"",
+      "",
+      "/*******************************************************************************************",
+      "  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS",
+      "  (Uncomment and declare inputs and outputs as needed)",
+      "*******************************************************************************************/",
+      "// DIGITAL_INPUT ",
+      "// ANALOG_INPUT ",
+      "// STRING_INPUT ",
+      "// BUFFER_INPUT ",
+      "",
+      "// DIGITAL_OUTPUT ",
+      "// ANALOG_OUTPUT ",
+      "// STRING_OUTPUT ",
+      "",
+      "/*******************************************************************************************",
+      "  SOCKETS",
+      "  (Uncomment and define socket definitions as needed)",
+      "*******************************************************************************************/",
+      "// TCP_CLIENT",
+      "// TCP_SERVER",
+      "// UDP_SOCKET",
+      "",
+      "/*******************************************************************************************",
+      "  Parameters",
+      "  (Uncomment and declare parameters as needed)",
+      "*******************************************************************************************/",
+      "// INTEGER_PARAMETER",
+      "// SIGNED_INTEGER_PARAMETER",
+      "// LONG_INTEGER_PARAMETER",
+      "// SIGNED_LONG_INTEGER_PARAMETER",
+      "// STRING_PARAMETER",
+      "",
+      "/*******************************************************************************************",
+      "  Parameter Properties",
+      "  (Uncomment and declare parameter properties as needed)",
+      "*******************************************************************************************/",
+      "/*",
+      "#BEGIN_PARAMETER_PROPERTIES parameter_variable, parameter_variable, ...",
+      "   // propValidUnits = // unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks;",
+      "   // propDefaultUnit = // unitString, unitDecimal, unitHex, unitPercent, unitCharacter, unitTime or unitTicks;",
+      "   // propBounds = lower_bound , upper_bound;",
+      "   // propDefaultValue = ;  // or, propDefaultValue = \"\";",
+      "   // propList = // { \"value\" , \"label\" } , { \"value\" , \"label\" } , ... ;",
+      "   // propShortDescription = \"status_bar_hint_text\";",
+      "   // #BEGIN_PROP_FULL_DESCRIPTION  line_1...  line_2...  line_n  #END_PROP_FULL_DESCRIPTION",
+      "   // #BEGIN_PROP_NOTES line_1...  line_2...  line_n  #END_PROP_NOTES",
+      "#END_PARAMETER_PROPERTIES",
+      "*/",
+      "",
+      "/*******************************************************************************************",
+      "  Structure Definitions",
+      "  (Uncomment and define structure definitions as needed)",
+      "  Note:  Be sure to initialize all declared STRING variables as needed",
+      "         For example, in Function Main: struct.myString = \"\";",
+      "*******************************************************************************************/",
+      "/*",
+      "STRUCTURE MyStruct1",
+      "{",
+      "};",
+      "",
+      "MyStruct1 struct;",
+      "*/",
+      "",
+      "/*******************************************************************************************",
+      "  Global Variables",
+      "  (Uncomment and declare global variables as needed)",
+      "  Note:  Be sure to initialize all declared STRING variables as needed",
+      "         For example, in Function Main: myString = \"\";",
+      "*******************************************************************************************/",
+      "// INTEGER",
+      "// LONG_INTEGER",
+      "// SIGNED_INTEGER",
+      "// SIGNED_LONG_INTEGER",
+      "// STRING",
+      "",
+      "/*******************************************************************************************",
+      "  Functions",
+      "  (Add any additional functions here)",
+      "  Note:  Functions must be physically placed before the location in",
+      "         the code that calls them.",
+      "*******************************************************************************************/",
+      "/*",
+      "Function MyFunction1()",
+      "{",
+      "    // TODO:  Add local variable declarations here",
+      "",
+      "    // TODO:  Add code here",
+      "}",
+      "*/",
+      "",
+      "/*",
+      "Integer_Function MyIntFunction1()",
+      "{",
+      "    // TODO:  Add local variable declarations here",
+      "",
+      "    // TODO:  Add code here",
+      "",
+      "    Return (0);",
+      "}",
+      "*/",
+      "",
+      "/*",
+      "String_Function MyStrFunction1()",
+      "{",
+      "    // TODO:  Add local variable declarations here",
+      "",
+      "    // TODO:  Add code here",
+      "",
+      "    Return (\"\");",
+      "}",
+      "*/",
+      "",
+      "/*******************************************************************************************",
+      "  Event Handlers",
+      "  (Uncomment and declare additional event handlers as needed)",
+      "*******************************************************************************************/",
+      "/*",
+      "PUSH input",
+      "{",
+      "    // TODO:  Add code here",
+      "}",
+      "*/",
+      "",
+      "/*",
+      "RELEASE input",
+      "{",
+      "    // TODO:  Add code here",
+      "}",
+      "*/",
+      "",
+      "/*",
+      "CHANGE input",
+      "{",
+      "    // TODO:  Add code here",
+      "}",
+      "*/",
+      "",
+      "/*",
+      "EVENT",
+      "{",
+      "    // TODO:  Add code here",
+      "}",
+      "*/",
+      "",
+      "/*",
+      "SOCKETCONNECT",
+      "{",
+      "    // TODO:  Add code here",
+      "}",
+      "*/",
+      "",
+      "/*",
+      "SOCKETDISCONNECT",
+      "{",
+      "    // TODO:  Add code here",
+      "}",
+      "*/",
+      "",
+      "/*",
+      "SOCKETRECEIVE",
+      "{",
+      "    // TODO:  Add code here",
+      "}",
+      "*/",
+      "",
+      "/*",
+      "SOCKETSTATUS",
+      "{",
+      "    // TODO:  Add code here",
+      "}",
+      "*/",
+      "",
+      "/*******************************************************************************************",
+      "  Main()",
+      "  Uncomment and place one-time startup code here",
+      "  (This code will get called when the system starts up)",
+      "*******************************************************************************************/",
+      "/*",
+      "Function Main()",
+      "{",
+      "    // TODO:  Add code here",
+      "    // Initialize declared global and local variables/arrays as needed.",
+      "",
+      "    // WaitForInitializationComplete();",
+      "    // If you are reading any Input or Output variables, uncomment",
+      "    //   the WaitForInitializationComplete statement above and read",
+      "    //   them afterwards.  Input/Output variables will not have",
+      "    //   their correct values set until after the logic processor",
+      "    //   runs and propagates the values to them.",
+      "}",
+      "*/"
+    ]
+  },
+  "Document Template: Short Template:": {
+    "prefix": ["@TEMP", "TEMPLATE_DOCUMENT_SHORT"],
+    "body": [
+      "/*",
+      "Dealer Name:",
+      "System Name:",
+      "System Number:",
+      "Programmer:",
+      "Comments:",
+      "*/",
+      "",
+      "//#region ******** Compiler Directives and Libraries ********",
+      "",
+      "#DEFAULT_VOLATILE",
+      "#ENABLE_STACK_CHECKING",
+      "#ENABLE_TRACE",
+      "",
+      "//#endregion",
+      "",
+      "//#region ******** DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS, and Sockets ********",
+      "",
+      "// DIGITAL_INPUT ",
+      "// DIGITAL_OUTPUT ",
+      "",
+      "//#endregion",
+      "",
+      "//#region ******** Parameters ********",
+      "",
+      "// INTEGER_PARAMETER",
+      "",
+      "",
+      "//  Parameter Properties",
+      "",
+      "//#endregion",
+      "",
+      "//#region ******** Structures and Global Variables ********",
+      "",
+      "// INTEGER",
+      "",
+      "//#endregion",
+      "",
+      "//#region ******** Functions ********",
+      "",
+      "//#endregion",
+      "",
+      "//#region ******** Event Handlers ********",
+      "",
+      "/*",
+      "PUSH input",
+      "{",
+      "}",
+      "*/",
+      "",
+      "//#endregion",
+      "",
+      "/*",
+      "Function Main()",
+      "{",
+      "    // WaitForInitializationComplete();",
+      "}",
+      "*/"
+    ]
+  },
+  "Help": {
+    "prefix": ["help", "HELP", "SIMPLHELP"],
+    "body": [
+      "//\tSIMPL+ Snippet Help Topics ------------------------------------------------------------------ ",
+      "//\t\t @TEMP, List of code templates, Full, Short, and Properties",
+      "//\t\t @CD - List Compiler Directive statements",
+      "//\t\t @FILL - List statements that include bulk data"
+    ],
+    "description": "Crestron SIMPL+ Snippets Help"
+  }
 }

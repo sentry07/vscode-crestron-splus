@@ -1,0 +1,2274 @@
+{
+  "scopeName": "source.simpl-plus",
+  "fileTypes": [
+    "usp",
+    "usl"
+  ],
+  "name": "Crestron",
+  "patterns": [
+    {
+      "include": "#preprocessor"
+    },
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#declaration"
+    }
+  ],
+  "repository": {
+    "preprocessor": {
+      "patterns": [
+        {
+          "include": "#preprocessor-block-help"
+        },
+        {
+          "include": "#preprocessor-single-directive"
+        },
+        {
+          "include": "#preprocessor-define-constant"
+        },
+        {
+          "include": "#preprocessor-directive-with-value"
+        },
+        {
+          "include": "#preprocessor-analog-digital-expand"
+        },
+        {
+          "include": "#preprocessor-if-ifnot-defined"
+        },
+        {
+          "include": "#preprocessor-parameter-properties"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "preprocessor-block-help": {
+      "name": "meta.preprocessor.properties.help.usp",
+      "contentName": "comment.block.documentation.usp",
+      "begin": "(?i)(\\#)(help_begin)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        }
+      },
+      "end": "(?i)(\\#)(help_end)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "preprocessor-single-directive": {
+      "begin": "(?ix)\n  ^\\s*(\\#)\\s*\n  (PRINT_TO_TRACE|ENABLE_DYNAMIC|ENABLE_STACK_CHECKING|LARGE_STACK|ENABLE_TRACE|ENCODING_ASCII|\n  ENCODING_INHERIT_FROM_PARENT|ENCODING_INHERIT_FROM_PROGRAM|ENCODING_UTF16|DEFAULT_NONVOLATILE|\n  DEFAULT_VOLATILE|ENDIF|IF_SERIES2|IF_SERIES3|IF_SERIES4)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        }
+      },
+      "end": "(.*)(?<=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-define-constant": {
+      "begin": "(?ix)\n  ^\\s*(\\#)\\s*\n  (DEFINE_CONSTANT)\\s*  #Directive\n  ([_[:alpha:]][\\#\\$\\_[:alnum:]]*) #Constant Name",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        },
+        "3": {
+          "name": "entity.name.constant.usp"
+        }
+      },
+      "end": "(.*)(?=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "(0[xX])([[:xdigit:]]{1,4})",
+              "captures": {
+                "1": {
+                  "name": "constant.numeric.other.prefix.hex.usp"
+                },
+                "2": {
+                  "name": "constant.numeric.hex.usp"
+                }
+              }
+            },
+            {
+              "match": "([0-9]+)",
+              "name": "constant.numeric.decimal.usp"
+            },
+            {
+              "match": "(\\'.\\')",
+              "name": "constant.character.usp"
+            },
+            {
+              "match": "(\\\".*?\\\")",
+              "name": "string.quoted.double.usp"
+            },
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-directive-with-value": {
+      "begin": "(?ix)\n  ^\\s*(\\#)\\s*\n  (CATEGORY|CRESTRON_LIBRARY|USER_LIBRARY|CRESTRON_SIMPLSHARP_LIBRARY|USER_SIMPLSHARP_LIBRARY|INCLUDEPATH|HINT|HELP|SYMBOL_NAME|OUTPUT_SHIFT|MAX_INTERNAL_BUFFER_SIZE)  #Directive",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        },
+        "3": {
+          "name": "entity.name.constant.usp"
+        }
+      },
+      "end": "(.*)(?=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "(0[xX])([[:xdigit:]]{1,4})",
+              "captures": {
+                "1": {
+                  "name": "constant.numeric.other.prefix.hex.usp"
+                },
+                "2": {
+                  "name": "constant.numeric.hex.usp"
+                }
+              }
+            },
+            {
+              "match": "([0-9]+)",
+              "name": "constant.numeric.decimal.usp"
+            },
+            {
+              "match": "(\\'.\\')",
+              "name": "constant.character.usp"
+            },
+            {
+              "match": "(\\\".*?\\\")",
+              "name": "string.quoted.double.usp"
+            },
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-analog-digital-expand": {
+      "begin": "(?ix)\n  ^\\s*(\\#)\\s*\n  (analog_serial_expand|digital_expand) #Directive",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        }
+      },
+      "end": "(.*)(?=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "(?ix)\n  (Separately|OutputsWithParams|InputsWithOutputs|InputsWithParams|AllWithAny|PWithIxorO)",
+              "name": "keyword.control.option.$1.usp"
+            },
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-if-ifnot-defined": {
+      "begin": "(?ix)\n  ^\\s*(\\#)\\s*\n  (if_defined|if_not_defined)\\s* #Directive",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        }
+      },
+      "end": "(.*)(?=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "([_[:alpha:]][\\#\\$\\_[:alnum:]]*)",
+              "name": "entity.name.variable.preprocessor.symbol.usp"
+            },
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-parameter-properties": {
+      "name": "meta.preprocessor.properties.usp",
+      "begin": "(?ix)\n  \\s*(\\#)\\s*\n  (BEGIN_PARAMETER_PROPERTIES)\n  (\n    [\\_\\#\\_\\$\\,[:alnum:]\\s]*\n  )? #Parameter Properties Directive",
+      "beginCaptures": {
+        "0": {
+          "name": "meta.preprocessor.usp"
+        },
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.beginparameterproperties.usp"
+        },
+        "3": {
+          "patterns": [
+            {
+              "match": "([_[:alpha:]][\\#\\$\\_[:alnum:]]*)",
+              "name": "entity.name.type"
+            },
+            {
+              "include": "#punctuation-comma"
+            }
+          ]
+        }
+      },
+      "end": "(?ix)\n  \\s*(\\#)\\s*\n  (END_PARAMETER_PROPERTIES)",
+      "endCaptures": {
+        "0": {
+          "name": "meta.preprocessor.usp"
+        },
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.endparameterproperties.usp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#preprocessor-parameter-properties-valid-unit"
+        },
+        {
+          "include": "#preprocessor-parameter-properties-default-unit"
+        },
+        {
+          "include": "#preprocessor-parameter-properties-default-value"
+        },
+        {
+          "include": "#preprocessor-parameter-properties-list"
+        },
+        {
+          "include": "#preprocessor-parameter-properties-bounds"
+        },
+        {
+          "include": "#preprocessor-parameter-properties-short-description"
+        },
+        {
+          "include": "#preprocessor-properties-block-description-notes"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "preprocessor-parameter-properties-valid-unit": {
+      "begin": "(?ix)\n  \\s*(\\#)\\s*\n  (propValidUnits) #directive",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        }
+      },
+      "end": "(.*)(?=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "(=)",
+              "name": "punctuation.separator.assignment.usp"
+            },
+            {
+              "include": "#punctuation-pipe"
+            },
+            {
+              "include": "#preprocessor-parameter-units"
+            },
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-parameter-properties-default-unit": {
+      "begin": "(?ix)\n  \\s*(\\#)\\s*\n  (propDefaultUnits) #directive",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        }
+      },
+      "end": "(.*)(?=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "(=)",
+              "name": "punctuation.separator.assignment.usp"
+            },
+            {
+              "include": "#preprocessor-parameter-units"
+            },
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-parameter-properties-default-value": {
+      "begin": "(?ix)\n  \\s*(\\#)\\s*\n  (propDefaultValue) #directive",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        }
+      },
+      "end": "(.*)(?=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "(=)",
+              "name": "punctuation.separator.assignment.usp"
+            },
+            {
+              "include": "#preprocessor-property-literals"
+            },
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-parameter-properties-list": {
+      "begin": "(?ix)\n  \\s*(\\#)\\s*\n  (propList) #directive",
+      "beginCaptures": {
+        "0": {
+          "name": "meta.preprocessor.usp"
+        },
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        }
+      },
+      "end": "(.*)(?=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "(=)",
+              "name": "punctuation.separator.assignment.usp"
+            },
+            {
+              "include": "#preprocessor-property-list-pair"
+            },
+            {
+              "include": "#punctuation-comma"
+            },
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-parameter-properties-bounds": {
+      "begin": "(?ix)\n  \\s*(\\#)\\s*\n  (propUpperBound|propLowerBound) #directive",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.$2.usp"
+        }
+      },
+      "end": "(.*)(?=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "(=)",
+              "name": "punctuation.separator.assignment.usp"
+            },
+            {
+              "include": "#preprocessor-property-literals"
+            },
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-parameter-properties-short-description": {
+      "begin": "(?ix)\n  \\s*(\\#)\\s*\n  (propShortDescription) #directive",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.propShortDescription.usp"
+        }
+      },
+      "end": "(.*)(?=$)",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#string-literal"
+            },
+            {
+              "include": "#comment"
+            }
+          ]
+        }
+      },
+      "name": "meta.preprocessor.usp"
+    },
+    "preprocessor-properties-block-description-notes": {
+      "name": "meta.preprocessor.properties.description.usp",
+      "contentName": "comment.block.documentation.usp",
+      "begin": "(?i)(\\#)(?:(begin_prop_full_description)|(begin_prop_notes))",
+      "beginCaptures": {
+        "0": {
+          "name": "meta.preprocessor.usp"
+        },
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.beginpropfulldescription.usp"
+        },
+        "3": {
+          "name": "keyword.preprocessor.beginpropnotes.usp"
+        }
+      },
+      "end": "(?i)(\\#)(?:(end_prop_full_description)|(end_prop_notes))$",
+      "endCaptures": {
+        "0": {
+          "name": "meta.preprocessor.usp"
+        },
+        "1": {
+          "name": "punctuation.separator.hash.usp"
+        },
+        "2": {
+          "name": "keyword.preprocessor.endpropfulldescription.usp"
+        },
+        "3": {
+          "name": "keyword.preprocessor.endpropnotes.usp"
+        }
+      }
+    },
+    "preprocessor-parameter-units": {
+      "patterns": [
+        {
+          "match": "(?ix)\n  \\b(unitString|unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks)\\b #directive",
+          "name": "keyword.preprocessor.$1."
+        }
+      ]
+    },
+    "preprocessor-property-list-pair": {
+      "patterns": [
+        {
+          "match": "(\\{)([^}]*)(\\})",
+          "captures": {
+            "1": {
+              "name": "punctuation.curlybrace.open.usp"
+            },
+            "2": {
+              "patterns": [
+                {
+                  "match": "(.*)\\s?(,)\\s?(.*)",
+                  "captures": {
+                    "1": {
+                      "patterns": [
+                        {
+                          "include": "#preprocessor-property-literals"
+                        }
+                      ]
+                    },
+                    "2": {
+                      "name": "punctuation.comma.usp"
+                    },
+                    "3": {
+                      "patterns": [
+                        {
+                          "include": "#string-literal"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "3": {
+              "name": "punctuation.curlybrace.close.usp"
+            }
+          }
+        }
+      ]
+    },
+    "preprocessor-property-literals": {
+      "patterns": [
+        {
+          "include": "#preprocessor-numeric"
+        },
+        {
+          "include": "#char-literal"
+        },
+        {
+          "include": "#string-literal"
+        }
+      ]
+    },
+    "preprocessor-numeric": {
+      "match": "(?x)\n  (?:\n    (?:[0-9a-fA-F%])+ #capture any digit  (anything that resembles a number)\n    (?:[dh%st])\n  )  #that has a valid property suffix",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "begin": "(?=.)",
+              "end": "$",
+              "patterns": [
+                {
+                  "match": "(?x)\n  ([0-9]+d) #capture decimal digits that terminate with d",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.decimal.usp"
+                    }
+                  }
+                },
+                {
+                  "match": "(?x)\n  ([0-9a-fA-F]+h) #capture hex digits and h",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.hex.usp"
+                    }
+                  }
+                },
+                {
+                  "match": "(?x)\n  ([0-9]+%) #capture decimal digits that terminate in %",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.percentage.usp"
+                    }
+                  }
+                },
+                {
+                  "match": "(?x)\n  ([0-9]+s) #capture decimal digits that terminate in s",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.seconds.usp"
+                    }
+                  }
+                },
+                {
+                  "match": "(?x)\n  ([0-9]+t) #capture decimal digits that terminate in t",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.ticks.usp"
+                    }
+                  }
+                },
+                {
+                  "match": "(?:(?:[0-9a-zA-Z_]|_)|(?<=[eE])[+-]|\\.\\d)+",
+                  "name": "invalid.illegal.constant.numeric.usp"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.cs",
+          "begin": "(^\\s+)?(//).*$",
+          "while": "^(\\s*)(//).*$",
+          "captures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.cs"
+            },
+            "2": {
+              "name": "punctuation.definition.comment.cs"
+            }
+          }
+        },
+        {
+          "name": "comment.block.cs",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "captures": {
+            "0": {
+              "name": "punctuation.definition.comment.cs"
+            }
+          }
+        }
+      ]
+    },
+    "declaration": {
+      "patterns": [
+        {
+          "include": "#punctuation-semicolon"
+        },
+        {
+          "include": "#structure-declaration"
+        },
+        {
+          "include": "#event-declaration"
+        },
+        {
+          "include": "#function-declaration"
+        },
+        {
+          "include": "#global-variable-declaration"
+        }
+      ]
+    },
+    "global-variable-declaration": {
+      "begin": "(?ix)\n  (?:\\s*\n    (?:\\b(dynamic|volatile|nonvolatile|ascii|utf16|inherit|delegateproperty)\\b\\s+)?         #possibly grab modifier\n    ([_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s+   #grab variable type\n    (\n      (?:[_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s* #grab variable name\n      (?:(?<array>\\[.*?\\])?)(?:\\g<array>)?  #that possible has an array punctuation series\n    )\n)\n(?=,|;|=|\\))  #stop before a comma, semicolon, assignment operator, or closing parenthesis without grabbing any",
+      "beginCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#storage-modifier"
+            }
+          ]
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#global-variable-declaration-keywords"
+            },
+            {
+              "match": "([_[:alpha:]][\\#\\$\\_[:alnum:]]*)",
+              "name": "entity.name.type.usp"
+            }
+          ]
+        },
+        "3": {
+          "patterns": [
+            {
+              "include": "#variable-name"
+            },
+            {
+              "include": "#type-array-suffix"
+            }
+          ]
+        }
+      },
+      "end": "(?ix)\n  (\\;)  #stop pattern before the closing curly brace or before semicolon without grabbing any characters",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#punctuation-semicolon"
+            }
+          ]
+        }
+      },
+      "patterns": [
+        {
+          "include": "#variable-name"
+        },
+        {
+          "include": "#type-array-suffix"
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#punctuation-comma"
+        }
+      ]
+    },
+    "function-declaration": {
+      "begin": "(?ix)\\s*\n  (?:\\b(callback)\\b\\s+)?   # possible grab callback\n  ([_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s* # grab the built-in function type or\n  ([_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s* # the function name\n  (?=\\() #and stop before the opening parenthesis",
+      "beginCaptures": {
+        "0": {
+          "name": "meta.function.declaration.usp"
+        },
+        "1": {
+          "name": "storage.modifier.callback.usp"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#declaration-keyword-function"
+            }
+          ]
+        },
+        "3": {
+          "name": "entity.name.function.usp"
+        }
+      },
+      "end": "(?ix)\n  (?<=})  #stop pattern after the closing curly bracket without grabbing any characters",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#parenthesized-parameter-list"
+        },
+        {
+          "include": "#block"
+        }
+      ]
+    },
+    "event-declaration": {
+      "begin": "(?ix)\n  \\s*\n  (?:\\b(threadsafe)\\b\\s+)?  #Possibly grab threadsafe\n  \\b(push|event|change|release|socketconnect|socketdisconnect|socketreceive|socketstatus)\\b\\s+ # grab event type \n  ([_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s*         # grab first event name\n(?=,|$|{)  #stop before a comma, end of line or opening curly brace without grabbing any characters",
+      "end": "(?ix)\n  (?<=})   #stop pattern after the closing curly bracket or first semicolon without grabbing any characters",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.$1.usp"
+        },
+        "2": {
+          "name": "keyword.type.$2.usp"
+        },
+        "3": {
+          "name": "entity.name.variable.event.usp"
+        }
+      },
+      "patterns": [
+        {
+          "match": "(?i)\\b(push|event|change|release|socketconnect|socketdisconnect|socketreceive|socketstatus)\\b",
+          "name": "keyword.type.$1.usp"
+        },
+        {
+          "match": "([_[:alpha:]][\\#\\$\\_[:alnum:]]*)",
+          "name": "entity.name.variable.event.usp"
+        },
+        {
+          "include": "#punctuation-comma"
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#block"
+        }
+      ]
+    },
+    "structure-declaration": {
+      "begin": "(?xi)\n  (?=\n    \\b(structure)\\b\\s+\n  )",
+      "end": "(?<=\\})|(?=;)",
+      "patterns": [
+        {
+          "begin": "(?xi)\n  \\b(structure)\\b\\s+\n  ([_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s*",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.type.structure.usp"
+            },
+            "2": {
+              "name": "entity.name.type.structure.usp"
+            }
+          },
+          "end": "(?=\\{)|(?=;)",
+          "patterns": [
+            {
+              "include": "#comment"
+            }
+          ]
+        },
+        {
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.open.usp"
+            }
+          },
+          "end": "(\\})",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.curlybrace.close.usp"
+            }
+          },
+          "name": "meta.block.structure.usp",
+          "patterns": [
+            {
+              "include": "#structure-members"
+            }
+          ]
+        }
+      ]
+    },
+    "structure-members": {
+      "patterns": [
+        {
+          "include": "#local-variable-declaration"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "parenthesized-parameter-list": {
+      "begin": "(\\()",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.parenthesis.open.usp"
+        }
+      },
+      "end": "(\\))",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.parenthesis.close.usp"
+        }
+      },
+      "name": "meta.parenthesized.parameter-list.usp",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#parameter"
+        },
+        {
+          "include": "#punctuation-comma"
+        }
+      ]
+    },
+    "parameter": {
+      "begin": "(?ix)\n    \\s*(ByVal|ByRef|ReadOnlyByRef)?\\s*  #Possibly grab modifier\n    (?:\n      (integer|string|long_integer|signed_integer|signed_long_integer|SIMPLSHARPSTRING|eventargs)| #grab the built in type or\n      ([_[:alpha:]][\\#\\$\\_[:alnum:]]*) #grab the type\n    )",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.modifier.$1.usp"
+        },
+        "2": {
+          "name": "keyword.type.$2.usp"
+        },
+        "3": {
+          "name": "entity.name.type.usp"
+        }
+      },
+      "end": "(?ix)\n  (?=[\\,\\)])  #stop pattern before theres a comma or closing parenthesis without grabbing any characters",
+      "patterns": [
+        {
+          "match": "([_[:alpha:]][\\#\\$\\_[:alnum:]]*)",
+          "name": "entity.name.variable.parameter.usp"
+        },
+        {
+          "include": "#type-array-suffix"
+        }
+      ]
+    },
+    "type-array-suffix": {
+      "begin": "\\[",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.squarebracket.open.usp"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.squarebracket.close.usp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#numeric-literal"
+        },
+        {
+          "include": "#punctuation-comma"
+        }
+      ]
+    },
+    "global-variable-declaration-keywords": {
+      "patterns": [
+        {
+          "include": "#declaration-keyword-input"
+        },
+        {
+          "include": "#declaration-keyword-output"
+        },
+        {
+          "include": "#declaration-keyword-class"
+        },
+        {
+          "include": "#declaration-keyword-socket"
+        },
+        {
+          "include": "#declaration-keyword-parameter"
+        },
+        {
+          "include": "#declaration-keyword-variable"
+        }
+      ]
+    },
+    "declaration-keyword-input": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(digital_input|analog_input|buffer_input|string_input)\\b",
+          "name": "keyword.type.$1.usp"
+        }
+      ]
+    },
+    "declaration-keyword-output": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(digital_output|analog_output|buffer_output|string_output)\\b",
+          "name": "keyword.type.$1.usp"
+        }
+      ]
+    },
+    "declaration-keyword-parameter": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(integer_parameter|string_parameter|long_integer_parameter|signed_integer_parameter|signed_long_integer_parameter)\\b",
+          "name": "keyword.type.$1.usp"
+        }
+      ]
+    },
+    "declaration-keyword-variable": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(integer|string|long_integer|signed_integer|signed_long_integer|SIMPLSHARPSTRING)\\b",
+          "name": "keyword.type.$1.usp"
+        }
+      ]
+    },
+    "declaration-keyword-class": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(cevent|cmutex|file_info|ramp_info)\\b",
+          "name": "keyword.type.$1.usp"
+        }
+      ]
+    },
+    "declaration-keyword-socket": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(tcp_client|tcp_server|udp_socket)\\b",
+          "name": "keyword.type.$1.usp"
+        }
+      ]
+    },
+    "declaration-keyword-function": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(eventhandler|function|integer_function|string_function|long_integer_function|signed_integer_function|signed_long_integer_function|simplsharpstring_function|GatherEventHandler)\\b",
+          "name": "keyword.type.$1.usp"
+        }
+      ]
+    },
+    "storage-modifier": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(volatile|nonvolatile|dynamic|ascii|utf16|inherit|delegateproperty|threadsafe)\\b",
+          "name": "storage.modifier.$1.usp"
+        }
+      ]
+    },
+    "variable-name": {
+      "patterns": [
+        {
+          "include": "#variable-keyword-skip"
+        },
+        {
+          "match": "([_[:alpha:]][\\#\\$\\_[:alnum:]]*)",
+          "name": "entity.name.variable.usp"
+        }
+      ]
+    },
+    "variable-keyword-skip": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(_SKIP_)\\b",
+          "name": "keyword.support.skip.usp"
+        }
+      ]
+    },
+    "block": {
+      "begin": "(?<!\\{)\\{(?!\\{)",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.curlybrace.open.api"
+        }
+      },
+      "end": "(?<!\\})\\}(?!\\})",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.curlybrace.close.api"
+        }
+      },
+      "name": "meta.block.usp",
+      "patterns": [
+        {
+          "include": "#statement"
+        }
+      ]
+    },
+    "statement": {
+      "patterns": [
+        {
+          "include": "#preprocessor"
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#branching-and-decision"
+        },
+        {
+          "include": "#expression"
+        },
+        {
+          "include": "#block"
+        },
+        {
+          "include": "#local-variable-declaration"
+        },
+        {
+          "include": "#punctuation-semicolon"
+        }
+      ]
+    },
+    "branching-and-decision": {
+      "patterns": [
+        {
+          "include": "#while-statement"
+        },
+        {
+          "include": "#do-statement"
+        },
+        {
+          "include": "#until-statement"
+        },
+        {
+          "include": "#for-statement"
+        },
+        {
+          "include": "#try-statement"
+        },
+        {
+          "include": "#local-variable-declaration"
+        },
+        {
+          "include": "#local-builtin-function-declaration"
+        },
+        {
+          "include": "#if-statement"
+        },
+        {
+          "include": "#else-part"
+        },
+        {
+          "include": "#switch-statement-or-expression"
+        },
+        {
+          "include": "#break-or-continue-statement"
+        },
+        {
+          "include": "#return-statement"
+        },
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "while-statement": {
+      "begin": "(?ix)\n  \\b(while)\\b\\s*(?=\\() #Keyword",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.loop.while.usp"
+        }
+      },
+      "end": "(?<=\\))|(?=;|})",
+      "patterns": [
+        {
+          "begin": "\\(",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.parenthesis.open.api"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.parenthesis.close.api"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#expression-no-assignment"
+            }
+          ]
+        },
+        {
+          "include": "#statement"
+        },
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "do-statement": {
+      "begin": "(?xi)\n  \\b(do)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.loop.do.api"
+        }
+      },
+      "end": "(?<=\\))|(?=;|})",
+      "patterns": [
+        {
+          "include": "#statement"
+        },
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "until-statement": {
+      "begin": "(?xi)\n  \\b(until)\\b\\s*(?=\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.loop.until.api"
+        }
+      },
+      "end": "(?<=\\))",
+      "patterns": [
+        {
+          "begin": "\\(",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.parenthesis.open.api"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.parenthesis.close.api"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#expression-no-assignment"
+            }
+          ]
+        }
+      ]
+    },
+    "for-statement": {
+      "begin": "(?i)\\b(for)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.loop.for.api"
+        }
+      },
+      "end": "(?<=\\))|(?=;|})",
+      "patterns": [
+        {
+          "begin": "\\(",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.parenthesis.open-for.api"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.parenthesis.close-for.api"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#expression"
+            }
+          ]
+        },
+        {
+          "name": "test.api"
+        }
+      ]
+    },
+    "local-variable-declaration": {
+      "begin": "(?ix)\n  (?:\\s*\n    (?:\\b([[:alnum:]]*)\\b\\s+)?            #possibly grab modifier\n    ([_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s+   #grab variable type\n    (\n      (?:[_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s* #grab variable name\n      (?:(?<array>\\[.*?\\])?)(?:\\g<array>)?  #that possible has an array punctuation series\n    )\n)\n(?=,|;|=|\\))  #stop before a comma, semicolon, assignment operator, or closing parenthesis without grabbing any",
+      "beginCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#storage-modifier"
+            }
+          ]
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#local-declaration-keywords"
+            },
+            {
+              "match": "([_[:alpha:]][\\#\\$\\_[:alnum:]]*)",
+              "name": "entity.name.type.usp"
+            }
+          ]
+        },
+        "3": {
+          "patterns": [
+            {
+              "include": "#variable-name"
+            },
+            {
+              "include": "#type-array-suffix"
+            }
+          ]
+        }
+      },
+      "name": "meta.local-variable.declaration.usp",
+      "end": "(?ix)\n  (\\;)  #stop pattern before the closing curly brace or before semicolon without grabbing any characters",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#punctuation-semicolon"
+            }
+          ]
+        }
+      },
+      "patterns": [
+        {
+          "include": "#variable-name"
+        },
+        {
+          "include": "#type-array-suffix"
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#punctuation-comma"
+        }
+      ]
+    },
+    "local-builtin-function-declaration": {
+      "begin": "(?ix)\n  (\\bwait\\b\\s*)?  # possible grab callback\n  (?=\\() #and stop before the opening parenthesis",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.function.wait.usp"
+        }
+      },
+      "end": "(?ix)\n  (?<=})|(?=;)   #stop pattern after the closing curly bracket or first semicolon without grabbing any characters",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#parenthesized-parameter-list"
+        },
+        {
+          "include": "#block"
+        }
+      ]
+    },
+    "local-declaration-keywords": {
+      "patterns": [
+        {
+          "include": "#declaration-keyword-class"
+        },
+        {
+          "include": "#declaration-keyword-variable"
+        }
+      ]
+    },
+    "if-statement": {
+      "begin": "(?i)(?<!\\.)\\b(if)\\b\\s*(?=\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.conditional.if.api"
+        }
+      },
+      "end": "(?<=})|(?=;)",
+      "patterns": [
+        {
+          "begin": "\\(",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.parenthesis.open.api"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.parenthesis.close.api"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#expression-no-assignment"
+            }
+          ]
+        },
+        {
+          "include": "#statement"
+        }
+      ]
+    },
+    "else-part": {
+      "begin": "(?i)(?<!\\.)\\b(else)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.conditional.else.api"
+        }
+      },
+      "end": "(?<=})|(?=;)",
+      "patterns": [
+        {
+          "include": "#statement"
+        }
+      ]
+    },
+    "switch-statement-or-expression": {
+      "begin": "(?i)(?<!\\.)\\b(switch|cswitch)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.conditional.$1.api"
+        }
+      },
+      "end": "(?<=})|(?=})",
+      "patterns": [
+        {
+          "include": "#intrusive"
+        },
+        {
+          "begin": "(?=\\()",
+          "end": "(?<=\\})|(?=\\})",
+          "patterns": [
+            {
+              "include": "#switch-statement"
+            }
+          ]
+        },
+        {
+          "begin": "(?=\\{)",
+          "end": "(?<=\\})|(?=\\})"
+        }
+      ]
+    },
+    "switch-statement": {
+      "patterns": [
+        {
+          "include": "#intrusive"
+        },
+        {
+          "begin": "\\(",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.parenthesis.open.api"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.parenthesis.close.api"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#expression"
+            }
+          ]
+        },
+        {
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.open.api"
+            }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.close.api"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#switch-label"
+            },
+            {
+              "include": "#statement"
+            }
+          ]
+        }
+      ]
+    },
+    "switch-label": {
+      "begin": "(?i)\\b(case|default)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.conditional.$1.api"
+        }
+      },
+      "end": "(:)|(?=})",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.separator.colon.api"
+        }
+      }
+    },
+    "break-or-continue-statement": {
+      "match": "(?i)(?<!\\.)\\b(break|continue)\\b",
+      "name": "keyword.control.flow.$1.api"
+    },
+    "return-statement": {
+      "begin": "(?i)(?<!\\.)\\b(return)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.flow.return.api"
+        }
+      },
+      "end": "(?=[;}])",
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "try-statement": {
+      "patterns": [
+        {
+          "include": "#try-block"
+        },
+        {
+          "include": "#catch-clause"
+        }
+      ]
+    },
+    "try-block": {
+      "begin": "(?i)(?<!\\.)\\b(try)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.exception.try.api"
+        }
+      },
+      "end": "(?<=\\})",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#block"
+        }
+      ]
+    },
+    "catch-clause": {
+      "begin": "(?i)(?<!\\.)\\b(catch)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.exception.catch.api"
+        }
+      },
+      "end": "(?<=\\})",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#block"
+        }
+      ]
+    },
+    "expression": {
+      "patterns": [
+        {
+          "include": "#assignment-expression"
+        },
+        {
+          "include": "#expression-no-assignment"
+        }
+      ]
+    },
+    "expression-no-assignment": {
+      "patterns": [
+        {
+          "include": "#preprocessor"
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#expression-operator"
+        },
+        {
+          "include": "#invocation-expression"
+        },
+        {
+          "include": "#element-access-expression"
+        },
+        {
+          "include": "#built-in-constants"
+        },
+        {
+          "include": "#built-in-looping-keywords"
+        },
+        {
+          "include": "#built-in-variables"
+        },
+        {
+          "include": "#literals"
+        },
+        {
+          "include": "#type-name"
+        },
+        {
+          "include": "#parenthesized-expression"
+        }
+      ]
+    },
+    "invocation-expression": {
+      "begin": "(?xi)\n  ([_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s* #grab the function name  \n  (?=\\() #stop pattern before the opening parenthesis without grabbing any characters",
+      "beginCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#builtin-functions"
+            },
+            {
+              "include": "#built-in-void-functions"
+            },
+            {
+              "match": "(?xi)[_[:alpha:]][\\#\\$\\_[:alnum:]]*",
+              "name": "entity.name.function.invocation.usp"
+            }
+          ]
+        }
+      },
+      "end": "(?xi)\n  (?<=\\)) #stop pattern after the closing parenthesis without grabbing any characters",
+      "patterns": [
+        {
+          "include": "#argument-list"
+        }
+      ]
+    },
+    "builtin-functions": {
+      "patterns": [
+        {
+          "include": "#functions-data-conversion"
+        },
+        {
+          "include": "#functions-random-number"
+        },
+        {
+          "include": "#functions-string-parsing"
+        },
+        {
+          "include": "#functions-mathematical"
+        },
+        {
+          "include": "#functions-bit-and-byte"
+        },
+        {
+          "include": "#functions-file"
+        },
+        {
+          "include": "#functions-time-and-date"
+        },
+        {
+          "include": "#functions-system-interfacing"
+        },
+        {
+          "include": "#functions-direct-socket-access"
+        },
+        {
+          "include": "#functions-email"
+        },
+        {
+          "include": "#functions-ramping"
+        },
+        {
+          "include": "#functions-encoding"
+        },
+        {
+          "include": "#functions-array-operations"
+        },
+        {
+          "include": "#functions-exception-handling"
+        },
+        {
+          "include": "#functions-bitwise"
+        }
+      ]
+    },
+    "functions-data-conversion": {
+      "match": "(?i)\\b(Atoi|Atosi|Atol|Atosl|Chr|HexToI|HexToL|HexToSI|HexToSL|Itoa|Itohex|Ltoa|Ltohex)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-random-number": {
+      "match": "(?i)\\b(Random|Rnd)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-string-parsing": {
+      "match": "(?ix)\n  \\b(CompareStrings|CompareStringsNoCase|Find|\n  FindNoCase|Gather|GatherByLength|GatherAsync|GatherAsyncByLength|GatherByLengthWithDest|ReArmGatherAsync|RemoveGatherAsync|\n  GetC|Left|Len|Lower|Upper|Mid|Remove|RemoveByLength|ResizeString|ReverseFind|ReverseFindNoCase|Right|SetString)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-mathematical": {
+      "match": "(?i)\\b(abs|max|min|muldiv|smax|smin)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-bit-and-byte": {
+      "match": "(?i)\\b(Bit|Byte|High|HighWord|Low|LowWord|LowerChar|RotateLeft|RotateLeftLong|RotateRight|RotateRightLong|SetByte|UpperChar)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-file": {
+      "match": "(?ix)\n  \\b(FileBOF|FileClose|FileDelete|FileDeleteShared|FileEOF|FileLength|CheckForDisk|GetCurrentDirectory|\n  FileOpen|FileOpenShared|FileRead|FileSeek|FileWrite|FindClose|FindFirst|FindFirstShared|FindNext|\n  IsDirectory|IsHidden|IsReadOnly|IsSystem|IsVolume|MakeDirectory|MakeDirectoryShared|ReadInteger|\n  ReadIntegerArray|ReadLongInteger|ReadLongIntegerArray|ReadSignedInteger|ReadSignedIntegerArray|\n  ReadSignedLongInteger|ReadSignedLongIntegerArray|ReadString|ReadStringArray|CheckForNVRAMDisk|\n  RemoveDirectory|RemoveDirectoryShared|SetCurrentDirectory|StartFileOperations|EndFileOperations|WaitForNewDisk|\n  WriteInteger|WriteIntegerArray|WriteLongInteger|WriteLongIntegerArray|WriteSignedInteger|\n  WriteSignedIntegerArray|WriteSignedLongInteger|WriteSignedLongIntegerArray|WriteString|WriteStringArray|IsNull)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-time-and-date": {
+      "match": "(?ix)\n  \\b(Date|Day|FileDate|FileDay|FileGetDateNum|FileGetDayOfWeekNum|FileGetHourNum|\n  FileGetMinutesNum|FileGetMonthNum|FileGetSecondsNum|FileGetYearNum|FileMonth|FileTime|GetDateNum|\n  GetDayOfWeekNum|GetDST|GetGMTOffset|GetHourNum|GetHSeconds|GetMinutesNum|GetMonthNum|GetSecondsNum|\n  GetTicks|GetYearNum|month|SetGMTOffset|Time)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-direct-socket-access": {
+      "match": "(?ix)\n\\b(SocketConnectClient|SocketDisconnectClient|\nSocketGetAddressAsRequested|SocketGetPortNumber|SocketGetRemoteIPAddress|SocketGetSenderIPAddress|\nSocketGetStatus|SocketIsBroadcast|SocketIsMulticast|SocketSend|SocketServerStartListen|\nSocketServerStopListen|SocketUDP_Disable|SocketUDP_Enable)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-email": {
+      "match": "(?i)\\b(SendMail|SendMailAdvance|SendMailWithAttachments)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-ramping": {
+      "match": "(?ix)\n  \\b(CompareRampsByAttribute|CompareRampsByID|CreateRamp|GetRampInfo|\n  IsRamping|RAMP_INFO|StopRamp)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-encoding": {
+      "match": "(?i)\\b(GetEncoding|SetEncoding|ToAscii|ToUtf16)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-system-interfacing": {
+      "match": "(?ix)\n  \\b(GetSlot|GetCresnet|GetCIP|GetSymbolInstanceName|GetSymbolReferenceName|MakeProgramFilename|GetModelNumber|GetSeries|\n  IsSignalDefined)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-array-operations": {
+      "match": "(?ix)\n  \\b(GetLastModifiedArrayIndex|GetNumArrayCols|GetNumArrayRows|GetNumStructureArrayCols|\n  ResizeArray|ResizeStructureArray)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-exception-handling": {
+      "match": "(?i)\\b(GetExceptionCode|GetExceptionMessage)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "functions-bitwise": {
+      "match": "(?i)\\b(not)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "built-in-void-functions": {
+      "patterns": [
+        {
+          "include": "#void-functions-random-number"
+        },
+        {
+          "include": "#void-functions-string-parsing"
+        },
+        {
+          "include": "#void-functions-file"
+        },
+        {
+          "include": "#void-functions-system-control"
+        },
+        {
+          "include": "#void-functions-time-and-date"
+        },
+        {
+          "include": "#void-functions-system-interfacing"
+        },
+        {
+          "include": "#void-functions-wait"
+        },
+        {
+          "include": "#void-functions-string-formatting-and-printing"
+        },
+        {
+          "include": "#void-functions-ramping"
+        },
+        {
+          "include": "#void-functions-encoding"
+        },
+        {
+          "include": "#void-functions-array-operations"
+        },
+        {
+          "include": "#void-functions-delegate-handling"
+        },
+        {
+          "include": "#void-functions-event-handling"
+        }
+      ]
+    },
+    "void-functions-random-number": {
+      "match": "(?i)\\b(Seed)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-string-parsing": {
+      "match": "(?ix)\\b(ClearBuffer)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-system-control": {
+      "match": "(?ix)\\b(delay|ProcessLogic|pulse|WaitForInitializationComplete)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-system-interfacing": {
+      "match": "(?ix)\\b(GenerateUserNotice|GenerateUserWarning|GenerateUserError|SendPacketToCPU|SendCresnetPacket|SetCresnet|SetSlot|SetCIP)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-wait": {
+      "match": "(?i)\\b(CancelAllWait|CancelWait|PauseAllWait|PauseWait|ResumeAllWait|ResumeWait|RetimeWait)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-string-formatting-and-printing": {
+      "match": "(?i)\\b(Makestring|Print|Trace)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-file": {
+      "match": "(?ix)\\b(ReadStructure|WriteStructure)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-time-and-date": {
+      "match": "(?ix)\\b(SetDate|SetClock)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-ramping": {
+      "match": "(?ix)\\b(InitializeRampInfoArray|InitializeRampInfo)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-encoding": {
+      "match": "(?i)\\b(SetEncoding)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-delegate-handling": {
+      "match": "(?i)\\b(RegisterDelegate)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-event-handling": {
+      "match": "(?i)\\b(RegisterEvent)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "void-functions-array-operations": {
+      "match": "(?ix)\\b(SetArray)\\b",
+      "name": "keyword.support.function.invocation.usp"
+    },
+    "built-in-variable-declaration": {
+      "match": "(?ix)\n  \\b(function|integer_function|string_function|long_integer_function|signed_integer_function|signed_long_integer_function|simplsharpstring)\\b",
+      "name": "keyword.support.type.$1.usp"
+    },
+    "built-in-variables": {
+      "match": "(?ix)\n  \\b(_oem_break|_oem_cd|_oem_cts|_oem_dtr|_oem_long_break|_oem_max_string|_oem_pacing|\n  _oem_rts|_oem_str_in|_oem_str_out)\\b",
+      "name": "variable.language.communication.$1.usp"
+    },
+    "built-in-constants": {
+      "patterns": [
+        {
+          "include": "#built-in-constants-io"
+        },
+        {
+          "include": "#built-in-constants-file-info"
+        },
+        {
+          "include": "#built-in-constants-boolean"
+        }
+      ]
+    },
+    "built-in-constants-io": {
+      "match": "(?ix)\n  \\b(_O_APPEND|_O_CREAT|_O_EXCL|_O_TRUNC|_O_TEXT|_O_BINARY|_O_RDONLY|_O_RDWR|_O_WRONLY|ENCODING_ASCII|ENCODING_UTF16|ENCODING_INHERIT)\\b",
+      "name": "constant.language.io.$1.usp"
+    },
+    "built-in-constants-file-info": {
+      "match": "(?ix)\n  \\b(ARDONLY|AHIDDEN|ASYSTEM|AVOLUME|ADIRENT|ARCHIVE|SEEK_SET|SEEK_CUR|SEEK_END)\\b",
+      "name": "constant.language.file-info.$1.usp"
+    },
+    "built-in-constants-boolean": {
+      "match": "(?ix)\n  \\b(ON|OFF)\\b",
+      "name": "constant.language.boolean.$1.usp"
+    },
+    "built-in-looping-keywords": {
+      "match": "(?i)\\b(to|step)\\b",
+      "name": "keyword.control.loop.$1.usp"
+    },
+    "type-name": {
+      "patterns": [
+        {
+          "include": "#type-name-property"
+        },
+        {
+          "include": "#type-name-object"
+        },
+        {
+          "include": "#type-name-readwrite"
+        }
+      ]
+    },
+    "type-name-property": {
+      "patterns": [
+        {
+          "match": "(\\.)\\s*([_[:alpha:]][\\#\\$\\_[:alnum:]]*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.accessor.usp"
+            },
+            "2": {
+              "name": "variable.other.object.property.usp"
+            }
+          }
+        }
+      ]
+    },
+    "type-name-object": {
+      "patterns": [
+        {
+          "match": "(\\.)?([_[:alpha:]][\\#\\$\\_[:alnum:]]*)(?=\\s*\\.\\s*[_[:alpha:]][\\#\\$\\_[:alnum:]]*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.accessor.usp"
+            },
+            "2": {
+              "name": "variable.other.object.usp"
+            }
+          }
+        }
+      ]
+    },
+    "type-name-readwrite": {
+      "patterns": [
+        {
+          "name": "variable.other.readwrite.usp",
+          "match": "([_[:alpha:]][\\#\\$\\_[:alnum:]]*)"
+        }
+      ]
+    },
+    "bracketed-argument-list": {
+      "begin": "\\[",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.squarebracket.open.usp"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.squarebracket.close.usp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#expression"
+        },
+        {
+          "include": "#punctuation-comma"
+        }
+      ]
+    },
+    "argument-list": {
+      "begin": "\\(",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.parenthesis.open.usp"
+        }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.parenthesis.close.usp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#expression"
+        },
+        {
+          "include": "#punctuation-comma"
+        }
+      ]
+    },
+    "assignment-expression": {
+      "begin": "(=)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.operator.assignment.api"
+        }
+      },
+      "end": "(?=[,\\)\\];}])",
+      "patterns": [
+        {
+          "include": "#expression-no-assignment"
+        }
+      ]
+    },
+    "expression-operator": {
+      "patterns": [
+        {
+          "name": "keyword.operator.relational.usp",
+          "match": "<=|>=|S<=|S>=|S<|S>"
+        },
+        {
+          "match": "(?<!\\<)<(?!\\<)|(?<!\\>)>(?!\\>)",
+          "name": "keyword.operator.relational.usp"
+        },
+        {
+          "name": "keyword.operator.arithmetic.usp",
+          "match": "(?i)\\+|\\-|\\*|\\/|S\\/|%|mod|umod"
+        },
+        {
+          "name": "keyword.operator.bitwise.shift.usp",
+          "match": "<<|>>"
+        },
+        {
+          "name": "keyword.operator.bitwise.rotate.usp",
+          "match": "\\{\\{|\\}\\}"
+        },
+        {
+          "name": "keyword.operator.bitwise.usp",
+          "match": "(?i)\\&|\\^|\\|"
+        },
+        {
+          "name": "keyword.operator.bitwise.usp",
+          "match": "\\!|&&|\\|\\|"
+        },
+        {
+          "match": "(=)",
+          "name": "keyword.operator.comparison.usp"
+        }
+      ]
+    },
+    "element-access-expression": {
+      "begin": "(?x)\n  (?:([_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s*) # property name\n  (?=\\[)                              # open bracket of argument list",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.type.usp"
+        }
+      },
+      "end": "(?<=\\])(?!\\s*\\[)",
+      "patterns": [
+        {
+          "include": "#bracketed-argument-list"
+        }
+      ]
+    },
+    "parenthesized-expression": {
+      "begin": "\\(",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.parenthesis.open.api"
+        }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.parenthesis.close.api"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "literals": {
+      "patterns": [
+        {
+          "include": "#numeric-literal"
+        },
+        {
+          "include": "#char-literal"
+        },
+        {
+          "include": "#string-literal"
+        }
+      ]
+    },
+    "numeric-literal": {
+      "match": "(?x)\n  (?<!\\w)\\.?\\d #ensure it starts with a digit or period and not a word character\n  (?:\n    (?:[0-9a-zA-Z_%]|_)| #capture any digit or letter or underscore (anything that resembles a number)\n    (?<=[eE])[+-]| # even if it looks scientific\n    \\.\\d #or floating point\n  )*",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "begin": "(?=.)",
+              "end": "$",
+              "patterns": [
+                {
+                  "match": "(?x)\n  (0[xX]) #ensure it starts with a 0x or 0X\n  ([0-9a-fA-F](?:[0-9a-fA-F])*)$ #capture rest of hex digits",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.other.prefix.hex.usp"
+                    },
+                    "2": {
+                      "name": "constant.numeric.hex.usp"
+                    }
+                  }
+                },
+                {
+                  "match": "(?x)\n  (?=[0-9])(?!0[xX]) #ensure it starts with a digit, but not wit a 0x or 0X \n  ([0-9](?:[0-9])*)$ #capture rest of decimal digits and d (for parameter properties decimal value)",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.decimal.usp"
+                    }
+                  }
+                },
+                {
+                  "match": "(?:(?:[0-9a-zA-Z_]|_)|(?<=[eE])[+-]|\\.\\d)+",
+                  "name": "invalid.illegal.constant.numeric.usp"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "char-literal": {
+      "name": "string.quoted.single.usp",
+      "begin": "\\'",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.char.begin.usp"
+        }
+      },
+      "end": "(\\')|((?:[^\\n])$)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.char.end.usp"
+        },
+        "2": {
+          "name": "invalid.illegal.newline.usp"
+        }
+      },
+      "patterns": [
+        {
+          "match": "([0-9a-zA-Z]{2,})",
+          "name": "invalid.illegal.char.usp"
+        }
+      ]
+    },
+    "string-literal": {
+      "name": "string.quoted.double.usp",
+      "begin": "\\\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.usp"
+        }
+      },
+      "end": "(\")|((?:[^\\n])$)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.end.usp"
+        },
+        "2": {
+          "name": "invalid.illegal.newline.usp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#string-character-escape"
+        }
+      ]
+    },
+    "string-character-escape": {
+      "match": "(?x)\n  (\\%   #escape initializer character either % or \\\n    (?:\n      (?:[0-9a-zA-Z]|\\%)? #grab any digit or letter or % character for next character zero or 1 times\n      (?:[0-9a-zA-Z])*    #grab the rest of the digits or letters\n    )\n  ) |  #or\n  (?:\\\\(?:[a-zA-Z])(?:(?:[0-9a-fA-F]){2})?)|(?:\\\\\\\\) #grab any one letter or dual hex number after a backslash or double backslash",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "begin": "(?=.)",
+              "end": "$",
+              "patterns": [
+                {
+                  "match": "(?x)\n  (%%) |  # Prints % or\n  (%\n    (?:\n      (?:[0-9]?[0-9])? #[[pad]width]\n      (?:\n        d|  #Signed Analog_Input, Analog_Output or Integer as decimal\n        s|  #Buffer_Input, String_Input or String\n        u|  #Unsigned Analog_Input, Analog_Output or integer\n        ld| #Long_Integer as decimal\n        lu| #Long_Unsigned_Integer as decimal\n        x|  #Analog_Input, Analog_Output or Integer as lowercase hexadecimal\n        X|  #Analog_Input, Analog_Output or Integer as uppercase hexadecimal\n        lx| #long Integer as lowercase hexadecimal\n        lX| #long Integer as uppercase hexadecimal\n        c|  #Printable ASCII character\n      ){1}\n    ) #Print Formatters %[[pad]width]specifier\n  )",
+                  "name": "constant.character.escape.usp"
+                },
+                {
+                  "match": "(?x)\n  (\\\\\n    [\n      a  #Alert (Beep)\n      b  #Backspace\n      f  #Form Feed\n      n  #Newline\n      r  #Carriage Return\n      t  #Horizontal Tab\n      v\n    ] #Vertical Tab\n  ) |\n  (\\\\\n    (?:\n    [xX](?:[0-9a-fA-F]){2}  #Hexadecimal character code\n    )\n  ) |\n  (\\\\\\\\) #double backslash",
+                  "name": "constant.character.escape.usp"
+                },
+                {
+                  "match": ".*",
+                  "name": "invalid.illegal.character.escape.usp"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "include": "#punctuation-grouping"
+        },
+        {
+          "include": "#punctuation-structure"
+        }
+      ]
+    },
+    "punctuation-grouping": {
+      "patterns": [
+        {
+          "include": "#punctuation-square-bracket"
+        },
+        {
+          "include": "punctuation-parenthesis"
+        },
+        {
+          "include": "punctuation-curlybrace"
+        }
+      ]
+    },
+    "punctuation-structure": {
+      "patterns": [
+        {
+          "include": "#punctuation-comma"
+        },
+        {
+          "include": "#punctuation-semicolon"
+        },
+        {
+          "include": "#punctuation-parenthesis"
+        },
+        {
+          "include": "#punctuation-accessor"
+        },
+        {
+          "include": "#punctuation-dot"
+        },
+        {
+          "include": "#punctuation-pipe"
+        }
+      ]
+    },
+    "punctuation-square-bracket": {
+      "begin": "\\[",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.squarebracket.open.usp"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.squarebracket.close.usp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#intrusive"
+        },
+        {
+          "include": "#punctuation-comma"
+        }
+      ]
+    },
+    "punctuation-curlybrace": {
+      "begin": "\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.curlybrace.open.usp"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.curlybrace.close.usp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#intrusive"
+        },
+        {
+          "include": "#punctuation-comma"
+        }
+      ]
+    },
+    "punctuation-parenthesis": {
+      "begin": "(\\()",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.parenthesis.open.usp"
+        }
+      },
+      "end": "(\\))",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.parenthesis.close.usp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "punctuation-comma": {
+      "match": "\\,",
+      "name": "punctuation.comma.usp"
+    },
+    "punctuation-semicolon": {
+      "match": "\\;",
+      "name": "punctuation.terminator.usp"
+    },
+    "punctuation-dot": {
+      "match": "(\\.)",
+      "name": "punctuation.structure.dot.usp"
+    },
+    "punctuation-pipe": {
+      "match": "(\\|)",
+      "name": "punctuation.structure.pipe.usp"
+    }
+  }
+}
