@@ -1,0 +1,148 @@
+@startmindmap
++ compiler directives
+
+**:== meta.preprocessor
+preprocessor
+----
+preprocesor define constant
+|= keyword.preprocessor.defineconstant |= entity.name.constant  |= constant.numeric.hex \n constant.numeric.decimal \n constant.character \n string.quoted.double |
+| #DEFINE_CONSTANT  |  name | value |
+----
+preprocessor-category
+|= keyword.preprocessor.category |= constant.numeric.category  |
+| #CATEGORY  | constant |
+----
+preprocessor library
+|= keyword.preprocessor.{namebelow} |= string.quoted.double  |
+|  #USER_SIMPLSHARP_LIBRARY \n  #CRESTRON_SIMPLSHARP_LIBRARY \n  #USER_LIBRARY \n  #CRESTRON_LIBRARY  | "libray name" |
+----
+preprocessor include path
+|= keyword.preprocessor.includepath |= string.quoted.double  |
+| #INCLUDEPATH  | "absolute or relative path" |
+----
+preprocessor symbol name
+|= keyword.preprocessor.symbolname |= string.quoted.double  |
+| #SYMBOL_NAME  | "absolute or relative path" |
+----
+preprocessor hint
+|= keyword.preprocessor.hint |= string.quoted.double  |
+| #HINT  | "hint text" |
+----
+preprocessor help
+|= keyword.preprocessor.help |= string.quoted.double  |
+| #HELP  | "help text" |
+----
+preprocessor default nonvolatile volatile
+|= keyword.preprocessor.defaultnonvolatile \n  keyword.preprocessor.defaultvolatile|
+| #DEFAULT_NONVOLATILE \n #DEFAULT_VOLATILE  |
+----
+preprocessor analog digital expand
+|= keyword.preprocessor.analogserialexpand \n keyword.preprocessor.digitalexpand |= keyword.control.option.{name below}  |
+| #ANALOG_SERIAL_EXPAND \n #DIGITAL_EXPAND  | Separately \n OutputsWithParams \n InputsWithOutputs \n InputsWithParams \n AllWithAny \n PWithIxorO   |
+----
+preprocessor-output
+|= keyword.preprocessor.outputshift |= constant.numeric.category  |
+| #OUTPUT_SHIFT  | constant |
+----
+preprocessor max internal buffer size
+|= keyword.preprocessor.outputshift |= constant.numeric.category  |
+| #MAX_INTERNAL_BUFFER_SIZE  | constant |;
+
+left side
+
+**:= meta.preprocessor
+preprocessor
+----
+preprocessor single
+|= keyword.preprocessor.{namebelow}   |
+|  #PRINT_TO_TRACE \n  #ENABLE_DYNAMIC \n  #ENABLE_STACK_CHECKING \n  #LARGE_STACK \n  #ENABLE_TRACE \n  #ENCODING_ASCII \n  #ENCODING_INHERIT_FROM_PARENT \n  #ENCODING_INHERIT_FROM_PROGRAM \n  #ENCODING_UTF16 \n  #DEFAULT_NONVOLATILE \n  #DEFAULT_VOLATILE  |;
+
+**:= meta.preprocessor
+preprocessor parameter properties
+|= keyword.preprocessor.beginparameterproperties   | entity.name.type |
+| #BEGIN_PARAMETER_PROPERTIES | property name |
+
+|= keyword.preprocessor.endparameterproperties   |
+| #BEGIN_PARAMETER_PROPERTIES |;
+
+***:= meta.preprocessor.properties
+preprocessor parameter properties valid unit
+|= keyword.preprocessor.propvalidunits | keyword.operator.assignment   | keyword.preprocessor.{word below} |   punctuation.structure.pipe    |
+| \n\n\n      #propValidUnits |=  \n\n\n      =  |  unitString \n  unitDecimal \n   unitHex \n   unitPercent \n   unitCharacter \n   unitTime \n   unitTicks \n   unitString \n    |= \n\n\n      <U+0007C>    |
+----
+preprocessor parameter properties default unit
+|= keyword.preprocessor.propdefaultunits | keyword.operator.assignment   | keyword.preprocessor.{word below} |
+| \n\n\n      #propDefaultUnits |=  \n\n\n      =  |  unitString \n  unitDecimal \n   unitHex \n   unitPercent \n   unitCharacter \n   unitTime \n   unitTicks \n   unitString \n    |
+----
+preprocessor parameter properties default value
+|= keyword.preprocessor.propdefaultvalue | keyword.operator.assignment   | keyword.preprocessor.{word below} |
+| \n\n\n      #propDefaultValue |=  \n\n\n      =  |  unitString \n  unitDecimal \n   unitHex \n   unitPercent \n   unitCharacter \n   unitTime \n   unitTicks \n   unitString \n    |
+----
+preprocessor parameter properties list
+|= keyword.preprocessor.proplist |= keyword.operator.assignment   |= punctuation.curlybrace.open |= Literals |= punctuation.comma |= string.quoted.double |= punctuation.curlybrace.close |= punctuation.comma |
+|  #propList |=   =    |=   { |=  value  |=    ,|   "label"  |=     }  |= , |
+----
+preprocessor parameter properties upper bounds
+|= keyword.preprocessor.propupperbounds | keyword.operator.assignment   | #numeric-literal  |
+|  #propUpperBound |=        =  | 25s |
+preprocessor parameter properties lower bounds
+|= keyword.preprocessor.proplowerbounds | keyword.operator.assignment   | #numeric-literal |
+|  #propLowerBount |=        =  |  5s |
+----
+preprocessor parameter properties short description
+|= keyword.preprocessor.propShortDescription | keyword.operator.assignment   | string.quoted.double |
+|  #propShortDescription |=        =  |  "description"   |
+----
+preprocessor block help
+meta.preprocessor.properties.help
+|= keyword.preprocessor.helpbegin |
+| #HELP_BEGIN |
+|= comment.block.documentation |
+| contents |
+|= keyword.preprocessor.helpend |
+| #HELP_END |
+----
+properties block description notes:
+meta.preprocessor.properties.description
+|= keyword.preprocessor.beginpropfulldescription \n keyword.preprocessor.beginpropnotes  |
+| #BEGIN_PROP_FULL_DESCRIPTION \n #BEGIN_PROP_NOTES |
+|= comment.block.documentation |
+| contents |
+|= keyword.preprocessor.endpropfulldescription \n keyword.preprocessor.endpropnotes |
+| #END_PROP_FULL_DESCRIPTION \n #END_PROP_NOTES |;
+
+***: preprocessors properties Literals
+|= constant.numeric.hex |= constant.numberic.other.suffix.hex |
+| 12AB | h |
+----
+|= constant.numeric.decimal |= constant.numberic.other.suffix.dec |
+| 1234 | d |
+----
+|= constant.numeric.percent |= constant.numberic.other.suffix.percent |
+| 1234 | % |
+----
+|= punctuation.definition.char.begin |= constant.numeric.char |= punctuation.definition.char.end |
+| ' | A | ' |
+---- 
+|= constant.numeric.seconds |= constant.numberic.other.suffix.time |
+| 1234 | s |
+----
+|= constant.numeric.ticks |= constant.numberic.other.suffix.ticks |
+| 1234 | t |
+----
+|= punctuation.doublequotes |= constant.numeric.string |= punctuation.doublequotes |
+| " | Hello World | " |;
+
+
+**:= conditional compilation
+----
+preprocessor if ifnot defined
+|= keyword.preprocessor.ifdefined\n keyword.preprocessor.ifnotdefined |= entity.name.variable.preprocessor.symbol  |
+| #IF_DEFINED \n #IF_NOT_DEFINED  | constant |
+preprocessor if series
+|= keyword.preprocessor.ifseries2\n keyword.preprocessor.ifseries3\nkeyword.preprocessor.ifseries4  |
+| #IF_SERIES2 \n #IF_SERIES3 \n #IF_SERIES4  |
+preprocessor endif
+|= keyword.preprocessor.endif  |
+| #ENDIF  |;
+@endmindmap

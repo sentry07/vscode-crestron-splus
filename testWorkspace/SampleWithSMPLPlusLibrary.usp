@@ -1,0 +1,41 @@
+#CATEGORY "4" //Device Interface
+
+DIGITAL_INPUT Test;
+
+#USER_LIBRARY "SampleLibrary"
+#USER_SIMPLSHARP_LIBRARY "SampleSimplSharpLibrary"
+
+
+STRUCTURE myStruct1/test
+{
+	INTEGER Variable;
+};
+
+STRUCTURE myStruct2 //test
+{
+	INTEGER Variable;
+	myStruct1 structureVar1;
+};
+
+STRUCTURE myStruct3 //test
+{
+	INTEGER Variable;
+	myStruct2 structureVar2;
+};
+                                         
+myStruct3 testStructure;
+
+SampleClass MyClass;
+push Test
+{
+	SampleClass myLocalClass;
+ 	print("%i",testStructure.Variable7);
+	 testStructure.structureVar2.structureVar1.Variable;
+	 testStructure.structureVar2.structureVar1.Variable
+
+}
+
+function myFunction(Integer test, Long_Integer test2){
+	myFunction()
+	MyClass.
+}

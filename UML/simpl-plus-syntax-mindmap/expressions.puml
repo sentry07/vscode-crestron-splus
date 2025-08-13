@@ -1,0 +1,144 @@
+@startmindmap
+*:= Expressions
+
+* preprocessor
+* comment
+* type
+* switch-statement-or-expression
+* assignment-expression
+* expression-operators
+* variable-declaration
+* invocation-expression
+* element-access-expression
+* literal
+* parenthesized-expression
+* identifier
+* built-in-function
+* built-in-variables
+* built-in-constants;
+
+**:== operators
+expression-operators
+|= keyword.operator.bitwise.shift |
+|    <<  >> {{  }}|
+|= keyword.operator.comparison |
+|    =  <> |
+|= keyword.operator.relational |
+|    <=  >=  <  >  S< S> S<= S>= |
+|= keyword.operator.logical |
+|    && <U+007c><U+007c> |
+|= keyword.operator.bitwise |
+|    &  <U+007c>  ^   |
+|= keyword.operator.atithmetic |
+|    + - * / % mod umod |;
+
+
+**:== type
+function
+|= variable.other.object |=punctuation.accessor |= entity.name.function.invocation |
+| name | . | function() |
+variable
+|= variable.other.object |=punctuation.accessor |= variable.other.object.property |
+| name | . | function() |;
+
+**:== intrusive
+preprocessor
+comment;
+
+**:= literal
+numeric-lieteral
+|= constant.numeric.other.prefix  |= constant.numeric.hex |
+| 0x | 1234 |
+
+|= constant.numeric.decimal |
+| 1234 |
+----
+char-literal
+|= punctuation.definition.char.begin |= constant.numeric.char |= punctuation.definition.char.end |
+| ' | A | ' |
+----
+string-literal
+|= punctuation.doublequotes |= string.quoted.double |= punctuation.doublequotes |
+| " | Hello World | " |
+----
+string-character-escape
+|= constant.character.escape |
+| \\a: alert \n \\b: backspace \n \\f: form feed \n \\n: new line \n \\r: carriage return \n \\ t: Horizontal tab \n \\v: vertical Tab \n \:slash  |
+----
+|= constant.specification.string |
+| %[[pad]width]specifier: \n %d: signed analog \n %s: string \n %u unsigned analong \n %ld: long integer \n %lu: long unsigned integer \n %x analog as lowercase hex \n %X analog as upercase hex \n %c printable ascii |;
+
+
+
+left side
+
+**:= comment
+comment-single-line
+|= comment.line.double-slash |
+| \\ comment |
+----
+coment-block
+|= comment.block |
+| /* comment */ |;
+
+
+**:= assignment
+assignment-expression
+|= variable.other.readwrite-ie |= keword.operator.assignment | expression |= punctuation.terminator.statement |
+| a  |  =  |  b  |  ;  |;
+
+**:= invocation
+invocation-expression
+|= puctuation.accessor  |= entity.name.function | argument-list | punctuation.terminator.invocation |
+| . (optional) | function  |   argument-list  |  ;  |
+----
+argument-list
+|= punctuation.parenthesis.open | elements |= punctuation.parenthesis.open  |
+| (  | named-argument \n expression \n punctuation-comma | )  |
+----
+named-argument
+|= variable.other.readwrite-ie  |
+| variable name |;
+
+**:= element access
+element-access-expression
+|= variable.other.object.property |= punctuation.squarebracket.open  |= expression  |= punctuation.squarebracket.close |
+| variable name | [  |  named-argument \n expression \n punctuation-comma  |  ]  |;
+
+**:= parenthesized-expression
+element-access-expression
+|= punctuation.parenthesis.open  | expression  |= punctuation.parenthesis.close |
+| ( |   expression  |  )  |;
+
+**:= built-in-function
+built-in-function
+|= keyword.support.function.invocation  | argument-list | punctuation.terminator.statement |
+| data conversion\n random number\n string parsing\n mathematical\n string formating and printing\n bit and byte\n file\n time & date\n direct socket access\n email\n ramping\n encoding\n system-interfacing\n delegate-handling\n event-handling\n system-control\n wait\n array-operations\n exception-handling  |   argument-list  |  ;  |;
+
+**:= built-in-constants
+built-in-constants
+|= constant.language.io.{name below}   |
+| _O_APPEND\n _O_CREAT\n _O_EXCL\n _O_TRUNC\n _O_TEXT\n _O_BINARY\n _O_RDONLY\n _O_RDWR\n _O_WRONLY |
+----
+File Info Bit Flags
+|= constant.language.file-info.{name below}   |
+|ARDONLY\n AHIDDEN\n ASYSTEM\n AVOLUME\n ADIRENT\n ARCHIVE|
+----
+boolean
+|= constant.language.boolean.{name below}   |
+| on \noff |;
+
+
+
+**:= built-in-types
+built-in-types
+|= keyword.support.type   |
+| socket_struct\n ramp_info\n file_info|;
+
+**:= built-in-variables
+built-in-variables
+|= variable.language.communication.{name below}   |
+| _OEM_STR_OUT\n _OEM_CD\n _OEM_STR_IN\n _OEM_CTS\n _OEM_STR_IN\n _OEM_MAX_STRING \n _OEM_LONG_BREAK\n _OEM_CTS\n _OEM_BREAK \n _OEM_DTR |;
+
+@endmindmap
+
