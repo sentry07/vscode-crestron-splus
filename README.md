@@ -22,7 +22,7 @@ This is a language package for programming Crestron SIMPL+ module. It features:
 *  [Automatic API file generation for SIMPL# libraries](#api-auto-build-and-auto-complete)
 *  Snippets for many SIMPL+ functions
 
-The extension also add teh following:
+The extension also adds the following:
 * [Extension Commands](#extension-commands)
 * [Extension Settings](#extension-settings)
 * [Keybindings and Menus](#keybindings-and-menus)
@@ -58,7 +58,7 @@ Modify the tasks.json file to include 1 or many files.  The json file schema is 
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "simpl-plus",
+			"type": "crestron-splus",
 			"buildTypes": [
 				"Series4"
 			],
@@ -74,13 +74,13 @@ Modify the tasks.json file to include 1 or many files.  The json file schema is 
 				"kind": "build",
 				"isDefault": true
 			},
-			"label": "simpl-plus: Compile 4 Series"
+			"label": "crestron-splus: Compile 4 Series"
 		}
 	]
 }
 ```
 
-* `type`: must always be `simpl-plus`
+* `type`: must always be `crestron-splus`
 * `buildTypes`: Array of build targets to build the file with.  Options are `Series2`, `Series3`, and `Series4`
 * `files`: Array of files to build, just the file name, not the full path
 * `directory`: The directory where the file is located
@@ -96,7 +96,7 @@ A json file like this:
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "simpl-plus",
+			"type": "crestron-splus",
 			"buildTypes": [
 				"Series3"
 			],
@@ -112,10 +112,10 @@ A json file like this:
 				"kind": "build",
 				"isDefault": true
 			},
-			"label": "simpl-plus: Will build my series 3 document"
+			"label": "crestron-splus: Will build my series 3 document"
 		},
 		{
-			"type": "simpl-plus",
+			"type": "crestron-splus",
 			"buildTypes": [
 				"Series4"
 			],
@@ -132,7 +132,7 @@ A json file like this:
 				"kind": "build",
 				"isDefault": true
 			},
-			"label": "simpl-plus: Will Build 2 of my series 4 documents"
+			"label": "crestron-splus: Will Build 2 of my series 4 documents"
 		}
 	]
 }
@@ -196,23 +196,23 @@ The extension is also aware of referenced SIMPL+ libraries and will suggest func
 
 This extension contributes the following commands:
 
-* `simpl-plus.localHelp`: Opens the local SIMPL+ help reference file
-* `simpl-plus.webHelp`: Opens the online SIMPL+ help reference page
-* `simpl-plus.build`: Builds the current SIMPL+ file
-* `simpl-plus.insertCategory`: Inserts a SIMPL+ category at the beginning of the file
-* `simpl-plus.openApis`: Open all project related API files
-* `simpl-plus.openLibraries`: Open all project related library files
+* `crestron-splus.localHelp`: Opens the local SIMPL+ help reference file
+* `crestron-splus.webHelp`: Opens the online SIMPL+ help reference page
+* `crestron-splus.build`: Builds the current SIMPL+ file
+* `crestron-splus.insertCategory`: Inserts a SIMPL+ category at the beginning of the file
+* `crestron-splus.openApis`: Open all project related API files
+* `crestron-splus.openLibraries`: Open all project related library files
 
 ## Extension Settings
 
 This extension contributes the following settings:
 
-* `simpl-plus.enable2series`: Enables Series 2 build target for new or unknown SIMPL+ files. Default is false.
-* `simpl-plus.enable3series`: Enables Series 3 build target for new or unknown SIMPL+ files. Default is true.
-* `simpl-plus.enable4series`: Enables Series 4 build target for new or unknown SIMPL+ files. Default is true.
-* `simpl-plus.simplDirectory`: Location of the Crestron SIMPL Directory. Default is `C:\Program Files (x86)\Crestron\Simpl`
-* `simpl-plus.keywordCase`: Case used when performing autoformat of built-in keywords, statements, etc. Default is `Unchanged`
-* `simpl-plus.braceLine`: If enable it will add a new line before every opening curly bracket.  If not, it will move it to the end of the previous line. Default is false
+* `crestron-splus.enable2series`: Enables Series 2 build target for new or unknown SIMPL+ files. Default is false.
+* `crestron-splus.enable3series`: Enables Series 3 build target for new or unknown SIMPL+ files. Default is true.
+* `crestron-splus.enable4series`: Enables Series 4 build target for new or unknown SIMPL+ files. Default is true.
+* `crestron-splus.simplDirectory`: Location of the Crestron SIMPL Directory. Default is `C:\Program Files (x86)\Crestron\Simpl`
+* `crestron-splus.keywordCase`: Case used when performing autoformat of built-in keywords, statements, etc. Default is `Unchanged`
+* `crestron-splus.braceLine`: If enable it will add a new line before every opening curly bracket.  If not, it will move it to the end of the previous line. Default is false
 
 ## Keybindings and Menus
 

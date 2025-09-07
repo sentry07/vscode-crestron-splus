@@ -24,7 +24,7 @@ suite('Insert Category Command Test Suite', () => {
         };
         showQuickPickStub.resolves(quickPickItem);
         await OpenAndShowSPlusDocument("\/\/Nothing To See");
-        await vscode.commands.executeCommand('simpl-plus.insertCategory');
+        await vscode.commands.executeCommand('crestron-splus.insertCategory');
         await delay(200);
         const text = vscode.window.activeTextEditor?.document.getText();
         if (text === undefined) { assert.fail; }
@@ -41,7 +41,7 @@ suite('Insert Category Command Test Suite', () => {
         const showInputBoxStub = sinon.stub(vscode.window, 'showInputBox').resolves("My Test Category");
 
         await OpenAndShowSPlusDocument("\/\/Nothing To See");
-        await vscode.commands.executeCommand('simpl-plus.insertCategory');
+        await vscode.commands.executeCommand('crestron-splus.insertCategory');
         await delay(200);
         const text = vscode.window.activeTextEditor?.document.getText();
         if (text === undefined) { assert.fail; }
@@ -52,7 +52,7 @@ suite('Insert Category Command Test Suite', () => {
         showQuickPickStub.resolves(undefined);
 
         await OpenAndShowSPlusDocument("\/\/Nothing To See");
-        await vscode.commands.executeCommand('simpl-plus.insertCategory');
+        await vscode.commands.executeCommand('crestron-splus.insertCategory');
 
         const text = vscode.window.activeTextEditor?.document.getText();
         if (text === undefined) { assert.fail; }

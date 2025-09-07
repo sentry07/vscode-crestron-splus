@@ -16,7 +16,7 @@ suite('default Settings', function () {
         uri: 'enable4series',
         defaultValue: true
     }];
-    const configurationSplus = vscode.workspace.getConfiguration('simpl-plus');
+    const configurationSplus = vscode.workspace.getConfiguration('crestron-splus');
     settingsToTest.forEach(function (setting) {
         test(`${setting.uri} has been added with default value ${setting.defaultValue}`, function () {
             var exists = configurationSplus.has(setting.uri);

@@ -21,7 +21,7 @@ export class KeywordService {
     }
 
     private constructor() {
-        const extensionPath = extensions.getExtension("sentry07.simpl-plus")?.extensionPath;
+        const extensionPath = extensions.getExtension("sentry07.crestron-splus")?.extensionPath;
         if (extensionPath === undefined) { return; }
         const keywordDefinitionsPath = path.join(extensionPath, "support", "keywords.csv");
         if (!fsExistsWrapper.existsSyncWrapper(keywordDefinitionsPath)) {

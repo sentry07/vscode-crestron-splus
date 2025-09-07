@@ -16,7 +16,7 @@ export class SimplPlusProgramObjectService implements Disposable {
 
     private _documents = new Map<string, SimplPlusObject[]>();
     private static _instance: SimplPlusProgramObjectService;
-    private selector: DocumentSelector = 'simpl-plus';
+    private selector: DocumentSelector = 'crestron-splus';
     public static getInstance(ctx: ExtensionContext): SimplPlusProgramObjectService {
         if (!SimplPlusProgramObjectService._instance && ctx) {
             SimplPlusProgramObjectService._instance = new SimplPlusProgramObjectService(ctx);

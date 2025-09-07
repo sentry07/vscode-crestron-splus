@@ -28,11 +28,11 @@ export class SimplPlusStatusBar {
         this._statusBar = window.createStatusBarItem(StatusBarAlignment.Right, 100);
         this._statusBar.text = "SIMPL+";
         this._statusBar.tooltip = "Click to select SIMPL+ compilation targets";
-        this._statusBar.command = "simpl-plus.showQuickPick";
+        this._statusBar.command = "crestron-splus.showQuickPick";
         this._simplPlusDocuments = new SimplPlusActiveDocuments();
 
 
-        let showQuickPick_command = commands.registerCommand("simpl-plus.showQuickPick", async () => this.showQuickPick());
+        let showQuickPick_command = commands.registerCommand("crestron-splus.showQuickPick", async () => this.showQuickPick());
 
         let onChangeActiveTextEditor_event = window.onDidChangeActiveTextEditor((editor) => this.updateOnChangeActiveTextEditor(editor));
         let onCloseTextDocument_event = workspace.onDidCloseTextDocument((document) => this.updateOnCloseTextDocument(document));
@@ -48,7 +48,7 @@ export class SimplPlusStatusBar {
 
 
         const activeEditor = window.activeTextEditor;
-        if (activeEditor === undefined || activeEditor.document.languageId !== "simpl-plus") {
+        if (activeEditor === undefined || activeEditor.document.languageId !== "crestron-splus") {
             this.updateBuildTargetsStatusBar([]);
             return;
         }
@@ -70,13 +70,13 @@ export class SimplPlusStatusBar {
     }
 
     private updateOnCloseTextDocument(document: TextDocument) {
-        if (document.languageId !== "simpl-plus") {
+        if (document.languageId !== "crestron-splus") {
             return;
         }
         this._simplPlusDocuments.RemoveSimpPlusDocument(document);
     }
     private updateOnChangeActiveTextEditor(editor: TextEditor | undefined) {
-        if (editor === undefined || editor.document.languageId !== "simpl-plus") {
+        if (editor === undefined || editor.document.languageId !== "crestron-splus") {
             this.updateBuildTargetsStatusBar([]);
             return;
         }

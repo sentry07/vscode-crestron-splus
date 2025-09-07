@@ -96,7 +96,7 @@ suite("Formatting Input Output Directives", function () {
     });
     test(`${unformattedText.directive} multiple line with start spaces, trims spaces, tabs other lines`, async () => {
       const document = await vscode.workspace.openTextDocument({
-        language: "simpl-plus",
+        language: "crestron-splus",
         content: `   ${unformattedText.directive} variable1,\r\n  variable2;`,
       });
       await vscode.window.showTextDocument(document);

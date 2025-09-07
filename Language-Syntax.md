@@ -6,10 +6,10 @@ Below you can find links to the diagrams use when creating the syntaxes, as well
 
 ## SIMPL+ Syntax
 
-* [Preprocessor](UML/simpl-plus-syntax-mindmap/preprocessor.svg)
-* [Declarations](UML/simpl-plus-syntax-mindmap/declarations.svg)
-* [Statements](UML/simpl-plus-syntax-mindmap/statements.svg)
-* [Expressions](UML/simpl-plus-syntax-mindmap/expressions.svg)
+* [Preprocessor](UML/crestron-splus-syntax-mindmap/preprocessor.svg)
+* [Declarations](UML/crestron-splus-syntax-mindmap/declarations.svg)
+* [Statements](UML/crestron-splus-syntax-mindmap/statements.svg)
+* [Expressions](UML/crestron-splus-syntax-mindmap/expressions.svg)
 
 ## SIMPL# API Syntax
 

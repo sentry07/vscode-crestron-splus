@@ -17,7 +17,7 @@ suite('SimplPlusActiveDocuments', () => {
         simplPlusActiveDocuments = new SimplPlusActiveDocuments();
         mockDocument = {
             uri: Uri.file('test.usp'),
-            languageId: 'simpl-plus',
+            languageId: 'crestron-splus',
             isUntitled: false,
             version: 1,
             getText: sinon.stub(),
@@ -47,7 +47,7 @@ suite('SimplPlusActiveDocuments', () => {
     test('should return global values BuildType.Series3 and 4 for an untitled', () => {
         mockDocument = {
             uri: Uri.file('test.usp'),
-            languageId: 'simpl-plus',
+            languageId: 'crestron-splus',
             isUntitled: true,
             version: 1,
             getText: sinon.stub(),
@@ -133,7 +133,7 @@ suite('with existing document with ush contents', function ()  {
         simplPlusActiveDocuments = new SimplPlusActiveDocuments();
         mockDocument = {
             uri: Uri.file('test.usp'),
-            languageId: 'simpl-plus',
+            languageId: 'crestron-splus',
             isUntitled: false,
             version: 1,
             getText: sinon.stub(),
