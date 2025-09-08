@@ -9,14 +9,22 @@
     "type": "git",
     "url": "https://github.com/sentry07/vscode-crestron-splus.git"
   },
+  "homepage": "https://raw.github.com/sentry07/vscode-crestron-splus/blob/beta/README.md",
+  "bugs": {
+    "url": "https://github.com/sentry07/vscode-crestron-splus/issues"
+  },
   "license": "GPL-3.0",
   "engines": {
     "vscode": "^1.93.0"
   },
+  "vsce": {
+    "baseImagesUrl": "https://raw.githubusercontent.com/sentry07/vscode-crestron-splus/beta"
+  },
   "categories": [
     "Programming Languages",
     "Snippets",
-    "Formatters"
+    "Formatters",
+    "Language Packs"
   ],
   "main": "./dist/extension",
   "contributes": {

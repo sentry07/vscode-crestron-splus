@@ -37,13 +37,13 @@ The extension provides autoformatting for SIMPL+ files. The following settings a
 
 Configure your preferred brace line style. Default is `Same Line`. Options are `Same Line` and `New Line`.
 
-![alt text](readmeImages/autoformat-brace-line.gif)
+![Auto AutoFormat Brace Line](readmeImages/autoformat-brace-line.gif)
 
 ### Keyword Case
 
 Configure your preferred case for keywords, statements, etc. Default is `Unchanged`. Options are `Lowercase`, `UPPERCASE`, `PascalCase`, and `Unchanged`.
 
-![AutoFormat](readmeImages/autoformat-case.gif)
+![AutoFormat Case](readmeImages/autoformat-case.gif)
 
 ## VS Code Build Task Support
 
@@ -176,7 +176,7 @@ The extension will suggest possible completions depending on the context the cur
 
 Provides help in filling in arguments for Built-in as well as User Defined functions.
 
-![alt text](readmeImages/Function-Signature-Help.gif)
+![Function Signature Help](readmeImages/Function-Signature-Help.gif)
 
 ## SIMPL+ category insertion 
 
