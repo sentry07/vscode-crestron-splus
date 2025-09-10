@@ -84,7 +84,6 @@ export class SimplPlusCompletionProvider implements CompletionItemProvider {
             const uri = window.activeTextEditor?.document.uri;
             const itemLabel = typeof item.label === "string" ? item.label : item.label.label;
             let functionInfo = this._projectObjectService.getFunctionInfo(uri, itemLabel);
-            console.log("keyword?", functionInfo);
             if (functionInfo === undefined) {
                 //if item is from a keyword, add help from the Online help service
                 const keyword = this._keywordService.getKeyword(itemLabel);
@@ -117,7 +116,6 @@ export class SimplPlusCompletionProvider implements CompletionItemProvider {
                 };
                 item.label = functionLabel;
             }
-            console.log("i", item);
             resolve(item);
         });
     }

@@ -196,7 +196,7 @@ export class SimplPlusTasks implements TaskProvider {
         // setting ShellExecution Options so it runs on cmd.exe 
         // executable, the executable to run (cmd)
         // shellArgs, the arguments to pass to the executable for cmd  /C  Carries out the command specified by string and then terminates. cwd: current working directory
-        const shellOptions: ShellExecutionOptions = { executable: dosExecutable, shellArgs: ["/C"], cwd: directory };
+        const shellOptions: ShellExecutionOptions = { executable: dosExecutable, shellArgs: ["/C"], cwd: directory};
         const execution = new ShellExecution(command, commandArguments, shellOptions);
         return [label, definition, execution];
     }
