@@ -1,245 +1,106 @@
 {
-    "DIGITAL_INPUT": {
+    "Digital_Input": {
         "prefix": [
-            "DIGITAL_INPUT",
-            "DIGITALINPUT",
-            "DIN"
-        ],
-        "body": [
-            "DIGITAL_INPUT\t${1:Variable}${2:[${3:Array Size}${4:, ${5:Minimum Show}}]};$0"
-        ],
-        "description": "Routes digital inputs from the outside SIMPL program into a SIMPL+ program under the specified variable names. DIGITAL_INPUT values are either 0 (digital low) or 1 (digital high)."
-    },
-    "digital_input": {
-        "prefix": [
-            "digital_input",
-            "digitalinput",
+            "Digital_Input",
             "din"
         ],
         "body": [
-            "digital_input\t${1:Variable}${2:[${3:Array Size}${4:, ${5:Minimum Show}}]};$0"
+            "Digital_Input\t${1:Variable}${2:[${3:Array Size}${4:, ${5:Minimum Show}}]};$0"
         ],
-        "description": "Routes digital inputs from the outside SIMPL program into a SIMPL+ program under the specified variable names. DIGITAL_INPUT values are either 0 (digital low) or 1 (digital high)."
+        "description": "Routes digital inputs from the outside SIMPL program into a SIMPL+ program under the specified variable names. Digital_Input values are either 0 (digital low) or 1 (digital high)."
     },
-    "DIGITAL_OUTPUT": {
+    "Digital_Output": {
         "prefix": [
-            "DIGITAL_OUTPUT",
-            "DIGITALOUTPUT",
-            "DOUT"
-        ],
-        "body": [
-            "DIGITAL_OUTPUT\t${1:Variable}${2:[${3:Array Size}]};$0"
-        ],
-        "description": "Routes a value from the SIMPL+ program to a SIMPL program. If a value different from 0 is placed on a DIGITAL_OUTPUT, the digital signal in the SIMPL program is set high when the control system processes the logic."
-    },
-    "digital_output": {
-        "prefix": [
-            "digital_output",
-            "digitaloutput",
+            "Digital_Output",
             "dout"
         ],
         "body": [
-            "digital_output\t${1:Variable}${2:[${3:Array Size}]};$0"
+            "Digital_Output\t${1:Variable}${2:[${3:Array Size}]};$0"
         ],
-        "description": "Routes a value from the SIMPL+ program to a SIMPL program. If a value different from 0 is placed on a DIGITAL_OUTPUT, the digital signal in the SIMPL program is set high when the control system processes the logic."
+        "description": "Routes a value from the SIMPL+ program to a SIMPL program. If a value different from 0 is placed on a Digital_Output, the digital signal in the SIMPL program is set high when the control system processes the logic."
     },
-    "ANALOG_INPUT": {
+    "Analog_Output": {
         "prefix": [
-            "ANALOG_INPUT",
-            "ANALOGINPUT",
-            "AIN"
-        ],
-        "body": [
-            "ANALOG_INPUT\t${1:Variable}${2:[${3:Array Size}${4:, ${5:Minimum Show}}]};$0"
-        ],
-        "description": "Routes analog inputs from the outside SIMPL program into a SIMPL+ program under with the specified variable names. ANALOG_INPUT values are 16-bit numbers. They are treated as signed or unsigned values inside of a SIMPL+ program depending on the operators or functions being used."
-    },
-    "analog_input": {
-        "prefix": [
-            "analog_input",
-            "analoginput",
+            "Analog_Output",
             "ain"
         ],
         "body": [
-            "analog_input\t${1:Variable}${2:[${3:Array Size}${4:, ${5:Minimum Show}}]};$0"
+            "Analog_Output\t${1:Variable}${2:[${3:Array Size}${4:, ${5:Minimum Show}}]};$0"
         ],
-        "description": "Routes analog inputs from the outside SIMPL program into a SIMPL+ program under with the specified variable names. ANALOG_INPUT values are 16-bit numbers. They are treated as signed or unsigned values inside of a SIMPL+ program depending on the operators or functions being used."
+        "description": "Routes analog inputs from the outside SIMPL program into a SIMPL+ program under with the specified variable names. Analog_Output values are 16-bit numbers. They are treated as signed or unsigned values inside of a SIMPL+ program depending on the operators or functions being used."
     },
-    "ANALOG_OUTPUT": {
+    "String_Input": {
         "prefix": [
-            "ANALOG_OUTPUT",
-            "ANALOGOUTPUT",
-            "AOUT"
-        ],
-        "body": [
-            "ANALOG_OUTPUT\t${1:Variable}${2:[${3:Array Size}]};$0"
-        ],
-        "description": "Routes a value from the SIMPL+ program to the SIMPL program as an analog value. ANALOG_OUTPUT values are 16-bit numbers. They are treated as signed or unsigned values inside of a SIMPL+ program depending on the operators or functions being used."
-    },
-    "analog_output": {
-        "prefix": [
-            "analog_output",
-            "analogoutput",
-            "aout"
-        ],
-        "body": [
-            "analog_output\t${1:Variable}${2:[${3:Array Size}]};$0"
-        ],
-        "description": "Routes a value from the SIMPL+ program to the SIMPL program as an analog value. ANALOG_OUTPUT values are 16-bit numbers. They are treated as signed or unsigned values inside of a SIMPL+ program depending on the operators or functions being used."
-    },
-    "STRING_INPUT": {
-        "prefix": [
-            "STRING_INPUT",
-            "STRINGINPUT",
-            "SIN"
-        ],
-        "body": [
-            "STRING_INPUT\t${1:Variable}${2:[${3:Array Size}]}[${4:Characters}];$0"
-        ],
-        "description": "Routes serial inputs from the outside SIMPL program into a SIMPL+ program under the specified variable names. Strings are of arbitrary length, so a maximum size must be specified. Upon receiving new data, the value is cleared and the new string is put in. Strings received greater than the specified size are truncated to the size in the declaration. String inputs may be written to, so their data space may be used as a storage spot for doing something such as parsing through a string without declaring temporary storage."
-    },
-    "string_input": {
-        "prefix": [
-            "string_input",
-            "stringinput",
+            "String_Input",
             "sin"
         ],
         "body": [
-            "string_input\t${1:Variable}${2:[${3:Array Size}]}[${4:Characters}];$0"
+            "String_Input\t${1:Variable}${2:[${3:Array Size}]}[${4:Characters}];$0"
         ],
         "description": "Routes serial inputs from the outside SIMPL program into a SIMPL+ program under the specified variable names. Strings are of arbitrary length, so a maximum size must be specified. Upon receiving new data, the value is cleared and the new string is put in. Strings received greater than the specified size are truncated to the size in the declaration. String inputs may be written to, so their data space may be used as a storage spot for doing something such as parsing through a string without declaring temporary storage."
     },
-    "STRING_OUTPUT": {
+    "String_Output": {
         "prefix": [
-            "STRING_OUTPUT",
-            "STRINGOUTPUT",
-            "SOUT"
-        ],
-        "body": [
-            "STRING_OUTPUT\t${1:Variable}${2:[${3:Array Size}]};$0"
-        ],
-        "description": "Routes serial strings from the SIMPL+ program to the SIMPL program. A string length is not required as the output string buffer management is performed by the operating system."
-    },
-    "string_output": {
-        "prefix": [
-            "string_output",
-            "stringoutput",
+            "String_Output",
             "sout"
         ],
         "body": [
-            "string_output\t${1:Variable}${2:[${3:Array Size}]};$0"
+            "String_Output\t${1:Variable}${2:[${3:Array Size}]};$0"
         ],
         "description": "Routes serial strings from the SIMPL+ program to the SIMPL program. A string length is not required as the output string buffer management is performed by the operating system."
     },
-    "PUSH": {
+    "Push": {
         "prefix": [
-            "PUSH"
+            "Push"
         ],
         "body": [
-            "PUSH ${1:DIGITAL_INPUT}{",
+            "Push ${1:Digital_Input}{",
             "\t${0://code here}",
             "}"
         ],
-        "description": "PUSH is executed when a DIGITAL_INPUT transitions from low to high."
+        "description": "Push is executed when a Digital_Input transitions from low to high."
     },
-    "push": {
+    "Release": {
         "prefix": [
-            "push"
+            "Release"
         ],
         "body": [
-            "push ${1:digital_input}{",
+            "Release ${1:Digital_Input}{",
             "\t${0://code here}",
             "}"
         ],
-        "description": "PUSH is executed when a DIGITAL_INPUT transitions from low to high."
+        "description": "Release is executed when a Digital_Input transitions from high to low."
     },
-    "RELEASE": {
+    "Change": {
         "prefix": [
-            "RELEASE"
+            "Change"
         ],
         "body": [
-            "RELEASE ${1:DIGITAL_INPUT}{",
+            "Change ${1:String_Input Or Analog_Output}{",
             "\t${0://code here}",
             "}"
         ],
-        "description": "RELEASE is executed when a DIGITAL_INPUT transitions from high to low."
+        "description": "The Change event is called when a Digital_Input transitions from low to high or high to low, or when an Analog_Output or String_Input Changes."
     },
-    "release": {
+    "Integer_Parameter": {
         "prefix": [
-            "release"
-        ],
-        "body": [
-            "release ${1:digital_input}{",
-            "\t${0://code here}",
-            "}"
-        ],
-        "description": "RELEASE is executed when a DIGITAL_INPUT transitions from high to low."
-    },
-    "CHANGE": {
-        "prefix": [
-            "CHANGE"
-        ],
-        "body": [
-            "CHANGE ${1:STRING_INPUT Or ANALOG_INPUT}{",
-            "\t${0://code here}",
-            "}"
-        ],
-        "description": "The CHANGE event is called when a DIGITAL_INPUT transitions from low to high or high to low, or when an ANALOG_INPUT or STRING_INPUT changes."
-    },
-    "change": {
-        "prefix": [
-            "change"
-        ],
-        "body": [
-            "change ${1:string_input or analog_input}{",
-            "\t${0://code here}",
-            "}"
-        ],
-        "description": "The CHANGE event is called when a DIGITAL_INPUT transitions from low to high or high to low, or when an ANALOG_INPUT or STRING_INPUT changes."
-    },
-    "INTEGER_PARAMETER": {
-        "prefix": [
-            "INTEGER_PARAMETER",
-            "INTEGERPARAMETER",
-            "IPARAM"
-        ],
-        "body": [
-            "INTEGER_PARAMETER\t${1:Variable}${2:[${3:ARRAY}]};$0"
-        ],
-        "description": "An INTEGER_PARAMETER array element may be used anywhere an INTEGER is legal, with the caveat that it may not be written to.  Array elements are referenced by using the name followed by [element]. The element number may range from 1 to the element size. For example, if an array is declared as NUM[2], then legal elements are NUM[1], and NUM[2]. The bracket notation is often called an array subscript."
-    },
-    "integer_parameter": {
-        "prefix": [
-            "integer_parameter",
-            "integerparameter",
+            "Integer_Parameter",
             "iparam"
         ],
         "body": [
-            "integer_parameter\t${1:Variable}${2:[${3:ARRAY}]};$0"
+            "Integer_Parameter\t${1:Variable}${2:[${3:ARRAY}]};$0"
         ],
-        "description": "An INTEGER_PARAMETER array element may be used anywhere an INTEGER is legal, with the caveat that it may not be written to.  Array elements are referenced by using the name followed by [element]. The element number may range from 1 to the element size. For example, if an array is declared as NUM[2], then legal elements are NUM[1], and NUM[2]. The bracket notation is often called an array subscript."
+        "description": "An Integer_Parameter array element may be used anywhere an INTEGER is legal, with the caveat that it may not be written to.  Array elements are referenced by using the name followed by [element]. The element number may range from 1 to the element size. For example, if an array is declared as NUM[2], then legal elements are NUM[1], and NUM[2]. The bracket notation is often called an array subscript."
     },
-    "STRING_PARAMETER": {
+    "String_Parameter": {
         "prefix": [
-            "STRING_PARAMETER",
-            "STRINGPARAMETER",
-            "SPARAM"
-        ],
-        "body": [
-            "STRING_PARAMETER\t${1:Variable}${2:[${3:Array Size}]}[${4:Characters}];$0"
-        ],
-        "description": "A STRING_PARAMETER array element may be used anywhere a STRING is legal, with the caveat that it may not be written to.  Array elements are referenced by using the name followed by [element]. The element number may range from 1 to the element size. For example, if an array is declared as NUM[2], then legal elements are NUM[1], and NUM[2]. The bracket notation is often called an array subscript."
-    },
-    "string_parameter": {
-        "prefix": [
-            "string_parameter",
-            "stringparameter",
+            "String_Parameter",
             "sparam"
         ],
         "body": [
-            "string_parameter\t${1:Variable}${2:[${3:Array Size}]}[${4:Characters}];$0"
+            "String_Parameter\t${1:Variable}${2:[${3:Array Size}]}[${4:Characters}];$0"
         ],
-        "description": "A STRING_PARAMETER array element may be used anywhere a STRING is legal, with the caveat that it may not be written to.  Array elements are referenced by using the name followed by [element]. The element number may range from 1 to the element size. For example, if an array is declared as NUM[2], then legal elements are NUM[1], and NUM[2]. The bracket notation is often called an array subscript."
+        "description": "A String_Parameter array element may be used anywhere a STRING is legal, with the caveat that it may not be written to.  Array elements are referenced by using the name followed by [element]. The element number may range from 1 to the element size. For example, if an array is declared as NUM[2], then legal elements are NUM[1], and NUM[2]. The bracket notation is often called an array subscript."
     },
     "%s": {
         "prefix": [
@@ -248,7 +109,7 @@
         "body": [
             "%s $0"
         ],
-        "description": "s: Specifies a BUFFER_INPUT, STRING, or STRING_INPUT variable."
+        "description": "s: Specifies a BUFFER_INPUT, STRING, or String_Input variable."
     },
     "%d": {
         "prefix": [
@@ -257,7 +118,7 @@
         "body": [
             "%d $0"
         ],
-        "description": "d: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as a signed decimal value."
+        "description": "d: Specifies an Analog_Output, ANALOG_OUTPUT, or INTEGER to be printed as a signed decimal value."
     },
     "%u": {
         "prefix": [
@@ -266,7 +127,7 @@
         "body": [
             "%u $0"
         ],
-        "description": "u: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as an unsigned decimal value."
+        "description": "u: Specifies an Analog_Output, ANALOG_OUTPUT, or INTEGER to be printed as an unsigned decimal value."
     },
     "%x": {
         "prefix": [
@@ -275,7 +136,7 @@
         "body": [
             "%x $0"
         ],
-        "description": "x: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as a lowercase hexadecimal number."
+        "description": "x: Specifies an Analog_Output, ANALOG_OUTPUT, or INTEGER to be printed as a Lowercase hexadecimal number."
     },
     "%X": {
         "prefix": [
@@ -284,7 +145,7 @@
         "body": [
             "%X $0"
         ],
-        "description": "X: Specifies an ANALOG_INPUT, ANALOG_OUTPUT, or INTEGER to be printed as an uppercase hexadecimal number."
+        "description": "X: Specifies an Analog_Output, ANALOG_OUTPUT, or INTEGER to be printed as an Uppercase hexadecimal number."
     },
     "%l": {
         "prefix": [
@@ -322,609 +183,305 @@
         ],
         "description": "%c: Specifies a printable ASCII character to be printed."
     },
-    "TRACE": {
+    "Trace": {
         "prefix": [
-            "TRACE"
+            "Trace"
         ],
         "body": [
-            "TRACE(\"${1:your statement here}\\n\"${2:, ${3:args}});\n$0",
+            "Trace(\"${1:your statement here}\\n\"${2:, ${3:args}});\n$0",
             "\t//Type % then CTRL+SPACE to see arg types"
         ],
-        "description": "The output of TRACE goes to the CONSOLE of the control system and can be monitored in the Trace window in the Crestron Toolbox SIMPL Debugger and in Crestron Viewport. It can display simple text strings or complex formatted strings."
+        "description": "The output of Trace goes to the CONSOLE of the control system and can be monitored in the Trace window in the Crestron Toolbox SIMPL Debugger and in Crestron Viewport. It can display simple text strings or complex formatted strings."
     },
-    "trace": {
+    "Makestring Destination": {
         "prefix": [
-            "trace"
-        ],
-        "body": [
-            "trace(\"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
-        ],
-        "description": "The output of TRACE goes to the CONSOLE of the control system and can be monitored in the Trace window in the Crestron Toolbox SIMPL Debugger and in Crestron Viewport. It can display simple text strings or complex formatted strings."
-    },
-    "MAKESTRING DESTINATION": {
-        "prefix": [
-            "MAKESTRING DESTINATION"
+            "Makestring Destination"
         ],
         "body": [
             "MAKESTRING(${1:BUILDING STRING VAR}, \"${2:your statement here}\\n\"${3:, ${4:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
         ],
         "description": "MAKESTRING is a variant of PRINT. The output of MAKESTRING goes to the DESTINATION string. It can print simple text strings or complex formatted strings."
     },
-    "makestring destination": {
+    "Makestring Console(0)": {
         "prefix": [
-            "makestring destination"
+            "Makestring Console"
         ],
         "body": [
-            "makestring(${1:BUILDING STRING VAR}, \"${2:your statement here}\\n\"${3:, ${4:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
-        ],
-        "description": "MAKESTRING is a variant of PRINT. The output of MAKESTRING goes to the DESTINATION string. It can print simple text strings or complex formatted strings."
-    },
-    "MAKESTRING CONSOLE(0)": {
-        "prefix": [
-            "MAKESTRING CONSOLE"
-        ],
-        "body": [
-            "MAKESTRING(0, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
+            "Makestring(0, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
         ],
         "description": "0:  Console Port, same as PRINT."
     },
-    "makestring console(0)": {
+    "Makestring CPU(1)": {
         "prefix": [
-            "makestring console"
+            "Makestring CPU"
         ],
         "body": [
-            "makestring(0, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
-        ],
-        "description": "0:  Console Port, same as PRINT."
-    },
-    "MAKESTRING CPU(1)": {
-        "prefix": [
-            "MAKESTRING CPU"
-        ],
-        "body": [
-            "MAKESTRING(1, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
+            "Makestring(1, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
         ],
         "description": "1:  CPU (same functionality as SendPacketToCPU function)"
     },
-    "makestring cpu(1)": {
+    "Makestring Cresnet Network(2)": {
         "prefix": [
-            "makestring cpu"
+            "Makestring Cresnet Network "
         ],
         "body": [
-            "makestring(1, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
-        ],
-        "description": "1:  CPU (same functionality as SendPacketToCPU function)"
-    },
-    "MAKESTRING CRESNET NETWORK(2)": {
-        "prefix": [
-            "MAKESTRING CRESNET NETWORK"
-        ],
-        "body": [
-            "MAKESTRING(2, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
+            "Makestring(2, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
         ],
         "description": "2:  Cresnet Network (same functionality as SendCresnetPacket function)."
     },
-    "makestring cresnet network(2)": {
+    "Find": {
         "prefix": [
-            "makestring cresnet network"
+            "Find"
         ],
         "body": [
-            "makestring(2, \"${1:your statement here}\\n\"${2:, ${3:args}});\n$0 //Type % then CTRL+SPACE to see arg types"
+            "${1:INTEGER RETURN_VALUE} = Find(\"${2:STRING MATCH_STRING}\", ${3:STRING SOURCE_STRING}${4:, [${5:INTEGER START_POSITION}]});\n$0"
         ],
-        "description": "2:  Cresnet Network (same functionality as SendCresnetPacket function)."
+        "description": "MATCH_STRING is a STRING containing the string to be matched. SOURCE_STRING is a STRING containing the string to be searched. START_POSITION is an INTEGER which tells Find at what character in the string to start the search, and is 1 based. If it is not specified, it defaults to 1. RETURN_VALUE is the index of where MATCH_STRING first occurs (going left to right) in SOURCE_STRING. If a match can not be found, or POSITION exceeds the length of the SOURCE_STRING then 0 is returned. The index is 1 based."
     },
-    "FIND": {
+    "Mid": {
         "prefix": [
-            "FIND"
+            "Mid"
         ],
         "body": [
-            "${1:INTEGER RETURN_VALUE} = FIND(\"${2:STRING MATCH_STRING}\", ${3:STRING SOURCE_STRING}${4:, [${5:INTEGER START_POSITION}]});\n$0"
+            "${1:STRING RETURN_VALUE} = Mid(${2:SOURCE_STRING}, ${3:INTEGER START_POSITION}, ${4:INTEGER GATHER_LENGTH})\n$0"
         ],
-        "description": "MATCH_STRING is a STRING containing the string to be matched. SOURCE_STRING is a STRING containing the string to be searched. START_POSITION is an INTEGER which tells FIND at what character in the string to start the search, and is 1 based. If it is not specified, it defaults to 1. RETURN_VALUE is the index of where MATCH_STRING first occurs (going left to right) in SOURCE_STRING. If a match can not be found, or POSITION exceeds the length of the SOURCE_STRING then 0 is returned. The index is 1 based."
+        "description": "Returns a string GATHER_LENGTH characters long from SOURCE_STRING, starting at START_POSITION. SOURCE_STRING is a STRING containing the input string. START_POSITION is an INTEGER telling Mid at which character position in SOURCE_STRING to start. The first character of SOURCE_STRING is considered 1. GATHER_LENGTH is an INTEGER telling Mid how many characters to use from SOURCE_STRING. RETURN_VALUE: A STRING GATHER_LENGTH characters long starting st START_POSITION. If START_POSITION is greater than the length of SOURCE_STRING, an empty STRING is returned. If GATHER_LENGTH is greater than the total number of characters that can be retrieved starting from START_POSITION, only the remaining characters in SOURCE_STRING will be pulled. For Example, Mid(\"ABCD\", 2, 10) would return a STRING containing BCD."
     },
-    "find": {
+    "Delay": {
         "prefix": [
-            "find"
+            "Delay"
         ],
         "body": [
-            "${1:INTEGER RETURN_VALUE} = find(\"${2:STRING MATCH_STRING}\", ${3:STRING SOURCE_STRING}${4:, [${5:INTEGER START_POSITION}]});\n$0"
-        ],
-        "description": "MATCH_STRING is a STRING containing the string to be matched. SOURCE_STRING is a STRING containing the string to be searched. START_POSITION is an INTEGER which tells FIND at what character in the string to start the search, and is 1 based. If it is not specified, it defaults to 1. RETURN_VALUE is the index of where MATCH_STRING first occurs (going left to right) in SOURCE_STRING. If a match can not be found, or POSITION exceeds the length of the SOURCE_STRING then 0 is returned. The index is 1 based."
-    },
-    "MID": {
-        "prefix": [
-            "MID"
-        ],
-        "body": [
-            "${1:STRING RETURN_VALUE} = MID(${2:SOURCE_STRING}, ${3:INTEGER START_POSITION}, ${4:INTEGER GATHER_LENGTH})\n$0"
-        ],
-        "description": "Returns a string GATHER_LENGTH characters long from SOURCE_STRING, starting at START_POSITION. SOURCE_STRING is a STRING containing the input string. START_POSITION is an INTEGER telling MID at which character position in SOURCE_STRING to start. The first character of SOURCE_STRING is considered 1. GATHER_LENGTH is an INTEGER telling MID how many characters to use from SOURCE_STRING. RETURN_VALUE: A STRING GATHER_LENGTH characters long starting st START_POSITION. If START_POSITION is greater than the length of SOURCE_STRING, an empty STRING is returned. If GATHER_LENGTH is greater than the total number of characters that can be retrieved starting from START_POSITION, only the remaining characters in SOURCE_STRING will be pulled. For Example, MID(\"ABCD\", 2, 10) would return a STRING containing BCD."
-    },
-    "mid": {
-        "prefix": [
-            "mid"
-        ],
-        "body": [
-            "${1:STRING RETURN_VALUE} = mid(${2:SOURCE_STRING}, ${3:INTEGER START_POSITION}, ${4:INTEGER GATHER_LENGTH})\n$0"
-        ],
-        "description": "Returns a string GATHER_LENGTH characters long from SOURCE_STRING, starting at START_POSITION. SOURCE_STRING is a STRING containing the input string. START_POSITION is an INTEGER telling MID at which character position in SOURCE_STRING to start. The first character of SOURCE_STRING is considered 1. GATHER_LENGTH is an INTEGER telling MID how many characters to use from SOURCE_STRING. RETURN_VALUE: A STRING GATHER_LENGTH characters long starting st START_POSITION. If START_POSITION is greater than the length of SOURCE_STRING, an empty STRING is returned. If GATHER_LENGTH is greater than the total number of characters that can be retrieved starting from START_POSITION, only the remaining characters in SOURCE_STRING will be pulled. For Example, MID(\"ABCD\", 2, 10) would return a STRING containing BCD."
-    },
-    "DELAY": {
-        "prefix": [
-            "DELAY"
-        ],
-        "body": [
-            "DELAY(${1:TIME in Hundredths of a second});",
+            "Delay(${1:TIME in Hundredths of a second});",
             "\t//EX. 500 = 5 SECONDS, 1000 = 10 SECONDS",
-            "\t//DELAY PAUSES IN THIS PLACE OF CODE AND CONTINUES WITH THE STATEMENTS AFTER THE DELAY TIME EXPIRES\n$0"
+            "\t//Delay PAUSES IN THIS PLACE OF CODE AND CONTINUES WITH THE STATEMENTS AFTER THE Delay TIME EXPIRES\n$0"
         ],
-        "description": "Forces a task switch and starts a timer for the hundredths of a second specified by TIME. The system continues with the statements after a delay when the delay time has expired."
+        "description": "Forces a task switch and starts a timer for the hundredths of a second specified by TIME. The system continues with the statements after a Delay when the Delay time has expired."
     },
-    "delay": {
+    "Lower": {
         "prefix": [
-            "delay"
+            "Lower"
         ],
         "body": [
-            "delay(${1:TIME in Hundredths of a second});",
-            "\t//EX. 500 = 5 SECONDS, 1000 = 10 SECONDS",
-            "\t//DELAY PAUSES IN THIS PLACE OF CODE AND CONTINUES WITH THE STATEMENTS AFTER THE DELAY TIME EXPIRES\n$0"
+            "${1:${2:STRING RETURN_VALUE} = }Lower(${3:SOURCE_STRING})\n$0"
         ],
-        "description": "Forces a task switch and starts a timer for the hundredths of a second specified by TIME. The system continues with the statements after a delay when the delay time has expired."
+        "description": "Takes a source string and converts characters with the values A-Z (Uppercase) to a-z (Lowercase)."
     },
-    "LOWER": {
+    "Upper": {
         "prefix": [
-            "LOWER"
+            "Upper"
         ],
         "body": [
-            "${1:${2:STRING RETURN_VALUE} = }LOWER(${3:SOURCE_STRING})\n$0"
+            "${1:${2:STRING RETURN_VALUE} = }Upper(${3:SOURCE_STRING})\n$0"
         ],
-        "description": "Takes a source string and converts characters with the values A-Z (uppercase) to a-z (lowercase)."
+        "description": "Takes a source string and converts characters with the values a-z (Lowercase) to A-Z (Uppercase)."
     },
-    "lower": {
+    "IToA": {
         "prefix": [
-            "lower"
+            "IToA",
+            "IntegerToASCII",
+            "IntegerToString"
         ],
         "body": [
-            "${1:${2:STRING RETURN_VALUE} = }lower(${3:SOURCE_STRING})\n$0"
-        ],
-        "description": "Takes a source string and converts characters with the values A-Z (uppercase) to a-z (lowercase)."
-    },
-    "UPPER": {
-        "prefix": [
-            "UPPER"
-        ],
-        "body": [
-            "${1:${2:STRING RETURN_VALUE} = }UPPER(${3:SOURCE_STRING})\n$0"
-        ],
-        "description": "Takes a source string and converts characters with the values a-z (lowercase) to A-Z (uppercase)."
-    },
-    "upper": {
-        "prefix": [
-            "upper"
-        ],
-        "body": [
-            "${1:${2:STRING RETURN_VALUE} = }upper(${3:SOURCE_STRING})\n$0"
-        ],
-        "description": "Takes a source string and converts characters with the values a-z (lowercase) to A-Z (uppercase)."
-    },
-    "ITOA": {
-        "prefix": [
-            "ITOA",
-            "INTEGERTOASCII",
-            "INTEGERTOSTRING"
-        ],
-        "body": [
-            "${1:${2:STRING RETURN_VALUE} = }ITOA(${3:INTEGER_VARIABLE}) //INTEGER_VARIABLE MUST CONTAIN A NUMBER FROM 0 TO 65535\n$0"
+            "${1:${2:STRING RETURN_VALUE} = }IToA(${3:INTEGER_VARIABLE}) //INTEGER_VARIABLE MUST CONTAIN A NUMBER FROM 0 TO 65535\n$0"
         ],
         "description": "Takes the value in INTEGER_VARIABLE and creates a string containing the string equivalent of that integer. The output string does not contain leading zeros."
     },
-    "itoa": {
+    "AToI": {
         "prefix": [
-            "itoa",
-            "integertoascii",
-            "integertostring"
+            "AToI",
+            "ASCIITotInteger",
+            "StringToInteger"
         ],
         "body": [
-            "${1:${2:STRING RETURN_VALUE} = }itoa(${3:INTEGER_VARIABLE}) //INTEGER_VARIABLE MUST CONTAIN A NUMBER FROM 0 TO 65535\n$0"
+            "${1:${2:INTEGER RETURN_VALUE} = }AToI(${3:STRING_VARIABLE})\n$0"
         ],
-        "description": "Takes the value in INTEGER_VARIABLE and creates a string containing the string equivalent of that integer. The output string does not contain leading zeros."
+        "description": "Converts a STRING to an INTEGER value. The conversion looks for the first valid character (0-9), and then reads until it Finds the first invalid character. The resulting string of valid characters is then converted. The \"-\" is ignored, hence the output is an unsigned number [i.e., AToI(\"-1\") would yield 1 as the output]. If the value exceeds 65535, the value is undefined. If no valid value to convert is found, 0 is returned."
     },
-    "ATOI": {
+    "Chr": {
         "prefix": [
-            "ATOI",
-            "ASCIITOINTEGER",
-            "STRINGTOINTEGER"
+            "Chr"
         ],
         "body": [
-            "${1:${2:INTEGER RETURN_VALUE} = }ATOI(${3:STRING_VARIABLE})\n$0"
-        ],
-        "description": "Converts a STRING to an INTEGER value. The conversion looks for the first valid character (0-9), and then reads until it finds the first invalid character. The resulting string of valid characters is then converted. The \"-\" is ignored, hence the output is an unsigned number [i.e., ATOI(\"-1\") would yield 1 as the output]. If the value exceeds 65535, the value is undefined. If no valid value to convert is found, 0 is returned."
-    },
-    "atoi": {
-        "prefix": [
-            "atoi",
-            "asciitointeger",
-            "stringtointeger"
-        ],
-        "body": [
-            "${1:${2:INTEGER RETURN_VALUE} = }atoi(${3:STRING_VARIABLE})\n$0"
-        ],
-        "description": "Converts a STRING to an INTEGER value. The conversion looks for the first valid character (0-9), and then reads until it finds the first invalid character. The resulting string of valid characters is then converted. The \"-\" is ignored, hence the output is an unsigned number [i.e., ATOI(\"-1\") would yield 1 as the output]. If the value exceeds 65535, the value is undefined. If no valid value to convert is found, 0 is returned."
-    },
-    "CHR": {
-        "prefix": [
-            "CHR"
-        ],
-        "body": [
-            "${1:${2:STRING RETURN_VALUE} = }CHR(${3:INTEGER_VARIABLE}) //INTEGER_VARIABLE MUST CONTAIN A NUMBER FROM 0 TO 255\n$0"
+            "${1:${2:STRING RETURN_VALUE} = }Chr(${3:INTEGER_VARIABLE}) //INTEGER_VARIABLE MUST CONTAIN A NUMBER FROM 0 TO 255\n$0"
         ],
         "description": "Takes the INTEGER_VARIABLE specified and returns the corresponding ASCII character as a one-byte string."
     },
-    "chr": {
+    "Pulse": {
         "prefix": [
-            "chr"
+            "Pulse"
         ],
         "body": [
-            "${1:${2:STRING RETURN_VALUE} = }chr(${3:INTEGER_VARIABLE}) //INTEGER_VARIABLE MUST CONTAIN A NUMBER FROM 0 TO 255\n$0"
+            "Pulse(${1:TIME in Hundredths Of a Second}, ${2:Digital_Output});\n$0"
         ],
-        "description": "Takes the INTEGER_VARIABLE specified and returns the corresponding ASCII character as a one-byte string."
+        "description": "Pulses the output high then low for the specified length of time (in hundredths of a second). When the Pulse starts, a task switch is performed so other logic can be processed. Pulse is always high, then low. If the output is already high, the high is ignored, but the low will be sent at the appropriate time."
     },
-    "PULSE": {
+    "For": {
         "prefix": [
-            "PULSE"
+            "For"
         ],
         "body": [
-            "PULSE(${1:TIME in Hundredths Of a Second}, ${2:DIGITAL_OUTPUT});\n$0"
-        ],
-        "description": "Pulses the output high then low for the specified length of time (in hundredths of a second). When the pulse starts, a task switch is performed so other logic can be processed. Pulse is always high, then low. If the output is already high, the high is ignored, but the low will be sent at the appropriate time."
-    },
-    "pulse": {
-        "prefix": [
-            "pulse"
-        ],
-        "body": [
-            "pulse(${1:TIME in Hundredths Of a Second}, ${2:DIGITAL_OUTPUT});\n$0"
-        ],
-        "description": "Pulses the output high then low for the specified length of time (in hundredths of a second). When the pulse starts, a task switch is performed so other logic can be processed. Pulse is always high, then low. If the output is already high, the high is ignored, but the low will be sent at the appropriate time."
-    },
-    "FOR": {
-        "prefix": [
-            "FOR"
-        ],
-        "body": [
-            "FOR (${1:INTEGER_VARIABLE} = ${2:VALUE_A} TO ${3:VALUE_B}){",
+            "For (${1:INTEGER_VARIABLE} = ${2:VALUE_A} To ${3:VALUE_B}){",
             "\t${0://code here}",
             "}"
         ],
         "description": "This loop executes the <statements> while <variable> iterates from the value of <start_expression> to the value of <end_expression>. The variable is incremented by <step_expression> at the end of the loop, if STEP is specified, else it is incremented by 1. The <step_expression> can be negative which will result in the loop counting down. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that <start_expression> and <end_expression> are evaluated once before the loop starts and are not re-evaluated during the execution of the loop. If it is defined, <step_expression> is evaluated each pass through the loop, so <step_expression> may be modified during execution of the loop."
     },
-    "for": {
+    "Switch": {
         "prefix": [
-            "for"
+            "Switch"
         ],
         "body": [
-            "for (${1:INTEGER_VARIABLE} = ${2:VALUE_A} to ${3:VALUE_B}){",
-            "\t${0://code here}",
-            "}"
-        ],
-        "description": "This loop executes the <statements> while <variable> iterates from the value of <start_expression> to the value of <end_expression>. The variable is incremented by <step_expression> at the end of the loop, if STEP is specified, else it is incremented by 1. The <step_expression> can be negative which will result in the loop counting down. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that <start_expression> and <end_expression> are evaluated once before the loop starts and are not re-evaluated during the execution of the loop. If it is defined, <step_expression> is evaluated each pass through the loop, so <step_expression> may be modified during execution of the loop."
-    },
-    "SWITCH": {
-        "prefix": [
-            "SWITCH"
-        ],
-        "body": [
-            "SWITCH (${1:EXPRESSION}){",
-            "\tCASE (${2:VALUE}):{",
+            "Switch (${1:EXPRESSION}){",
+            "\tCase (${2:VALUE}):{",
             "\t\t${3://code here}",
             "\t}",
-            "\t(${0://type CASE to add a new case statement}",
-            "\tDEFAULT:{",
+            "\t${0://type CASE to add a new case statement}",
+            "\tDefault:{",
             "\t\t",
             "\t}",
             "}"
         ],
         "description": "SWITCH is a more direct method of writing a complex IF-ELSE-IF statement. In the SWITCH, if <expression> is equal to <expression1>, <statements1> is executed. If <expression> is equal to <expression2>, <statements2> is executed. This same method would apply to as many CASE statements as are listed in the body of the SWITCH. Note that if any of the <statements> blocks are only a single statement, the { and } characters on the CASE may be omitted."
     },
-    "switch": {
-        "prefix": [
-            "switch"
-        ],
-        "body": [
-            "switch (${1:EXPRESSION}){",
-            "\tcase (${2:VALUE}):{",
-            "\t\t${3://code here}",
-            "\t}",
-            "\t(${0://type CASE to add a new case statement}",
-            "\tdefault:{",
-            "\t\t",
-            "\t}",
-            "}"
-        ],
-        "description": "SWITCH is a more direct method of writing a complex IF-ELSE-IF statement. In the SWITCH, if <expression> is equal to <expression1>, <statements1> is executed. If <expression> is equal to <expression2>, <statements2> is executed. This same method would apply to as many CASE statements as are listed in the body of the SWITCH. Note that if any of the <statements> blocks are only a single statement, the { and } characters on the CASE may be omitted."
-    },
-    "CASE": {
+    "Case": {
         "prefix": [
             "CASE"
         ],
         "body": [
-            "CASE (${1:VALUE}):{",
+            "Case (${1:VALUE}):{",
             "\t${0://code here}",
             "}"
         ]
     },
-    "case": {
+    "If": {
         "prefix": [
-            "case"
+            "If"
         ],
         "body": [
-            "case (${1:VALUE}):{",
-            "\t${0://code here}",
-            "}"
-        ]
-    },
-    "IF": {
-        "prefix": [
-            "IF"
-        ],
-        "body": [
-            "IF (${1:EXPRESSION}){",
+            "If (${1:EXPRESSION}){",
             "\t${0://code}",
             "}"
         ],
         "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
     },
-    "if": {
+    "Else": {
         "prefix": [
-            "if"
+            "Else"
         ],
         "body": [
-            "if (${1:EXPRESSION}){",
+            "Else {",
             "\t${0://code}",
             "}"
         ],
         "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
     },
-    "ELSE": {
+    "Else If": {
         "prefix": [
-            "ELSE"
+            "Else If"
         ],
         "body": [
-            "ELSE {",
+            "Else If (${1:EXPRESSION}){",
             "\t${0://code}",
             "}"
         ],
         "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
     },
-    "else": {
+    "While": {
         "prefix": [
-            "else"
+            "While"
         ],
         "body": [
-            "else {",
-            "\t${0://code}",
-            "}"
-        ],
-        "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
-    },
-    "ELSE IF": {
-        "prefix": [
-            "ELSE IF"
-        ],
-        "body": [
-            "ELSE IF (${1:EXPRESSION}){",
-            "\t${0://code}",
-            "}"
-        ],
-        "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
-    },
-    "else if": {
-        "prefix": [
-            "else if"
-        ],
-        "body": [
-            "else if (${1:EXPRESSION}){",
-            "\t${0://code}",
-            "}"
-        ],
-        "description": "Executes a piece of code only if its associated <expression> evaluates to true. Many expressions can be tested if the IF-ELSE-IF construct is used. Note that only one <statements> block in an IF-ELSE or IF-ELSE-IF construct is executed. In any section of the construct, if <statements> is only a single statement, then the { and } characters may be omitted."
-    },
-    "WHILE": {
-        "prefix": [
-            "WHILE"
-        ],
-        "body": [
-            "WHILE (${1:EXPRESSION}){",
+            "While (${1:EXPRESSION}){",
             "\t${0://code}",
             "}"
         ],
         "description": "This loop performs a set of <statements> as long as <expression> does not evaluate to zero. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that depending on <expression>, the body of the loop may never be executed. Note that <expression> is evaluated at the beginning of the loop."
     },
-    "while": {
-        "prefix": [
-            "while"
-        ],
-        "body": [
-            "while (${1:EXPRESSION}){",
-            "\t${0://code}",
-            "}"
-        ],
-        "description": "This loop performs a set of <statements> as long as <expression> does not evaluate to zero. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that depending on <expression>, the body of the loop may never be executed. Note that <expression> is evaluated at the beginning of the loop."
-    },
-    "DO - UNTIL": {
+    "Do - Until": {
         "prefix": [
             "DO",
             "UNTIL",
             "DOUNTIL"
         ],
         "body": [
-            "DO {",
+            "Do {",
             "\t${0://code}",
             "}",
-            "UNTIL (${1:EXPRESSION});"
+            "Until (${1:EXPRESSION});"
         ],
         "description": "This loop performs a set of <statements> at least one time and will terminate when <expression> evaluates to true. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that <expression> is evaluated each time through the loop."
     },
-    "do - until": {
+    "Function": {
         "prefix": [
-            "do",
-            "until",
-            "dountil"
+            "Function"
         ],
         "body": [
-            "do {",
-            "\t${0://code}",
-            "}",
-            "until (${1:EXPRESSION});"
-        ],
-        "description": "This loop performs a set of <statements> at least one time and will terminate when <expression> evaluates to true. If only one statement is present in the body of the loop, then the { and } characters are not required, but may be used. If more than one statement is present in the loop body, then the { and } characters are mandatory. Note that <expression> is evaluated each time through the loop."
-    },
-    "FUNCTION": {
-        "prefix": [
-            "FUNCTION"
-        ],
-        "body": [
-            "FUNCTION ${1:FUNCTION}(${2:[INTEGER, STRING]}){",
+            "Function ${1:FUNCTION}(${2:[INTEGER, STRING]}){",
             "\t${0://code}",
             "}"
         ],
         "description": "Returns no data to the caller"
     },
-    "function": {
+    "Integer_Function": {
         "prefix": [
-            "function"
+            "Integer_Function"
         ],
         "body": [
-            "function ${1:FUNCTION}(${2:[INTEGER, STRING]}){",
-            "\t${0://code}",
-            "}"
-        ],
-        "description": "Returns no data to the caller"
-    },
-    "INTEGER_FUNCTION": {
-        "prefix": [
-            "INTEGER_FUNCTION"
-        ],
-        "body": [
-            "INTEGER_FUNCTION ${1:FUNCTION_NAME}(${2:[PARAMETERS]}){",
-            "\tINTEGER ${3:RETURN_VALUE}; //THIS IS RETURN VALUE FOR THIS FUNCTION",
+            "Integer_Function ${1:FUNCTION_NAME}(${2:[PARAMETERS]}){",
+            "\tInteger ${3:RETURN_VALUE}; //THIS IS RETURN VALUE FOR THIS FUNCTION",
             "\t",
-            "\tRETURN ($3);",
+            "\tReturn ($3);",
             "}"
         ],
         "description": "Returns an integer value to the caller"
     },
-    "integer_function": {
+    "String_Function": {
         "prefix": [
-            "integer_function"
+            "String_Function"
         ],
         "body": [
-            "integer_function ${1:FUNCTION_NAME}(${2:[PARAMETERS]}){",
-            "\tinteger ${3:RETURN_VALUE}; //THIS IS RETURN VALUE FOR THIS FUNCTION",
+            "String_Function ${1:FUNCTION_NAME}(${2:[PARAMETERS]}){",
+            "\tString ${3:RETURN_VALUE}[255]; //THIS IS RETURN VALUE FOR THIS FUNCTION",
             "\t",
-            "\treturn ($3);",
-            "}"
-        ],
-        "description": "Returns an integer value to the caller"
-    },
-    "STRING_FUNCTION": {
-        "prefix": [
-            "STRING_FUNCTION"
-        ],
-        "body": [
-            "STRING_FUNCTION ${1:FUNCTION_NAME}(${2:[PARAMETERS]}){",
-            "\tSTRING ${3:RETURN_VALUE}[255]; //THIS IS RETURN VALUE FOR THIS FUNCTION",
-            "\t",
-            "\tRETURN ($3);",
+            "\tReturn ($3);",
             "}"
         ],
         "description": "Returns a string value to the caller"
-    },
-    "string_function": {
-        "prefix": [
-            "string_function"
-        ],
-        "body": [
-            "string_function ${1:FUNCTION_NAME}(${2:[PARAMETERS]}){",
-            "\tstring ${3:RETURN_VALUE}[255]; //THIS IS RETURN VALUE FOR THIS FUNCTION",
-            "\t",
-            "\treturn ($3);",
-            "}"
-        ],
-        "description": "Returns a string value to the caller"
-    },
-    "GETLASTMODIFIEDARRAYINDEX": {
-        "prefix": [
-            "GETLASTMODIFIEDARRAYINDEX",
-            "GLMAI"
-        ],
-        "body": [
-            "GETLASTMODIFIEDARRAYINDEX();\n$0"
-        ],
-        "description": "Determines the specific index number of an input list array that has changed. ANALOG_INPUT, BUFFER_INPUT, DIGITAL_INPUT, and STRING_INPUT arrays are subject to be used in CHANGE, PUSH, and RELEASE statements, but only the overall array can be specified in the statement, not an individual element. In order to find out what element has been modified (and hence caused the activation of the CHANGE, PUSH, or RELEASE), GETLASTMODIFIEDARRAYINDEX is used."
-    },
-    "getlastmodifiedarrayindex": {
-        "prefix": [
-            "getlastmodifiedarrayindex",
-            "GetLastModifiedArrayIndex",
-            "glmai"
-        ],
-        "body": [
-            "GetLastModifiedArrayIndex();\n$0"
-        ],
-        "description": "Determines the specific index number of an input list array that has changed. ANALOG_INPUT, BUFFER_INPUT, DIGITAL_INPUT, and STRING_INPUT arrays are subject to be used in CHANGE, PUSH, and RELEASE statements, but only the overall array can be specified in the statement, not an individual element. In order to find out what element has been modified (and hence caused the activation of the CHANGE, PUSH, or RELEASE), GETLASTMODIFIEDARRAYINDEX is used."
     },
     "Parameter Property: Valid Units": {
         "prefix": [
-            "PROPVALIDUNITS"
+            "PropValidUnits"
         ],
         "body": [
-            "PROPVALIDUNITS = ${0};\t\t// unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks"
-        ],
-        "description": ""
-    },
-    "Parameter Property: Default Unit": {
-        "prefix": [
-            "PROPDEFAULTUNIT"
-        ],
-        "body": [
-            "PROPDEFAULTUNIT = ${0};\t\t// unitString, unitDecimal, unitHex, unitPercent, unitCharacter, unitTime, unitTicks"
+            "PropValidUnits = ${0};\t\t// unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks"
         ],
         "description": ""
     },
     "Parameter Property: Default Value": {
         "prefix": [
-            "PROPDEFAULTVALUE"
+            "propDefaultUnit"
         ],
         "body": [
-            "PROPDEFAULTVALUE = ${1:value};"
+            "propDefaultUnit = ${1:value};"
         ],
         "description": ""
     },
     "Parameter Property: List": {
         "prefix": [
-            "PROPLIST"
+            "propList"
         ],
         "body": [
-            "PROPLIST = $0;\t\t// {\"value\", \"label\"}, {\"value\", \"label\"};"
+            "propList = $0;\t\t// {\"value\", \"label\"}, {\"value\", \"label\"};"
         ],
         "description": ""
     },
     "Parameter Property: Bounds": {
         "prefix": [
-            "PROPBOUNDS"
+            "PropBounds"
         ],
         "body": [
-            "PROPBOUNDS = ${1:Lower_Bound},${2:Upper_Bound};"
-        ],
-        "description": ""
-    },
-    "Parameter Property: Short Description": {
-        "prefix": [
-            "PROPSHORTDESCRIPTION"
-        ],
-        "body": [
-            "PROPSHORTDESCRIPTION = $0;"
+            "PropBounds = ${1:Lower_Bound},${2:Upper_Bound};"
         ],
         "description": ""
     },
@@ -1237,15 +794,15 @@
         ],
         "description": "This provides a way to arrange the inputs and outputs on the symbol graphic so that they line up and are easy to read."
     },
-    "#PRINT_TO_TRACE": {
+    "#PRINT_TO_Trace": {
         "prefix": [
             "@CD",
-            "#PRINT_TO_TRACE"
+            "#PRINT_TO_Trace"
         ],
         "body": [
-            "#PRINT_TO_TRACE\n$0"
+            "#PRINT_TO_Trace\n$0"
         ],
-        "description": "When invoked, this enables converts all print statements to trace statements."
+        "description": "When invoked, this enables converts all print statements to Trace statements."
     },
     "#SYMBOL_NAME": {
         "prefix": [
@@ -1299,13 +856,14 @@
             "TEMPLATE_PARAMETER_PROPERTIES"
         ],
         "body": [
-            "#BEGIN_PARAMETER_PROPERTIES parameter_variable[, parameter_variable ...] ",
-            "\tpropValidUnits =\t\tunitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks;",
-            "\tpropDefaultUnit =\t\tunitString or unitDecimal or unitHex or unitPercent or unitCharacter or unitTime or unitTicks;",
-            "\tpropDefaultValue =\t\tdefault_value or \"default_value\";",
-            "\tpropList = \t\t\t\t{ \"value\",\"label\" },{ \"value\",\"label\" };",
-            "\tpropBounds = \t\t\tlower_bound , upper_bound;",
-            "\tpropShortDescription =\t\"status_bar_hint_text\";",
+            "#BEGIN_PARAMETER_PROPERTIES ${1:Parameter Name}$0",
+            
+            "\tPropDefaultUnit =\t\t${2|UnitDecimal\\|UnitHex\\|UnitPercent\\|UnitCharacter\\|UnitTime\\|UnitTicks,UnitString|};",
+            "\tPropValidUnits =\t\t${3|UnitDecimal,UnitHex,UnitPercent,UnitCharacter,UnitTime,UnitTicks,UnitString|};",
+            "\tPropDefaultValue =\t\t${4:Default Value}$0;",
+            "\tPropList = \t\t\t\t{ ${5:List Value}$0,\"${6:List Label}$0\" };",
+            "\tPropBounds = \t\t\t${7:Lower Bound Value}$0 , ${8:Upper Bound Value}$0;",
+            "\tPropShortDescription =\t\"${9:Brief Description}$0\";",
             "",
             "#BEGIN_PROP_FULL_DESCRIPTION",
             "line_1",
