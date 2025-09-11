@@ -271,9 +271,9 @@
         "name": "SIMPL+",
         "owner": "crestron-splus",
         "fileLocation": [
-          "relative",
-          "${workspaceFolder}"
+          "absolute"
         ],
+        "source": "SIMPL+",
         "pattern": {
           "regexp": "\\[([^\\]]*)\\]\\s*(?:Error)\\s*\\d*\\s*\\(Line (\\d*)\\)\\s*-\\s*(.*)$",
           "file": 1,
