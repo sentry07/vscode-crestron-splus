@@ -398,6 +398,29 @@ FUNCTION LoopingConstructs()
 
 }
 
+Function ConditionalFunctions()
+{
+	if (this = that)
+	{
+		d = ReverseFind(a,"d",0);
+	}
+	else 
+	{
+		d = ReverseFind(a,"d",0);
+	}
+
+	if (this = that) d = ReverseFind(a,"d",0);
+	else d = ReverseFind(a,"d",0);
+
+	if (this = that) 
+		d = ReverseFind(a,"d",0);
+	Else
+		d = ReverseFind(a,"d",0);
+
+	if (this = that)
+	else if (this = that) d = ReverseFind(a,"d",0);
+}
+
 FUNCTION EncodingFunctions()
 {
 	// encoding functions

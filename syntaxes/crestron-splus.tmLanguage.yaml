@@ -776,7 +776,7 @@ repository:
             (?:(?<array>\[.*?\])?)(?:\g<array>)?  #that possible has an array punctuation series
           )
       )
-      (?=,|;|=|\))  #stop before a comma, semicolon, assignment operator, or closing parenthesis without grabbing any 
+      (?=,|;|\))  #stop before a comma, semicolon, assignment operator, or closing parenthesis without grabbing any 
     beginCaptures:
       "1":
         patterns:

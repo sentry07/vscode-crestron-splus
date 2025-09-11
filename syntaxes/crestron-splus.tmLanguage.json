@@ -1245,7 +1245,7 @@
       ]
     },
     "local-variable-declaration": {
-      "begin": "(?ix)\n  (?:\\s*\n    (?:\\b([[:alnum:]]*)\\b\\s+)?            #possibly grab modifier\n    ([_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s+   #grab variable type\n    (\n      (?:[_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s* #grab variable name\n      (?:(?<array>\\[.*?\\])?)(?:\\g<array>)?  #that possible has an array punctuation series\n    )\n)\n(?=,|;|=|\\))  #stop before a comma, semicolon, assignment operator, or closing parenthesis without grabbing any",
+      "begin": "(?ix)\n  (?:\\s*\n    (?:\\b([[:alnum:]]*)\\b\\s+)?            #possibly grab modifier\n    ([_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s+   #grab variable type\n    (\n      (?:[_[:alpha:]][\\#\\$\\_[:alnum:]]*)\\s* #grab variable name\n      (?:(?<array>\\[.*?\\])?)(?:\\g<array>)?  #that possible has an array punctuation series\n    )\n)\n(?=,|;|\\))  #stop before a comma, semicolon, assignment operator, or closing parenthesis without grabbing any",
       "beginCaptures": {
         "1": {
           "patterns": [
