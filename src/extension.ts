@@ -268,7 +268,7 @@ function countChars(haystack: string, needle: string): number {
 class SplusCompiler {
     constructor() {
         this.arguments = [];
-        this.compilerPath = "\"" + workspace.getConfiguration("splus").compilerLocation + "\"";
+        this.compilerPath = "\"\"" + workspace.getConfiguration("splus").compilerLocation + "\"";
     }
     buildCommand() {
         return this.compilerPath + " " + this.arguments.join(" ");
@@ -295,7 +295,7 @@ function getBuildParameters(fileName: string, buildType: BuildType): [string, st
         seriesTargets.push(4);
         compiler.arguments.push("series4");
     }
-
+    compiler.arguments.push("\"");
     let label = "Compile " + seriesTargets.join(" & ") + " Series";
     let command = compiler.buildCommand();
     return [label, command];
