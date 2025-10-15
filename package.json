@@ -2,7 +2,7 @@
   "name": "crestron-splus",
   "displayName": "Crestron SIMPL+",
   "description": "Syntax highlighting, formatting, build tasks.",
-  "version": "1.0.0-beta2",
+  "version": "1.0.0",
   "publisher": "sentry07",
   "icon": "icons/crestron.png",
   "repository": {
