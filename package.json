@@ -15,7 +15,7 @@
   },
   "license": "GPL-3.0",
   "engines": {
-    "vscode": "^1.93.0"
+    "vscode": "^1.104.0"
   },
   "vsce": {
     "baseImagesUrl": "https://raw.githubusercontent.com/sentry07/vscode-crestron-splus/beta"
