@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/sentry07/vscode-crestron-splus.git"
   },
-  "homepage": "https://raw.github.com/sentry07/vscode-crestron-splus/blob/beta/README.md",
+  "homepage": "https://github.com/sentry07/vscode-crestron-splus/raw/master/README.md",
   "bugs": {
     "url": "https://github.com/sentry07/vscode-crestron-splus/issues"
   },
@@ -18,7 +18,7 @@
     "vscode": "^1.104.0"
   },
   "vsce": {
-    "baseImagesUrl": "https://raw.githubusercontent.com/sentry07/vscode-crestron-splus/beta"
+    "baseImagesUrl": "https://github.com/sentry07/vscode-crestron-splus/raw/master/readmeImages/autoformat-brace-line.gif"
   },
   "categories": [
     "Programming Languages",
