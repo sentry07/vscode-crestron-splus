@@ -3,10 +3,9 @@ import * as vscode from 'vscode';
 import * as assert from 'assert';
 import { SimplPlusObject } from "../../base/simplPlusObject";
 
-suite("With api Parser", function () {
+suite("With api Parserd", function () {
     let apiMembers: SimplPlusObject[];
-    const uri = "file:///c%3A/ExtensionDevelopment/SimplPlusExtension/vscode-crestron-splus/testWorkspace/apiParserTestFile.api";
-    suiteSetup(async function (){
+    suiteSetup(async function () {
         const workSpaceDir = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
         const apiFile = workSpaceDir + "\\apiParserTestFile.api";
 
@@ -19,7 +18,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].name, "SampleClass");
         assert.strictEqual(apiMembers[0].kind, vscode.CompletionItemKind.Class);
         assert.strictEqual(apiMembers[0].dataType, "class");
-        assert.strictEqual(apiMembers[0].uri, uri);
+        assert.match(apiMembers[0].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].nameRange.start.line, 3);
         assert.strictEqual(apiMembers[0].nameRange.start.character, 11);
         assert.strictEqual(apiMembers[0].nameRange.end.line, 3);
@@ -38,7 +37,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[0].dataType, "void");
         assert.strictEqual(apiMembers[0].children[0].dataTypeModifier, "EventHandler");
         assert.strictEqual(apiMembers[0].children[0].parent, parent);
-        assert.strictEqual(apiMembers[0].children[0].uri, uri);
+        assert.match(apiMembers[0].children[0].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[0].nameRange.start.line, 9);
         assert.strictEqual(apiMembers[0].children[0].nameRange.start.character, 21);
         assert.strictEqual(apiMembers[0].children[0].nameRange.end.line, 9);
@@ -49,7 +48,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[0].children[0].dataType, "SampleClass");
         assert.strictEqual(apiMembers[0].children[0].children[0].dataTypeModifier, "");
         assert.strictEqual(apiMembers[0].children[0].children[0].parent, apiMembers[0].children[0]);
-        assert.strictEqual(apiMembers[0].children[0].children[0].uri, uri);
+        assert.match(apiMembers[0].children[0].children[0].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[0].children[0].nameRange.start.line, 9);
         assert.strictEqual(apiMembers[0].children[0].children[0].nameRange.start.character, 54);
         assert.strictEqual(apiMembers[0].children[0].children[0].nameRange.end.line, 9);
@@ -63,7 +62,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[0].children[1].dataType, "MyEventArgs");
         assert.strictEqual(apiMembers[0].children[0].children[1].dataTypeModifier, "");
         assert.strictEqual(apiMembers[0].children[0].children[1].parent, apiMembers[0].children[0]);
-        assert.strictEqual(apiMembers[0].children[0].children[1].uri, uri);
+        assert.match(apiMembers[0].children[0].children[1].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[0].children[1].nameRange.start.line, 9);
         assert.strictEqual(apiMembers[0].children[0].children[1].nameRange.start.character, 62);
         assert.strictEqual(apiMembers[0].children[0].children[1].nameRange.end.line, 9);
@@ -80,7 +79,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[1].dataType, "SIGNED_LONG_INTEGER_FUNCTION");
         assert.strictEqual(apiMembers[0].children[1].dataTypeModifier, "delegate");
         assert.strictEqual(apiMembers[0].children[1].parent, parent);
-        assert.strictEqual(apiMembers[0].children[1].uri, uri);
+        assert.match(apiMembers[0].children[1].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[1].nameRange.start.line, 6);
         assert.strictEqual(apiMembers[0].children[1].nameRange.start.character, 46);
         assert.strictEqual(apiMembers[0].children[1].nameRange.end.line, 6);
@@ -91,7 +90,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[1].children[0].dataType, "SIGNED_LONG_INTEGER");
         assert.strictEqual(apiMembers[0].children[1].children[0].dataTypeModifier, "");
         assert.strictEqual(apiMembers[0].children[1].children[0].parent, apiMembers[0].children[1]);
-        assert.strictEqual(apiMembers[0].children[1].children[0].uri, uri);
+        assert.match(apiMembers[0].children[1].children[0].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[1].children[0].nameRange.start.line, 6);
         assert.strictEqual(apiMembers[0].children[1].children[0].nameRange.start.character, 86);
         assert.strictEqual(apiMembers[0].children[1].children[0].nameRange.end.line, 6);
@@ -105,7 +104,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[1].children[1].dataType, "INTEGER");
         assert.strictEqual(apiMembers[0].children[1].children[1].dataTypeModifier, "");
         assert.strictEqual(apiMembers[0].children[1].children[1].parent, apiMembers[0].children[1]);
-        assert.strictEqual(apiMembers[0].children[1].children[1].uri, uri);
+        assert.match(apiMembers[0].children[1].children[1].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[1].children[1].nameRange.start.line, 6);
         assert.strictEqual(apiMembers[0].children[1].children[1].nameRange.start.character, 108);
         assert.strictEqual(apiMembers[0].children[1].children[1].nameRange.end.line, 6);
@@ -122,7 +121,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[2].kind, vscode.CompletionItemKind.Function);
         assert.strictEqual(apiMembers[0].children[2].dataTypeModifier, "");
         assert.strictEqual(apiMembers[0].children[2].parent, parent);
-        assert.strictEqual(apiMembers[0].children[2].uri, uri);
+        assert.match(apiMembers[0].children[2].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[2].nameRange.start.line, 12);
         assert.strictEqual(apiMembers[0].children[2].nameRange.start.character, 25);
         assert.strictEqual(apiMembers[0].children[2].nameRange.end.line, 12);
@@ -133,7 +132,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[2].children[0].dataType, "INTEGER");
         assert.strictEqual(apiMembers[0].children[2].children[0].dataTypeModifier, "");
         assert.strictEqual(apiMembers[0].children[2].children[0].parent, apiMembers[0].children[2]);
-        assert.strictEqual(apiMembers[0].children[2].children[0].uri, uri);
+        assert.match(apiMembers[0].children[2].children[0].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[2].children[0].nameRange.start.line, 12);
         assert.strictEqual(apiMembers[0].children[2].children[0].nameRange.start.character, 54);
         assert.strictEqual(apiMembers[0].children[2].children[0].nameRange.end.line, 12);
@@ -147,7 +146,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[2].children[1].dataType, "SampleStructure");
         assert.strictEqual(apiMembers[0].children[2].children[1].dataTypeModifier, "");
         assert.strictEqual(apiMembers[0].children[2].children[1].parent, apiMembers[0].children[2]);
-        assert.strictEqual(apiMembers[0].children[2].children[1].uri, uri);
+        assert.match(apiMembers[0].children[2].children[1].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[2].children[1].nameRange.start.line, 12);
         assert.strictEqual(apiMembers[0].children[2].children[1].nameRange.start.character, 88);
         assert.strictEqual(apiMembers[0].children[2].children[1].nameRange.end.line, 12);
@@ -161,7 +160,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[2].children[2].dataType, "SampleSubClass");
         assert.strictEqual(apiMembers[0].children[2].children[2].dataTypeModifier, "");
         assert.strictEqual(apiMembers[0].children[2].children[2].parent, apiMembers[0].children[2]);
-        assert.strictEqual(apiMembers[0].children[2].children[2].uri, uri);
+        assert.match(apiMembers[0].children[2].children[2].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[2].children[2].nameRange.start.line, 12);
         assert.strictEqual(apiMembers[0].children[2].children[2].nameRange.start.character, 126);
         assert.strictEqual(apiMembers[0].children[2].children[2].nameRange.end.line, 12);
@@ -178,7 +177,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[3].dataType, "STRING");
         assert.strictEqual(apiMembers[0].children[3].dataTypeModifier, "");
         assert.strictEqual(apiMembers[0].children[3].parent, parent);
-        assert.strictEqual(apiMembers[0].children[3].uri, uri);
+        assert.match(apiMembers[0].children[3].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[3].children.length, 0);
         assert.strictEqual(apiMembers[0].children[3].nameRange.start.line, 15);
         assert.strictEqual(apiMembers[0].children[3].nameRange.start.character, 15);
@@ -196,7 +195,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[4].nameRange.end.character, 62);
         assert.strictEqual(apiMembers[0].children[4].dataTypeModifier, "DelegateProperty");
         assert.strictEqual(apiMembers[0].children[4].parent, parent);
-        assert.strictEqual(apiMembers[0].children[4].uri, uri);
+        assert.match(apiMembers[0].children[4].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[4].children.length, 0);
     });
     test("test class property", async () => {
@@ -210,7 +209,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[0].children[5].nameRange.end.character, 43);
         assert.strictEqual(apiMembers[0].children[5].dataTypeModifier, "");
         assert.strictEqual(apiMembers[0].children[5].parent, parent);
-        assert.strictEqual(apiMembers[0].children[5].uri, uri);
+        assert.match(apiMembers[0].children[5].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[0].children[5].children.length, 0);
     });
     test("test enum", async () => {
@@ -219,7 +218,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[1].kind, vscode.CompletionItemKind.Enum);
         assert.strictEqual(apiMembers[1].dataType, "enum");
         assert.strictEqual(apiMembers[1].dataTypeModifier, "");
-        assert.strictEqual(apiMembers[1].uri, uri);
+        assert.match(apiMembers[1].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[1].nameRange.start.line, 21);
         assert.strictEqual(apiMembers[1].nameRange.start.character, 9);
         assert.strictEqual(apiMembers[1].nameRange.end.line, 21);
@@ -242,7 +241,7 @@ suite("With api Parser", function () {
         assert.strictEqual(apiMembers[1].children[0].nameRange.end.character, 24);
         assert.strictEqual(apiMembers[1].children[0].dataTypeModifier, "");
         assert.strictEqual(apiMembers[1].children[0].parent, parent);
-        assert.strictEqual(apiMembers[1].children[0].uri, uri);
+        assert.match(apiMembers[1].children[0].uri, /apiParserTestFile.api/);
         assert.strictEqual(apiMembers[1].children[0].children.length, 0);
     });
 });

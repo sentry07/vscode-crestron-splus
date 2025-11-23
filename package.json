@@ -2,7 +2,7 @@
   "name": "crestron-splus",
   "displayName": "Crestron SIMPL+",
   "description": "Syntax highlighting, formatting, build tasks.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "sentry07",
   "icon": "icons/crestron.png",
   "repository": {
@@ -109,6 +109,16 @@
             "type": "boolean",
             "default": false,
             "description": "If enable it will add a new line before every opening curly bracket.  If not, it will move it to the end of the previous line"
+          },
+          "crestron-splus.indentSize": {
+            "type": "number",
+            "default": 4,
+            "description": "Number of spaces to use for each indentation level during autoformat when insertSpaces is true. Defaults to 4."
+          },
+          "crestron-splus.insertSpaces": {
+            "type": "boolean",
+            "default": false,
+            "description": "If enabled, insert spaces when autoformatting.  If disabled, use tabs. Defaults to false."
           }
         }
       }
@@ -305,7 +315,7 @@
     "lint": "eslint src",
     "package": "vsce package",
     "test": "vscode-test",
-    "test-with-coverage": "vscode-test --coverage",
+    "test-with-coverage": "vscode-test  --coverage ",
     "yaml2json-watch": "yaml2json syntaxes --save --pretty --recursive --watch",
     "puml-to-svg": "java -jar \"C:\\ProgramData\\chocolatey\\lib\\plantuml\\tools\\plantuml.jar\"  \".\\UML\\csharp-syntax-mindmap\\*.puml\" \".\\UML\\crestron-splus-syntax-mindmap\\*.puml\" -svg"
   },
@@ -316,9 +326,9 @@
     "@types/vscode": "^1.93.0",
     "@typescript-eslint/eslint-plugin": "^8.42.0",
     "@typescript-eslint/parser": "^8.42.0",
-    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
-    "@vscode/vsce": "^3.6.0",
+    "@vscode/vsce": "^3.7.0",
     "eslint": "^9.35.0",
     "sinon": "^21.0.0",
     "ts-loader": "^9.5.4",

@@ -9,7 +9,8 @@ This is a language package for programming Crestron SIMPL+ module. It features:
         *   lowercase
         *   UPPERCASE
         *   PascalCase
-        *   Leave Untouched
+        *   Unchanged 
+	*   TABs or Spaces for indentation with configurable space size.
 *  [Full support of VS Code Build Task](#vs-code-build-task-support)
     *   Autodetects workspaces with USP and [suggest relevant SIMPL+ Build Task](https://code.visualstudio.com/docs/editor/tasks#_task-autodetection) 
     *   Create your own [Custom Build task](https://code.visualstudio.com/docs/editor/tasks#_custom-tasks) for one or many SIMPL+ files through VS Code tasks.json
@@ -44,6 +45,10 @@ Configure your preferred brace line style. Default is `Same Line`. Options are `
 Configure your preferred case for keywords, statements, etc. Default is `Unchanged`. Options are `Lowercase`, `UPPERCASE`, `PascalCase`, and `Unchanged`.
 
 ![AutoFormat Case](readmeImages/autoformat-case.gif)
+
+### Indentation Settings
+
+Configure your preferred indentation style.  Options are to use TABs or Spaces, and the number of spaces to use when using spaces.  Default is to use TABs.
 
 ## VS Code Build Task Support
 

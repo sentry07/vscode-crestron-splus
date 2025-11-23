@@ -1,0 +1,63 @@
+DIGITAL_INPUT digitalInput1;
+DIGITAL_INPUT digitalInput2, digitalInput3, digitalInput4;
+ANALOG_INPUT analogInput1;
+ANALOG_INPUT analogInput2, analogInput3, analogInput4;
+STRING_INPUT stringInput1;
+STRING_INPUT stringInput2, stringInput3, stringInput4;
+BUFFER_INPUT bufferInput1;
+BUFFER_INPUT bufferInput2, bufferInput3, bufferInput4;
+DIGITAL_OUTPUT digitaloutput1;
+DIGITAL_OUTPUT digitaloutput2, digitaloutput3, digitaloutput4;
+ANALOG_OUTPUT analogoutput1;
+ANALOG_OUTPUT analogoutput2, analogoutput3, analogoutput4;
+STRING_OUTPUT stringoutput1;
+STRING_OUTPUT stringoutput2, stringoutput3, stringoutput4;
+/* test test test
+	test test test
+*/
+CHANGE Name2 { //test
+	IF (Name3 = 2) { //test
+/* test test test
+	test test test
+*/
+		SWITCH (Name3) { //test
+			CASE (3): { //code
+				a = (4 * 5 - 3) * 3; //test
+/* test test test
+test test test
+*/
+				//test
+			} //test
+			DEFAULT: { //test
+			} //test
+		} //test
+	} //test
+	IF (Name3 = 2) {
+		SWITCH (Name3) {
+			CASE (3): //code
+				a = (4 * 5 - 3) * 3;
+		}
+		DEFAULT: {
+			//test
+		}
+	}
+	WHILE (something() + somethingElse) {
+		some statements;
+	}
+
+	DO {
+		some statements;
+	} UNTIL (expression with FUNCTION(a));
+
+	FOR (expression = something TO limit STEP stp)
+		something;
+	FOR (expression = something TO limit STEP stp) {
+		something;
+	}
+	FOR (expression = something TO limit STEP stp)
+		IF (expression = result)
+			something;
+	ELSE
+		somethingelse;
+
+}

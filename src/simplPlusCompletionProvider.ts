@@ -205,6 +205,7 @@ export class SimplPlusCompletionProvider implements CompletionItemProvider {
     private getRootKeywords(): CompletionItem[] {
         const rootKeywords: string[] = [
             "Class",
+            "Directive",
             "Declaration",
             "Global Declaration",
             "Input Declaration",

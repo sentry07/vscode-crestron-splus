@@ -204,8 +204,8 @@ export class SimplPlusTasks implements TaskProvider {
     public async CompileCurrentSimplPlusFile(buildTypes: BuildType[], rebuild: boolean = false): Promise<void> {
         const fileInfo = getFileName();
         if (fileInfo.name === "") { return; }
-        if (!fileInfo.name.endsWith(".usp")) {
-            window.showErrorMessage("Active file is not a .usp file");
+        if (!(fileInfo.name.endsWith(".usp") || fileInfo.name.endsWith(".usl"))) {
+            window.showErrorMessage("Active file should be a .usp or .usl file");
         }
         let [label, definition, execution] = this.getBuildParameters(buildTypes, [fileInfo.name], fileInfo.directory, rebuild);
         let task = this.TaskCreator(label, definition, execution);

@@ -1,0 +1,10 @@
+FUNCTION FUNCTION([INTEGER, STRING])
+{
+	SWITCH (EXPRESSION)
+	{
+		CASE (VALUE):
+			something;
+		DEFAULT:
+			something;
+	}
+}

@@ -25,13 +25,13 @@ repository:
   preprocessor-block-help:
     name: meta.preprocessor.properties.help.usp
     contentName: comment.block.documentation.usp
-    begin: (?i)(\#)(help_begin)
+    begin: (?i)\s*(\#)(help_begin)
     beginCaptures:
       "1":
         name: punctuation.separator.hash.usp
       "2":
         name: keyword.preprocessor.$2.usp
-    end: (?i)(\#)(help_end)
+    end: (?i)\s*(\#)(help_end)
     endCaptures:
       "1":
         name: punctuation.separator.hash.usp
@@ -316,7 +316,7 @@ repository:
   preprocessor-properties-block-description-notes:
     name: meta.preprocessor.properties.description.usp
     contentName: comment.block.documentation.usp
-    begin: (?i)(\#)(?:(begin_prop_full_description)|(begin_prop_notes))
+    begin: (?i)\s*(\#)(?:(begin_prop_full_description)|(begin_prop_notes))
     beginCaptures:
       "0":
         name: meta.preprocessor.usp
@@ -326,7 +326,7 @@ repository:
         name: keyword.preprocessor.beginpropfulldescription.usp
       "3":
         name: keyword.preprocessor.beginpropnotes.usp
-    end: (?i)(\#)(?:(end_prop_full_description)|(end_prop_notes))$
+    end: (?i)\s*(\#)(?:(end_prop_full_description)|(end_prop_notes))$
     endCaptures:
       "0":
         name: meta.preprocessor.usp
@@ -507,7 +507,7 @@ repository:
           (?:\b(threadsafe)\b\s+)?  #Possibly grab threadsafe
           \b(push|event|change|release|socketconnect|socketdisconnect|socketreceive|socketstatus)\b\s+ # grab event type 
           ([_[:alpha:]][\#\$\_[:alnum:]]*)\s*         # grab first event name
-        (?=,|$|{)  #stop before a comma, end of line or opening curly brace without grabbing any characters
+        (?=,|$|{|\/)  #stop before a comma, end of line, opening curly brace, or forward slash without grabbing any characters
     end: |-
         (?ix)
           (?<=})   #stop pattern after the closing curly bracket or first semicolon without grabbing any characters

@@ -1,2 +1,6 @@
 {
+    "crestron-splus.braceLine": true,
+    "crestron-splus.insertSpaces": false,
+    "crestron-splus.indentSize": 2,
+    "crestron-splus.keywordCase": "UPPERCASE"
 }

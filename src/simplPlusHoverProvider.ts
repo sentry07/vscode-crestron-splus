@@ -8,7 +8,7 @@ export class SimplPlusHoverProvider implements HoverProvider {
     async provideHover(document: TextDocument, position: Position, Token: CancellationToken) {
         const helpDefinitions = await SimplPlusKeywordHelpService.getInstance();
 
-        const range = document.getWordRangeAtPosition(position);
+        const range = document.getWordRangeAtPosition(position,/\#?[\w_]+/);
         const word = document.getText(range);
 
         try {
